@@ -12,6 +12,7 @@ Revit için manifest-tabanlı BIM otomasyon platformu. Türk AEC standartlarına
   API'siz şablon eşleştirme)
 - **Preview-Confirm + Atomic** transaction modları
 - **Çoklu Revit sürümü** — 2024, 2025, 2026
+- Yeni eklenmiş 70 adet manifest
 
 ## Hızlı Başlangıç
 
