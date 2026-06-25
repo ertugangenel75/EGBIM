@@ -1,0 +1,42 @@
+EGBIMOTO
+Copyright 2026 Ertuğan Genel
+
+This product includes software developed by Ertuğan Genel.
+
+Licensed under the Apache License, Version 2.0. See the LICENSE file for the
+full license text.
+
+================================================================================
+Third-Party Architectural Attributions
+================================================================================
+
+EGBIMOTO's architecture was informed by patterns and approaches from the
+following open-source projects. No source code was copied verbatim; these are
+acknowledged as design influences:
+
+- rst-c (Revit Ribbon Profile Manager)
+  The Bootstrap + side-engine loading pattern (AssemblyDependencyResolver),
+  add-in directory scanning, and health snapshot concepts in EGBIMOTO were
+  adapted from this project's architecture.
+
+- pyRevit
+  The manifest-driven extension model and operation registry concepts drew
+  inspiration from pyRevit's approach to Revit automation.
+
+If any portion of this software is found to incorporate third-party code
+subject to its own license terms, those terms apply to that portion and this
+NOTICE will be updated accordingly.
+
+================================================================================
+Runtime Dependencies
+================================================================================
+
+EGBIMOTO depends on the following components at runtime, each under its own
+license:
+
+- Microsoft.Web.WebView2          (Microsoft, BSD-style license)
+- Microsoft.CodeAnalysis (Roslyn) (Microsoft, MIT License)
+- Autodesk Revit API              (Autodesk, used under Revit SDK terms)
+
+These dependencies are not distributed as part of EGBIMOTO's source and remain
+governed by their respective licenses.
