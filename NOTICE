@@ -23,6 +23,43 @@ acknowledged as design influences:
   The manifest-driven extension model and operation registry concepts drew
   inspiration from pyRevit's approach to Revit automation.
 
+- 460707300-tech/MEPStraighten  (MIT License)
+  The double-elbow (S-bend / 翻弯) detection and straightening algorithm in
+  MepStraightenOps.cs was adapted from this project. The original single-shot
+  PickObject command was reworked into EGBIMOTO's manifest/DAG op model
+  (batch scan + report + optional apply). Original copyright belongs to the
+  respective author under the MIT License.
+
+- 460707300-tech/MEPRegionMarker
+  The "MEP elements inside a closed region" detection approach in
+  MepRegionOps.cs was inspired by this project. The interactive region-drawing
+  and tagging command was reworked into Room/Area-boundary based counting,
+  reporting, and parameter-writing ops.
+
+- 460707300-tech/Arbitrary3D  (MIT License)
+  The rectangular duct equivalent-section conversion concept ("风管截面转换")
+  listed in this project's MEP tool catalog inspired DuctSectionOps.cs. No code
+  was copied; the implementation was written from scratch using ASHRAE
+  equivalent-diameter formulas.
+
+- Dave5264/transom-revit
+  The schedule round-trip architecture in ScheduleRoundtripOps.cs — the
+  "display pass" (reading via ViewSchedule.GetCellText for exact visual fidelity)
+  and the "rolled-back UID anchor" pattern (stamp UniqueId, AddField, Regenerate,
+  read, then RollBack so the model is never persistently changed) — was learned
+  from this project's design docs (SPEC.md, IMPLEMENTATION_PLAN.md). No code was
+  copied; the implementation was written from scratch for EGBIMOTO's manifest/DAG
+  op model, limited to the core round-trip scope (non-grouped itemized schedules).
+  Transom's product-level features (NPOI style interning, colour contract, grouped
+  type-parameter conflict resolution, MCP bridge) are intentionally out of scope.
+
+- sbuchanan01/hanger-layout-for-revit  (MIT License, Autodesk evaluation sample)
+  The size-banded hanger spacing concept inspired the data/validation/mep_aski_aralik.json
+  ruleset and the place_family_along_mep op. No code was copied; the original targets
+  Autodesk Fabrication parts via a modeless dialog, whereas EGBIMOTO implements generic
+  point-along-curve family placement for standard Revit MEP (Pipe/Duct/CableTray) driven
+  by manifests.
+
 If any portion of this software is found to incorporate third-party code
 subject to its own license terms, those terms apply to that portion and this
 NOTICE will be updated accordingly.

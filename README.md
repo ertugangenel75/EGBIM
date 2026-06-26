@@ -5,7 +5,7 @@ Revit için manifest-tabanlı BIM otomasyon platformu. Türk AEC standartlarına
 
 ## Özellikler
 
-- **373 operasyon**, 16 kategori — metraj, maliyet, kalıp, yapısal, MEP, elektrik,
+- **384 operasyon**, 16 kategori — metraj, maliyet, kalıp, yapısal, MEP, elektrik,
   yangın, koordinasyon, IFC/IDS, çakışma tespiti ve daha fazlası
 - **222 hazır manifest** — JSON ile tanımlı, DAG motoruyla çalışan iş akışları
 - **AI + Pattern manifest üretimi** — doğal dilden iş akışı (Claude API veya
@@ -28,7 +28,7 @@ Tüm kılavuzlar `docs/` altında:
 - `HIZLI_BASLANGIC.md` — kurulum ve ilk çalıştırma
 - `KURULUM_DAGITIM.md` — MSI installer, Bootstrap mimarisi
 - `MANIFEST_YAZIM_REHBERI.md` — manifest JSON yazımı
-- `OP_REFERANSI.md` — 373 op'un tam referansı
+- `OP_REFERANSI.md` — 384 op'un tam referansı
 - `MIMARI.md` — katman yapısı ve tasarım
 
 ## Mimari

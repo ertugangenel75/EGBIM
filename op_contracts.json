@@ -1,0 +1,7326 @@
+{
+  "add_column": {
+    "file": "FilterOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "field",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "value",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "add_shared_params": {
+    "file": "ParamOps.cs",
+    "returns": "Dictionary<string, object?>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "spf_path",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "group_filter",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "align_tags": {
+    "file": "AnnotationOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "mode",
+        "type": "String",
+        "required": false,
+        "default": "left"
+      },
+      {
+        "key": "view_id",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "element_id",
+      "tip",
+      "mode",
+      "tasindi",
+      "durum"
+    ],
+    "category": "Annotation",
+    "description": "Tag/yazı elemanlarının başlarını (head) hizalar veya eşit dağıtır (left|right|top|bottom|center|middle|distribute_h|distribute_v). Leader'lara dokunulmaz, etiket başları hizalanır.",
+    "requires_transaction": true
+  },
+  "arch_apply_view_template": {
+    "file": "ArchOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "template_name",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "view_name_contains",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "arch_check_fire_rating_continuity": {
+    "file": "ArchOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "min_fire_rating",
+        "type": "String",
+        "required": false,
+        "default": "60"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "arch_check_material_assigned": {
+    "file": "ArchOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "arch_check_windowless_rooms": {
+    "file": "ArchOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "arch_renumber_doors": {
+    "file": "ArchOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "prefix",
+        "type": "String",
+        "required": false,
+        "default": "K"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "arch_sheets_from_data": {
+    "file": "ArchOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "arch_validate_accessibility": {
+    "file": "ArchOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "min_width_mm",
+        "type": "Double",
+        "required": false,
+        "default": "850.0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "arch_validate_ceiling_height": {
+    "file": "ArchOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "min_height_mm",
+        "type": "Double",
+        "required": false,
+        "default": "2400.0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "arch_validate_room_area": {
+    "file": "ArchOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "min_area_m2",
+        "type": "Double",
+        "required": false,
+        "default": "0.0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "arch_validate_room_naming": {
+    "file": "ArchOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "arrange_tags": {
+    "file": "AnnotationOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "view_id",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "element_id",
+      "taraf",
+      "durum"
+    ],
+    "category": "Annotation",
+    "description": "Leader'lı IndependentTag'leri görünüm kenarlarına otomatik dizer ve leader çaprazlarını çözer. CropBox aktif olmalı.",
+    "requires_transaction": true
+  },
+  "assert_not_empty": {
+    "file": "UtilityOps.cs",
+    "returns": "object?",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "message",
+        "type": "String",
+        "required": false,
+        "default": "Beklenen veri bulunamadı."
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "assign_egbim_mark": {
+    "file": "SemanticOps.cs",
+    "returns": "int",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "assign_flow_to_terminals": {
+    "file": "MepHvacOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element> (Space)",
+    "params": [
+      {
+        "key": "round_cfm_to",
+        "type": "Double",
+        "required": false,
+        "default": 5
+      },
+      {
+        "key": "flow_param_name",
+        "type": "String",
+        "required": false,
+        "default": "Flow"
+      },
+      {
+        "key": "system_type_filter",
+        "type": "String",
+        "required": false,
+        "default": "Supply Air"
+      },
+      {
+        "key": "only_with_flow",
+        "type": "Bool",
+        "required": false,
+        "default": true
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [
+      "Flow"
+    ],
+    "out_fields": [
+      "space_id",
+      "space_name",
+      "space_number",
+      "terminal_count",
+      "supply_cfm",
+      "cfm_per_terminal",
+      "status"
+    ],
+    "category": "MEP HVAC",
+    "description": "Her mahalin hesaplanan supply air flow degerini, icindeki supply hava terminallerine esit bolup yazar (terminal Flow parametresi). Revit ic birimi ft3/s, CFM=x60.",
+    "requires_transaction": true
+  },
+  "assign_poz_number": {
+    "file": "PreviewOps.cs",
+    "returns": "int",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "param_name",
+        "type": "String",
+        "required": false,
+        "default": "EGBIM_PozNo"
+      },
+      {
+        "key": "prefix",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "start_from",
+        "type": "Int",
+        "required": false,
+        "default": "1"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "assign_wbs_code": {
+    "file": "DataOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "category_field",
+        "type": "String",
+        "required": false,
+        "default": "kategori"
+      }
+    ],
+    "reg_reads": [
+      "wbs_mapping"
+    ],
+    "reg_writes": [],
+    "out_fields": [
+      "wbs_kodu"
+    ]
+  },
+  "beam_volume": {
+    "description": "beam_volume",
+    "category": "geometry",
+    "params": []
+  },
+  "beton_metraj": {
+    "file": "CostOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "build_spatial_graph": {
+    "file": "SpatialOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dict",
+    "params": [
+      {
+        "key": "include_exterior",
+        "type": "Bool",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "key": "deduplicate",
+        "type": "Bool",
+        "required": false,
+        "default": "true"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "from_room_id",
+      "from_room_name",
+      "from_room_number",
+      "to_room_id",
+      "to_room_name",
+      "to_room_number",
+      "shared_wall_id",
+      "shared_wall_type",
+      "edge_length_mm",
+      "fire_rating",
+      "is_exterior"
+    ],
+    "note": "Input: room_boundary_extract çıktısı. Her satır bir kenar (edge). to_room_id=null → dış cephe."
+  },
+  "cable_tray_fill_check": {
+    "file": "MepInspectOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "fill_param",
+        "type": "String",
+        "required": false,
+        "default": "EG_KabloDoluluk"
+      },
+      {
+        "key": "max_fill_pct",
+        "type": "Double",
+        "required": false,
+        "default": "70"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "Pre-check: EG_KabloDoluluk (%) parametresi yoksa PARAM_MISSING."
+  },
+  "calc_ach_airflow": {
+    "file": "MepCalcOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "area_m2",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "height_m",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "ach",
+        "type": "Double",
+        "required": false,
+        "default": "6"
+      },
+      {
+        "key": "mode",
+        "type": "String",
+        "required": false,
+        "default": "normal"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "room_id",
+      "room_name",
+      "area_m2",
+      "height_m",
+      "volume_m3",
+      "ach",
+      "airflow_cmh",
+      "airflow_cfm",
+      "fan_option_4x_cmh",
+      "fan_option_6x_cmh"
+    ],
+    "note": "Input: List<Room> veya boş (params ile). mode: normal(6ACH)|smoke(10ACH)"
+  },
+  "calc_anchorage_length": {
+    "file": "RebarOps.cs",
+    "returns": "Dictionary<string, object?>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "diameter_mm",
+        "type": "Double",
+        "required": false,
+        "default": "12"
+      },
+      {
+        "key": "fck",
+        "type": "Double",
+        "required": false,
+        "default": "25"
+      },
+      {
+        "key": "fyk",
+        "type": "Double",
+        "required": false,
+        "default": "420"
+      },
+      {
+        "key": "cover_mm",
+        "type": "Double",
+        "required": false,
+        "default": "30"
+      },
+      {
+        "key": "hook",
+        "type": "Bool",
+        "required": false,
+        "default": "false"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "calc_brick_quantity": {
+    "file": "MepCalcOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "area_m2",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "thickness_cm",
+        "type": "Double",
+        "required": false,
+        "default": "19"
+      },
+      {
+        "key": "brick_type",
+        "type": "String",
+        "required": false,
+        "default": "tam"
+      },
+      {
+        "key": "mortar_ratio",
+        "type": "Double",
+        "required": false,
+        "default": "0.25"
+      },
+      {
+        "key": "waste_pct",
+        "type": "Double",
+        "required": false,
+        "default": "7.5"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "wall_id",
+      "wall_type",
+      "area_m2",
+      "thickness_cm",
+      "wall_volume_m3",
+      "mortar_m3",
+      "net_brick_m3",
+      "brick_count",
+      "waste_pct",
+      "total_with_waste"
+    ],
+    "note": "brick_type: yarım(10cm)|tam(19cm)|1.5(29cm)|2(39cm)"
+  },
+  "calc_cost": {
+    "file": "CostOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "quantity_field",
+        "type": "String",
+        "required": false,
+        "default": "hacim_m3"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "miktar",
+      "toplam_maliyet"
+    ]
+  },
+  "calc_duct_sheet_weight": {
+    "file": "FireCalcOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "thickness_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0.8"
+      },
+      {
+        "key": "density_kg_m3",
+        "type": "Double",
+        "required": false,
+        "default": "7850"
+      },
+      {
+        "key": "width_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "height_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "length_m",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "duct_id",
+      "width_mm",
+      "height_mm",
+      "length_m",
+      "perimeter_mm",
+      "thickness_mm",
+      "sheet_volume_m3",
+      "sheet_weight_kg"
+    ],
+    "note": "Input: List<Duct> (dikdörtgen) veya params. Dairesel kanallar atlanır."
+  },
+  "calc_hazen_williams": {
+    "file": "FireCalcOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "flow_rate_lpm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "pipe_diam_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "c_factor",
+        "type": "Double",
+        "required": false,
+        "default": "120"
+      },
+      {
+        "key": "pipe_length_m",
+        "type": "Double",
+        "required": false,
+        "default": "1.0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "pipe_id",
+      "diam_mm",
+      "flow_lpm",
+      "c_factor",
+      "length_m",
+      "friction_loss_bar_per_m",
+      "total_loss_bar",
+      "velocity_m_s"
+    ],
+    "note": "Input: List<Pipe> veya params. c_factor: galvaniz=120, PE/PVC=150, çelik=100"
+  },
+  "calc_lap_length": {
+    "file": "RebarOps.cs",
+    "returns": "Dictionary<string, object?>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "diameter_mm",
+        "type": "Double",
+        "required": false,
+        "default": "12"
+      },
+      {
+        "key": "fck",
+        "type": "Double",
+        "required": false,
+        "default": "25"
+      },
+      {
+        "key": "fyk",
+        "type": "Double",
+        "required": false,
+        "default": "420"
+      },
+      {
+        "key": "cover_mm",
+        "type": "Double",
+        "required": false,
+        "default": "30"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "calc_min_spacing": {
+    "file": "RebarOps.cs",
+    "returns": "Dictionary<string, object?>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "diameter_mm",
+        "type": "Double",
+        "required": false,
+        "default": "12"
+      },
+      {
+        "key": "aggregate_size_mm",
+        "type": "Double",
+        "required": false,
+        "default": "20"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "calc_placement_point": {
+    "file": "PlacementOps.cs",
+    "returns": "Dictionary<string, object?>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "offset_x_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "offset_y_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "height_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "x",
+      "y",
+      "z",
+      "level_id"
+    ],
+    "note": "Girdi eleman listesinin ilk elemanının origin'inden offset+yükseklik ile XYZ üretir."
+  },
+  "calc_room_lux": {
+    "file": "MepCalcOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "lumen_param",
+        "type": "String",
+        "required": false,
+        "default": "InitialIntensity"
+      },
+      {
+        "key": "cu",
+        "type": "Double",
+        "required": false,
+        "default": "0.60"
+      },
+      {
+        "key": "mf",
+        "type": "Double",
+        "required": false,
+        "default": "0.80"
+      },
+      {
+        "key": "target_lux",
+        "type": "Double",
+        "required": false,
+        "default": "300"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "room_id",
+      "room_name",
+      "room_number",
+      "area_m2",
+      "fixture_count",
+      "total_lumens",
+      "cu",
+      "mf",
+      "avg_lux",
+      "target_lux",
+      "status"
+    ],
+    "note": "Pre-check: lumen_param fixture family'de yoksa PARAM_MISSING döner."
+  },
+  "calc_sprinkler_design_density": {
+    "file": "FireCalcOps.cs",
+    "returns": "Dictionary<string, object?>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "hazard_class",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "system_type",
+        "type": "String",
+        "required": false,
+        "default": "islak"
+      },
+      {
+        "key": "area_m2",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "hazard_class",
+      "design_density_mm_per_min",
+      "protection_area_m2",
+      "required_flow_lpm",
+      "total_pump_flow_lpm",
+      "reference"
+    ],
+    "note": "TR Yangın Yönetmeliği Ek-8/B. hazard_class: dusuk|orta_1|orta_2|orta_3|yuksek_1|yuksek_2"
+  },
+  "check_overlapping_rooms": {
+    "file": "ValidationOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "check_unplaced_rooms": {
+    "file": "ValidationOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "check_untagged_elements": {
+    "file": "ViewOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "view_id",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "element_id",
+      "category",
+      "family_type",
+      "level",
+      "tag_count"
+    ]
+  },
+  "check_zero_volume": {
+    "file": "ValidationOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "clash_detect_matrix": {
+    "file": "ClashOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "None",
+    "params": [
+      {
+        "key": "group_a",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "group_b",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "tolerance_mm",
+        "type": "Int32",
+        "required": false,
+        "default": 10
+      },
+      {
+        "key": "max_results",
+        "type": "Int32",
+        "required": false,
+        "default": 1000
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "a_id",
+      "a_category",
+      "b_id",
+      "b_category",
+      "clash_x",
+      "clash_y",
+      "clash_z",
+      "overlap_volume_m3",
+      "disiplin_cifti",
+      "seviye"
+    ],
+    "category": "Koordinasyon",
+    "description": "İki kategori grubu (A vs B) arasında hard clash tespiti (BBox + Solid)",
+    "requires_transaction": false
+  },
+  "clash_severity_sort": {
+    "file": "ClashOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary>",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "sira_no"
+    ],
+    "category": "Koordinasyon",
+    "description": "Clash bulgularını kesişim hacmine göre önceliklendirir",
+    "requires_transaction": false
+  },
+  "classify_by_wbs": {
+    "file": "SemanticOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [
+      "wbs_mapping"
+    ],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "classify_elements": {
+    "file": "SemanticOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "clear_script_cache": {
+    "file": "ScriptOps.cs",
+    "returns": "Dictionary",
+    "input_type": "Any",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "cleared"
+    ]
+  },
+  "collect_air_terminals": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_beams": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_by_category": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "category",
+        "type": "String",
+        "required": false,
+        "default": "OST_Walls"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_by_ids": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "List<Dictionary<string, object?>>",
+    "params": [
+      {
+        "key": "id_fields",
+        "type": "String",
+        "required": false,
+        "default": "element_id"
+      },
+      {
+        "key": "distinct",
+        "type": "String",
+        "required": false,
+        "default": "true"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Toplama",
+    "description": "Dict satırlarındaki ID alan(lar)ından Element listesi toplar. Satır-tabanlı çıktıları Element bekleyen op'lara köprüler.",
+    "requires_transaction": false
+  },
+  "collect_by_phase": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "phase_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_by_type_name": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "type_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_by_workset": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "workset_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_cable_trays": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_casework": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_ceilings": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_columns": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_conduits": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_curtain_panels": {
+    "file": "FacadeOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Cephe",
+    "description": "Projedeki tüm curtain panel elementlerini toplar. ",
+    "requires_transaction": false
+  },
+  "collect_curtain_walls": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_doors": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_doors_in_room": {
+    "file": "PlacementOps.cs",
+    "returns": "List<Element>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "Input: List<Room>. Odanın boundary segmentlerinden host duvarlarını bulur, o duvarlardaki kapıları döner."
+  },
+  "collect_duct_fittings": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_ducts": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_electrical_equipment": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_electrical_fixtures": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_elements": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "category",
+        "type": "String",
+        "required": false,
+        "default": "OST_Walls"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_families": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "category",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_fire_alarm_devices": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_floors": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_foundations": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_furniture": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_furniture_systems": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_generic_models": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_grids": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_levels": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_lighting_devices": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_lighting_fixtures": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_linked_elements": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "category",
+        "type": "String",
+        "required": false,
+        "default": "OST_Walls"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_mechanical_equipment": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_multi": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "categories",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_parking": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_pipe_accessories": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_pipe_fittings": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_pipes": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_plumbing_fixtures": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_ramps": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_rebar": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_rebar_in_host": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "host_id",
+        "type": "Int",
+        "required": false,
+        "default": "-1"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_roofs": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_rooms": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_selected": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_sheets": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_site": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_sprinklers": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_stairs": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_structural_columns": {
+    "file": "PreviewOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_structural_framing": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_structural_walls": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_topography": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_types": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "category",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_views": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "view_type",
+        "type": "String",
+        "required": false,
+        "default": "All"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_walls": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "collect_windows": {
+    "file": "CollectionOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "column_height": {
+    "description": "column_height",
+    "category": "geometry",
+    "params": []
+  },
+  "column_volume": {
+    "description": "column_volume",
+    "category": "geometry",
+    "params": []
+  },
+  "compare_run_result": {
+    "file": "TraceOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "trace_key",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "element_id",
+      "status"
+    ],
+    "note": "status: new|existing|removed"
+  },
+  "compute": {
+    "file": "UtilityOps.cs",
+    "returns": "double",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "field",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "func",
+        "type": "String",
+        "required": false,
+        "default": "sum"
+      },
+      {
+        "key": "a",
+        "type": "Double",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "b",
+        "type": "Double",
+        "required": false,
+        "default": "1.0"
+      },
+      {
+        "key": "op",
+        "type": "String",
+        "required": false,
+        "default": "mul"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "conduit_fill_check": {
+    "file": "MepInspectOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "count_param",
+        "type": "String",
+        "required": false,
+        "default": "EG_IletkenSayisi"
+      },
+      {
+        "key": "area_param",
+        "type": "String",
+        "required": false,
+        "default": "EG_IletkenKesit_mm2"
+      },
+      {
+        "key": "max_fill_pct",
+        "type": "Double",
+        "required": false,
+        "default": "40"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "Pre-check: EG_IletkenSayisi + EG_IletkenKesit_mm2 yoksa PARAM_MISSING."
+  },
+  "coord_check_clearance": {
+    "file": "MepAndPmOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "min_clearance_mm",
+        "type": "Double",
+        "required": false,
+        "default": "50.0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "coord_validate_level_consistency": {
+    "file": "MepAndPmOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "coord_validate_penetration_firestop": {
+    "file": "MepAndPmOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "copy_param": {
+    "file": "ParamOps.cs",
+    "returns": "int",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "source_param",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "target_param",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "cost_by_level": {
+    "file": "CostOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "cost_summary": {
+    "file": "CostOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "group_by",
+        "type": "String",
+        "required": false,
+        "default": "kategori"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "count_items": {
+    "file": "UtilityOps.cs",
+    "returns": "int",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "create_3d_view": {
+    "file": "ModelingOps.cs",
+    "returns": "Element",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "view_name",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "padding_mm",
+        "type": "Double",
+        "required": false,
+        "default": "500"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "create_beam_by_curve": {
+    "file": "StructuralCreateOps.cs",
+    "returns": "List<Element>",
+    "input_type": "List<object",
+    "requires_transaction": true,
+    "params": [
+      {
+        "key": "family_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "type_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "level_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "offset_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "Input: List<Curve>. line_by_points çıktısı ile kullanın."
+  },
+  "create_column_by_point": {
+    "file": "StructuralCreateOps.cs",
+    "returns": "List<Element>",
+    "input_type": "List<object",
+    "requires_transaction": true,
+    "params": [
+      {
+        "key": "family_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "type_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "base_level",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "top_level",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "height_mm",
+        "type": "Double",
+        "required": false,
+        "default": "3000"
+      },
+      {
+        "key": "structural",
+        "type": "Bool",
+        "required": false,
+        "default": "true"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "Input: List<XYZ>. points_grid veya table_to_points ile kullanın."
+  },
+  "create_floor": {
+    "file": "CreationOps.cs",
+    "returns": "List<Element>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "type_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "level_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "points",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "offset_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "input: List<Room> veya boş (points param ile)"
+  },
+  "create_grid": {
+    "file": "CreationOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "x1_mm",
+        "type": "Double",
+        "required": true,
+        "default": "0"
+      },
+      {
+        "key": "y1_mm",
+        "type": "Double",
+        "required": true,
+        "default": "0"
+      },
+      {
+        "key": "x2_mm",
+        "type": "Double",
+        "required": true,
+        "default": "1000"
+      },
+      {
+        "key": "y2_mm",
+        "type": "Double",
+        "required": true,
+        "default": "0"
+      },
+      {
+        "key": "name",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "create_grid_by_line": {
+    "file": "StructuralCreateOps.cs",
+    "returns": "List<Element>",
+    "input_type": "List<object",
+    "requires_transaction": true,
+    "params": [
+      {
+        "key": "name_prefix",
+        "type": "String",
+        "required": false,
+        "default": "G"
+      },
+      {
+        "key": "start_index",
+        "type": "Int",
+        "required": false,
+        "default": "1"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "Input: List<Curve>. create_grid'in curve versiyonu."
+  },
+  "create_level": {
+    "file": "CreationOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "elevation_mm",
+        "type": "Double",
+        "required": true,
+        "default": "0"
+      },
+      {
+        "key": "name",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "create_room": {
+    "file": "CreationOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "x_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "y_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "level_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "name",
+        "type": "String",
+        "required": false,
+        "default": "Oda"
+      },
+      {
+        "key": "number",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "create_sheet": {
+    "file": "ModelingOps.cs",
+    "returns": "Element",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "sheet_number",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "sheet_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "title_block_name",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "create_view_filter": {
+    "file": "ViewOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "filter_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "categories",
+        "type": "String",
+        "required": true,
+        "default": "OST_DuctCurves"
+      },
+      {
+        "key": "param_name",
+        "type": "String",
+        "required": false,
+        "default": "System Classification"
+      },
+      {
+        "key": "rule_operator",
+        "type": "String",
+        "required": false,
+        "default": "contains"
+      },
+      {
+        "key": "rule_value",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "color_r",
+        "type": "Int",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "color_g",
+        "type": "Int",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "color_b",
+        "type": "Int",
+        "required": false,
+        "default": "255"
+      },
+      {
+        "key": "line_weight",
+        "type": "Int",
+        "required": false,
+        "default": "4"
+      },
+      {
+        "key": "fill_pattern",
+        "type": "String",
+        "required": false,
+        "default": "Solid Fill"
+      },
+      {
+        "key": "overwrite",
+        "type": "Bool",
+        "required": false,
+        "default": "false"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "view_id",
+      "view_name",
+      "filter_id",
+      "filter_name",
+      "applied",
+      "status"
+    ],
+    "requires_transaction": true,
+    "note": "Input: List<View>. rule_operator: contains|equals|begins_with"
+  },
+  "create_wall": {
+    "file": "CreationOps.cs",
+    "returns": "List<Element>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "mode",
+        "type": "String",
+        "required": true,
+        "default": "from_lines"
+      },
+      {
+        "key": "type_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "level_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "height_mm",
+        "type": "Double",
+        "required": false,
+        "default": "3000"
+      },
+      {
+        "key": "reference",
+        "type": "String",
+        "required": false,
+        "default": "centerline"
+      },
+      {
+        "key": "flip",
+        "type": "Bool",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "key": "structural",
+        "type": "Bool",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "key": "skip_existing",
+        "type": "Bool",
+        "required": false,
+        "default": "true"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "mode: from_lines | between_lines | from_room"
+  },
+  "csv_read": {
+    "file": "CsvOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "file_path",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "delimiter",
+        "type": "String",
+        "required": false,
+        "default": ","
+      },
+      {
+        "key": "has_header",
+        "type": "Bool",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "key": "encoding",
+        "type": "String",
+        "required": false,
+        "default": "utf-8"
+      },
+      {
+        "key": "skip_rows",
+        "type": "Int",
+        "required": false,
+        "default": "0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "csv_write": {
+    "file": "CsvOps.cs",
+    "returns": "string",
+    "input_type": "List<Dict",
+    "params": [
+      {
+        "key": "file_path",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "delimiter",
+        "type": "String",
+        "required": false,
+        "default": ","
+      },
+      {
+        "key": "include_header",
+        "type": "Bool",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "key": "encoding",
+        "type": "String",
+        "required": false,
+        "default": "utf-8-sig"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "curve_from_element": {
+    "description": "curve_from_element",
+    "category": "geometry",
+    "params": []
+  },
+  "data_get": {
+    "file": "DataOps.cs",
+    "returns": "object?",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "key",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "data_list_keys": {
+    "file": "DataOps.cs",
+    "returns": "List<string>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "data_load": {
+    "file": "DataOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "path",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "root_key",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "cache_bust",
+        "type": "Bool",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "key": "key",
+        "type": "String",
+        "required": false,
+        "default": "Path.GetFileNameWithoutExtension(fullPat"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "delete_generated": {
+    "file": "TraceOps.cs",
+    "returns": "int",
+    "input_type": "—",
+    "requires_transaction": true,
+    "params": [
+      {
+        "key": "trace_key",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "confirm",
+        "type": "Bool",
+        "required": false,
+        "default": "false"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "confirm=true zorunlu — güvenlik kilidi."
+  },
+  "detect_undefined_system": {
+    "file": "ViewOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "discipline",
+        "type": "String",
+        "required": false,
+        "default": "all"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "element_id",
+      "category",
+      "family_type",
+      "level",
+      "system_type",
+      "fix_hint"
+    ],
+    "note": "Input boşsa tüm MEP taranır. discipline: hvac|plumbing|electrical|all"
+  },
+  "distinct_rows": {
+    "file": "FilterOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "field",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "door_clearance_check": {
+    "file": "DoorOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "min_clear_width_mm",
+        "type": "Double",
+        "required": false,
+        "default": "850"
+      },
+      {
+        "key": "min_latch_side_mm",
+        "type": "Double",
+        "required": false,
+        "default": "300"
+      },
+      {
+        "key": "severity",
+        "type": "String",
+        "required": false,
+        "default": "WARNING"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "door_fire_rating_from_wall": {
+    "file": "DoorOps.cs",
+    "returns": "int",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "wall_param",
+        "type": "String",
+        "required": false,
+        "default": "Yangın Dayanım Süresi"
+      },
+      {
+        "key": "door_param",
+        "type": "String",
+        "required": false,
+        "default": "EG_YanginDayanim"
+      },
+      {
+        "key": "rating_map",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "requires_transaction": true
+  },
+  "door_handing_detect": {
+    "file": "DoorOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "element_id",
+      "handing",
+      "swing",
+      "hand_flipped",
+      "facing_flipped",
+      "facing_x",
+      "facing_y",
+      "hand_x",
+      "hand_y"
+    ]
+  },
+  "door_number_by_room": {
+    "file": "DoorOps.cs",
+    "returns": "int",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "param_name",
+        "type": "String",
+        "required": false,
+        "default": "Mark"
+      },
+      {
+        "key": "separator",
+        "type": "String",
+        "required": false,
+        "default": "-"
+      },
+      {
+        "key": "start_index",
+        "type": "Int",
+        "required": false,
+        "default": "1"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "requires_transaction": true
+  },
+  "duct_aspect_ratio_check": {
+    "file": "MepInspectOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "max_ratio",
+        "type": "Double",
+        "required": false,
+        "default": "4.0"
+      },
+      {
+        "key": "severity",
+        "type": "String",
+        "required": false,
+        "default": "WARNING"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "Sadece dikdörtgen kanallar. Dairesel kanallar atlanır."
+  },
+  "duct_section_convert_apply": {
+    "file": "DuctSectionOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?>>",
+    "params": [
+      {
+        "key": "skip_warnings",
+        "type": "String",
+        "required": false,
+        "default": "false"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "duct_id",
+      "status",
+      "message",
+      "new_w_mm",
+      "new_h_mm"
+    ],
+    "category": "MEP-Mekanik",
+    "description": "duct_section_convert_preview çıktısındaki yeni kanal boyutlarını modele yazar.",
+    "requires_transaction": true
+  },
+  "duct_section_convert_preview": {
+    "file": "DuctSectionOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element>",
+    "params": [
+      {
+        "key": "fix_dimension",
+        "type": "String",
+        "required": false,
+        "default": "height"
+      },
+      {
+        "key": "fixed_value_mm",
+        "type": "Double",
+        "required": true,
+        "default": 0
+      },
+      {
+        "key": "round_to_mm",
+        "type": "Double",
+        "required": false,
+        "default": 50
+      },
+      {
+        "key": "max_aspect_ratio",
+        "type": "Double",
+        "required": false,
+        "default": 4.0
+      },
+      {
+        "key": "only_round_ducts",
+        "type": "String",
+        "required": false,
+        "default": "false"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "duct_id",
+      "system_name",
+      "old_w_mm",
+      "old_h_mm",
+      "old_de_mm",
+      "new_w_mm",
+      "new_h_mm",
+      "new_de_mm",
+      "aspect_ratio",
+      "de_error_pct",
+      "warning"
+    ],
+    "category": "MEP-Mekanik",
+    "description": "Dikdörtgen kanalları eş-kesit (eşdeğer çap korumalı) yeniden boyutlandırır. Yalnızca hesap.",
+    "requires_transaction": false
+  },
+  "echo": {
+    "file": "CoreOps.cs",
+    "returns": "object?",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "message",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "eg_addin_disable_unused": {
+    "file": "SystemOps.cs",
+    "returns": "Dictionary",
+    "input_type": "None",
+    "params": [
+      {
+        "key": "keep",
+        "type": "List<String>",
+        "required": false,
+        "default": []
+      },
+      {
+        "key": "revit_version",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "disabled_count",
+      "skipped_readonly",
+      "failed_count",
+      "restart_required"
+    ],
+    "category": "Sistem",
+    "description": "Zorunlu olmayan add-inleri .EGdisabled olarak devre dışı bırakır"
+  },
+  "eg_addin_restore_all": {
+    "file": "SystemOps.cs",
+    "returns": "Dictionary",
+    "input_type": "None",
+    "params": [
+      {
+        "key": "revit_version",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "restored_count",
+      "failed_count",
+      "restart_required"
+    ],
+    "category": "Sistem",
+    "description": "Tüm .EGdisabled / .RSTdisabled add-inleri geri yükler"
+  },
+  "eg_addin_restore_single": {
+    "file": "SystemOps.cs",
+    "returns": "bool",
+    "input_type": "None",
+    "params": [
+      {
+        "key": "addin_file",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "revit_version",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Sistem",
+    "description": "Tek bir add-ini geri yükler (addin_file: pyRevit.addin)"
+  },
+  "eg_addin_scan": {
+    "file": "SystemOps.cs",
+    "returns": "List<Dictionary>",
+    "input_type": "None",
+    "params": [
+      {
+        "key": "revit_version",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "include_disabled",
+        "type": "Boolean",
+        "required": false,
+        "default": true
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "fileName",
+      "disabled",
+      "directory",
+      "name",
+      "addinId"
+    ],
+    "category": "Sistem",
+    "description": "Kurulu Revit add-inleri tarar ve listeler"
+  },
+  "eg_health_snapshot": {
+    "file": "SystemOps.cs",
+    "returns": "string",
+    "input_type": "None",
+    "params": [
+      {
+        "key": "format",
+        "type": "String",
+        "required": false,
+        "default": "html"
+      },
+      {
+        "key": "open",
+        "type": "Boolean",
+        "required": false,
+        "default": false
+      },
+      {
+        "key": "out_path",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "out_path"
+    ],
+    "category": "Sistem",
+    "description": "RAM/CPU/Disk/OS/Revit/Warnings sağlık raporu üretir (html|json|text)"
+  },
+  "elec_check_circuit_assigned": {
+    "file": "MepAndPmOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "elec_check_emergency_lighting": {
+    "file": "MepAndPmOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "elec_circuit_diff": {
+    "file": "ElecCircuitDiffOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "-",
+    "params": [
+      {
+        "key": "baseline_path",
+        "type": "String",
+        "required": true,
+        "default": null
+      },
+      {
+        "key": "output_path",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "panel_filter",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "load_tolerance_va",
+        "type": "Double",
+        "required": false,
+        "default": 1
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "change_type",
+      "panel",
+      "circuit_number",
+      "field",
+      "old_value",
+      "new_value",
+      "detail"
+    ],
+    "category": "MEP-Elektrik",
+    "description": "Mevcut modeli onceki devre snapshot'i ile karsilastirir; EKLENEN/SILINEN/DEGISEN devreleri ve degisen alani saha icin raporlar. UniqueId ile eslestirir.",
+    "requires_transaction": false
+  },
+  "elec_circuit_snapshot": {
+    "file": "ElecCircuitDiffOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element> (ElectricalSystem)",
+    "params": [
+      {
+        "key": "output_path",
+        "type": "String",
+        "required": true,
+        "default": null
+      },
+      {
+        "key": "panel_filter",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "circuit_id",
+      "panel",
+      "circuit_number",
+      "load_va",
+      "poles",
+      "status"
+    ],
+    "category": "MEP-Elektrik",
+    "description": "Modeldeki tum elektrik devrelerinin durumunu JSON snapshot'a yazar (onayli tasarim ani). elec_circuit_diff ile karsilastirilir.",
+    "requires_transaction": false
+  },
+  "elec_conduit_calc_iec": {
+    "file": "ElecConduitIecOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element> (Conduit)",
+    "params": [
+      {
+        "key": "voltage",
+        "type": "Double",
+        "required": false,
+        "default": 400
+      },
+      {
+        "key": "vdrop_limit_pct",
+        "type": "Double",
+        "required": false,
+        "default": 5
+      },
+      {
+        "key": "max_fill_pct",
+        "type": "Double",
+        "required": false,
+        "default": 40
+      },
+      {
+        "key": "ampacity_table_path",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "only_with_circuit",
+        "type": "Bool",
+        "required": false,
+        "default": true
+      }
+    ],
+    "reg_reads": [
+      "EG_DevreNo",
+      "EG_KurulumMetodu",
+      "EG_Yalitim",
+      "EG_Iletken",
+      "EG_OrtamSicaklik",
+      "EG_GruplamaAdet",
+      "EG_GucFaktoru",
+      "EG_YapmaPayi"
+    ],
+    "reg_writes": [
+      "EG_ModelUzunluk",
+      "EG_KabloUzunluk",
+      "EG_HesapAkim",
+      "EG_KabloKesiti",
+      "EG_FazKesit_mm2",
+      "EG_GerilimDusumu",
+      "EG_GerilimDusumuV",
+      "EG_SigortaOneri",
+      "EG_DolulukYuzde",
+      "EG_KisaDevreKesiti",
+      "EG_HesapDurumu",
+      "EG_HesapTarihi"
+    ],
+    "out_fields": [
+      "conduit_id",
+      "devre",
+      "uzunluk_m",
+      "akim_a",
+      "kesit_mm2",
+      "gerilim_dusumu_pct",
+      "doluluk_pct",
+      "sigorta_a",
+      "durum"
+    ],
+    "category": "MEP-Elektrik",
+    "description": "Conduit uzunlugunu okur, EG_DevreNo ile ElectricalSystem'i eslestirir, IEC 60364 kablo secimi (ampacity+gerilim dusumu+kisa devre) + conduit fill hesabi yapar, cikti parametrelerini conduit'e yazar.",
+    "requires_transaction": true
+  },
+  "elec_conduit_schedule": {
+    "file": "ElecConduitIecOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element> (Conduit)",
+    "params": [
+      {
+        "key": "output_path",
+        "type": "String",
+        "required": true,
+        "default": null
+      },
+      {
+        "key": "only_calculated",
+        "type": "Bool",
+        "required": false,
+        "default": true
+      }
+    ],
+    "reg_reads": [
+      "EG_DevreNo",
+      "EG_Kaynak",
+      "EG_Hedef",
+      "EG_KabloKesiti",
+      "EG_KabloUzunluk",
+      "EG_HesapAkim",
+      "EG_GerilimDusumu",
+      "EG_DolulukYuzde",
+      "EG_SigortaOneri",
+      "EG_HesapDurumu"
+    ],
+    "reg_writes": [],
+    "out_fields": [
+      "devre",
+      "kaynak",
+      "hedef",
+      "kesit",
+      "uzunluk_m",
+      "gerilim_dusumu_pct",
+      "doluluk_pct",
+      "sigorta_a",
+      "durum"
+    ],
+    "category": "MEP-Elektrik",
+    "description": "Conduit hesap sonuclarindan From-To-Devre-Kesit-Uzunluk-GerilimDusumu-Fill cetveli uretir (HTML/CSV).",
+    "requires_transaction": false
+  },
+  "elec_generate_panel_schedule": {
+    "file": "MepAndPmOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "elec_setup_conduit_params": {
+    "file": "ElecConduitIecOps.cs",
+    "returns": "Dictionary<string, object?>",
+    "input_type": "-",
+    "params": [
+      {
+        "key": "spf_path",
+        "type": "String",
+        "required": false,
+        "default": "mapping/EGBIM_ElektrikParams.txt"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "added",
+      "skipped",
+      "spf_path"
+    ],
+    "category": "MEP-Elektrik",
+    "description": "EGBIM elektrik hesap shared parametrelerini (sabit GUID) projeye yukler, Conduit+ElectricalCircuit kategorilerine bind. Hesaptan once bir kez calistirilir.",
+    "requires_transaction": true
+  },
+  "elec_validate_lux_level": {
+    "file": "MepAndPmOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "min_lux",
+        "type": "Double",
+        "required": false,
+        "default": "300.0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "elec_validate_panel_load": {
+    "file": "MepAndPmOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "max_load_kva",
+        "type": "Double",
+        "required": false,
+        "default": "100.0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "element_area": {
+    "description": "element_area",
+    "category": "geometry",
+    "params": []
+  },
+  "element_bounding_box": {
+    "description": "element_bounding_box",
+    "category": "geometry",
+    "params": []
+  },
+  "element_count": {
+    "file": "RevitOps.cs",
+    "returns": "int",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "element_length": {
+    "description": "element_length",
+    "category": "geometry",
+    "params": []
+  },
+  "element_report": {
+    "file": "ExportOps.cs",
+    "returns": "string",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "title",
+        "type": "String",
+        "required": false,
+        "default": "EGBIMOTO Eleman Raporu"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "element_volume": {
+    "description": "element_volume",
+    "category": "geometry",
+    "params": []
+  },
+  "element_volume_geometry": {
+    "description": "element_volume_geometry",
+    "category": "geometry",
+    "params": []
+  },
+  "elements_to_rows": {
+    "file": "FilterOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "elements_to_rows_with_params": {
+    "file": "FilterOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "param_names",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "eq": {
+    "file": "CoreOps.cs",
+    "returns": "bool",
+    "input_type": "object",
+    "params": [
+      {
+        "key": "left",
+        "type": "Object",
+        "required": false,
+        "default": "$input",
+        "desc": "Karşılaştırılacak sol değer. Boşsa input kullanılır."
+      },
+      {
+        "key": "right",
+        "type": "Object",
+        "required": true,
+        "default": "",
+        "desc": "Karşılaştırılacak sağ değer."
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "Condition parser zaten == destekler; bu op manifest adımı olarak eşitlik kontrolü gerektiğinde kullanılır."
+  },
+  "excel_xml_read": {
+    "file": "CsvOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "file_path",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "sheet_name",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "has_header",
+        "type": "Bool",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "key": "skip_rows",
+        "type": "Int",
+        "required": false,
+        "default": "0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "openpyxl gerektirmez — ZipArchive+XML"
+  },
+  "export_csv": {
+    "file": "CoreOps.cs",
+    "returns": "string",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "file_path",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "export_html_report": {
+    "file": "CoreOps.cs",
+    "returns": "string",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "title",
+        "type": "String",
+        "required": false,
+        "default": "EGBIMOTO Rapor"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "export_pdf": {
+    "file": "ExportOps.cs",
+    "returns": "string",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "title",
+        "type": "String",
+        "required": false,
+        "default": "EGBIMOTO Rapor"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "export_row_report": {
+    "file": "PreviewOps.cs",
+    "returns": "string",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "title",
+        "type": "String",
+        "required": false,
+        "default": "EGBIMOTO Raporu"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "export_validation_report": {
+    "file": "ExportOps.cs",
+    "returns": "string",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "title",
+        "type": "String",
+        "required": false,
+        "default": "EGBIMOTO Doğrulama Raporu"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "export_wbs_report": {
+    "file": "DataOps.cs",
+    "returns": "string",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "output_path",
+        "type": "String",
+        "required": false,
+        "default": "DataRoot/default"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "export_xlsx": {
+    "file": "ExportOps.cs",
+    "returns": "string",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "file_path",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "sheet_name",
+        "type": "String",
+        "required": false,
+        "default": "EGBIMOTO"
+      },
+      {
+        "key": "title",
+        "type": "String",
+        "required": false,
+        "default": "EGBIMOTO"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "fa_classify_room_detector": {
+    "file": "MepAndPmOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "fa_device_schedule": {
+    "file": "MepInspectOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "loop_param",
+        "type": "String",
+        "required": false,
+        "default": "EG_Loop"
+      },
+      {
+        "key": "zone_param",
+        "type": "String",
+        "required": false,
+        "default": "EG_Zone"
+      },
+      {
+        "key": "circuit_param",
+        "type": "String",
+        "required": false,
+        "default": "EG_Circuit"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "device_type",
+      "level",
+      "zone",
+      "loop",
+      "circuit",
+      "quantity"
+    ],
+    "note": "Pre-check: EG_Loop + EG_Zone yoksa PARAM_MISSING."
+  },
+  "fa_validate_circuit_assigned": {
+    "file": "MepAndPmOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "fa_validate_device_in_room": {
+    "file": "MepAndPmOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "fa_validate_mounting_height": {
+    "file": "MepAndPmOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "min_aff_mm",
+        "type": "Double",
+        "required": false,
+        "default": "2000.0"
+      },
+      {
+        "key": "max_aff_mm",
+        "type": "Double",
+        "required": false,
+        "default": "2400.0"
+      },
+      {
+        "key": "device_filter",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "facade_area_by_type": {
+    "file": "FacadeOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Cephe",
+    "description": "Panel tipine göre toplam cephe alanını hesaplar. ",
+    "requires_transaction": false
+  },
+  "facade_export_schedule": {
+    "file": "FacadeOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Cephe",
+    "description": "Cephe metraj tablosunu HTML + özet satırıyla dışa aktarır. ",
+    "requires_transaction": false
+  },
+  "facade_joint_validate": {
+    "file": "FacadeOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Cephe",
+    "description": "Curtain panellerin derz parametrelerini doğrular. ",
+    "requires_transaction": false
+  },
+  "facade_opening_ratio": {
+    "file": "FacadeOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Cephe",
+    "description": "Cephe saydamlık oranını hesaplar (pencere alanı / toplam cephe alanı). ",
+    "requires_transaction": false
+  },
+  "facade_panel_matrix": {
+    "file": "FacadeOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Cephe",
+    "description": "Curtain panellerini tip ve kata göre gruplandırarak matris tablosu oluşturur. ",
+    "requires_transaction": false
+  },
+  "facade_system_params": {
+    "file": "FacadeOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Cephe",
+    "description": "Cephe duvarlarına EGBIMOTO TR BIM parametrelerini toplu yazar. ",
+    "requires_transaction": true
+  },
+  "facade_u_value_check": {
+    "file": "FacadeOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Cephe",
+    "description": "Cephe panellerinin U değerini TS 825 limitine göre kontrol eder. ",
+    "requires_transaction": false
+  },
+  "family_add_param": {
+    "file": "FamilyCreateOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Aile",
+    "description": "Aktif aile belgesine yeni bir instance veya type parametresi ekler. ",
+    "requires_transaction": true
+  },
+  "family_batch_load": {
+    "file": "FamilyCreateOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Aile",
+    "description": "Belirtilen klasördeki tüm .rfa dosyalarını projeye toplu yükler. ",
+    "requires_transaction": true
+  },
+  "family_ensure_loaded": {
+    "file": "ParamOps.cs",
+    "returns": "bool",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "family_path",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "family_health_check": {
+    "file": "FamilyOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "expected_params",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "max_types",
+        "type": "Int",
+        "required": false,
+        "default": "50"
+      },
+      {
+        "key": "origin_threshold_m",
+        "type": "Double",
+        "required": false,
+        "default": "100.0"
+      },
+      {
+        "key": "check_nested",
+        "type": "Bool",
+        "required": false,
+        "default": "false"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "family_id",
+      "family_name",
+      "category",
+      "type_count",
+      "param_count",
+      "is_in_place",
+      "has_no_category",
+      "type_count_ok",
+      "missing_params",
+      "has_origin_issue",
+      "nested_count",
+      "status"
+    ],
+    "note": "status: OK|WARNING|ERROR. check_nested=true ağır işlem — scope daralt."
+  },
+  "family_load_to_project": {
+    "file": "FamilyCreateOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Aile",
+    "description": "Bir .rfa dosyasını aktif Revit projesine yükler (varsa günceller). ",
+    "requires_transaction": true
+  },
+  "family_open_template": {
+    "file": "FamilyCreateOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Aile",
+    "description": "Bir aile şablonu dosyasını açar veya mevcut aile belgesini döner. ",
+    "requires_transaction": false
+  },
+  "family_type_create": {
+    "file": "FamilyCreateOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Aile",
+    "description": "Bir aile içinde yeni tip oluşturur veya varolan tipin parametrelerini günceller. ",
+    "requires_transaction": true
+  },
+  "filter_by_category": {
+    "file": "FilterOps.cs",
+    "returns": "List<Element>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "category",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "filter_by_level": {
+    "file": "FilterOps.cs",
+    "returns": "List<Element>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "level_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "filter_by_level_range": {
+    "file": "FilterOps.cs",
+    "returns": "List<Element>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "min_level",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "max_level",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "filter_by_param": {
+    "file": "FilterOps.cs",
+    "returns": "List<Element>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "param_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "value",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "operator",
+        "type": "String",
+        "required": false,
+        "default": "equals"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "filter_by_type": {
+    "file": "FilterOps.cs",
+    "returns": "List<Element>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "type_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "filter_by_workset": {
+    "file": "FilterOps.cs",
+    "returns": "List<Element>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "workset_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "filter_empty_param": {
+    "file": "FilterOps.cs",
+    "returns": "List<Element>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "param_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "filter_not_empty_param": {
+    "file": "FilterOps.cs",
+    "returns": "List<Element>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "param_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "filter_rows": {
+    "file": "FilterOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "field",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "value",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "operator",
+        "type": "String",
+        "required": false,
+        "default": "eq"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "filter_rows_multi": {
+    "file": "FilterOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dict",
+    "params": [
+      {
+        "key": "conditions",
+        "type": "Array",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "fire_hose_cabinet_spacing_check": {
+    "file": "FireCalcOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "max_spacing_m",
+        "type": "Double",
+        "required": false,
+        "default": "30.0"
+      },
+      {
+        "key": "hose_length_m",
+        "type": "Double",
+        "required": false,
+        "default": "20.0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "En yakın komşuya mesafe × 2 hortum uzunluğu erişim analizi."
+  },
+  "flatten_list": {
+    "file": "UtilityOps.cs",
+    "returns": "List<object?>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "floor_volume": {
+    "description": "floor_volume",
+    "category": "geometry",
+    "params": []
+  },
+  "format_message": {
+    "file": "UtilityOps.cs",
+    "returns": "string",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "template",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "format_number": {
+    "file": "UtilityOps.cs",
+    "returns": "string",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "value",
+        "type": "Double",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "format",
+        "type": "String",
+        "required": false,
+        "default": "N2"
+      },
+      {
+        "key": "unit",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "foundation_volume": {
+    "description": "foundation_volume",
+    "category": "geometry",
+    "params": []
+  },
+  "fp_validate_sprinkler_coverage": {
+    "file": "MepAndPmOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "max_coverage_m2",
+        "type": "Double",
+        "required": false,
+        "default": "12.0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "generate_ids": {
+    "file": "ParamOps.cs",
+    "returns": "string",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "title",
+        "type": "String",
+        "required": false,
+        "default": "EGBIMOTO IDS"
+      },
+      {
+        "key": "output_path",
+        "type": "String",
+        "required": false,
+        "default": "DataRoot/default"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "get_door_wall_clearances": {
+    "file": "PlacementOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "element_id",
+      "left_mm",
+      "right_mm",
+      "wall_length_mm",
+      "door_width_mm"
+    ],
+    "note": "Input: List<FamilyInstance door>. Her kapı için duvardaki sol/sağ serbest mesafeyi mm döner."
+  },
+  "get_room_ceiling_center": {
+    "file": "PlacementOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "element_id",
+      "room_name",
+      "x",
+      "y",
+      "z"
+    ],
+    "note": "Input: List<Room>. Her odanın tavan düzeyindeki merkez XYZ koordinatını döner."
+  },
+  "group_by": {
+    "file": "FilterOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "field",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "group_elements_by_category": {
+    "file": "FilterOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "group_elements_by_level": {
+    "file": "FilterOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "group_elements_by_type": {
+    "file": "FilterOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "ifc_export": {
+    "file": "ExportOps.cs",
+    "returns": "string",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "output_dir",
+        "type": "String",
+        "required": false,
+        "default": "Environment.GetFolderPath(Environment.Sp"
+      },
+      {
+        "key": "file_name",
+        "type": "String",
+        "required": false,
+        "default": "$\"{Path.GetFileNameWithoutExtension(rctx"
+      },
+      {
+        "key": "ifc_version",
+        "type": "String",
+        "required": false,
+        "default": "IFC2x3"
+      },
+      {
+        "key": "export_linked_files",
+        "type": "Bool",
+        "required": false,
+        "default": "false"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "join_rows": {
+    "file": "FilterOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "key_field",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "kalip_all": {
+    "description": "Tüm yapısal kategorilerin kalıp alanını tek geçişte hesaplar (kolon, kiriş, duvar, döşeme, temel)",
+    "input_type": "List<Element>",
+    "returns": "List<Dictionary>",
+    "category": "Maliyet",
+    "params": [
+      {
+        "key": "include_edges",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ]
+  },
+  "kalip_column": {
+    "description": "Kolon kalıp alanı. Ana gövde: (çevre−duvar_temas)×H. Kolon başı: her yüz kiriş/döşeme düşümü.",
+    "input_type": "List<Element>",
+    "returns": "List<Dictionary>",
+    "category": "Maliyet",
+    "params": []
+  },
+  "kalip_export_xlsx": {
+    "file": "KalipOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Raporlama",
+    "description": "Kalıp hesap sonuçlarını Excel BOQ formatında dışa aktarır. ",
+    "requires_transaction": false
+  },
+  "kalip_floor": {
+    "file": "CostOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "kalip_report": {
+    "file": "KalipOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Raporlama",
+    "description": "Kalıp hesap sonuçlarını profesyonel HTML raporuna dönüştürür. ",
+    "requires_transaction": false
+  },
+  "kalip_summary": {
+    "file": "CostOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "group_by",
+        "type": "String",
+        "required": false,
+        "default": "kat"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "kalip_wall": {
+    "file": "CostOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "kalip_write_back": {
+    "description": "Kalıp satırlarını Revit parametrelerine yazar: Formwork_Area, TR_KalipAlani, TR_KalipPozNo, TR_KalipToplamTutar",
+    "input_type": "List<Dictionary>",
+    "returns": "Dictionary",
+    "category": "Maliyet",
+    "params": []
+  },
+  "lighting_emergency_check": {
+    "file": "MepInspectOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "emergency_param",
+        "type": "String",
+        "required": false,
+        "default": "EG_AcilAydinlatma"
+      },
+      {
+        "key": "emergency_panel_pattern",
+        "type": "String",
+        "required": false,
+        "default": "EP"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "Pre-check: EG_AcilAydinlatma (Yes/No) yoksa PARAM_MISSING. Sadece acil=Yes fixture'lar kontrol edilir."
+  },
+  "link_quantity_to_wbs": {
+    "file": "DataOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "quantity_field",
+        "type": "String",
+        "required": false,
+        "default": "hacim_m3"
+      },
+      {
+        "key": "wbs_field",
+        "type": "String",
+        "required": false,
+        "default": "wbs_kodu"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "list_cross_product": {
+    "file": "ListOps.cs",
+    "returns": "List<object?>",
+    "input_type": "List<object",
+    "params": [
+      {
+        "key": "second_key",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "list_filter_by_rule": {
+    "file": "ListOps.cs",
+    "returns": "List<object?>",
+    "input_type": "List<object",
+    "params": [
+      {
+        "key": "field",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "operator",
+        "type": "String",
+        "required": true,
+        "default": "eq"
+      },
+      {
+        "key": "value",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "operator: eq|ne|gt|lt|gte|lte|contains|starts_with"
+  },
+  "list_flatten": {
+    "file": "ListOps.cs",
+    "returns": "List<object?>",
+    "input_type": "List<object",
+    "params": [
+      {
+        "key": "levels",
+        "type": "Int",
+        "required": false,
+        "default": "1"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "list_group_by_key": {
+    "file": "ListOps.cs",
+    "returns": "List<object?>",
+    "input_type": "List<object",
+    "params": [
+      {
+        "key": "key_field",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "key_field_value",
+      "items",
+      "count"
+    ]
+  },
+  "list_map": {
+    "file": "ListOps.cs",
+    "returns": "List<object?>",
+    "input_type": "List<object",
+    "params": [
+      {
+        "key": "template",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "field",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "output_field",
+        "type": "String",
+        "required": false,
+        "default": "_mapped"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "list_shared_params": {
+    "file": "ParamOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "list_sort_by": {
+    "file": "ListOps.cs",
+    "returns": "List<object?>",
+    "input_type": "List<object",
+    "params": [
+      {
+        "key": "sort_field",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "ascending",
+        "type": "Bool",
+        "required": false,
+        "default": "true"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "list_take_every_n": {
+    "file": "ListOps.cs",
+    "returns": "List<object?>",
+    "input_type": "List<object",
+    "params": [
+      {
+        "key": "n",
+        "type": "Int",
+        "required": true,
+        "default": "2"
+      },
+      {
+        "key": "offset",
+        "type": "Int",
+        "required": false,
+        "default": "0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "list_transpose": {
+    "file": "ListOps.cs",
+    "returns": "List<object?>",
+    "input_type": "List<object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "list_zip": {
+    "file": "ListOps.cs",
+    "returns": "List<object?>",
+    "input_type": "List<object",
+    "params": [
+      {
+        "key": "second_key",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "second_key: manifest'teki ikinci listenin step_id'si (Vars'tan okunur)"
+  },
+  "load_ifc_mapping": {
+    "file": "DataOps.cs",
+    "returns": "Dictionary<string, object?>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "ifc_path",
+        "type": "String",
+        "required": false,
+        "default": "DataRoot/default"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [
+      "ifc_mapping"
+    ],
+    "out_fields": []
+  },
+  "load_poz_canonical_map": {
+    "description": "data/poz/poz_canonical_map.json dosyasını registry'ye yükler. poz_match_keynote_aware için ön koşul.",
+    "input_type": "—",
+    "returns": "Dictionary",
+    "category": "ETL",
+    "params": []
+  },
+  "load_poz_data": {
+    "file": "DataOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "file",
+        "type": "String",
+        "required": false,
+        "default": "DataRoot/default"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [
+      "poz_data"
+    ],
+    "out_fields": [
+      "birim_fiyat"
+    ]
+  },
+  "load_poz_section_rules": {
+    "description": "data/poz/poz_section_rules.json dosyasını registry'ye yükler. canonical_class → poz prefix listesi.",
+    "input_type": "—",
+    "returns": "Dictionary",
+    "category": "ETL",
+    "params": []
+  },
+  "load_qa_matrix": {
+    "file": "DataOps.cs",
+    "returns": "object?",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "qa_path",
+        "type": "String",
+        "required": false,
+        "default": "DataRoot/default"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [
+      "qa_matrix"
+    ],
+    "out_fields": []
+  },
+  "load_rayic": {
+    "file": "DataOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "rayic_path",
+        "type": "String",
+        "required": false,
+        "default": "DataRoot/default"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [
+      "rayic_data"
+    ],
+    "out_fields": []
+  },
+  "load_shared_param_map": {
+    "file": "DataOps.cs",
+    "returns": "Dictionary<string, object?>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "map_path",
+        "type": "String",
+        "required": false,
+        "default": "DataRoot/default"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [
+      "shared_param_map"
+    ],
+    "out_fields": []
+  },
+  "load_wbs_mapping": {
+    "file": "DataOps.cs",
+    "returns": "Dictionary<string, object?>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "wbs_path",
+        "type": "String",
+        "required": false,
+        "default": "DataRoot/default"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [
+      "wbs_mapping"
+    ],
+    "out_fields": []
+  },
+  "log_message": {
+    "file": "RevitOps.cs",
+    "returns": "object?",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "message",
+        "type": "String",
+        "required": false,
+        "default": "—"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "lookup_value": {
+    "file": "DataOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "key_field",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "lookup_key",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "result_field",
+        "type": "String",
+        "required": false,
+        "default": "lookup_result"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "map_to_ifc": {
+    "file": "SemanticOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [
+      "ifc_mapping"
+    ],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "mep_air_terminal_space_map": {
+    "file": "MepAndPmOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "mep_by_system": {
+    "description": "mep_by_system",
+    "category": "geometry",
+    "params": []
+  },
+  "mep_region_count": {
+    "file": "MepRegionOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element>",
+    "params": [
+      {
+        "key": "region_category",
+        "type": "String",
+        "required": false,
+        "default": "OST_Rooms"
+      },
+      {
+        "key": "mep_categories",
+        "type": "String",
+        "required": false,
+        "default": "OST_PipeCurves,OST_DuctCurves,OST_CableTray"
+      },
+      {
+        "key": "z_tolerance_mm",
+        "type": "Int32",
+        "required": false,
+        "default": 1500
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "region_id",
+      "region_name",
+      "region_number",
+      "level_name",
+      "area_m2",
+      "mep_count",
+      "total_length_m",
+      "pipe_count",
+      "duct_count",
+      "tray_count",
+      "by_category"
+    ],
+    "category": "MEP Koordinasyon",
+    "description": "Kapalı bölge (Room/Area) içindeki MEP elemanlarını sayar ve uzunluk toplar.",
+    "requires_transaction": false
+  },
+  "mep_region_tag": {
+    "file": "MepRegionOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element>",
+    "params": [
+      {
+        "key": "region_category",
+        "type": "String",
+        "required": false,
+        "default": "OST_Rooms"
+      },
+      {
+        "key": "mep_categories",
+        "type": "String",
+        "required": false,
+        "default": "OST_PipeCurves,OST_DuctCurves,OST_CableTray"
+      },
+      {
+        "key": "target_param",
+        "type": "String",
+        "required": false,
+        "default": "Comments"
+      },
+      {
+        "key": "write_mode",
+        "type": "String",
+        "required": false,
+        "default": "name_number"
+      },
+      {
+        "key": "z_tolerance_mm",
+        "type": "Int32",
+        "required": false,
+        "default": 1500
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "region_id",
+      "region_name",
+      "tagged_count",
+      "skipped_count"
+    ],
+    "category": "MEP Koordinasyon",
+    "description": "Kapalı bölge içindeki MEP elemanlarına bölge adı/numarasını parametre yazar.",
+    "requires_transaction": true
+  },
+  "mep_straighten_apply": {
+    "file": "MepStraightenOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?>>",
+    "params": [
+      {
+        "key": "max_apply",
+        "type": "Int32",
+        "required": false,
+        "default": 0
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "elbow_a_id",
+      "elbow_b_id",
+      "status",
+      "message"
+    ],
+    "category": "MEP Koordinasyon",
+    "description": "Tespit edilen S-bendleri düzleştirir (dirsek+ara segment siler, ana hattı uzatır).",
+    "requires_transaction": true
+  },
+  "mep_straighten_scan": {
+    "file": "MepStraightenOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element>",
+    "params": [
+      {
+        "key": "categories",
+        "type": "String",
+        "required": false,
+        "default": "OST_DuctCurves,OST_PipeCurves,OST_CableTray"
+      },
+      {
+        "key": "min_offset_mm",
+        "type": "Int32",
+        "required": false,
+        "default": 5
+      },
+      {
+        "key": "max_offset_mm",
+        "type": "Int32",
+        "required": false,
+        "default": 600
+      },
+      {
+        "key": "max_results",
+        "type": "Int32",
+        "required": false,
+        "default": 2000
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "elbow_a_id",
+      "elbow_b_id",
+      "middle_ids",
+      "offset_mm",
+      "system_name",
+      "category",
+      "anchor_id",
+      "mover_id",
+      "center_x",
+      "center_y",
+      "center_z"
+    ],
+    "category": "MEP Koordinasyon",
+    "description": "MEP hatlarındaki çift-dirsek sapmalarını (S-bend) tespit eder. Yalnızca rapor.",
+    "requires_transaction": false
+  },
+  "mep_summary": {
+    "description": "mep_summary",
+    "category": "geometry",
+    "params": []
+  },
+  "mep_total_length": {
+    "description": "mep_total_length",
+    "category": "geometry",
+    "params": []
+  },
+  "mep_validate_duct_size": {
+    "file": "MepAndPmOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "min_size_mm",
+        "type": "Double",
+        "required": false,
+        "default": "100.0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "mep_validate_duct_slope": {
+    "file": "MepAndPmOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "min_slope_pct",
+        "type": "Double",
+        "required": false,
+        "default": "0.5"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "mep_validate_duct_velocity": {
+    "file": "MepAndPmOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "max_velocity_m_s",
+        "type": "Double",
+        "required": false,
+        "default": "6.0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "mep_validate_space_hvac_zone": {
+    "file": "MepAndPmOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "merge_lists": {
+    "file": "FilterOps.cs",
+    "returns": "List<Element>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "merge_rows": {
+    "file": "FilterOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "merge_validation_reports": {
+    "file": "ValidationOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "title",
+        "type": "String",
+        "required": false,
+        "default": "Birleşik Doğrulama Raporu"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "mirror_element": {
+    "file": "ModelingOps.cs",
+    "returns": "int",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "axis",
+        "type": "String",
+        "required": false,
+        "default": "Y"
+      },
+      {
+        "key": "pivot_x_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "pivot_y_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "copy",
+        "type": "Bool",
+        "required": false,
+        "default": "false"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "model_checksum": {
+    "file": "UtilityOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "move_element": {
+    "file": "ModelingOps.cs",
+    "returns": "int",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "dx_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "dy_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "dz_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "noop": {
+    "file": "CoreOps.cs",
+    "returns": "object?",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "op_health_check": {
+    "file": "ParamOps.cs",
+    "returns": "Dictionary<string, object?>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "panel_phase_balance_check": {
+    "file": "MepInspectOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "max_imbalance_pct",
+        "type": "Double",
+        "required": false,
+        "default": "10.0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "panel_id",
+      "panel_name",
+      "phase_a_va",
+      "phase_b_va",
+      "phase_c_va",
+      "total_va",
+      "max_imbalance_pct",
+      "circuit_count",
+      "status"
+    ],
+    "note": "Pre-check: devrelere yük atanmış olmalı. status: OK|PARAM_MISSING|WARNING"
+  },
+  "param_exists": {
+    "file": "RevitOps.cs",
+    "returns": "Dictionary<string, object?>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "param_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "param_exists_check": {
+    "file": "ValidationOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "param_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "param_filled_check": {
+    "file": "ValidationOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "param_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "severity",
+        "type": "String",
+        "required": false,
+        "default": "ERROR"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "param_range_check": {
+    "file": "ValidationOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "param_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "min",
+        "type": "Double",
+        "required": false,
+        "default": "double.MinValue"
+      },
+      {
+        "key": "max",
+        "type": "Double",
+        "required": false,
+        "default": "double.MaxValue"
+      },
+      {
+        "key": "severity",
+        "type": "String",
+        "required": false,
+        "default": "WARNING"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "param_validate_schema": {
+    "file": "ParamOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "schema_path",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "param_value_check": {
+    "file": "ValidationOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "param_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "expected_value",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "severity",
+        "type": "String",
+        "required": false,
+        "default": "ERROR"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "pass_through": {
+    "file": "RevitOps.cs",
+    "returns": "object?",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "pivot_table": {
+    "file": "DataOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "row_field",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "col_field",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "value_field",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "func",
+        "type": "String",
+        "required": false,
+        "default": "sum"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "place_adaptive_component_by_points": {
+    "file": "StructuralCreateOps.cs",
+    "returns": "List<Element>",
+    "input_type": "List<object",
+    "requires_transaction": true,
+    "params": [
+      {
+        "key": "family_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "type_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "points_per_item",
+        "type": "Int",
+        "required": true,
+        "default": "2"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "Input: List<XYZ>. points_per_item nokta başına 1 instance."
+  },
+  "place_family": {
+    "file": "ModelingOps.cs",
+    "returns": "int",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "family_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "type_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "level_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "x_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "y_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "z_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "rotation_deg",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "place_family_along_mep": {
+    "file": "PlacementOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element>",
+    "params": [
+      {
+        "key": "family_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "type_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "spacing_mm",
+        "type": "Double",
+        "required": false,
+        "default": 2000
+      },
+      {
+        "key": "end_setback_mm",
+        "type": "Double",
+        "required": false,
+        "default": 300
+      },
+      {
+        "key": "vertical_offset_mm",
+        "type": "Double",
+        "required": false,
+        "default": 0
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "host_id",
+      "category",
+      "placed_count",
+      "spacing_mm",
+      "run_length_m"
+    ],
+    "category": "Yerleştirme",
+    "description": "Boru/kanal/kablo hattı boyunca belirtilen aralıkla aile (askı/destek) yerleştirir.",
+    "requires_transaction": true
+  },
+  "place_family_on_ceiling": {
+    "file": "PlacementOps.cs",
+    "returns": "int",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "family_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "type_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "offset_x_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "offset_y_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "requires_transaction": true,
+    "note": "Input: List<Ceiling>. Tavan yüzeyine face-based family yerleştirir. Transaction gerektirir."
+  },
+  "place_family_on_wall": {
+    "file": "PlacementOps.cs",
+    "returns": "int",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "family_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "type_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "offset_mm",
+        "type": "Double",
+        "required": false,
+        "default": "1200"
+      },
+      {
+        "key": "spacing_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "requires_transaction": true,
+    "note": "Input: List<Wall>. Duvara host family yerleştirir. Transaction gerektirir."
+  },
+  "place_opening": {
+    "file": "OpeningCoordOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Koordinasyon",
+    "description": "smart_check_mep_no_opening bulgularına göre boşluk aile örnekleri yerleştirir. ",
+    "requires_transaction": true
+  },
+  "place_view_on_sheet": {
+    "file": "ModelingOps.cs",
+    "returns": "int",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "sheet_number",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "x_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      },
+      {
+        "key": "y_mm",
+        "type": "Double",
+        "required": false,
+        "default": "0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "plumbing_calc_flow_rate": {
+    "file": "MepAndPmOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "plumbing_check_fixture_room_assigned": {
+    "file": "MepAndPmOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "plumbing_validate_connector_diameter": {
+    "file": "MepAndPmOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "expected_diameter_mm",
+        "type": "Double",
+        "required": false,
+        "default": "50.0"
+      },
+      {
+        "key": "tolerance_mm",
+        "type": "Double",
+        "required": false,
+        "default": "5.0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "plumbing_validate_pipe_slope": {
+    "file": "MepAndPmOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "min_slope_pct",
+        "type": "Double",
+        "required": false,
+        "default": "1.0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "plumbing_validate_system_separation": {
+    "file": "MepAndPmOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "pm_get_project_info": {
+    "file": "MepAndPmOps.cs",
+    "returns": "Dictionary<string, object?>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "pm_model_delta_summary": {
+    "file": "MepAndPmOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "pm_validate_lod": {
+    "file": "MepAndPmOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "lod_level",
+        "type": "String",
+        "required": false,
+        "default": "LOD300"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "pm_validate_naming_convention": {
+    "file": "MepAndPmOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "name_pattern",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "populate_space_param": {
+    "file": "MepHvacOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element> (Space)",
+    "params": [
+      {
+        "key": "target_param",
+        "type": "String",
+        "required": true,
+        "default": null
+      },
+      {
+        "key": "source",
+        "type": "String",
+        "required": false,
+        "default": "cfm_per_sf"
+      },
+      {
+        "key": "value",
+        "type": "Double",
+        "required": false,
+        "default": 0
+      },
+      {
+        "key": "skip_zero_area",
+        "type": "Bool",
+        "required": false,
+        "default": true
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "space_id",
+      "space_name",
+      "space_number",
+      "value",
+      "status"
+    ],
+    "category": "MEP HVAC",
+    "description": "Mahallere hesaplanmis bir parametre degeri yazar (orn 'CFM per SF' = supply_cfm/alan_ft2). source: cfm_per_sf|supply_cfm|constant.",
+    "requires_transaction": true
+  },
+  "poz_match": {
+    "file": "CostOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "category_field",
+        "type": "String",
+        "required": false,
+        "default": "kategori"
+      },
+      {
+        "key": "type_field",
+        "type": "String",
+        "required": false,
+        "default": "tip"
+      }
+    ],
+    "reg_reads": [
+      "poz_data"
+    ],
+    "reg_writes": [],
+    "out_fields": [
+      "poz_no",
+      "poz_adi",
+      "birim",
+      "birim_fiyat"
+    ]
+  },
+  "poz_match_by_code": {
+    "file": "CostOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "poz_code_field",
+        "type": "String",
+        "required": false,
+        "default": "poz_no"
+      }
+    ],
+    "reg_reads": [
+      "poz_data"
+    ],
+    "reg_writes": [],
+    "out_fields": [
+      "poz_adi",
+      "birim",
+      "birim_fiyat"
+    ]
+  },
+  "poz_match_keynote_aware": {
+    "description": "Üç aşamalı poz çözümleme: 1.Keynote/TR_CSB_PozNo 2.Semantic canonical map 3.Kategori varsayılanı",
+    "input_type": "List<Dictionary>",
+    "returns": "List<Dictionary>",
+    "category": "Maliyet",
+    "params": []
+  },
+  "preview_collect_geometry": {
+    "file": "PreviewOps.cs",
+    "returns": "PreviewGeometryDto",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "operation_name",
+        "type": "String",
+        "required": false,
+        "default": "Önizleme"
+      },
+      {
+        "key": "include_labels",
+        "type": "Bool",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "key": "max_elements",
+        "type": "Int",
+        "required": false,
+        "default": "500"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "preview_gate": {
+    "file": "PreviewOps.cs",
+    "returns": "string",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "qa_check_approved_families": {
+    "file": "QaOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "qa_check_level_assigned": {
+    "file": "QaOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "qa_detect_duplicates": {
+    "file": "QaOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "tolerance_mm",
+        "type": "Double",
+        "required": false,
+        "default": "10.0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "qa_find_empty_params": {
+    "file": "QaOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "qa_find_redundant_rooms": {
+    "file": "QaOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "qa_get_model_warnings": {
+    "file": "QaOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "qa_model_size_analysis": {
+    "file": "QaOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "qa_validate_coordinates": {
+    "file": "QaOps.cs",
+    "returns": "Dictionary<string, object?>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "qa_validate_phase_consistency": {
+    "file": "QaOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "qa_validate_workset": {
+    "file": "QaOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "expected_workset",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "read_builtin_param": {
+    "file": "ParamOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "builtin_param",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "read_param": {
+    "file": "ParamOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "param_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "read_param_with_fallback": {
+    "description": "Elemandan öncelikli parametre listesinden ilk dolu değeri okur. params: param_names[], output_field",
+    "input_type": "List<Element>",
+    "returns": "List<Dictionary>",
+    "category": "Parametre",
+    "params": [
+      {
+        "key": "param_names",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "output_field",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ]
+  },
+  "read_params": {
+    "file": "ParamOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "param_names",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "rebar_summary_by_diameter": {
+    "file": "RebarOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "rebar_summary_by_level": {
+    "file": "RebarOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "rebar_total_weight": {
+    "file": "RebarOps.cs",
+    "returns": "double",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "rebar_weight_calc": {
+    "file": "RebarOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Donatı",
+    "description": "Donatı listesini çap tablosu + fabrika boyu + bindirme katsayısıyla hesaplar. ",
+    "requires_transaction": false
+  },
+  "rebar_weight_table": {
+    "file": "RebarOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "rename_column": {
+    "file": "FilterOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "from",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "to",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "rename_element": {
+    "file": "ModelingOps.cs",
+    "returns": "int",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "param_name",
+        "type": "String",
+        "required": false,
+        "default": "Name"
+      },
+      {
+        "key": "value",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "prefix",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "suffix",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "resize_diffuser_by_flow": {
+    "file": "MepHvacOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element> (FamilyInstance/DuctTerminal)",
+    "params": [
+      {
+        "key": "family_name",
+        "type": "String",
+        "required": true,
+        "default": null
+      },
+      {
+        "key": "flow_param_name",
+        "type": "String",
+        "required": false,
+        "default": "Flow"
+      },
+      {
+        "key": "thresholds",
+        "type": "String",
+        "required": true,
+        "default": null
+      },
+      {
+        "key": "system_type_filter",
+        "type": "String",
+        "required": false,
+        "default": "Supply Air"
+      }
+    ],
+    "reg_reads": [
+      "Flow"
+    ],
+    "reg_writes": [],
+    "out_fields": [
+      "terminal_id",
+      "current_cfm",
+      "old_type",
+      "new_type",
+      "changed",
+      "status"
+    ],
+    "category": "MEP HVAC",
+    "description": "Terminalin debisine gore uygun diffuzor tipini (FamilySymbol) esik tablosundan secip ChangeTypeId ile uygular. thresholds: 'cfm:type' ciftleri.",
+    "requires_transaction": true
+  },
+  "resolve_canonical_class": {
+    "file": "SemanticOps.cs",
+    "returns": "string",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "type_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "category",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "resolve_discipline": {
+    "file": "SemanticOps.cs",
+    "returns": "string",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "category",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "room_area": {
+    "description": "room_area",
+    "category": "geometry",
+    "params": []
+  },
+  "room_area_breakdown": {
+    "file": "RoomFinishOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Oda",
+    "description": "Oda bazlı taban, duvar ve tavan alanlarını hesaplar. ",
+    "requires_transaction": false
+  },
+  "room_boundary_extract": {
+    "file": "RoomOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "include_openings",
+        "type": "Bool",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "key": "fire_param",
+        "type": "String",
+        "required": false,
+        "default": "Yangın Dayanım Süresi"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "room_id",
+      "room_name",
+      "room_number",
+      "loop_index",
+      "segment_index",
+      "host_wall_id",
+      "host_wall_type",
+      "fire_rating",
+      "is_exterior",
+      "start_x",
+      "start_y",
+      "end_x",
+      "end_y",
+      "length_mm",
+      "direction_deg",
+      "has_opening"
+    ],
+    "note": "loop_index=0 dış sınır, 1+ iç boşluklar (shaft vb). direction_deg: 0=doğu, 90=kuzey."
+  },
+  "room_door_relation_map": {
+    "file": "DoorOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "room_id",
+      "room_name",
+      "room_number",
+      "door_count",
+      "door_ids",
+      "door_marks"
+    ]
+  },
+  "room_finish_assign": {
+    "file": "RoomFinishOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Oda",
+    "description": "Oda ismi veya fonksiyon parametresine göre kaplama tiplerini toplu atar. ",
+    "requires_transaction": true
+  },
+  "room_finish_matrix": {
+    "file": "RoomFinishOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Oda",
+    "description": "Tüm odaları kaplama bilgileriyle tablo haline getirir. ",
+    "requires_transaction": false
+  },
+  "room_finish_validate": {
+    "file": "RoomFinishOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Oda",
+    "description": "Odaların kaplama parametrelerinin dolu olup olmadığını kontrol eder. ",
+    "requires_transaction": false
+  },
+  "room_naming_normalize": {
+    "file": "RoomFinishOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Oda",
+    "description": "Oda isimlerini EGBIM standardına göre normalize eder. ",
+    "requires_transaction": true
+  },
+  "room_to_ifc_space": {
+    "file": "RoomFinishOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Oda",
+    "description": "Oda fonksiyon tipini IFC Space tipine eşler ve EG_IfcSpaceTip parametresini yazar. ",
+    "requires_transaction": true
+  },
+  "run_csharp_script": {
+    "file": "ScriptOps.cs",
+    "returns": "Dictionary",
+    "input_type": "Any",
+    "params": [
+      {
+        "key": "script_path",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "cache",
+        "type": "Boolean",
+        "required": false,
+        "default": true
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "result"
+    ]
+  },
+  "schedule_collect_4d": {
+    "file": "ScheduleOps.cs",
+    "returns": "FourDFiveDDto",
+    "input_type": "List<Element>",
+    "params": [
+      {
+        "key": "operation_name",
+        "type": "String",
+        "required": false,
+        "default": "4D Yapım Simülasyonu"
+      },
+      {
+        "key": "project_start",
+        "type": "String",
+        "required": false,
+        "default": "bugün"
+      },
+      {
+        "key": "project_end",
+        "type": "String",
+        "required": false,
+        "default": "project_start+9ay"
+      },
+      {
+        "key": "kat_sure_hafta",
+        "type": "Int",
+        "required": false,
+        "default": "3"
+      },
+      {
+        "key": "max_elements",
+        "type": "Int",
+        "required": false,
+        "default": "500"
+      },
+      {
+        "key": "schedule_map",
+        "type": "Object",
+        "required": false,
+        "default": "{}",
+        "desc": "Kategori adı → {start:ISO, end:ISO, phase:String} — P2 kaynak. P1: element parametreleri EG_BaslangicTarihi/EG_BitisTarihi; P3: kat_sure_hafta ile otomatik dağıtım."
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "meshes",
+      "schedule_items",
+      "project_start",
+      "project_end",
+      "element_count",
+      "warnings",
+      "stats",
+      "bbox"
+    ]
+  },
+  "schedule_collect_5d": {
+    "file": "ScheduleOps.cs",
+    "returns": "FourDFiveDDto",
+    "input_type": "List<Element>",
+    "params": [
+      {
+        "key": "operation_name",
+        "type": "String",
+        "required": false,
+        "default": "4D/5D Maliyet Simülasyonu"
+      },
+      {
+        "key": "project_start",
+        "type": "String",
+        "required": false,
+        "default": "bugün"
+      },
+      {
+        "key": "project_end",
+        "type": "String",
+        "required": false,
+        "default": "project_start+9ay"
+      },
+      {
+        "key": "kat_sure_hafta",
+        "type": "Int",
+        "required": false,
+        "default": "3"
+      },
+      {
+        "key": "max_elements",
+        "type": "Int",
+        "required": false,
+        "default": "500"
+      },
+      {
+        "key": "schedule_map",
+        "type": "Object",
+        "required": false,
+        "default": "{}"
+      },
+      {
+        "key": "cost_step",
+        "type": "String",
+        "required": false,
+        "default": "",
+        "desc": "Önceki calc_cost adımının ID'si. Boşsa DataRegistry['cost_rows'] aranır."
+      }
+    ],
+    "reg_reads": [
+      "cost_rows (opsiyonel, P2 fallback)"
+    ],
+    "reg_writes": [],
+    "out_fields": [
+      "meshes",
+      "schedule_items",
+      "cost_items",
+      "total_cost",
+      "currency",
+      "project_start",
+      "project_end",
+      "element_count",
+      "warnings",
+      "stats",
+      "bbox"
+    ]
+  },
+  "schedule_export_anchored": {
+    "file": "ScheduleRoundtripOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "None",
+    "params": [
+      {
+        "key": "schedule_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "include_anchor",
+        "type": "String",
+        "required": false,
+        "default": "true"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "__egbimoto_uid__",
+      "(schedule sütunları dinamik)"
+    ],
+    "category": "Raporlama",
+    "description": "Schedule'ı GetCellText ile birebir okur + UID anchor ekler (rolled-back). Model değişmez.",
+    "requires_transaction": false
+  },
+  "schedule_gate": {
+    "file": "ScheduleOps.cs",
+    "returns": "string",
+    "input_type": "FourDFiveDDto",
+    "params": [
+      {
+        "key": "title",
+        "type": "String",
+        "required": false,
+        "default": "4D/5D Önizleme"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "DagExecutor intercept — FourDFiveDWindow açar. Çıktı: 'confirmed' | 'cancelled'"
+  },
+  "schedule_roundtrip_apply": {
+    "file": "ScheduleRoundtripOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?>>",
+    "params": [
+      {
+        "key": "apply_type_params",
+        "type": "String",
+        "required": false,
+        "default": "true"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "uid",
+      "field",
+      "old_value",
+      "new_value",
+      "status",
+      "message"
+    ],
+    "category": "Raporlama",
+    "description": "schedule_roundtrip_diff değişikliklerini güvenle yazar (per-Set doğrulamalı).",
+    "requires_transaction": true
+  },
+  "schedule_roundtrip_diff": {
+    "file": "ScheduleRoundtripOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?>>",
+    "params": [
+      {
+        "key": "ignore_fields",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "uid",
+      "field",
+      "old_value",
+      "new_value",
+      "writable",
+      "binding",
+      "note"
+    ],
+    "category": "Raporlama",
+    "description": "Düzenlenmiş schedule satırlarını model ile karşılaştırır (UID eşleşmeli). Yazma yok.",
+    "requires_transaction": false
+  },
+  "select_columns": {
+    "file": "FilterOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "fields",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "select_field": {
+    "file": "CoreOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "fields",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "set_element_type": {
+    "file": "ModelingOps.cs",
+    "returns": "int",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "type_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "set_level": {
+    "file": "ModelingOps.cs",
+    "returns": "int",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "level_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "set_param_from_schedule": {
+    "file": "ScheduleOps.cs",
+    "returns": "int",
+    "input_type": "List<Element>",
+    "params": [
+      {
+        "key": "schedule_step",
+        "type": "String",
+        "required": true,
+        "default": "",
+        "desc": "FourDFiveDDto döndüren adımın ID'si (schedule_collect_4d veya 5d)"
+      },
+      {
+        "key": "start_param",
+        "type": "String",
+        "required": false,
+        "default": "EG_BaslangicTarihi",
+        "desc": "Revit parametre adı. Yoksa EgParamNames.BaslangicTarihi (EG_BaslangicTarihi)."
+      },
+      {
+        "key": "end_param",
+        "type": "String",
+        "required": false,
+        "default": "EG_BitisTarihi"
+      },
+      {
+        "key": "phase_param",
+        "type": "String",
+        "required": false,
+        "default": "EG_FazAdi"
+      },
+      {
+        "key": "wbs_param",
+        "type": "String",
+        "required": false,
+        "default": "EG_WbsKodu"
+      },
+      {
+        "key": "write_cost",
+        "type": "Bool",
+        "required": false,
+        "default": "true",
+        "desc": "true → EG_PozNo, EG_PozAdi, EG_BirimMaliyet, EG_ToplamMaliyet, EG_PozMiktar, EG_PozBirim"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "Yazma op — transaction gerektirir. Dönüş: yazılan element sayısı."
+  },
+  "set_phase": {
+    "file": "ModelingOps.cs",
+    "returns": "int",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "phase_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "phase_type",
+        "type": "String",
+        "required": false,
+        "default": "created"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "set_var": {
+    "file": "UtilityOps.cs",
+    "returns": "object?",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "key",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "value",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "set_workset": {
+    "file": "ModelingOps.cs",
+    "returns": "int",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "workset_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "show_count": {
+    "file": "CoreOps.cs",
+    "returns": "int",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "show_result": {
+    "file": "CoreOps.cs",
+    "returns": "object?",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "title",
+        "type": "String",
+        "required": false,
+        "default": "EGBIMOTO"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "show_table": {
+    "file": "CoreOps.cs",
+    "returns": "object?",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "title",
+        "type": "String",
+        "required": false,
+        "default": "EGBIMOTO Sonuç"
+      },
+      {
+        "key": "max_rows",
+        "type": "Int",
+        "required": false,
+        "default": "20"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "skip_n": {
+    "file": "FilterOps.cs",
+    "returns": "object?",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "count",
+        "type": "Int",
+        "required": false,
+        "default": "0"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "slope_analysis": {
+    "file": "SlopeAnalysisOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Analiz",
+    "description": "Döşeme / çatı / topografya yüzeylerinin eğim açısını hesaplar. ",
+    "requires_transaction": false
+  },
+  "slope_validate": {
+    "file": "SlopeAnalysisOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Analiz",
+    "description": "Eğim analizi sonuçlarını Türk standartlarına göre doğrular.  ",
+    "requires_transaction": false
+  },
+  "smart_check_mep_no_opening": {
+    "file": "OpeningCoordOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Koordinasyon",
+    "description": "MEP elemanlarının yapısal eleman (duvar/döşeme/kiriş) geçişlerini tarar. ",
+    "requires_transaction": false
+  },
+  "sort_rows": {
+    "file": "FilterOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "field",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "descending",
+        "type": "Bool",
+        "required": false,
+        "default": "false"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "sprinkler_head_schedule": {
+    "file": "MepInspectOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "k_factor_param",
+        "type": "String",
+        "required": false,
+        "default": "K_Factor"
+      },
+      {
+        "key": "coverage_param",
+        "type": "String",
+        "required": false,
+        "default": "EG_KapsaAlan_m2"
+      },
+      {
+        "key": "zone_param",
+        "type": "String",
+        "required": false,
+        "default": "EG_Zone"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "type_name",
+      "k_factor",
+      "coverage_m2",
+      "zone",
+      "level",
+      "quantity"
+    ],
+    "note": "Pre-check: K_Factor yoksa PARAM_MISSING. Tip/zone/kat bazlı gruplar."
+  },
+  "structural_collect_all": {
+    "file": "StructuralCheckOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Yapısal",
+    "description": "Tüm yapısal elementleri (kolon, kiriş, döşeme, perde, temel) toplar. ",
+    "requires_transaction": false
+  },
+  "structural_continuity_check": {
+    "file": "StructuralCheckOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Yapısal",
+    "description": "Kolonların kat geçişlerinde Z ekseninde sürekli olup olmadığını kontrol eder. ",
+    "requires_transaction": false
+  },
+  "structural_level_summary": {
+    "file": "StructuralCheckOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Yapısal",
+    "description": "Kat bazlı yapısal element özeti üretir. ",
+    "requires_transaction": false
+  },
+  "structural_material_check": {
+    "file": "StructuralCheckOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Yapısal",
+    "description": "Yapısal elementlerin beton/çelik sınıf parametrelerinin dolu olup olmadığını kontrol eder. ",
+    "requires_transaction": false
+  },
+  "structural_tbdy_params": {
+    "file": "StructuralCheckOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Yapısal",
+    "description": "Yapısal elementlere TBDY 2018 parametrelerini toplu yazar. ",
+    "requires_transaction": true
+  },
+  "structural_ts500_section": {
+    "file": "StructuralCheckOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Yapısal",
+    "description": "TS 500 Madde 7 minimum kesit boyutlarını kontrol eder. ",
+    "requires_transaction": false
+  },
+  "sum_field": {
+    "file": "UtilityOps.cs",
+    "returns": "double",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "field",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "system_info": {
+    "file": "ParamOps.cs",
+    "returns": "Dictionary<string, object?>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "table_to_points": {
+    "file": "CsvOps.cs",
+    "returns": "List<object?>",
+    "input_type": "List<Dict",
+    "params": [
+      {
+        "key": "x_field",
+        "type": "String",
+        "required": false,
+        "default": "x"
+      },
+      {
+        "key": "y_field",
+        "type": "String",
+        "required": false,
+        "default": "y"
+      },
+      {
+        "key": "z_field",
+        "type": "String",
+        "required": false,
+        "default": "z"
+      },
+      {
+        "key": "unit",
+        "type": "String",
+        "required": false,
+        "default": "mm"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "Çıktı: List<XYZ> — Geometry Ops ve Create Ops için köprü"
+  },
+  "table_validate_schema": {
+    "file": "CsvOps.cs",
+    "returns": "Dictionary<string, object?>",
+    "input_type": "List<Dict",
+    "params": [
+      {
+        "key": "required_fields",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "optional_fields",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "valid",
+      "missing_fields",
+      "row_count",
+      "field_count",
+      "message"
+    ]
+  },
+  "tag_elements": {
+    "file": "ViewOps.cs",
+    "returns": "int",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "tag_type_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "view_id",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "leader",
+        "type": "Bool",
+        "required": false,
+        "default": "false"
+      },
+      {
+        "key": "orientation",
+        "type": "String",
+        "required": false,
+        "default": "horizontal"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "requires_transaction": true
+  },
+  "take_n": {
+    "file": "FilterOps.cs",
+    "returns": "object?",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "count",
+        "type": "Int",
+        "required": false,
+        "default": "10"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "trace_find_existing": {
+    "file": "TraceOps.cs",
+    "returns": "List<Element>",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "trace_key",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "trace_write": {
+    "file": "TraceOps.cs",
+    "returns": "int",
+    "input_type": "List<Element",
+    "requires_transaction": true,
+    "params": [
+      {
+        "key": "trace_key",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "note": "RevitExtensibleStorage ile modele kalıcı yazar."
+  },
+  "type_get": {
+    "file": "ParamOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "type_read_param": {
+    "file": "ParamOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "param_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "update_or_create_family": {
+    "file": "TraceOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "requires_transaction": true,
+    "params": [
+      {
+        "key": "trace_key",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "family_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "type_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "level_name",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "update_type",
+        "type": "Bool",
+        "required": false,
+        "default": "true"
+      },
+      {
+        "key": "update_location",
+        "type": "Bool",
+        "required": false,
+        "default": "false"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "element_id",
+      "index",
+      "action",
+      "status"
+    ],
+    "note": "Dynamo element binding karşılığı. action: created|updated|skipped|error"
+  },
+  "validate_ids": {
+    "file": "ValidationOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "ids_path",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "validate_qa": {
+    "file": "ValidationOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "rules_path",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "validate_rebar_ts500": {
+    "file": "RebarOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "fck",
+        "type": "Double",
+        "required": false,
+        "default": "25"
+      },
+      {
+        "key": "fyk",
+        "type": "Double",
+        "required": false,
+        "default": "420"
+      },
+      {
+        "key": "cover_mm",
+        "type": "Double",
+        "required": false,
+        "default": "30"
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "validate_required_params": {
+    "file": "ParamOps.cs",
+    "returns": "ValidationReport",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "required_params",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "validation_summary": {
+    "file": "ValidationOps.cs",
+    "returns": "string",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "validation_to_rows": {
+    "file": "ValidationOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "—",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "valve_type_classify": {
+    "file": "MepInspectOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [
+      "element_id",
+      "family_name",
+      "type_name",
+      "valve_class",
+      "system_type",
+      "diameter_mm"
+    ],
+    "note": "Sınıflar: GATE|GLOBE|BALL|BUTTERFLY|CHECK|RELIEF|NEEDLE_ANGLE|DIAPHRAGM|SOLENOID|STRAINER|UNKNOWN"
+  },
+  "wall_area": {
+    "file": "CostOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Element",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "wall_length": {
+    "description": "wall_length",
+    "category": "geometry",
+    "params": []
+  },
+  "wall_net_area": {
+    "description": "wall_net_area",
+    "category": "geometry",
+    "params": []
+  },
+  "wall_type_export_csv": {
+    "file": "WallTypeOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Duvar",
+    "description": "Projedeki mevcut Basic Wall tiplerini wall_type_from_csv uyumlu CSV formatına aktarır. ",
+    "requires_transaction": false
+  },
+  "wall_type_from_csv": {
+    "file": "WallTypeOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Duvar",
+    "description": "CSV dosyasından Revit Basic Wall tipleri oluşturur veya günceller. ",
+    "requires_transaction": true
+  },
+  "wall_volume": {
+    "description": "wall_volume",
+    "category": "geometry",
+    "params": []
+  },
+  "where": {
+    "file": "CoreOps.cs",
+    "returns": "List<Dictionary<string, object?>>",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "field",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "op",
+        "type": "String",
+        "required": false,
+        "default": "eq"
+      },
+      {
+        "key": "value",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "workset_by_level": {
+    "file": "ModelingOps.cs",
+    "returns": "object",
+    "input_type": "object",
+    "params": [],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": [],
+    "category": "Modelleme",
+    "description": "Her kat (Level) için aynı isimde User Workset oluşturur. ",
+    "requires_transaction": true
+  },
+  "write_param": {
+    "file": "ParamOps.cs",
+    "returns": "int",
+    "input_type": "List<Element",
+    "params": [
+      {
+        "key": "param_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "value",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "write_param_from_rows": {
+    "file": "ParamOps.cs",
+    "returns": "int",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "param_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "value_field",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "write_row_param": {
+    "file": "PreviewOps.cs",
+    "returns": "int",
+    "input_type": "List<Dictionary<string, object?",
+    "params": [
+      {
+        "key": "param_name",
+        "type": "String",
+        "required": true,
+        "default": ""
+      },
+      {
+        "key": "value_key",
+        "type": "String",
+        "required": true,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  },
+  "write_trace": {
+    "file": "ExportOps.cs",
+    "returns": "string",
+    "input_type": "—",
+    "params": [
+      {
+        "key": "message",
+        "type": "String",
+        "required": false,
+        "default": ""
+      },
+      {
+        "key": "file_path",
+        "type": "String",
+        "required": false,
+        "default": ""
+      }
+    ],
+    "reg_reads": [],
+    "reg_writes": [],
+    "out_fields": []
+  }
+}
