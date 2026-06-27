@@ -72,6 +72,39 @@ Her sürüm için ayrı build ve MSI:
 
 Engine'ler ayrı klasörlerde (`R24\`, `R25\`, `R26\`) yan yana durur, çakışmaz.
 
+## MCP Server (Claude Desktop Entegrasyonu)
+
+EGBIMOTO engine'i, Claude Desktop'ın Revit modeline bağlanmasını sağlayan gömülü bir
+MCP Server içerir. Ek kurulum gerektirmez — engine ile birlikte gelir. Yalnızca Python
+köprüsü ve Claude Desktop config ayarı gerekir.
+
+### Server tarafı (Revit içinde)
+
+Ribbon'da **EGBIMOTO → Otomasyon → MCP Server** butonu server'ı başlatır/durdurur.
+`localhost:5577`'de yalnızca `127.0.0.1` dinler (dışarıdan erişilemez). İsteğe bağlı
+`X-EGBIMOTO-Token` başlığı kurumsal ortam için desteklenir.
+
+Endpoint'ler: `/health` (durum), `/ops` (op katalogu), `/run` (manifest çalıştır),
+`/validate` (manifest doğrula).
+
+### Köprü tarafı (Claude Desktop)
+
+```bash
+# 1. Python bağımlılıkları
+pip install -r mcp_bridge/requirements.txt
+
+# 2. Claude Desktop config'ine köprüyü ekle
+#    (örnek: mcp_bridge/claude_desktop_config.example.json)
+#    %AppData%\Claude\claude_desktop_config.json içine egbimoto girişini kopyalayın.
+```
+
+Claude Desktop yeniden başlatıldığında "egbimoto" aracı görünür. Revit'te MCP Server
+açıkken doğal dil komutları verilebilir. Tam adımlar ve mimari: `mcp_bridge/README.md`.
+
+> **Not:** MCP Server, EGBIMOTO'nun gömülü `ManifestGenerator`'ından bağımsızdır.
+> Claude Desktop kullanmadan EGBIMOTO arayüzünden AI/Pattern üretim de çalışmaya
+> devam eder.
+
 ## Sorun Giderme
 
 **Şerit görünmüyor:** Bootstrap log'una bakın:
@@ -97,4 +130,15 @@ deploy/
         HarvestedFiles.wxs          ← (stage.sh üretir) manifest/data component'leri
     stage.sh                        ← build → stage dizimi
     generate_components.py          ← WiX harvest üretici
+    generate_op_referansi.py        ← docs/OP_REFERANSI.md üretici (op_contracts.json'dan)
+
+mcp_bridge/
+    egbimoto_mcp_bridge.py          ← Python MCP köprüsü (Claude Desktop ↔ HTTP)
+    claude_desktop_config.example.json
+    requirements.txt
+    README.md                       ← MCP Server kurulum + mimari
+
+Directory.Build.props               ← ortak MSBuild değişkenleri (RepoRoot)
+op_contracts.json                   ← op kataloğu (SSoT, koddaki [EgOp]'lerden)
+categories.json                     ← manifest klasör kategorileri
 ```

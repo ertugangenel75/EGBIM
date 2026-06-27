@@ -41,8 +41,24 @@ zorunlu adım başarısız olursa tüm değişiklikler geri alınır (rollback).
 
 - **Pattern modu** (API'siz, ~100 ms): Anahtar kelime tabanlı şablon eşleştirme.
   "Tüm duvarların kalıp metrajını çıkar ve Excel'e aktar" → hazır manifest.
-- **AI modu** (Claude API, anahtar gerekli): 373 op'un tamamını kullanarak
+- **AI modu** (Claude API, anahtar gerekli): 400 op'un tamamını kullanarak
   serbest manifest üretir, otomatik doğrular ve hatalıysa kendini düzeltir.
+
+## Claude Desktop ile Kullanma (MCP Server)
+
+EGBIMOTO, Claude Desktop'ın doğrudan Revit modeline bağlanmasını sağlayan bir MCP
+Server içerir. Bağlandığınızda Türkçe doğal dil komutu verir, Claude EGBIMOTO'nun
+op katalogunu okuyup manifest'i kendisi üretir ve çalıştırır.
+
+1. Şeritte **EGBIMOTO → Otomasyon → MCP Server** butonuna tıklayın (başlat/durdur).
+   Server `localhost:5577`'de yalnızca yerel olarak dinler.
+2. Python köprüsünü kurun ve Claude Desktop config'ine ekleyin — adımlar:
+   `mcp_bridge/README.md`.
+3. Claude Desktop'ta "egbimoto" bağlandıktan sonra örn. *"tüm kapıları say ve rapor
+   çıkar"* yazın; Claude uygun op'lardan manifest üretip Revit'te çalıştırır.
+
+Bağlantı durumunu tarayıcıdan da görebilirsiniz: `http://127.0.0.1:5577/health`
+(durum + aktif doküman), `http://127.0.0.1:5577/ops` (op katalogu).
 
 ## Sonraki Adımlar
 

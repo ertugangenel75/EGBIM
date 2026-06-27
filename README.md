@@ -5,9 +5,11 @@ Revit için manifest-tabanlı BIM otomasyon platformu. Türk AEC standartlarına
 
 ## Özellikler
 
-- **384 operasyon**, 16 kategori — metraj, maliyet, kalıp, yapısal, MEP, elektrik,
-  yangın, koordinasyon, IFC/IDS, çakışma tespiti ve daha fazlası
-- **222 hazır manifest** — JSON ile tanımlı, DAG motoruyla çalışan iş akışları
+- **400 operasyon**, 48 kategori — metraj, maliyet, kalıp, yapısal, MEP (HVAC/sıhhi/elektrik/mekanik),
+  yangın, koordinasyon, IFC/IDS, çakışma tespiti, donatı, cephe ve daha fazlası
+- **322 hazır manifest** — JSON ile tanımlı, DAG motoruyla çalışan iş akışları
+- **MCP Server** — Claude Desktop (veya MCP uyumlu ajan) Revit modeline bağlanır,
+  op katalogunu okuyup manifest üretir ve çalıştırır (localhost:5577)
 - **AI + Pattern manifest üretimi** — doğal dilden iş akışı (Claude API veya
   API'siz şablon eşleştirme)
 - **Preview-Confirm + Atomic** transaction modları
@@ -26,16 +28,19 @@ Detaylar için `docs/HIZLI_BASLANGIC.md` ve `docs/KURULUM_DAGITIM.md`.
 
 Tüm kılavuzlar `docs/` altında:
 - `HIZLI_BASLANGIC.md` — kurulum ve ilk çalıştırma
-- `KURULUM_DAGITIM.md` — MSI installer, Bootstrap mimarisi
+- `KURULUM_DAGITIM.md` — MSI installer, Bootstrap mimarisi, MCP Server kurulumu
 - `MANIFEST_YAZIM_REHBERI.md` — manifest JSON yazımı
-- `OP_REFERANSI.md` — 384 op'un tam referansı
+- `OP_REFERANSI.md` — 400 op'un tam referansı (op_contracts.json'dan üretilir)
 - `MIMARI.md` — katman yapısı ve tasarım
+
+MCP Server + Python köprüsü için: `mcp_bridge/README.md`.
 
 ## Mimari
 
-İki katman: `EGBIMOTO.Core` (Revit bağımsız DAG motoru, test edilebilir) ve
-`EGBIMOTO.Addin` (Revit API, op'lar, WPF UI). Dağıtım için opsiyonel
-`EGBIMOTO.Bootstrap` (engine ayrımı). Ayrıntı: `docs/MIMARI.md`.
+Üç proje: `EGBIMOTO.Core` (Revit bağımsız DAG motoru, test edilebilir),
+`EGBIMOTO.Addin` (Revit API, op'lar, WPF UI, MCP Server) ve dağıtım için
+`EGBIMOTO.Bootstrap` (versiyonsuz thunk; engine'i `%AppData%` altından yükler).
+Ayrıntı: `docs/MIMARI.md`.
 
 ## Lisans
 
