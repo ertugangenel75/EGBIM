@@ -1,124 +1,65 @@
-# EGBIMOTO MCP Server + Manifest Üretici Ajan
+# EGBIMOTO
 
-EGBIMOTO'yu **AI-erişilebilir bir BIM platformuna** dönüştüren köprü. Claude Desktop
-(veya MCP uyumlu herhangi bir AI ajanı) doğal dilde komut verir, Claude EGBIMOTO'nun
-op katalogunu okuyup **manifest'i kendisi üretir** ve Revit'te çalıştırır.
+Revit için manifest-tabanlı BIM otomasyon platformu. Türk AEC standartlarına
+(TR BIM, ÇŞB 2026, TS500, TBDY 2018, IFC/IDS) odaklı, native C# .NET 8 Revit add-in.
+
+## Özellikler
+
+- **400 operasyon**, 48 kategori — metraj, maliyet, kalıp, yapısal, MEP (HVAC/sıhhi/elektrik/mekanik),
+  yangın, koordinasyon, IFC/IDS, çakışma tespiti, donatı, cephe ve daha fazlası
+- **322 hazır manifest** — JSON ile tanımlı, DAG motoruyla çalışan iş akışları
+- **MCP Server** — Claude Desktop (veya MCP uyumlu ajan) Revit modeline bağlanır,
+  op katalogunu okuyup manifest üretir ve çalıştırır (localhost:5577)
+- **AI + Pattern manifest üretimi** — doğal dilden iş akışı (Claude API veya
+  API'siz şablon eşleştirme)
+- **Preview-Confirm + Atomic** transaction modları
+- **Çoklu Revit sürümü** — 2024, 2025, 2026
+
+## Hızlı Başlangıç
+
+```bash
+dotnet build src/EGBIMOTO.Addin -c Release -p:RevitVersion=2026
+```
+
+Çıktıyı `%AppData%\Autodesk\Revit\Addins\2026\`'a kopyalayın ve Revit'i başlatın.
+Detaylar için `docs/HIZLI_BASLANGIC.md` ve `docs/KURULUM_DAGITIM.md`.
+
+## Dokümantasyon
+
+Tüm kılavuzlar `docs/` altında:
+- `HIZLI_BASLANGIC.md` — kurulum ve ilk çalıştırma
+- `KURULUM_DAGITIM.md` — MSI installer, Bootstrap mimarisi, MCP Server kurulumu
+- `MANIFEST_YAZIM_REHBERI.md` — manifest JSON yazımı
+- `OP_REFERANSI.md` — 400 op'un tam referansı (op_contracts.json'dan üretilir)
+- `MIMARI.md` — katman yapısı ve tasarım
+
+MCP Server + Python köprüsü için: `mcp_bridge/README.md`.
 
 ## Mimari
 
+Üç proje: `EGBIMOTO.Core` (Revit bağımsız DAG motoru, test edilebilir),
+`EGBIMOTO.Addin` (Revit API, op'lar, WPF UI, MCP Server) ve dağıtım için
+`EGBIMOTO.Bootstrap` (versiyonsuz thunk; engine'i `%AppData%` altından yükler).
+Ayrıntı: `docs/MIMARI.md`.
+
+## Lisans
+
+Apache License 2.0 — bkz. [LICENSE](LICENSE) ve [NOTICE](NOTICE).
+
 ```
-┌──────────────────┐   MCP/stdio    ┌──────────────────┐   HTTP/localhost   ┌──────────────────────┐
-│  Claude Desktop  │ ─────────────► │  Python Köprüsü  │ ─────────────────► │  EGBIMOTO Server     │
-│  (kendi bağlamı) │ ◄───────────── │  (mcp_bridge)    │ ◄───────────────── │  (Revit içinde)      │
-└──────────────────┘                └──────────────────┘                    └──────────┬───────────┘
-                                                                                        │ ExternalEvent
-                                                                                        │ (ana thread marshal)
-                                                                                        ▼
-                                                                            ┌──────────────────────┐
-                                                                            │  DagExecutor + 400 op │
-                                                                            │  → Revit Modeli       │
-                                                                            └──────────────────────┘
-```
+Copyright 2026 Ertuğan Genel
 
-**Önemli tasarım kararı:** Manifest üretimini **Claude Desktop'taki Claude yapar** — op
-katalogunu (`/ops`) görüp uygun op'lardan manifest oluşturur. Bu yüzden ek API anahtarı
-veya ikinci bir LLM çağrısı gerekmez. (EGBIMOTO'nun gömülü `ManifestGenerator`'ı, Claude
-Desktop kullanmayan, EGBIMOTO arayüzünden doğrudan üretim isteyenler için paralel kalır.)
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-## Bileşenler
+    http://www.apache.org/licenses/LICENSE-2.0
 
-| Bileşen | Konum | Görev |
-|---|---|---|
-| `RevitDispatcher` | `src/.../Server/` | HTTP thread → Revit ana thread marshalling (ExternalEvent) |
-| `EgbimotoMcpServer` | `src/.../Server/` | HttpListener, endpoint router (localhost:5577) |
-| `McpManifestRunner` | `src/.../Server/` | Manifest → DagExecutor köprüsü |
-| `McpServerManager` | `src/.../Server/` | Yaşam döngüsü (başlat/durdur) |
-| `McpServerToggleCommand` | `src/.../Commands/` | Ribbon düğmesi |
-| `egbimoto_mcp_bridge.py` | `mcp_bridge/` | Python MCP köprüsü (Claude Desktop ↔ HTTP) |
-
-## HTTP Endpoint'leri
-
-| Method | Path | Görev |
-|---|---|---|
-| GET | `/health` | Server durumu + aktif doküman adı |
-| GET | `/ops` | op_contracts.json (ajan yetenek katalogu) |
-| POST | `/run` | Gövdedeki manifest'i çalıştırır |
-| POST | `/validate` | Manifesti çalıştırmadan doğrular |
-
-**Güvenlik:** Yalnızca `127.0.0.1` (localhost) dinler — dışarıdan erişilemez. İsteğe
-bağlı `X-EGBIMOTO-Token` başlığı (kurumsal ortam için).
-
-## MCP Araçları (Claude Desktop'ın gördüğü)
-
-| Araç | Görev |
-|---|---|
-| `egbimoto_list_ops` | EGBIMOTO'nun tüm işlemlerinin katalogu |
-| `egbimoto_run_manifest` | Manifest'i Revit'te çalıştırır |
-| `egbimoto_health` | Bağlantı/doküman durumu |
-
-## Kurulum
-
-### 1. Python köprüsü
-```bash
-cd mcp_bridge
-pip install -r requirements.txt
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ```
 
-### 2. Claude Desktop yapılandırması
-`claude_desktop_config.example.json`'u Claude Desktop config'ine ekleyin:
-- Windows: `%APPDATA%/Claude/claude_desktop_config.json`
-- `args` içindeki yolu kendi `egbimoto_mcp_bridge.py` konumunuza göre düzeltin.
+## Yazar
 
-```json
-{
-  "mcpServers": {
-    "egbimoto": {
-      "command": "python",
-      "args": ["C:/EGBIM/mcp_bridge/egbimoto_mcp_bridge.py"],
-      "env": { "EGBIMOTO_PORT": "5577" }
-    }
-  }
-}
-```
-Claude Desktop'ı yeniden başlatın.
-
-### 3. Revit tarafı
-- EGBIMOTO yüklü Revit'i açın, bir model açın.
-- EGBIMOTO şeridinden **MCP Server Başlat** düğmesine basın.
-- "MCP Server başlatıldı (port 5577)" mesajını görün.
-
-## Kullanım
-
-Claude Desktop'ta doğrudan Türkçe konuşun:
-
-> "Açık Revit modelinde tüm kapıları say ve oda bazında bir rapor çıkar."
-
-Claude şunu yapar:
-1. `egbimoto_list_ops` çağırır → kapı/oda op'larını bulur (`collect_doors`, `door_number_by_room`...)
-2. Uygun op'lardan bir manifest oluşturur
-3. `egbimoto_run_manifest` ile çalıştırır
-4. Sonucu özetler
-
-Diğer örnekler:
-- "Bütün ıslak hacimlerin kaplama matrisini çıkar."
-- "Kolonları TBDY'ye göre kontrol et, yetersiz olanları söyle." *(önce kolonlara Ndm girilmeli)*
-- "Elektrik conduit'lerinin IEC kablo hesabını yap ve cetvel üret."
-
-## Güvenlik Notları
-
-- Server **modeli değiştirebilir** (yazma op'ları). Claude, yazma yapan manifest'i
-  çalıştırmadan önce genellikle size gösterir; emin değilseniz "önce manifest'i göster"
-  deyin.
-- `transaction_policy: atomic` olan manifest'lerde bir adım hata verirse **tüm
-  değişiklikler geri alınır**.
-- Server yalnızca siz **MCP Server Başlat** dediğinizde çalışır; Revit'i kapatınca durur.
-- Token isterseniz: `McpServerToggleCommand.cs`'de `token` parametresini doldurun ve
-  Python köprüsü env'ine `EGBIMOTO_TOKEN` ekleyin.
-
-## Sınırlar
-
-- Server **headless** çalışır: interaktif onay kapıları (preview gate) otomatik onaylanır.
-  Görsel önizleme gerektiren işlemler için EGBIMOTO arayüzünü kullanın.
-- Aynı anda tek Revit dokümanı (aktif olan) hedeflenir.
-- ExternalEvent marshalling: Revit bir dialog beklerken takılırsa istek zaman aşımına
-  uğrayabilir (varsayılan 180s).
+Ertuğan Genel — EGBIM
