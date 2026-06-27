@@ -478,6 +478,14 @@ data/poz/poz_section_rules.json dosyasını registry'ye yükler. canonical_class
 - **Çıktı:** `List<Element>`
 - **Parametreler:** `category`
 
+### `collect_by_ids`
+
+Dict satırlarındaki ID alan(lar)ından `Element` listesi toplar. Satır-tabanlı op çıktılarını (clash_detect_matrix'in a_id/b_id, scan, diff sonuçları) `move_element` / `set_param` gibi Element bekleyen op'lara köprüler. Genel amaçlı bir dönüşüm op'udur.
+
+- **Çıktı:** `List<Element>`
+- **Girdi:** `List<Dictionary<string, object?>>`
+- **Parametreler:** `id_fields` (virgülle çok alan, örn. `"a_id,b_id"`, default `element_id`), `distinct`
+
 ### `collect_families`
 
 - **Çıktı:** `List<Element>`
@@ -1233,6 +1241,24 @@ data/poz/poz_section_rules.json dosyasını registry'ye yükler. canonical_class
 - **Çıktı:** `ValidationReport`
 - **Parametreler:** `max_velocity_m_s`
 
+### `duct_section_convert_preview`
+
+Dikdörtgen kanalları eş-kesit (ASHRAE eşdeğer çap korumalı) yeniden boyutlandırır. Bir boyut sabitlenir, diğeri aynı aerodinamik karakteristiği koruyacak şekilde hesaplanır. Yazma yapmaz.
+
+- **Çıktı:** `List<Dictionary<string, object?>>`
+- **Girdi:** `List<Element>` *(Duct — opsiyonel, verilmezse tüm dikdörtgen kanallar)*
+- **Parametreler:** `fix_dimension`, `fixed_value_mm` *(zorunlu)*, `round_to_mm`, `max_aspect_ratio`, `only_round_ducts`
+- **Çıktı alanları:** `duct_id`, `system_name`, `old_w_mm`, `old_h_mm`, `old_de_mm`, `new_w_mm`, `new_h_mm`, `new_de_mm`, `aspect_ratio`, `de_error_pct`, `warning`
+
+### `duct_section_convert_apply` 🔒
+
+`duct_section_convert_preview` çıktısındaki yeni kanal boyutlarını modele yazar. Model değişikliği yapar.
+
+- **Çıktı:** `List<Dictionary<string, object?>>`
+- **Girdi:** `duct_section_convert_preview` çıktısı *(from ile)*
+- **Parametreler:** `skip_warnings`
+- **Çıktı alanları:** `duct_id`, `status`, `message`, `new_w_mm`, `new_h_mm`
+
 ### `mep_validate_space_hvac_zone`
 
 - **Çıktı:** `ValidationReport`
@@ -1343,6 +1369,15 @@ data/poz/poz_section_rules.json dosyasını registry'ye yükler. canonical_class
 
 - **Çıktı:** `int`
 - **Parametreler:** `family_name` *(zorunlu)*, `type_name` *(zorunlu)*, `offset_mm`, `spacing_mm`
+
+### `place_family_along_mep` 🔒
+
+Boru/kanal/kablo taşıyıcı hatları boyunca, belirtilen aralıkla (spacing_mm) verilen aileyi (askı/destek/etiket) yerleştirir. Her segmentin LocationCurve'ü uçtan uca, uç boşluğu bırakarak spacing aralıklarla bölünür. Manuel family + manuel aralık → manifest ile tam kontrol. Çap bantlı aralık değerleri için `data/validation/mep_aski_aralik.json` referans alınır.
+
+- **Çıktı:** `List<Dictionary<string, object?>>`
+- **Girdi:** `List<Element>` (Pipe/Duct/CableTray segmentleri)
+- **Parametreler:** `family_name` *(zorunlu)*, `type_name` *(zorunlu)*, `spacing_mm`, `end_setback_mm`, `vertical_offset_mm`
+- **Çıktı alanları:** `host_id`, `category`, `placed_count`, `spacing_mm`, `run_length_m`
 
 ### `place_view_on_sheet`
 
@@ -1769,6 +1804,44 @@ Clash bulgularını kesişim hacmine göre önceliklendirir
 - **Parametreler:** yok
 - **Çıktı alanları:** `sira_no`
 
+## MEP Koordinasyon
+
+### `mep_straighten_scan`
+
+MEP hatlarındaki çift-dirsek sapmalarını (S-bend) tespit eder. Yalnızca rapor — yazma yapmaz. Kanal/boru/kablo taşıyıcı destekler.
+
+- **Çıktı:** `List<Dictionary<string, object?>>`
+- **Girdi:** `List<Element>` *(opsiyonel — verilmezse categories ile toplanır)*
+- **Parametreler:** `categories`, `min_offset_mm`, `max_offset_mm`, `max_results`
+- **Çıktı alanları:** `elbow_a_id`, `elbow_b_id`, `middle_ids`, `offset_mm`, `system_name`, `category`, `anchor_id`, `mover_id`, `center_x`, `center_y`, `center_z`
+
+### `mep_straighten_apply` 🔒
+
+`mep_straighten_scan` bulgularındaki S-bendleri düzleştirir (dirsekleri + ara segmenti siler, ana hattı uzatır). Model değişikliği yapar.
+
+- **Çıktı:** `List<Dictionary<string, object?>>`
+- **Girdi:** `mep_straighten_scan` çıktısı *(input_from ile)*
+- **Parametreler:** `max_apply`
+- **Çıktı alanları:** `elbow_a_id`, `elbow_b_id`, `status`, `message`
+
+### `mep_region_count`
+
+Kapalı bölge (Room/Area) içindeki MEP elemanlarını sayar ve uzunluk toplar. Oda-bazlı metraj/hakediş için.
+
+- **Çıktı:** `List<Dictionary<string, object?>>`
+- **Girdi:** `List<Element>` *(opsiyonel bölge listesi)*
+- **Parametreler:** `region_category`, `mep_categories`, `z_tolerance_mm`
+- **Çıktı alanları:** `region_id`, `region_name`, `region_number`, `level_name`, `area_m2`, `mep_count`, `total_length_m`, `pipe_count`, `duct_count`, `tray_count`, `by_category`
+
+### `mep_region_tag` 🔒
+
+Kapalı bölge içindeki MEP elemanlarına bölge adı/numarasını parametre olarak yazar. Model değişikliği yapar.
+
+- **Çıktı:** `List<Dictionary<string, object?>>`
+- **Girdi:** `List<Element>` *(opsiyonel bölge listesi)*
+- **Parametreler:** `region_category`, `mep_categories`, `target_param`, `write_mode`, `z_tolerance_mm`
+- **Çıktı alanları:** `region_id`, `region_name`, `tagged_count`, `skipped_count`
+
 ### `place_opening` 🔒
 
 smart_check_mep_no_opening bulgularına göre boşluk aile örnekleri yerleştirir. 
@@ -1881,6 +1954,32 @@ Elemandan öncelikli parametre listesinden ilk dolu değeri okur. params: param_
 
 
 ## Raporlama
+
+### `schedule_export_anchored`
+
+Bir Revit schedule'ını GetCellText ile birebir görsel sadakatle okur ve her eleman satırına gizli UniqueId anchor (`__egbimoto_uid__`) ekler. Anchor, geçici alan + doc.Regenerate + RollBack ile alınır — **model kalıcı olarak değişmez**. Çıktı `export_xlsx` ile zincirlenir. Round-trip uygun değilse (malzeme metrajı, gömülü, bağlı model, non-itemized) yalnızca görüntü çıktısı üretilir.
+
+- **Çıktı:** `List<Dictionary<string, object?>>`
+- **Parametreler:** `schedule_name` *(zorunlu)*, `include_anchor`
+- **Çıktı alanları:** `__egbimoto_uid__` + schedule'ın görünür sütunları (dinamik)
+
+### `schedule_roundtrip_diff`
+
+Düzenlenmiş schedule satırlarını (anchor'lı) canlı model ile karşılaştırır. Her satırı UniqueId ile elemana eşler, hücre değerini model değeriyle kıyaslar. Yazma yapmaz.
+
+- **Çıktı:** `List<Dictionary<string, object?>>`
+- **Girdi:** `schedule_export_anchored` çıktısı + kullanıcı düzenlemeleri
+- **Parametreler:** `ignore_fields`
+- **Çıktı alanları:** `uid`, `field`, `old_value`, `new_value`, `writable`, `binding`, `note`
+
+### `schedule_roundtrip_apply` 🔒
+
+`schedule_roundtrip_diff` değişikliklerini güvenle modele yazar. Her yazımdan sonra değeri yeniden okuyarak doğrular (sessiz Set hatalarına karşı). Tip parametresi yazımı tüm tipi etkiler.
+
+- **Çıktı:** `List<Dictionary<string, object?>>`
+- **Girdi:** `schedule_roundtrip_diff` çıktısı *(from ile)*
+- **Parametreler:** `apply_type_params`
+- **Çıktı alanları:** `uid`, `field`, `old_value`, `new_value`, `status`, `message`
 
 ### `kalip_export_xlsx`
 
