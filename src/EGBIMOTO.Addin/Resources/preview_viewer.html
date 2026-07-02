@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>EGBIMOTO Önizleme</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1a1a2e;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    color: #ccc;
+  }
+  #canvas-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+  canvas { display: block; }
+
+  /* Yükleniyor overlay */
+  #loading {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #1a1a2e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+  .spinner {
+    width: 40px; height: 40px;
+    border: 3px solid #333;
+    border-top-color: #5B9BD5;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 12px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Koordinat eksenler göstergesi */
+  #axes-hint {
+    position: absolute;
+    bottom: 12px; left: 12px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 11px;
+    color: #777;
+    pointer-events: none;
+  }
+  .ax { display: inline-block; margin-right: 8px; font-weight: bold; }
+  .ax-x { color: #e74c3c; }
+  .ax-y { color: #2ecc71; }
+  .ax-z { color: #3498db; }
+
+  /* Eleman seçim bilgisi */
+  #info-popup {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: rgba(20,20,40,0.92);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 12px 16px;
+    max-width: 260px;
+    display: none;
+    font-size: 12px;
+  }
+  #info-popup h4 { color: #5B9BD5; margin-bottom: 8px; font-size: 13px; }
+  #info-popup table { width: 100%; border-collapse: collapse; }
+  #info-popup td { padding: 2px 4px; color: #bbb; }
+  #info-popup td:first-child { color: #888; width: 90px; }
+</style>
+</head>
+<body>
+<div id="loading">
+  <div class="spinner"></div>
+  <div style="font-size:13px;color:#666">3D görünüm yükleniyor...</div>
+</div>
+
+<div id="canvas-container">
+  <div id="axes-hint">
+    <span class="ax ax-x">X</span>
+    <span class="ax ax-y">Y (yukarı)</span>
+    <span class="ax ax-z">Z</span>
+    &nbsp;|&nbsp; Sol tık: döndür &nbsp; Sağ tık: kaydır &nbsp; Scroll: zoom
+  </div>
+  <div id="info-popup">
+    <h4 id="info-title">Eleman Bilgisi</h4>
+    <table id="info-table"></table>
+  </div>
+</div>
+
+<!-- Three.js — dosya addin Resources klasöründen gelir -->
+<script src="three.min.js"></script>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════════════
+//  EGBIMOTO Preview Viewer  v1.0
+//  Three.js r128 uyumlu — OrbitControls inline (bağımlılık yok)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+'use strict';
+
+// ── Sahne ─────────────────────────────────────────────────────────────────────
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = false;
+renderer.outputEncoding = THREE.sRGBEncoding;
+document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+const scene  = new THREE.Scene();
+scene.background = new THREE.Color(0x1a1a2e);
+
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1e6);
+camera.position.set(5000, 5000, 5000);
+camera.lookAt(0, 0, 0);
+
+// ── Işıklar ───────────────────────────────────────────────────────────────────
+const ambient   = new THREE.AmbientLight(0xffffff, 0.5);
+const dirLight  = new THREE.DirectionalLight(0xffffff, 0.8);
+dirLight.position.set(10000, 20000, 10000);
+const fillLight = new THREE.DirectionalLight(0x4466aa, 0.3);
+fillLight.position.set(-5000, -5000, -5000);
+scene.add(ambient, dirLight, fillLight);
+
+// ── Grid ──────────────────────────────────────────────────────────────────────
+const grid = new THREE.GridHelper(50000, 50, 0x333344, 0x222233);
+scene.add(grid);
+
+// ── Grup (tüm preview nesneleri) ──────────────────────────────────────────────
+const previewGroup = new THREE.Group();
+scene.add(previewGroup);
+
+// ── Önizleme verisi ───────────────────────────────────────────────────────────
+let currentDto = null;
+
+function loadPreview(dto) {
+  document.getElementById('loading').style.display = 'none';
+  currentDto = dto;
+
+  // Sahneyi temizle
+  while (previewGroup.children.length > 0)
+    previewGroup.remove(previewGroup.children[0]);
+
+  // Mesh'ler
+  (dto.meshes || []).forEach(m => {
+    if (!m.vertices || m.vertices.length === 0) return;
+
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position',
+      new THREE.BufferAttribute(new Float32Array(m.vertices), 3));
+
+    if (m.indices && m.indices.length > 0)
+      geo.setIndex(m.indices);
+
+    geo.computeVertexNormals();
+
+    const color   = new THREE.Color(m.color || '#4A90D9');
+    const opacity = (m.opacity !== undefined) ? m.opacity : 0.65;
+
+    const mat = new THREE.MeshPhongMaterial({
+      color       : color,
+      opacity     : opacity,
+      transparent : opacity < 1.0,
+      side        : THREE.DoubleSide,
+      shininess   : 30,
+      specular    : new THREE.Color(0x111111)
+    });
+
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.userData = m;
+    previewGroup.add(mesh);
+  });
+
+  // Edge'ler (wireframe)
+  (dto.edges || []).forEach(e => {
+    if (!e.points || e.points.length < 6) return;
+    const pts = [];
+    for (let i = 0; i + 2 < e.points.length; i += 3)
+      pts.push(new THREE.Vector3(e.points[i], e.points[i+1], e.points[i+2]));
+
+    const geo = new THREE.BufferGeometry().setFromPoints(pts);
+    const mat = new THREE.LineBasicMaterial({
+      color  : new THREE.Color(e.color || '#AAAAAA'),
+      opacity: e.opacity || 0.5,
+      transparent: true
+    });
+
+    // Çift noktalı LineSegments (her çift = bir kenar)
+    const segs = new THREE.LineSegments(geo, mat);
+    previewGroup.add(segs);
+  });
+
+  // Kamerayı BBox'a odakla
+  if (dto.bbox) {
+    fitCameraToBBox(dto.bbox);
+  } else {
+    autoFitCamera();
+  }
+}
+
+// ── Kamera odaklama ───────────────────────────────────────────────────────────
+
+function fitCameraToBBox(bbox) {
+  const cx = bbox.center_x !== undefined ? bbox.center_x : (bbox.min_x + bbox.max_x) / 2;
+  const cy = bbox.center_y !== undefined ? bbox.center_y : (bbox.min_y + bbox.max_y) / 2;
+  const cz = bbox.center_z !== undefined ? bbox.center_z : (bbox.min_z + bbox.max_z) / 2;
+  const diag = Math.sqrt(
+    Math.pow(bbox.max_x - bbox.min_x, 2) +
+    Math.pow(bbox.max_y - bbox.min_y, 2) +
+    Math.pow(bbox.max_z - bbox.min_z, 2)
+  ) || 5000;
+
+  controls.target.set(cx, cy, cz);
+  const dist = diag * 0.9;
+  camera.position.set(cx + dist * 0.6, cy + dist * 0.5, cz + dist * 0.6);
+  camera.lookAt(cx, cy, cz);
+  controls.update();
+}
+
+function autoFitCamera() {
+  const box = new THREE.Box3().setFromObject(previewGroup);
+  if (box.isEmpty()) return;
+  const center = box.getCenter(new THREE.Vector3());
+  const size   = box.getSize(new THREE.Vector3());
+  const diag   = Math.max(size.x, size.y, size.z) || 5000;
+  controls.target.copy(center);
+  camera.position.set(
+    center.x + diag * 0.8,
+    center.y + diag * 0.6,
+    center.z + diag * 0.8
+  );
+  camera.lookAt(center);
+  controls.update();
+}
+
+function resetCamera() {
+  if (currentDto && currentDto.bbox) fitCameraToBBox(currentDto.bbox);
+  else autoFitCamera();
+}
+
+// ── Inline OrbitControls (Three.js r128) ──────────────────────────────────────
+// Minimal implementasyon — sadece rotate, pan, zoom
+
+const controls = (function() {
+  const STATE = { NONE: -1, ROTATE: 0, PAN: 1, ZOOM: 2 };
+  let state    = STATE.NONE;
+  let prevMouse = new THREE.Vector2();
+  const spherical = new THREE.Spherical();
+  const offset     = new THREE.Vector3();
+  const panOffset  = new THREE.Vector3();
+
+  const obj = {
+    target  : new THREE.Vector3(),
+    minDist : 10,
+    maxDist : Infinity,
+    rotateSpeed: 0.5,
+    panSpeed   : 0.8,
+    zoomSpeed  : 1.2,
+    update() {
+      offset.copy(camera.position).sub(this.target);
+      spherical.setFromVector3(offset);
+      camera.position.copy(this.target).add(new THREE.Vector3().setFromSpherical(spherical));
+      camera.lookAt(this.target);
+    }
+  };
+
+  const el = renderer.domElement;
+
+  el.addEventListener('mousedown', e => {
+    if (e.button === 0) state = STATE.ROTATE;
+    if (e.button === 2) state = STATE.PAN;
+    prevMouse.set(e.clientX, e.clientY);
+    e.preventDefault();
+  });
+
+  el.addEventListener('mouseup', () => { state = STATE.NONE; });
+
+  el.addEventListener('mousemove', e => {
+    if (state === STATE.NONE) return;
+    const dx = e.clientX - prevMouse.x;
+    const dy = e.clientY - prevMouse.y;
+    prevMouse.set(e.clientX, e.clientY);
+
+    if (state === STATE.ROTATE) {
+      spherical.setFromVector3(offset.copy(camera.position).sub(obj.target));
+      spherical.theta -= dx * 0.008 * obj.rotateSpeed;
+      spherical.phi   -= dy * 0.008 * obj.rotateSpeed;
+      spherical.phi    = Math.max(0.05, Math.min(Math.PI - 0.05, spherical.phi));
+      offset.setFromSpherical(spherical);
+      camera.position.copy(obj.target).add(offset);
+      camera.lookAt(obj.target);
+    }
+
+    if (state === STATE.PAN) {
+      const dist = camera.position.distanceTo(obj.target);
+      const factor = dist / 1000 * obj.panSpeed;
+      const right = new THREE.Vector3();
+      const up    = new THREE.Vector3();
+      right.crossVectors(camera.getWorldDirection(new THREE.Vector3()), camera.up).normalize();
+      up.copy(camera.up).normalize();
+      panOffset.copy(right).multiplyScalar(-dx * factor)
+               .add(up.multiplyScalar(dy * factor));
+      obj.target.add(panOffset);
+      camera.position.add(panOffset);
+      camera.lookAt(obj.target);
+    }
+  });
+
+  el.addEventListener('wheel', e => {
+    const dist = camera.position.distanceTo(obj.target);
+    const factor = 1 + e.deltaY * 0.001 * obj.zoomSpeed;
+    const newDist = Math.max(obj.minDist, Math.min(obj.maxDist, dist * factor));
+    const dir = new THREE.Vector3().subVectors(camera.position, obj.target).normalize();
+    camera.position.copy(obj.target).add(dir.multiplyScalar(newDist));
+    camera.lookAt(obj.target);
+    e.preventDefault();
+  }, { passive: false });
+
+  el.addEventListener('contextmenu', e => e.preventDefault());
+
+  return obj;
+})();
+
+// ── Resize ────────────────────────────────────────────────────────────────────
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// ── Render loop ───────────────────────────────────────────────────────────────
+function animate() {
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+}
+animate();
+
+// ── WebView2 → postMessage köprüsü (büyük veri için) ─────────────────────────
+try {
+  window.chrome.webview.addEventListener('message', e => {
+    const raw = e.data;
+    if (typeof raw === 'string' && raw.startsWith('PREVIEW_DATA:')) {
+      const json = raw.slice('PREVIEW_DATA:'.length);
+      loadPreview(JSON.parse(json));
+    }
+  });
+} catch (err) {
+  // WebView2 yoksa (tarayıcıda test) sessiz geç
+}
+
+// ── WPF buton yedekleri (HTML içinde de buton olabilir) ───────────────────────
+function confirmFromHtml() {
+  window.chrome.webview.postMessage('confirm');
+}
+function cancelFromHtml() {
+  window.chrome.webview.postMessage('cancel');
+}
+</script>
+</body>
+</html>
