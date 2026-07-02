@@ -1,0 +1,68 @@
+{
+  "title": "Çatı Metrajı (m²/m³)",
+  "description": "Çatı elemanlarını toplar, alan ve hacim hesaplar, kat bazında gruplar.",
+  "version": "1.0.0",
+  "category": "Metraj",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "catiler",
+      "op": "collect_roofs"
+    },
+    {
+      "id": "alan",
+      "op": "element_area",
+      "from": "catiler"
+    },
+    {
+      "id": "hacim",
+      "op": "element_volume",
+      "from": "catiler"
+    },
+    {
+      "id": "kat_grup",
+      "op": "group_by",
+      "from": "alan",
+      "params": {
+        "group_field": "kat",
+        "agg_field": "alan_m2",
+        "agg_func": "sum"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "alan",
+      "params": {
+        "title": "Çatı Alan/Hacim",
+        "max_rows": 50
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "alan",
+      "params": {
+        "sheet_name": "Cati Metraj"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "metraj",
+    "miktar",
+    "boq"
+  ]
+}

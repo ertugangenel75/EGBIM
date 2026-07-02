@@ -1,0 +1,94 @@
+{
+  "title": "Tüm Model Metraj Özeti",
+  "description": "Duvar, döşeme, kolon, oda sayılarını ve duvar alanını raporlar.",
+  "version": "1.0.0",
+  "category": "Metraj",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "duvar_say",
+      "op": "element_count",
+      "from": "duvarlar"
+    },
+    {
+      "id": "doseme_say",
+      "op": "element_count",
+      "from": "dosemeler"
+    },
+    {
+      "id": "kolon_say",
+      "op": "element_count",
+      "from": "kolonlar"
+    },
+    {
+      "id": "oda_say",
+      "op": "element_count",
+      "from": "odalar"
+    },
+    {
+      "id": "duvar_alan",
+      "op": "wall_area",
+      "from": "duvarlar"
+    },
+    {
+      "id": "goster",
+      "op": "show_result",
+      "from": "duvar_alan",
+      "params": {
+        "title": "Duvar Toplam Alan (m²)"
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "odalar"
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "kat_bazli"
+    },
+    {
+      "id": "xlsx_rapor",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "Tüm Model Metraj Özeti"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "metraj",
+    "miktar",
+    "boq"
+  ]
+}

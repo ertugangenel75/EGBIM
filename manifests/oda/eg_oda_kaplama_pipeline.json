@@ -1,0 +1,125 @@
+{
+  "title": "EGBIMOTO Oda Kaplama Atama",
+  "description": "Kural bazlı kaplama atama → validasyon → IFC Space etiketleme → HTML rapor",
+  "category": "ODA",
+  "version": "1.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rooms"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Rooms elemanı bulunamadı"
+    }
+  ],
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "s02_normalize",
+      "op": "room_naming_normalize",
+      "from": "s01_odalar",
+      "inputs": {
+        "prefix": ""
+      }
+    },
+    {
+      "id": "s03_kaplama_ata",
+      "op": "room_finish_assign",
+      "from": "s01_odalar",
+      "inputs": {
+        "rules": [
+          {
+            "oda_pattern": "BANYO|WC|TUVALET",
+            "zemin": "Seramik 30x30",
+            "duvar": "Fayans 20x30",
+            "tavan": "Saten Boya"
+          },
+          {
+            "oda_pattern": "MUTFAK",
+            "zemin": "Seramik 40x40",
+            "duvar": "Fayans 20x60",
+            "tavan": "Saten Boya"
+          },
+          {
+            "oda_pattern": "OFİS|OFIS|ÇALIŞMA",
+            "zemin": "Granit 60x60",
+            "duvar": "Boyalı Alçı",
+            "tavan": "Asma Tavan"
+          },
+          {
+            "oda_pattern": "KORIDOR|HOL|GİRİŞ",
+            "zemin": "Mermer 60x60",
+            "duvar": "Boyalı Alçı",
+            "tavan": "Saten Boya"
+          },
+          {
+            "oda_pattern": "YATAK",
+            "zemin": "Ahşap Parke",
+            "duvar": "Boyalı Alçı",
+            "tavan": "Saten Boya"
+          },
+          {
+            "oda_pattern": "SALON|OTURMA",
+            "zemin": "Ahşap Parke",
+            "duvar": "Boyalı Alçı",
+            "tavan": "Saten Boya"
+          },
+          {
+            "oda_pattern": "DEPO|ARŞIV",
+            "zemin": "Beton",
+            "duvar": "Boyalı Sıva",
+            "tavan": "Ham Beton"
+          },
+          {
+            "oda_pattern": "TEKNİK|KAZAN|POMPA",
+            "zemin": "Karo Mozaik",
+            "duvar": "Boyalı Sıva",
+            "tavan": "Ham Beton"
+          }
+        ]
+      }
+    },
+    {
+      "id": "s04_validasyon",
+      "op": "room_finish_validate",
+      "from": "s01_odalar",
+      "required": false
+    },
+    {
+      "id": "s05_ifc_space",
+      "op": "room_to_ifc_space",
+      "from": "s01_odalar"
+    },
+    {
+      "id": "s06_matrix",
+      "op": "room_finish_matrix",
+      "from": "s01_odalar"
+    },
+    {
+      "id": "s07_alan_doküm",
+      "op": "room_area_breakdown",
+      "from": "s01_odalar"
+    },
+    {
+      "id": "s08_rapor",
+      "op": "export_html_report",
+      "from": "s06_matrix",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/oda_kaplama_raporu.html",
+        "title": "Oda Kaplama Raporu"
+      }
+    }
+  ],
+  "tags": [
+    "oda",
+    "room",
+    "kaplama",
+    "finish"
+  ]
+}

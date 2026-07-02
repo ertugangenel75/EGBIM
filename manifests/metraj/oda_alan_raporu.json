@@ -1,0 +1,66 @@
+{
+  "title": "Oda Alan Raporu",
+  "description": "Tüm odaların alan, hacim ve yüksekliklerini hesaplar.",
+  "version": "1.0.0",
+  "category": "Metraj",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "alanlar",
+      "op": "room_area",
+      "from": "odalar"
+    },
+    {
+      "id": "toplam",
+      "op": "sum_field",
+      "from": "alanlar",
+      "params": {
+        "field": "alan_m2"
+      }
+    },
+    {
+      "id": "goster",
+      "op": "show_table",
+      "from": "alanlar",
+      "params": {
+        "title": "Oda Alan Raporu",
+        "max_rows": 30
+      }
+    },
+    {
+      "id": "html",
+      "op": "export_html_report",
+      "from": "alanlar",
+      "params": {
+        "title": "Oda Alan Raporu"
+      },
+      "required": false
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "odalar"
+    }
+  ],
+  "tags": [
+    "metraj",
+    "miktar",
+    "boq"
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "title": "EGBIM_PozNo Yaz (Atomic)",
+  "description": "Poz eşleme sonuçlarını modele yazar. Önce poz_no_raporu.json çalıştır ve onayla.\nAtomic mod: tüm adımlar başarılı olursa commit, herhangi bir hata → tüm değişiklikler geri alınır.\nCaution: Bu manifest çalıştırılmadan önce poz_esleme.json çıktısını kontrol edin.",
+  "version": "1.0.0",
+  "category": "Parametre",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "poz_yukle",
+      "op": "load_poz_data",
+      "required": false
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns",
+      "cache": true
+    },
+    {
+      "id": "kirisler",
+      "op": "collect_beams",
+      "cache": true
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors",
+      "cache": true
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls",
+      "cache": true
+    },
+    {
+      "id": "temeller",
+      "op": "collect_foundations",
+      "cache": true
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_lists",
+      "from_many": [
+        "kolonlar",
+        "kirisler",
+        "dosemeler",
+        "duvarlar",
+        "temeller"
+      ]
+    },
+    {
+      "id": "hacim",
+      "op": "element_volume",
+      "from": "birlesik"
+    },
+    {
+      "id": "poz",
+      "op": "poz_match",
+      "from": "hacim"
+    },
+    {
+      "id": "yaz_no",
+      "op": "write_param_from_rows",
+      "from": "poz",
+      "params": {
+        "param_name": "EGBIM_PozNo",
+        "value_field": "poz_no"
+      }
+    },
+    {
+      "id": "yaz_adi",
+      "op": "write_param_from_rows",
+      "from": "poz",
+      "params": {
+        "param_name": "EGBIM_PozAdi",
+        "value_field": "poz_adi"
+      }
+    },
+    {
+      "id": "yaz_birim",
+      "op": "write_param_from_rows",
+      "from": "poz",
+      "params": {
+        "param_name": "EGBIM_Birim",
+        "value_field": "birim"
+      }
+    },
+    {
+      "id": "kontrol",
+      "op": "param_filled_check",
+      "from": "birlesik",
+      "params": {
+        "param_name": "EGBIM_PozNo",
+        "severity": "ERROR"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kontrol",
+      "params": {
+        "title": "PozNo Yazma Kontrolü"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "html_rapor",
+      "op": "export_validation_report",
+      "from": "satirlar",
+      "params": {
+        "title": "EGBIM_PozNo Yaz (Atomic)"
+      },
+      "required": false
+    },
+    {
+      "id": "xlsx_rapor",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "EGBIM_PozNo Yaz (Atomic)"
+      },
+      "required": false
+    }
+  ],
+  "transaction_policy": "atomic",
+  "tags": [
+    "parametre",
+    "shared_param",
+    "tr_bim"
+  ]
+}

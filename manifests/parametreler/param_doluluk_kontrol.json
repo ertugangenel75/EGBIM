@@ -1,0 +1,96 @@
+{
+  "title": "Parametre Doluluk Kontrolü",
+  "description": "Duvar ve kolonlarda zorunlu EGBIM parametrelerinin varlığını kontrol eder.",
+  "version": "1.0.0",
+  "category": "Parametre",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "kontrol_d",
+      "op": "validate_required_params",
+      "from": "duvarlar",
+      "params": {
+        "params": [
+          "EG_Poz",
+          "EG_WBS",
+          "EG_Disiplin"
+        ]
+      }
+    },
+    {
+      "id": "kontrol_k",
+      "op": "validate_required_params",
+      "from": "kolonlar",
+      "params": {
+        "params": [
+          "EG_Poz",
+          "EG_WBS",
+          "EG_Disiplin"
+        ]
+      }
+    },
+    {
+      "id": "ozet_d",
+      "op": "validation_summary",
+      "from": "kontrol_d"
+    },
+    {
+      "id": "ozet_k",
+      "op": "validation_summary",
+      "from": "kontrol_k"
+    },
+    {
+      "id": "rapor_d",
+      "op": "show_result",
+      "from": "ozet_d",
+      "params": {
+        "title": "Duvar Parametre Kontrolü"
+      }
+    },
+    {
+      "id": "html",
+      "op": "export_validation_report",
+      "from": "kontrol_d",
+      "params": {
+        "title": "Parametre Doluluk Raporu"
+      },
+      "required": false
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "kontrol_d",
+        "kontrol_k"
+      ],
+      "params": {
+        "title": "Parametre Doluluk Kontrolü"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "birlesik"
+    }
+  ],
+  "tags": [
+    "parametre",
+    "shared_param",
+    "tr_bim"
+  ]
+}

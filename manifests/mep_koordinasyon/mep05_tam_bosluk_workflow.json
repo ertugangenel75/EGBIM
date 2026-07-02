@@ -1,0 +1,83 @@
+{
+  "id": "mep05_tam_bosluk_workflow",
+  "title": "MEP Boşluk: Tam Workflow (Tespit → EC-2 → BCF → Lento)",
+  "description": "MEP bosluk tam is akisi: tespit + yerlestirme → EC-2 dogrulama + KB_Durum guncelleme → BCF 2.1 ihrac → otomatik lento. Tek manifest ile projenin tum MEP bosluk yonetimi.",
+  "category": "MEP-KOORDINASYON",
+  "version": "1.0",
+  "tags": [
+    "mep",
+    "bosluk",
+    "tespit",
+    "ec2",
+    "bcf",
+    "lento",
+    "koordinasyon",
+    "yangin_duvari",
+    "navisworks",
+    "kanal_boslugu",
+    "pipeline"
+  ],
+  "transaction_policy": "single",
+  "pre_checks": [
+    {
+      "type": "FAMILY_LOADED",
+      "family_name": "Kanal_Boslugu",
+      "on_fail": "ABORT",
+      "message": "Kanal_Boslugu ailesi yuklu degil. Once Insert Load Family yapiniz."
+    }
+  ],
+  "steps": [
+    {
+      "id": "s01_tespit",
+      "op": "mep_opening_detect",
+      "description": "1) Duct/Pipe/Tray-Duvar kesisim tespiti + bosluk yerlestirme",
+      "inputs": {
+        "clearance_normal_mm": "$INPUT:clearance_normal_mm:60",
+        "clearance_fire_mm": "$INPUT:clearance_fire_mm:100",
+        "min_size_mm": 50.0,
+        "level_filter": "$INPUT:level_filter:",
+        "guncelle_mevcut": true
+      }
+    },
+    {
+      "id": "s02_validate",
+      "op": "mep_opening_validate",
+      "description": "2) Gecersiz bosluk + EC-2 siniflandirma + KB_Durum guncelleme",
+      "inputs": {
+        "ec2_kontrol": true,
+        "kiriş_mesafe_mm": 300.0,
+        "bosluk_arasi_mm": 200.0,
+        "durum_guncelle": true
+      }
+    },
+    {
+      "id": "s03_bcf",
+      "op": "mep_opening_bcf_export",
+      "description": "3) Sorunlu bosluklari BCF 2.1 olarak ihrac",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output",
+        "sadece_kritik": false
+      }
+    },
+    {
+      "id": "s04_lento",
+      "op": "mep_lintel_place",
+      "description": "4) Genis bosluklara otomatik lento",
+      "inputs": {
+        "min_genislik_mm": "$INPUT:min_genislik_mm:600",
+        "binme_payi_mm": 200.0,
+        "beton_sinifi": "$INPUT:beton_sinifi:C25",
+        "mevcut_temizle": false
+      }
+    },
+    {
+      "id": "s05_rapor",
+      "op": "export_html_report",
+      "description": "5) Tam rapor",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/tam_bosluk_workflow.html",
+        "title": "MEP Bosluk Tam Workflow Raporu"
+      }
+    }
+  ]
+}

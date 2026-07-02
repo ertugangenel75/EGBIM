@@ -1,0 +1,72 @@
+{
+  "title": "Mimari: Oda İsimlendirme Standardı",
+  "category": "mimari",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rooms",
+        "OST_Doors",
+        "OST_Windows"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde mimari eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "kontrol",
+      "op": "arch_validate_room_naming",
+      "from": "odalar",
+      "params": {
+        "allowed_keywords": [
+          "ODA",
+          "WC",
+          "MUTFAK",
+          "SALON",
+          "KORİDOR",
+          "MERDİVEN",
+          "DEPO",
+          "TESİSAT"
+        ]
+      }
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "satırlar",
+      "params": {
+        "title": "Oda İsimlendirme",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "odalar"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_bazli"
+    }
+  ],
+  "id": "a09_oda_isimlendirme",
+  "description": "Mimari: Oda İsimlendirme Standardı — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "mimari",
+    "architecture",
+    "oda"
+  ]
+}

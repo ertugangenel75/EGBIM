@@ -1,0 +1,39 @@
+{
+  "id": "mep04_lento_yer",
+  "title": "MEP Boşluk: Otomatik Lento Yerleştirme",
+  "description": "Geniş MEP boşluklarına otomatik lento (lintel) yerleştirir. Gazbeton/tuğla duvarlara ekler, betonarme/perde atlar. EC-2 beton sınıfına göre demir çapı seçer.",
+  "category": "MEP-KOORDINASYON",
+  "version": "1.0",
+  "tags": [
+    "mep",
+    "lento",
+    "lintel",
+    "gazbeton",
+    "tugla",
+    "ec2",
+    "beton",
+    "structural"
+  ],
+  "transaction_policy": "single",
+  "steps": [
+    {
+      "id": "s01_lento",
+      "op": "mep_lintel_place",
+      "inputs": {
+        "min_genislik_mm": "$INPUT:min_genislik_mm:600",
+        "binme_payi_mm": "$INPUT:binme_payi_mm:200",
+        "beton_sinifi": "$INPUT:beton_sinifi:C25",
+        "lento_family_isim": "$INPUT:lento_family_isim:",
+        "mevcut_temizle": "$INPUT:mevcut_temizle:false"
+      }
+    },
+    {
+      "id": "s02_rapor",
+      "op": "export_html_report",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/lento_rapor.html",
+        "title": "Lento Yerlestirme Raporu"
+      }
+    }
+  ]
+}

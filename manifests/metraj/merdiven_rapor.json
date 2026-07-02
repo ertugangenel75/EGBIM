@@ -1,0 +1,65 @@
+{
+  "title": "Merdiven Raporu",
+  "description": "Tüm merdivenleri toplar, adet ve eleman bazlı parametre listesi üretir.",
+  "version": "1.0.0",
+  "category": "Metraj",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "merdivenler",
+      "op": "collect_stairs"
+    },
+    {
+      "id": "sayi",
+      "op": "element_count",
+      "from": "merdivenler"
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "merdivenler",
+      "params": {
+        "param_names": "Genişlik,Yükseklik,Basamak Sayısı,Malzeme"
+      }
+    },
+    {
+      "id": "tip_ozet",
+      "op": "group_elements_by_type",
+      "from": "merdivenler"
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "satirlar",
+      "params": {
+        "title": "Merdiven Listesi"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "Merdivenler"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "metraj",
+    "miktar",
+    "boq"
+  ]
+}

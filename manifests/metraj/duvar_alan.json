@@ -1,0 +1,65 @@
+{
+  "title": "Duvar Yüzey Alanı",
+  "description": "Tüm duvarların toplam yüzey alanını m² hesaplar.",
+  "version": "1.0.0",
+  "category": "Metraj",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "alan",
+      "op": "element_area",
+      "from": "duvarlar"
+    },
+    {
+      "id": "toplam",
+      "op": "sum_field",
+      "from": "alan",
+      "params": {
+        "field": "deger"
+      }
+    },
+    {
+      "id": "goster",
+      "op": "show_table",
+      "from": "alan",
+      "params": {
+        "title": "Duvar Yüzey Alanları"
+      }
+    },
+    {
+      "id": "html",
+      "op": "export_html_report",
+      "from": "alan",
+      "params": {
+        "title": "Duvar Alanı Raporu"
+      },
+      "required": false
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "duvarlar"
+    }
+  ],
+  "tags": [
+    "metraj",
+    "miktar",
+    "boq"
+  ]
+}

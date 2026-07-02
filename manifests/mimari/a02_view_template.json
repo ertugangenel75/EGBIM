@@ -1,0 +1,68 @@
+{
+  "title": "Mimari: View Template Uygulama",
+  "category": "mimari",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rooms",
+        "OST_Doors",
+        "OST_Windows"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde mimari eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "views",
+      "op": "collect_views"
+    },
+    {
+      "id": "uygula",
+      "op": "arch_apply_view_template",
+      "from": "views",
+      "params": {
+        "template_name": "EGBIM_PLAN_T1",
+        "view_name_contains": "Kat Planı"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "uygula",
+      "params": {
+        "title": "View Template Raporu",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "views"
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "kat_bazli",
+      "params": {
+        "title": "Mimari: View Template Uygulama"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "kat_bazli"
+    }
+  ],
+  "id": "a02_view_template",
+  "transaction_policy": "atomic",
+  "description": "Mimari: View Template Uygulama — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "mimari",
+    "architecture",
+    "oda"
+  ]
+}

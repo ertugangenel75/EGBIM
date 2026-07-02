@@ -1,0 +1,52 @@
+{
+  "title": "Element Tip Listesi",
+  "description": "Modeldeki duvar tiplerini ve kullanım sayılarını listeler.",
+  "version": "1.0.0",
+  "category": "Parametre",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "tipler",
+      "op": "type_get",
+      "from": "duvarlar"
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "tipler",
+      "params": {
+        "title": "Duvar Tip Listesi"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "tipler",
+      "params": {
+        "sheet_name": "Tipler"
+      },
+      "required": false
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "duvarlar"
+    }
+  ],
+  "tags": [
+    "parametre",
+    "shared_param",
+    "tr_bim"
+  ]
+}

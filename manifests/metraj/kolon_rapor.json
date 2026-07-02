@@ -1,0 +1,63 @@
+{
+  "title": "Kolon Metraj ve Sınıflandırma",
+  "description": "Kolonları toplar, canonical class atar ve HTML rapor üretir.",
+  "version": "1.0.0",
+  "category": "Metraj",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "siniflandir",
+      "op": "classify_elements",
+      "from": "kolonlar"
+    },
+    {
+      "id": "say",
+      "op": "element_count",
+      "from": "kolonlar"
+    },
+    {
+      "id": "goster",
+      "op": "show_table",
+      "from": "siniflandir",
+      "params": {
+        "title": "Kolon Sınıflandırma",
+        "max_rows": 25
+      }
+    },
+    {
+      "id": "html",
+      "op": "export_html_report",
+      "from": "siniflandir",
+      "params": {
+        "title": "Kolon Raporu"
+      },
+      "required": false
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "kolonlar"
+    }
+  ],
+  "tags": [
+    "metraj",
+    "miktar",
+    "boq"
+  ]
+}

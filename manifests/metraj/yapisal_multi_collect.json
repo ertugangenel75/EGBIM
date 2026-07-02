@@ -1,0 +1,83 @@
+{
+  "title": "Yapısal Metraj — Hızlı (collect_multi)",
+  "description": "collect_multi ile 5 yapısal kategoriyi paralel toplar. Büyük modellerde belirgin hız artışı.",
+  "version": "1.0.0",
+  "category": "Metraj",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "poz_yukle",
+      "op": "load_poz_data",
+      "required": false
+    },
+    {
+      "id": "yapisal",
+      "op": "collect_multi",
+      "cache": true,
+      "params": {
+        "categories": [
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Floors",
+          "OST_Walls",
+          "OST_StructuralFoundation"
+        ]
+      }
+    },
+    {
+      "id": "hacim",
+      "op": "element_volume",
+      "from": "yapisal"
+    },
+    {
+      "id": "poz",
+      "op": "poz_match",
+      "from": "hacim"
+    },
+    {
+      "id": "maliyet",
+      "op": "calc_cost",
+      "from": "poz"
+    },
+    {
+      "id": "ozet",
+      "op": "cost_summary",
+      "from": "maliyet"
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "ozet",
+      "params": {
+        "title": "Yapısal Metraj"
+      }
+    },
+    {
+      "id": "excel",
+      "op": "export_xlsx",
+      "from": "maliyet",
+      "required": false,
+      "params": {
+        "file_path": "",
+        "sheet_name": "Metraj"
+      }
+    }
+  ],
+  "tags": [
+    "metraj",
+    "miktar",
+    "boq"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "title": "Mimari: Penceresiz Oda Kontrolü",
+  "category": "mimari",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rooms",
+        "OST_Doors",
+        "OST_Windows"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde mimari eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "pencereler",
+      "op": "collect_windows"
+    },
+    {
+      "id": "kontrol",
+      "op": "arch_check_windowless_rooms",
+      "from": "odalar",
+      "params": {
+        "windows": "$pencereler",
+        "requires_window_keywords": [
+          "ODA",
+          "SALON",
+          "YATAK"
+        ]
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "kontrol",
+      "params": {
+        "title": "Penceresiz Oda Raporu",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "pencereler"
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "kat_bazli",
+      "params": {
+        "title": "Mimari: Penceresiz Oda Kontrolü"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "kat_bazli"
+    }
+  ],
+  "id": "a10_pencere_kontrol",
+  "description": "Mimari: Penceresiz Oda Kontrolü — 7 adımlı otomasyon iş akışı.",
+  "tags": [
+    "mimari",
+    "architecture",
+    "oda"
+  ]
+}

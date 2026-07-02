@@ -1,0 +1,85 @@
+{
+  "title": "Döşeme Metrajı (m²/m³)",
+  "description": "Tüm döşemeleri toplar, alan ve hacim hesaplar, kat bazında gruplar ve maliyet bağlar.",
+  "version": "1.0.0",
+  "category": "Metraj",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "poz_yukle",
+      "op": "load_poz_data",
+      "required": false
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "alan",
+      "op": "element_area",
+      "from": "dosemeler"
+    },
+    {
+      "id": "hacim",
+      "op": "floor_volume",
+      "from": "dosemeler"
+    },
+    {
+      "id": "kat_alan",
+      "op": "group_by",
+      "from": "alan",
+      "params": {
+        "group_field": "kat",
+        "agg_field": "alan_m2",
+        "agg_func": "sum"
+      }
+    },
+    {
+      "id": "poz",
+      "op": "poz_match",
+      "from": "hacim"
+    },
+    {
+      "id": "maliyet",
+      "op": "calc_cost",
+      "from": "poz",
+      "params": {
+        "quantity_field": "hacim_m3"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "kat_alan",
+      "params": {
+        "title": "Kat Bazlı Döşeme Alan"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "maliyet",
+      "params": {
+        "sheet_name": "Döşeme"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "metraj",
+    "miktar",
+    "boq"
+  ]
+}

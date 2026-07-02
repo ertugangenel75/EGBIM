@@ -1,0 +1,191 @@
+{
+  "title": "Room Data Governance QA",
+  "description": "Oda veri kalitesi denetimi: isim, numara, departman, kullanım türü, kaplama kodu, alan ve duplicate numara kontrolü.",
+  "category": "mimari",
+  "version": "1.0",
+  "author": "EGBIM",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "category": "OST_Rooms",
+      "message": "Modelde oda elementi yok"
+    },
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "collect_rooms",
+      "message": "collect_rooms kayıtlı değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "s01_collect",
+      "op": "collect_rooms",
+      "description": "Modeldeki tüm odaları topla",
+      "required": true
+    },
+    {
+      "id": "s02_name",
+      "op": "param_filled_check",
+      "from": "s01_collect",
+      "description": "Room Name — 'Name' parametresi dolu mu?",
+      "params": {
+        "param_name": "Name",
+        "severity": "ERROR"
+      },
+      "required": true
+    },
+    {
+      "id": "s03_number",
+      "op": "param_filled_check",
+      "from": "s01_collect",
+      "description": "Room Number — 'Number' parametresi dolu mu?",
+      "params": {
+        "param_name": "Number",
+        "severity": "ERROR"
+      },
+      "required": true
+    },
+    {
+      "id": "s04_department",
+      "op": "param_filled_check",
+      "from": "s01_collect",
+      "description": "Department — 'Department' parametresi dolu mu?",
+      "params": {
+        "param_name": "Department",
+        "severity": "WARNING"
+      },
+      "required": true
+    },
+    {
+      "id": "s05_occupancy",
+      "op": "param_filled_check",
+      "from": "s01_collect",
+      "description": "Occupancy — 'Occupancy' parametresi dolu mu?",
+      "params": {
+        "param_name": "Occupancy",
+        "severity": "WARNING"
+      },
+      "required": true
+    },
+    {
+      "id": "s06_finish_code",
+      "op": "param_filled_check",
+      "from": "s01_collect",
+      "description": "Finish Code — 'EG_FinishCode' parametresi dolu mu?",
+      "params": {
+        "param_name": "EG_FinishCode",
+        "severity": "WARNING"
+      },
+      "required": true
+    },
+    {
+      "id": "s07_area",
+      "op": "param_range_check",
+      "from": "s01_collect",
+      "description": "Area — oda alanı 1 m² üzerinde mi? Sıfır veya hesaplanmamış odaları yakalar.",
+      "params": {
+        "param_name": "Area",
+        "min": 1,
+        "max": 99999,
+        "severity": "ERROR"
+      },
+      "required": true
+    },
+    {
+      "id": "s08_all_params_rows",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_collect",
+      "description": "Tüm oda verilerini satır listesine çevir — duplicate ve dağılım analizleri için ortak kaynak.",
+      "params": {
+        "param_names": "Name,Number,Department,Occupancy,EG_FinishCode,Area"
+      },
+      "required": true
+    },
+    {
+      "id": "s09_duplicate_number",
+      "op": "group_by",
+      "from": "s08_all_params_rows",
+      "description": "Duplicate Number — 'Number' alanına göre grupla. count > 1 olan gruplar duplicate oda numarasını gösterir.",
+      "params": {
+        "field": "Number"
+      },
+      "required": true
+    },
+    {
+      "id": "s10_department_distribution",
+      "op": "group_by",
+      "from": "s08_all_params_rows",
+      "description": "Department dağılımı — departman bazında oda sayısı ve alan dağılımı.",
+      "params": {
+        "field": "Department"
+      },
+      "required": true
+    },
+    {
+      "id": "s11_merge",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "s02_name",
+        "s03_number",
+        "s04_department",
+        "s05_occupancy",
+        "s06_finish_code",
+        "s07_area"
+      ],
+      "description": "Tüm kontrol sonuçlarını tek raporda birleştir.",
+      "params": {
+        "title": "Room Data Governance QA"
+      },
+      "required": true
+    },
+    {
+      "id": "s12_summary",
+      "op": "validation_summary",
+      "from": "s11_merge",
+      "required": true
+    },
+    {
+      "id": "s13_to_rows",
+      "op": "validation_to_rows",
+      "from": "s11_merge",
+      "required": true
+    },
+    {
+      "id": "s14_excel_qa",
+      "op": "export_xlsx",
+      "from": "s13_to_rows",
+      "description": "Excel — QA sonuç tablosu",
+      "params": {
+        "sheet_name": "Room_QA",
+        "title": "Room Data Governance QA"
+      },
+      "required": false
+    },
+    {
+      "id": "s15_excel_duplicates",
+      "op": "export_xlsx",
+      "from": "s09_duplicate_number",
+      "description": "Excel — Duplicate numara raporu. count > 1 satırları incelenmeli.",
+      "params": {
+        "sheet_name": "Duplicate_Numbers",
+        "title": "Duplicate Room Numbers"
+      },
+      "required": false
+    },
+    {
+      "id": "s16_html",
+      "op": "export_validation_report",
+      "from": "s11_merge",
+      "description": "HTML rapor",
+      "params": {
+        "title": "Room Data Governance QA"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "mimari",
+    "architecture",
+    "oda"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "title": "Mimari: Kapı Numaralama",
+  "category": "mimari",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rooms",
+        "OST_Doors",
+        "OST_Windows"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde mimari eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kapilar",
+      "op": "collect_doors"
+    },
+    {
+      "id": "numarala",
+      "op": "arch_renumber_doors",
+      "from": "kapilar",
+      "params": {
+        "prefix": "K"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "numarala",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Kapı Numaraları"
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "kapilar"
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "kat_bazli",
+      "params": {
+        "title": "Mimari: Kapı Numaralama"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "kat_bazli"
+    }
+  ],
+  "id": "a04_kapi_numaralama",
+  "description": "Mimari: Kapı Numaralama — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "mimari",
+    "architecture",
+    "oda"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "title": "Mobilya & Dolap Sayımı",
+  "description": "Mobilya, dolap/mutfak ve mobilya sistemi elemanlarını toplar, tip bazında sayım üretir.",
+  "version": "1.0.0",
+  "category": "Metraj",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "mobilya",
+      "op": "collect_furniture"
+    },
+    {
+      "id": "dolap",
+      "op": "collect_casework"
+    },
+    {
+      "id": "sistemler",
+      "op": "collect_furniture_systems"
+    },
+    {
+      "id": "m_tipler",
+      "op": "group_elements_by_type",
+      "from": "mobilya"
+    },
+    {
+      "id": "d_tipler",
+      "op": "group_elements_by_type",
+      "from": "dolap"
+    },
+    {
+      "id": "m_sayi",
+      "op": "element_count",
+      "from": "mobilya"
+    },
+    {
+      "id": "d_sayi",
+      "op": "element_count",
+      "from": "dolap"
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "m_tipler",
+      "params": {
+        "title": "Mobilya Tip Sayımı"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "m_tipler",
+      "params": {
+        "sheet_name": "Mobilya"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "metraj",
+    "miktar",
+    "boq"
+  ]
+}

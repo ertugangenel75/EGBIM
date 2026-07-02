@@ -1,0 +1,96 @@
+{
+  "title": "Tip Parametresi Raporu",
+  "description": "Belirli kategorilerin eleman tiplerini listeler, seçili tip parametrelerini okur ve karşılaştırmalı rapor üretir.",
+  "version": "1.0.0",
+  "category": "Parametre",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvar_tipler",
+      "op": "collect_types",
+      "params": {
+        "category": "OST_Walls"
+      }
+    },
+    {
+      "id": "kolon_tipler",
+      "op": "collect_types",
+      "params": {
+        "category": "OST_StructuralColumns"
+      }
+    },
+    {
+      "id": "doseme_tipler",
+      "op": "collect_types",
+      "params": {
+        "category": "OST_Floors"
+      }
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "d_tip_param",
+      "op": "type_read_param",
+      "from": "duvarlar",
+      "params": {
+        "param_name": "Malzeme"
+      }
+    },
+    {
+      "id": "k_tip_param",
+      "op": "type_read_param",
+      "from": "kolonlar",
+      "params": {
+        "param_name": "Yapısal Malzeme"
+      }
+    },
+    {
+      "id": "r_d",
+      "op": "show_table",
+      "from": "d_tip_param",
+      "params": {
+        "title": "Duvar Tip Malzeme"
+      }
+    },
+    {
+      "id": "r_k",
+      "op": "show_table",
+      "from": "k_tip_param",
+      "params": {
+        "title": "Kolon Tip Malzeme"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "d_tip_param",
+      "params": {
+        "sheet_name": "Tip Parametreler"
+      },
+      "required": false
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "kolonlar"
+    }
+  ],
+  "tags": [
+    "parametre",
+    "shared_param",
+    "tr_bim"
+  ]
+}

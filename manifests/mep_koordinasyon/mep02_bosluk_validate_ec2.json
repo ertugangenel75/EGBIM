@@ -1,0 +1,38 @@
+{
+  "id": "mep02_bosluk_validate_ec2",
+  "title": "MEP Boşluk: Doğrulama + EC-2 Sınıflandırma",
+  "description": "Geçersiz boşluk tespiti (MEP elemanı kalmamış) + EC-2 boyut sınıflandırması. KB_Durum otomatik güncellenir.",
+  "category": "MEP-KOORDINASYON",
+  "version": "1.0",
+  "tags": [
+    "mep",
+    "bosluk",
+    "ec2",
+    "takviye",
+    "revizyon",
+    "dogrulama",
+    "kiris"
+  ],
+  "transaction_policy": "single",
+  "steps": [
+    {
+      "id": "s01_validate",
+      "op": "mep_opening_validate",
+      "description": "Gecersiz bosluk + EC-2 siniflandirma",
+      "inputs": {
+        "ec2_kontrol": true,
+        "kiriş_mesafe_mm": "$INPUT:kiris_mesafe_mm:300",
+        "bosluk_arasi_mm": "$INPUT:bosluk_arasi_mm:200",
+        "durum_guncelle": true
+      }
+    },
+    {
+      "id": "s02_rapor",
+      "op": "export_html_report",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/mep_bosluk_ec2.html",
+        "title": "MEP Bosluk EC-2 Dogrulama Raporu"
+      }
+    }
+  ]
+}

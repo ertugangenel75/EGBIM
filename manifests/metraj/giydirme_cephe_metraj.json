@@ -1,0 +1,75 @@
+{
+  "title": "Giydirme Cephe Metrajı (m²)",
+  "description": "Curtain wall elemanlarını toplar, brüt/net alan hesaplar, tip bazında gruplar.",
+  "version": "1.0.0",
+  "category": "Metraj",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "cepheler",
+      "op": "collect_curtain_walls"
+    },
+    {
+      "id": "alan",
+      "op": "element_area",
+      "from": "cepheler"
+    },
+    {
+      "id": "uzunluk",
+      "op": "wall_length",
+      "from": "cepheler"
+    },
+    {
+      "id": "tip_ozet",
+      "op": "group_by",
+      "from": "alan",
+      "params": {
+        "group_field": "tip",
+        "agg_field": "alan_m2",
+        "agg_func": "sum"
+      }
+    },
+    {
+      "id": "toplam",
+      "op": "sum_field",
+      "from": "alan",
+      "params": {
+        "field": "alan_m2"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "tip_ozet",
+      "params": {
+        "title": "Giydirme Cephe - Tip Özeti"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "alan",
+      "params": {
+        "sheet_name": "Giydirme Cephe"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "metraj",
+    "miktar",
+    "boq"
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "title": "Kiriş Metrajı (m³)",
+  "description": "Yapısal kirişleri toplar, hacim hesaplar, kat ve tip bazında gruplar.",
+  "version": "1.0.0",
+  "category": "Metraj",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kirisler",
+      "op": "collect_beams"
+    },
+    {
+      "id": "hacim",
+      "op": "beam_volume",
+      "from": "kirisler"
+    },
+    {
+      "id": "kat_grup",
+      "op": "group_by",
+      "from": "hacim",
+      "params": {
+        "group_field": "kat",
+        "agg_field": "hacim_m3",
+        "agg_func": "sum"
+      }
+    },
+    {
+      "id": "tip_grup",
+      "op": "group_by",
+      "from": "hacim",
+      "params": {
+        "group_field": "tip",
+        "agg_field": "hacim_m3",
+        "agg_func": "sum"
+      }
+    },
+    {
+      "id": "toplam",
+      "op": "sum_field",
+      "from": "hacim",
+      "params": {
+        "field": "hacim_m3"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "kat_grup",
+      "params": {
+        "title": "Kiriş - Kat Bazlı"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "hacim",
+      "params": {
+        "sheet_name": "Kiriş Metraj"
+      },
+      "required": false
+    },
+    {
+      "id": "html",
+      "op": "export_html_report",
+      "from": "hacim",
+      "params": {
+        "title": "Kiriş Metraj Raporu"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "metraj",
+    "miktar",
+    "boq"
+  ]
+}

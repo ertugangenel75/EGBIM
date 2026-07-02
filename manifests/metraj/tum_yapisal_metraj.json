@@ -1,0 +1,163 @@
+{
+  "title": "Tam Yapısal Metraj (Kolon+Kiriş+Döşeme+Temel)",
+  "description": "Tüm yapısal beton elemanlarını toplar, hacimlerini hesaplar ve birleşik rapor üretir. ÇŞB 2026 poz eşleme dahil.",
+  "version": "1.0.0",
+  "category": "Metraj",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "poz_yukle",
+      "op": "load_poz_data",
+      "required": false
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "kirisler",
+      "op": "collect_beams"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "temeller",
+      "op": "collect_foundations"
+    },
+    {
+      "id": "vol_k",
+      "op": "column_volume",
+      "from": "kolonlar"
+    },
+    {
+      "id": "vol_ki",
+      "op": "beam_volume",
+      "from": "kirisler"
+    },
+    {
+      "id": "vol_d",
+      "op": "floor_volume",
+      "from": "dosemeler"
+    },
+    {
+      "id": "vol_t",
+      "op": "foundation_volume",
+      "from": "temeller"
+    },
+    {
+      "id": "poz_k",
+      "op": "poz_match",
+      "from": "vol_k"
+    },
+    {
+      "id": "poz_ki",
+      "op": "poz_match",
+      "from": "vol_ki"
+    },
+    {
+      "id": "poz_d",
+      "op": "poz_match",
+      "from": "vol_d"
+    },
+    {
+      "id": "poz_t",
+      "op": "poz_match",
+      "from": "vol_t"
+    },
+    {
+      "id": "mal_k",
+      "op": "calc_cost",
+      "from": "poz_k",
+      "params": {
+        "quantity_field": "hacim_m3"
+      }
+    },
+    {
+      "id": "mal_ki",
+      "op": "calc_cost",
+      "from": "poz_ki",
+      "params": {
+        "quantity_field": "hacim_m3"
+      }
+    },
+    {
+      "id": "mal_d",
+      "op": "calc_cost",
+      "from": "poz_d",
+      "params": {
+        "quantity_field": "hacim_m3"
+      }
+    },
+    {
+      "id": "mal_t",
+      "op": "calc_cost",
+      "from": "poz_t",
+      "params": {
+        "quantity_field": "hacim_m3"
+      }
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_lists",
+      "from_many": [
+        "mal_k",
+        "mal_ki",
+        "mal_d",
+        "mal_t"
+      ]
+    },
+    {
+      "id": "ozet",
+      "op": "cost_summary",
+      "from": "birlesik",
+      "params": {
+        "group_by": "kategori"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "ozet",
+      "params": {
+        "title": "Yapısal Maliyet Özeti"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "birlesik",
+      "params": {
+        "sheet_name": "Yapısal Metraj"
+      },
+      "required": false
+    },
+    {
+      "id": "html",
+      "op": "export_html_report",
+      "from": "birlesik",
+      "params": {
+        "title": "Tam Yapısal Metraj"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "metraj",
+    "miktar",
+    "boq"
+  ]
+}

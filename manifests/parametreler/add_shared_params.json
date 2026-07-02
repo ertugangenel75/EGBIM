@@ -1,0 +1,51 @@
+{
+  "title": "EGBIM Paylaşımlı Parametre Ekle",
+  "description": "EGBIM_SharedParams.txt dosyasından modele paylaşımlı parametreler ekler.",
+  "version": "1.0.0",
+  "category": "Parametre",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "ekle",
+      "op": "add_shared_params",
+      "params": {
+        "group_filter": "EGBIM"
+      }
+    },
+    {
+      "id": "sonuc",
+      "op": "show_result",
+      "from": "ekle",
+      "params": {
+        "title": "Parametre Ekleme Sonucu"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "ekle"
+    },
+    {
+      "id": "xlsx_rapor",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "EGBIM Paylaşımlı Parametre E"
+      },
+      "required": false
+    }
+  ],
+  "transaction_policy": "atomic",
+  "tags": [
+    "parametre",
+    "shared_param",
+    "tr_bim"
+  ]
+}

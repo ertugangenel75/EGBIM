@@ -1,0 +1,70 @@
+{
+  "title": "Mimari: Malzeme Atama Kontrolü",
+  "category": "mimari",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rooms",
+        "OST_Doors",
+        "OST_Windows"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde mimari eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "hepsi",
+      "op": "merge_lists",
+      "from_many": [
+        "duvarlar",
+        "dosemeler"
+      ]
+    },
+    {
+      "id": "kontrol",
+      "op": "arch_check_material_assigned",
+      "from": "hepsi"
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "satırlar",
+      "params": {
+        "title": "Malzeme Ataması",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "kontrol",
+      "params": {
+        "title": "Mimari: Malzeme Atama Kontrolü"
+      }
+    }
+  ],
+  "id": "a07_malzeme_atama",
+  "description": "Mimari: Malzeme Atama Kontrolü — 7 adımlı otomasyon iş akışı.",
+  "tags": [
+    "mimari",
+    "architecture",
+    "oda"
+  ]
+}

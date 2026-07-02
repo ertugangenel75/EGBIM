@@ -1,0 +1,23 @@
+{
+  "title": "EGBIMOTO Etiket Hizalama (Aktif Görünüm)",
+  "description": "Aktif görünümdeki tüm tag ve yazı elemanlarını sola hizalar. Pafta teslim kalitesi için etiket düzeni.",
+  "category": "MIMARI",
+  "version": "1.0",
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_hizala",
+      "op": "align_tags",
+      "inputs": {
+        "mode": "left"
+      }
+    }
+  ],
+  "tags": [
+    "annotation",
+    "tag",
+    "hizalama",
+    "pafta",
+    "teslim_kalite"
+  ]
+}

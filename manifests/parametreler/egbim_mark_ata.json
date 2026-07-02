@@ -1,0 +1,99 @@
+{
+  "title": "EGBIM Mark Atama",
+  "description": "Tüm yapısal elemanlara canonical class + element_id formatında EGBIM_Mark parametresi yazar. TR BIM standart gereksinimi.",
+  "version": "1.0.0",
+  "category": "Parametre",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "kirisler",
+      "op": "collect_beams"
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "temeller",
+      "op": "collect_foundations"
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_lists",
+      "from_many": [
+        "kolonlar",
+        "kirisler",
+        "duvarlar",
+        "dosemeler",
+        "temeller"
+      ]
+    },
+    {
+      "id": "sinifla",
+      "op": "classify_elements",
+      "from": "birlesik"
+    },
+    {
+      "id": "mark_ata",
+      "op": "assign_egbim_mark",
+      "from": "birlesik"
+    },
+    {
+      "id": "kontrol",
+      "op": "param_filled_check",
+      "from": "birlesik",
+      "params": {
+        "param_name": "EGBIM_Mark",
+        "severity": "WARNING"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "validation_summary",
+      "from": "kontrol"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "Mark Atama"
+      },
+      "required": false
+    },
+    {
+      "id": "html_rapor",
+      "op": "export_validation_report",
+      "from": "rapor",
+      "required": false,
+      "params": {
+        "title": "EGBIM Mark Atama"
+      }
+    }
+  ],
+  "tags": [
+    "parametre",
+    "shared_param",
+    "tr_bim"
+  ]
+}

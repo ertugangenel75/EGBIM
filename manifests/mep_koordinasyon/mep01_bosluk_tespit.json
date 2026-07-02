@@ -1,0 +1,40 @@
+{
+  "id": "mep01_bosluk_tespit",
+  "title": "MEP Boşluk: Tespit ve Yerleştirme",
+  "description": "Duct/Pipe/CableTray elemanlarının duvarlarla kesişimini tespit eder, Kanal_Boslugu ailesi yerleştirir. KB_* parametrelerini yazar.",
+  "category": "MEP-KOORDINASYON",
+  "version": "1.0",
+  "tags": [
+    "mep",
+    "bosluk",
+    "kesisim",
+    "kanal",
+    "duct",
+    "pipe",
+    "tray",
+    "yangin_duvari"
+  ],
+  "transaction_policy": "single",
+  "steps": [
+    {
+      "id": "s01_tespit",
+      "op": "mep_opening_detect",
+      "description": "MEP-duvar kesisim tespiti ve bosluk yerlestirme",
+      "inputs": {
+        "clearance_normal_mm": "$INPUT:clearance_normal_mm:60",
+        "clearance_fire_mm": "$INPUT:clearance_fire_mm:100",
+        "min_size_mm": "$INPUT:min_size_mm:50",
+        "level_filter": "$INPUT:level_filter:",
+        "guncelle_mevcut": true
+      }
+    },
+    {
+      "id": "s02_rapor",
+      "op": "export_html_report",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/mep_bosluk_tespit.html",
+        "title": "MEP Bosluk Tespit Raporu"
+      }
+    }
+  ]
+}

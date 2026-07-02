@@ -1,0 +1,28 @@
+{
+  "title": "EGBIMOTO Etiket Düzenle (Dağıt + Çapraz Çöz)",
+  "description": "Aktif görünümdeki etiketleri dikey eşit dağıtır, sonra leader'lı etiketlerin çaprazlarını otomatik çözer. Kesit/görünüş paftaları için. Görünümde CropBox aktif olmalı.",
+  "category": "MIMARI",
+  "version": "1.0",
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_dagit",
+      "op": "align_tags",
+      "inputs": {
+        "mode": "distribute_v"
+      }
+    },
+    {
+      "id": "s02_capraz_coz",
+      "op": "arrange_tags"
+    }
+  ],
+  "tags": [
+    "annotation",
+    "tag",
+    "dagitim",
+    "arrange",
+    "leader",
+    "pafta"
+  ]
+}

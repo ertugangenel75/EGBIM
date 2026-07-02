@@ -1,0 +1,74 @@
+{
+  "title": "Model Genel Özet",
+  "description": "Duvar, döşeme, kolon ve oda sayılarını raporlar.",
+  "version": "1.0.0",
+  "category": "Metraj",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "log_duvar",
+      "op": "element_count",
+      "from": "duvarlar"
+    },
+    {
+      "id": "goster",
+      "op": "show_result",
+      "from": "log_duvar",
+      "params": {
+        "title": "Model Özeti"
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "odalar"
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "kat_bazli"
+    },
+    {
+      "id": "xlsx_rapor",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "Model Genel Özet"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "metraj",
+    "miktar",
+    "boq"
+  ]
+}

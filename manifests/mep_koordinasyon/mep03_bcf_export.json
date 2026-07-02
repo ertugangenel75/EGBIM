@@ -1,0 +1,28 @@
+{
+  "id": "mep03_bcf_export",
+  "title": "MEP Boşluk: BCF 2.1 İhraç",
+  "description": "Sorunlu boşlukları BCF 2.1 formatında ihraç eder. Navisworks / Solibri / BIMcollab ile açılabilir.",
+  "category": "MEP-KOORDINASYON",
+  "version": "1.0",
+  "tags": [
+    "mep",
+    "bcf",
+    "ihrac",
+    "navisworks",
+    "solibri",
+    "bimcollab",
+    "koordinasyon"
+  ],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_bcf",
+      "op": "mep_opening_bcf_export",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output",
+        "durum_filtresi": "$INPUT:durum_filtresi:RED,SORUN,GECERSIZ,REVIZYON,TAKVIYE,IPTAL",
+        "sadece_kritik": "$INPUT:sadece_kritik:false"
+      }
+    }
+  ]
+}

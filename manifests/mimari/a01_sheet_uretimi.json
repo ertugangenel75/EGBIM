@@ -1,0 +1,62 @@
+{
+  "title": "Mimari: Excel'den Sheet Üretimi",
+  "category": "mimari",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rooms",
+        "OST_Doors",
+        "OST_Windows"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde mimari eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "veri",
+      "op": "data_load",
+      "params": {
+        "path": "sheets.json"
+      }
+    },
+    {
+      "id": "sheetler",
+      "op": "arch_sheets_from_data",
+      "from": "veri"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "sheetler",
+      "params": {
+        "title": "Sheet Üretim Raporu",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "sheetler",
+      "params": {
+        "title": "Mimari: Excel'den Sheet Üretimi"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "sheetler"
+    }
+  ],
+  "id": "a01_sheet_uretimi",
+  "transaction_policy": "atomic",
+  "description": "Mimari: Excel'den Sheet Üretimi — 5 adımlı otomasyon iş akışı.",
+  "tags": [
+    "mimari",
+    "architecture",
+    "oda"
+  ]
+}

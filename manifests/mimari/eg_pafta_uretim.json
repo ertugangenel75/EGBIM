@@ -1,0 +1,46 @@
+{
+  "title": "Otomatik Pafta Üretimi — Görünüm Şablonu ve Yerleşim",
+  "description": "Mevcut görünümlere şablon uygular, veri tablosundan paftaları oluşturur ve görünümleri paftaya yerleştirir. Proje dokümantasyon hazırlığını hızlandırır.",
+  "version": "1.0",
+  "category": "mimari",
+  "tags": ["pafta", "sheet", "gorunum", "dokumantasyon", "view_template"],
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "gorunumler",
+      "op": "collect_views",
+      "params": {
+        "view_type": "FloorPlan"
+      }
+    },
+    {
+      "id": "sablon_uygula",
+      "op": "arch_apply_view_template",
+      "from": "gorunumler",
+      "required": false,
+      "params": {
+        "template_name": "EGBIM_Mimari_Plan",
+        "view_name_contains": "Kat"
+      }
+    },
+    {
+      "id": "mevcut_paftalar",
+      "op": "collect_sheets"
+    },
+    {
+      "id": "pafta_olustur",
+      "op": "arch_sheets_from_data",
+      "from": "gorunumler",
+      "required": false
+    },
+    {
+      "id": "ozet",
+      "op": "show_table",
+      "from": "pafta_olustur",
+      "params": {
+        "title": "Oluşturulan Paftalar",
+        "max_rows": 100
+      }
+    }
+  ]
+}

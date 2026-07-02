@@ -1,0 +1,60 @@
+{
+  "title": "Katlara Göre Duvar Dağılımı",
+  "description": "Duvarları katlara göre gruplar ve sayar.",
+  "version": "1.0.0",
+  "category": "Metraj",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "satırlar",
+      "op": "elements_to_rows",
+      "from": "duvarlar"
+    },
+    {
+      "id": "gruplama",
+      "op": "group_by",
+      "from": "satırlar",
+      "params": {
+        "field": "kat"
+      }
+    },
+    {
+      "id": "goster",
+      "op": "show_table",
+      "from": "gruplama",
+      "params": {
+        "title": "Kat Bazlı Duvar Sayısı"
+      }
+    },
+    {
+      "id": "xlsx_rapor",
+      "op": "export_xlsx",
+      "from": "satırlar",
+      "params": {
+        "sheet_name": "Katlara Göre Duvar Dağılımı"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "metraj",
+    "miktar",
+    "boq"
+  ]
+}
