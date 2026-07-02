@@ -44,7 +44,7 @@ Ayrıntı: `docs/MIMARI.md`.
 
 ## Lisans
 
-Apache License 2.0 — bkz. [LICENSE](LICENSE) ve [NOTICE](NOTICE).
+Apache License 2.0 — bkz. [LICENSE](LICENSE) 
 
 ```
 Copyright 2026 Ertuğan Genel
