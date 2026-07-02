@@ -1,0 +1,117 @@
+{
+  "title": "İnşaat İlerleme Hakediş",
+  "description": "Faz bazında tamamlanan imalatı tespit eder, WBS kodu atar ve ara hakediş raporu üretir. Aylık hakediş takibi için tasarlanmıştır.",
+  "category": "Hakediş",
+  "version": "1.0.0",
+  "tags": [
+    "hakediş",
+    "ilerleme",
+    "faz",
+    "ara hakediş",
+    "wbs"
+  ],
+  "steps": [
+    {
+      "id": "s01_poz",
+      "op": "load_poz_data",
+      "params": {
+        "file": "csb_poz_2026.json"
+      }
+    },
+    {
+      "id": "s02_faz1",
+      "op": "collect_by_phase",
+      "params": {
+        "phase_name": "Faz 1"
+      }
+    },
+    {
+      "id": "s03_faz2",
+      "op": "collect_by_phase",
+      "params": {
+        "phase_name": "Faz 2"
+      }
+    },
+    {
+      "id": "s04_birlestir",
+      "op": "merge_lists",
+      "from_many": [
+        "s02_faz1",
+        "s03_faz2"
+      ]
+    },
+    {
+      "id": "s05_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s04_birlestir",
+      "params": {
+        "param_names": [
+          "Phase Created",
+          "Phase Demolished",
+          "TR_WBS_Kodu",
+          "TR_PozNo",
+          "TR_IlerlemeYuzdesi"
+        ]
+      }
+    },
+    {
+      "id": "s06_wbs_ata",
+      "op": "assign_wbs_code",
+      "from": "s05_satirlar",
+      "params": {
+        "category_field": "Category"
+      }
+    },
+    {
+      "id": "s07_poz_esle",
+      "op": "poz_match",
+      "from": "s06_wbs_ata",
+      "params": {
+        "category_field": "Category",
+        "type_field": "Type"
+      }
+    },
+    {
+      "id": "s08_maliyet",
+      "op": "calc_cost",
+      "from": "s07_poz_esle",
+      "params": {
+        "quantity_field": "Volume"
+      }
+    },
+    {
+      "id": "s09_faz_ozet",
+      "op": "cost_summary",
+      "from": "s08_maliyet",
+      "params": {
+        "group_by": "Phase Created"
+      }
+    },
+    {
+      "id": "s10_wbs_rapor",
+      "op": "export_wbs_report",
+      "from": "s06_wbs_ata",
+      "params": {
+        "output_path": "EG_WBS_Raporu.xlsx"
+      }
+    },
+    {
+      "id": "s11_excel",
+      "op": "export_xlsx",
+      "from": "s08_maliyet",
+      "params": {
+        "file_path": "EG_Ilerleme_Hakedis.xlsx",
+        "sheet_name": "İlerleme Hakediş",
+        "title": "İnşaat İlerleme Hakediş"
+      }
+    },
+    {
+      "id": "s12_goster",
+      "op": "show_table",
+      "from": "s09_faz_ozet",
+      "params": {
+        "title": "Faz Bazlı Hakediş Özeti"
+      }
+    }
+  ]
+}

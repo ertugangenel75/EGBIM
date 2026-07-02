@@ -1,0 +1,109 @@
+{
+  "title": "MEP Çakışma Matrisi Raporu",
+  "description": "MEP ve yapısal elemanlar arasındaki hard clash'leri tespit eder, şiddet sıralaması yapar ve HTML rapor üretir.",
+  "category": "MEP Koordinasyon",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_DuctCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde DuctCurves elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "clash",
+    "çakışma",
+    "mep",
+    "yapısal",
+    "koordinasyon",
+    "rapor"
+  ],
+  "steps": [
+    {
+      "id": "s01_kanallar",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "s02_borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "s03_kablo_tava",
+      "op": "collect_cable_trays"
+    },
+    {
+      "id": "s04_kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "s05_kirisler",
+      "op": "collect_structural_framing"
+    },
+    {
+      "id": "s06_mep_birlestir",
+      "op": "merge_lists",
+      "from_many": [
+        "s01_kanallar",
+        "s02_borular",
+        "s03_kablo_tava"
+      ]
+    },
+    {
+      "id": "s07_yapisal_birlestir",
+      "op": "merge_lists",
+      "from_many": [
+        "s04_kolonlar",
+        "s05_kirisler"
+      ]
+    },
+    {
+      "id": "s08_clash",
+      "op": "clash_detect_matrix",
+      "from_many": [
+        "s06_mep_birlestir",
+        "s07_yapisal_birlestir"
+      ],
+      "params": {
+        "group_a": "MEP",
+        "group_b": "Yapısal",
+        "tolerance_mm": 0
+      }
+    },
+    {
+      "id": "s09_siralama",
+      "op": "clash_severity_sort",
+      "from": "s08_clash"
+    },
+    {
+      "id": "s10_html",
+      "op": "export_html_report",
+      "from": "s09_siralama",
+      "params": {
+        "title": "MEP Çakışma Matrisi Raporu"
+      }
+    },
+    {
+      "id": "s11_excel",
+      "op": "export_xlsx",
+      "from": "s09_siralama",
+      "params": {
+        "file_path": "EG_Clash_Raporu.xlsx",
+        "sheet_name": "Çakışmalar",
+        "title": "MEP Çakışma Raporu"
+      }
+    },
+    {
+      "id": "s12_goster",
+      "op": "show_table",
+      "from": "s09_siralama",
+      "params": {
+        "title": "Çakışma Listesi (Şiddet Sıralı)",
+        "max_rows": 50
+      }
+    }
+  ]
+}

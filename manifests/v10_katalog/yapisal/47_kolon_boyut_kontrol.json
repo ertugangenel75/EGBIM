@@ -1,0 +1,104 @@
+{
+  "title": "Kolon Boyut ve Simetri Kontrolü",
+  "description": "Kolonların minimum boyut kurallarına uygunluğunu kontrol eder, kat bazında boyut tutarlılığını değerlendirir.",
+  "category": "Yapısal",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_Columns"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde StructuralColumns/Columns elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "kolon",
+    "boyut",
+    "simetri",
+    "ts500",
+    "kontrol",
+    "yapısal"
+  ],
+  "steps": [
+    {
+      "id": "s01_kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "s02_ts500",
+      "op": "structural_ts500_section",
+      "from": "s01_kolonlar"
+    },
+    {
+      "id": "s03_kat_grup",
+      "op": "group_elements_by_level",
+      "from": "s01_kolonlar"
+    },
+    {
+      "id": "s04_tip_grup",
+      "op": "group_elements_by_type",
+      "from": "s01_kolonlar"
+    },
+    {
+      "id": "s05_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_kolonlar",
+      "params": {
+        "param_names": [
+          "Type",
+          "b",
+          "h",
+          "Level",
+          "Mark",
+          "Base Level",
+          "Top Level"
+        ]
+      }
+    },
+    {
+      "id": "s06_val_satirlar",
+      "op": "validation_to_rows",
+      "from": "s02_ts500"
+    },
+    {
+      "id": "s07_boyut_kontrol",
+      "op": "param_range_check",
+      "from": "s05_satirlar",
+      "params": {
+        "param_name": "b",
+        "min": 250,
+        "max": 2000
+      }
+    },
+    {
+      "id": "s08_html",
+      "op": "export_html_report",
+      "from": "s06_val_satirlar",
+      "params": {
+        "title": "Kolon Boyut Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s09_excel",
+      "op": "export_xlsx",
+      "from": "s05_satirlar",
+      "params": {
+        "file_path": "EG_Kolon_Boyut.xlsx",
+        "sheet_name": "Kolon Boyutları",
+        "title": "Kolon Boyut Listesi"
+      }
+    },
+    {
+      "id": "s10_goster",
+      "op": "show_table",
+      "from": "s03_kat_grup",
+      "params": {
+        "title": "Kat Bazlı Kolon Dağılımı"
+      }
+    }
+  ]
+}

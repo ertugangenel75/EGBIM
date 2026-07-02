@@ -1,0 +1,100 @@
+{
+  "title": "Panel Yük ve Faz Denge Kontrolü",
+  "description": "Elektrik panellerinin yük kapasitesini ve faz dengesini kontrol eder, aşırı yüklü devreleri ve dengesiz fazları raporlar.",
+  "category": "MEP Koordinasyon",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_ElectricalEquipment"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde ElectricalEquipment elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "elektrik",
+    "panel",
+    "yük",
+    "faz",
+    "denge",
+    "kontrol"
+  ],
+  "steps": [
+    {
+      "id": "s01_paneller",
+      "op": "collect_electrical_equipment"
+    },
+    {
+      "id": "s02_yuk",
+      "op": "elec_validate_panel_load",
+      "from": "s01_paneller",
+      "params": {
+        "max_load_kva": 400
+      }
+    },
+    {
+      "id": "s03_denge",
+      "op": "panel_phase_balance_check",
+      "from": "s01_paneller",
+      "params": {
+        "max_imbalance_pct": 10
+      }
+    },
+    {
+      "id": "s04_schedule",
+      "op": "elec_generate_panel_schedule",
+      "from": "s01_paneller"
+    },
+    {
+      "id": "s05_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_paneller",
+      "params": {
+        "param_names": [
+          "Family",
+          "Type",
+          "Load Classification",
+          "Voltage",
+          "TR_PanelNo"
+        ]
+      }
+    },
+    {
+      "id": "s06_birlestir",
+      "op": "merge_rows",
+      "from_many": [
+        "s02_yuk",
+        "s03_denge"
+      ]
+    },
+    {
+      "id": "s07_html",
+      "op": "export_html_report",
+      "from": "s06_birlestir",
+      "params": {
+        "title": "Panel Yük ve Faz Denge Raporu"
+      }
+    },
+    {
+      "id": "s08_excel",
+      "op": "export_xlsx",
+      "from": "s04_schedule",
+      "params": {
+        "file_path": "EG_Panel_Schedule.xlsx",
+        "sheet_name": "Panel Listesi",
+        "title": "Panel Schedule"
+      }
+    },
+    {
+      "id": "s09_goster",
+      "op": "show_table",
+      "from": "s06_birlestir",
+      "params": {
+        "title": "Panel Yük Kontrol Sonuçları"
+      }
+    }
+  ]
+}

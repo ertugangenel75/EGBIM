@@ -1,0 +1,105 @@
+{
+  "title": "Excel'den Kolon Üretimi",
+  "description": "Excel/CSV koordinat tablosundan yapısal kolonları otomatik üretir. Tabloyu XYZ noktalarına çevirir, kullanıcı onayı alır ve kolonları yerleştirir. trace_key ile tekrar çalıştırıldığında çoğaltmaz.",
+  "category": "Üretim",
+  "version": "1.1.0",
+  "tags": [
+    "üretim",
+    "kolon",
+    "yapısal",
+    "excel",
+    "otomasyon",
+    "create"
+  ],
+  "transaction_policy": "preview",
+  "steps": [
+    {
+      "id": "s01_oku",
+      "op": "csv_read",
+      "params": {
+        "file_path": "$INPUT:file_path:Kolon koordinat dosyası (CSV):*.csv",
+        "delimiter": ",",
+        "has_header": true
+      }
+    },
+    {
+      "id": "s02_noktalar",
+      "op": "table_to_points",
+      "from": "s01_oku",
+      "params": {
+        "x_field": "x",
+        "y_field": "y",
+        "z_field": "z",
+        "unit": "mm"
+      }
+    },
+    {
+      "id": "s03_sayim",
+      "op": "show_count",
+      "from": "s02_noktalar"
+    },
+    {
+      "id": "s04_onay",
+      "op": "preview_gate",
+      "from": "s02_noktalar",
+      "params": {
+        "title": "Kolon Üretimi — Noktalara kolon yerleştirilsin mi?"
+      }
+    },
+    {
+      "id": "s05_uret",
+      "op": "create_column_by_point",
+      "from": "s02_noktalar",
+      "condition": "$s04_onay == confirmed",
+      "params": {
+        "family_name": "$INPUT:family_type:Kolon ailesi ve tipi>>family_name",
+        "type_name": "$INPUT:family_type:Kolon ailesi ve tipi>>type_name",
+        "base_level": "$INPUT:level:Alt seviye",
+        "top_level": "$INPUT:level:Üst seviye",
+        "structural": true
+      }
+    },
+    {
+      "id": "s06_iz",
+      "op": "trace_write",
+      "from": "s05_uret",
+      "condition": "$s04_onay == confirmed",
+      "params": {
+        "trace_key": "uretim_kolon_excel"
+      }
+    },
+    {
+      "id": "s07_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s05_uret",
+      "condition": "$s04_onay == confirmed",
+      "params": {
+        "param_names": [
+          "Family",
+          "Type",
+          "Base Level",
+          "Top Level"
+        ]
+      }
+    },
+    {
+      "id": "s08_excel",
+      "op": "export_xlsx",
+      "from": "s07_satirlar",
+      "condition": "$s04_onay == confirmed",
+      "params": {
+        "file_path": "EG_Uretilen_Kolonlar.xlsx",
+        "sheet_name": "Kolonlar",
+        "title": "Üretilen Kolonlar"
+      }
+    },
+    {
+      "id": "s09_goster",
+      "op": "show_result",
+      "from": "s05_uret",
+      "params": {
+        "title": "Kolon Üretimi Tamamlandı"
+      }
+    }
+  ]
+}

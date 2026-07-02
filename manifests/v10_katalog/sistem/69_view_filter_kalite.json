@@ -1,0 +1,103 @@
+{
+  "title": "View Filtre ve Etiket Kalite Kontrolü",
+  "description": "Görünümlerde tanımsız sistem elemanlarını tespit eder, etiketsiz elemanları listeler ve view filtre standardı kurar.",
+  "category": "Sistem",
+  "version": "1.0.0",
+  "tags": [
+    "görünüm",
+    "filtre",
+    "etiket",
+    "kalite",
+    "kontrol",
+    "belgeleme"
+  ],
+  "steps": [
+    {
+      "id": "s01_views",
+      "op": "collect_views",
+      "params": {
+        "view_type": "FloorPlan"
+      }
+    },
+    {
+      "id": "s02_tum",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_DuctCurves",
+          "OST_PipeCurves",
+          "OST_CableTray"
+        ]
+      }
+    },
+    {
+      "id": "s03_tanimsiz",
+      "op": "detect_undefined_system",
+      "from": "s02_tum",
+      "params": {
+        "discipline": "Mechanical"
+      }
+    },
+    {
+      "id": "s04_etiketsiz",
+      "op": "check_untagged_elements",
+      "from": "s01_views",
+      "params": {
+        "view_id": ""
+      }
+    },
+    {
+      "id": "s05_filtre_kur",
+      "op": "create_view_filter",
+      "from": "s01_views",
+      "params": {
+        "filter_name": "EG_MEP_Filter",
+        "categories": [
+          "OST_DuctCurves",
+          "OST_PipeCurves"
+        ],
+        "param_name": "System Type",
+        "rule_value": "Undefined"
+      }
+    },
+    {
+      "id": "s06_etiket",
+      "op": "tag_elements",
+      "from": "s04_etiketsiz",
+      "params": {
+        "tag_type_name": "EG_GenelEtiket",
+        "view_id": "",
+        "leader": false
+      }
+    },
+    {
+      "id": "s07_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s03_tanimsiz",
+      "params": {
+        "param_names": [
+          "Category",
+          "Type",
+          "Level",
+          "System Type"
+        ]
+      }
+    },
+    {
+      "id": "s08_html",
+      "op": "export_html_report",
+      "from": "s07_satirlar",
+      "params": {
+        "title": "View Filtre ve Etiket Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s09_goster",
+      "op": "show_table",
+      "from": "s07_satirlar",
+      "params": {
+        "title": "Tanımsız Sistem Elemanları"
+      }
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "title": "Oda Alan ve İsimlendirme Kontrolü",
+  "description": "Oda alanlarını minimum gereksinime karşı doğrular, isimlendirme kurallarını kontrol eder ve kapı numaralama yapar.",
+  "category": "Mimari",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rooms"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Rooms elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "oda",
+    "alan",
+    "isimlendirme",
+    "kapı",
+    "numara",
+    "mimari"
+  ],
+  "steps": [
+    {
+      "id": "s01_odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "s02_kapilar",
+      "op": "collect_doors"
+    },
+    {
+      "id": "s03_alan_val",
+      "op": "arch_validate_room_area",
+      "from": "s01_odalar",
+      "params": {
+        "min_area_m2": 9
+      }
+    },
+    {
+      "id": "s04_isim_val",
+      "op": "arch_validate_room_naming",
+      "from": "s01_odalar"
+    },
+    {
+      "id": "s05_kapi_num",
+      "op": "arch_renumber_doors",
+      "from": "s02_kapilar",
+      "params": {
+        "prefix": "K"
+      }
+    },
+    {
+      "id": "s06_cakisma",
+      "op": "check_overlapping_rooms",
+      "from": "s01_odalar"
+    },
+    {
+      "id": "s07_yerlestirilmemis",
+      "op": "check_unplaced_rooms",
+      "from": "s01_odalar"
+    },
+    {
+      "id": "s08_val_birlestir",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "s03_alan_val",
+        "s04_isim_val",
+        "s06_cakisma",
+        "s07_yerlestirilmemis"
+      ],
+      "params": {
+        "title": "Oda Alan ve İsimlendirme Kontrolü"
+      }
+    },
+    {
+      "id": "s09_satirlar",
+      "op": "validation_to_rows",
+      "from": "s08_val_birlestir"
+    },
+    {
+      "id": "s10_oda_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_odalar",
+      "params": {
+        "param_names": [
+          "Name",
+          "Number",
+          "Area",
+          "Level",
+          "Department"
+        ]
+      }
+    },
+    {
+      "id": "s11_html",
+      "op": "export_html_report",
+      "from": "s09_satirlar",
+      "params": {
+        "title": "Oda Alan ve İsimlendirme Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s12_excel",
+      "op": "export_xlsx",
+      "from": "s10_oda_satirlar",
+      "params": {
+        "file_path": "EG_Oda_Alan.xlsx",
+        "sheet_name": "Odalar",
+        "title": "Oda Alan Listesi"
+      }
+    },
+    {
+      "id": "s13_goster",
+      "op": "show_table",
+      "from": "s09_satirlar",
+      "params": {
+        "title": "Oda Kontrol Sonuçları"
+      }
+    }
+  ]
+}

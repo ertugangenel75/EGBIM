@@ -1,0 +1,95 @@
+{
+  "title": "Model Snapshot ve Checksum",
+  "description": "Modelin anlık görüntüsünü alır, checksum üretir, eleman istatistiklerini çıkarır ve bir sonraki delta karşılaştırması için iz yazar.",
+  "category": "Sistem",
+  "version": "1.0.0",
+  "tags": [
+    "snapshot",
+    "checksum",
+    "istatistik",
+    "trace",
+    "delta",
+    "versiyon"
+  ],
+  "steps": [
+    {
+      "id": "s01_tum",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_Walls",
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Floors",
+          "OST_Doors",
+          "OST_Windows",
+          "OST_Rooms"
+        ]
+      }
+    },
+    {
+      "id": "s02_checksum",
+      "op": "model_checksum",
+      "from": "s01_tum"
+    },
+    {
+      "id": "s03_istatistik",
+      "op": "qa_model_size_analysis"
+    },
+    {
+      "id": "s04_uyarilar",
+      "op": "qa_get_model_warnings"
+    },
+    {
+      "id": "s05_trace_yaz",
+      "op": "trace_write",
+      "from": "s01_tum",
+      "params": {
+        "trace_key": "egbim_snapshot"
+      }
+    },
+    {
+      "id": "s06_proje",
+      "op": "pm_get_project_info"
+    },
+    {
+      "id": "s07_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s02_checksum",
+      "params": {
+        "param_names": [
+          "Category",
+          "Count",
+          "LastModified",
+          "Checksum"
+        ]
+      }
+    },
+    {
+      "id": "s08_excel",
+      "op": "export_xlsx",
+      "from": "s07_satirlar",
+      "params": {
+        "file_path": "EG_Model_Snapshot.xlsx",
+        "sheet_name": "Snapshot",
+        "title": "Model Snapshot"
+      }
+    },
+    {
+      "id": "s09_html",
+      "op": "export_html_report",
+      "from": "s07_satirlar",
+      "params": {
+        "title": "Model Snapshot Raporu"
+      }
+    },
+    {
+      "id": "s10_goster",
+      "op": "show_table",
+      "from": "s07_satirlar",
+      "params": {
+        "title": "Model Snapshot Özeti"
+      }
+    }
+  ]
+}

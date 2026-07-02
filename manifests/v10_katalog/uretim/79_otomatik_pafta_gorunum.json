@@ -1,0 +1,75 @@
+{
+  "title": "Otomatik Pafta ve 3D Görünüm Üretimi",
+  "description": "Yeni bir pafta oluşturur, modelden 3D görünüm üretir ve görünümü paftaya yerleştirir. Sunum/teslim paftalarını tek manifest ile hazırlar.",
+  "category": "Üretim",
+  "version": "1.1.0",
+  "tags": [
+    "üretim",
+    "pafta",
+    "sheet",
+    "görünüm",
+    "3d",
+    "teslim"
+  ],
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_pafta",
+      "op": "create_sheet",
+      "params": {
+        "sheet_number": "$INPUT:string:Pafta numarası",
+        "sheet_name": "$INPUT:string:Pafta adı",
+        "title_block_name": ""
+      }
+    },
+    {
+      "id": "s02_elemanlar",
+      "op": "collect_by_category",
+      "params": {
+        "category": "Walls"
+      }
+    },
+    {
+      "id": "s03_3d_gorunum",
+      "op": "create_3d_view",
+      "from": "s02_elemanlar",
+      "params": {
+        "view_name": "EG_Genel_3D",
+        "padding_mm": 1000
+      }
+    },
+    {
+      "id": "s04_paftaya_yerlestir",
+      "op": "place_view_on_sheet",
+      "from": "s03_3d_gorunum",
+      "params": {
+        "sheet_number": "$INPUT:string:Pafta numarası",
+        "x_mm": 200,
+        "y_mm": 150
+      }
+    },
+    {
+      "id": "s05_paftalar",
+      "op": "collect_sheets"
+    },
+    {
+      "id": "s06_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s05_paftalar",
+      "params": {
+        "param_names": [
+          "Sheet Number",
+          "Sheet Name"
+        ]
+      }
+    },
+    {
+      "id": "s07_goster",
+      "op": "show_table",
+      "from": "s06_satirlar",
+      "params": {
+        "title": "Paftalar"
+      }
+    }
+  ]
+}

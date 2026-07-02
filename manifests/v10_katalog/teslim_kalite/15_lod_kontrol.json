@@ -1,0 +1,95 @@
+{
+  "title": "LOD Kontrol",
+  "description": "Modeldeki elemanların LOD seviyelerini doğrular, eksik veya hatalı LOD atamasını raporlar. Milestone teslimlerinde kullanılır.",
+  "category": "Teslim Kalite",
+  "version": "1.0.0",
+  "tags": [
+    "lod",
+    "teslim",
+    "doğrulama",
+    "bim yönetimi"
+  ],
+  "steps": [
+    {
+      "id": "s01_tum",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_Walls",
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Floors",
+          "OST_Doors",
+          "OST_Windows",
+          "OST_Rooms"
+        ]
+      }
+    },
+    {
+      "id": "s02_lod",
+      "op": "pm_validate_lod",
+      "from": "s01_tum",
+      "params": {
+        "lod_level": 300
+      }
+    },
+    {
+      "id": "s03_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_tum",
+      "params": {
+        "param_names": [
+          "Category",
+          "Type",
+          "Level",
+          "TR_LOD",
+          "TR_BIM_KategoriKodu"
+        ]
+      }
+    },
+    {
+      "id": "s04_bos_lod",
+      "op": "filter_empty_param",
+      "from": "s01_tum",
+      "params": {
+        "param_name": "TR_LOD"
+      }
+    },
+    {
+      "id": "s05_bos_count",
+      "op": "show_count",
+      "from": "s04_bos_lod"
+    },
+    {
+      "id": "s06_val_satirlar",
+      "op": "validation_to_rows",
+      "from": "s02_lod"
+    },
+    {
+      "id": "s07_html",
+      "op": "export_html_report",
+      "from": "s06_val_satirlar",
+      "params": {
+        "title": "LOD Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s08_excel",
+      "op": "export_xlsx",
+      "from": "s03_satirlar",
+      "params": {
+        "file_path": "EG_LOD_Kontrol.xlsx",
+        "sheet_name": "LOD Kontrol",
+        "title": "LOD Kontrol"
+      }
+    },
+    {
+      "id": "s09_goster",
+      "op": "show_table",
+      "from": "s06_val_satirlar",
+      "params": {
+        "title": "LOD Kontrol Sonuçları"
+      }
+    }
+  ]
+}

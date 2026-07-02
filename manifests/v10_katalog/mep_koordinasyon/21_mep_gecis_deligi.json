@@ -1,0 +1,99 @@
+{
+  "title": "MEP Geçiş Deliği Pipeline",
+  "description": "MEP-yapısal kesişimlerini tespit eder, kullanıcı onayı alır (preview_gate) ve boşluk ailesini otomatik yerleştirir. Tek manifest ile tam koordinasyon akışı.",
+  "category": "MEP Koordinasyon",
+  "version": "1.0.0",
+  "tags": [
+    "koordinasyon",
+    "mep",
+    "boşluk",
+    "geçiş",
+    "preview",
+    "clash"
+  ],
+  "transaction_policy": "preview",
+  "steps": [
+    {
+      "id": "s01_tarama",
+      "op": "smart_check_mep_no_opening",
+      "params": {
+        "host_categories": [
+          "Walls",
+          "Floors",
+          "StructuralFraming"
+        ],
+        "mep_categories": [
+          "Pipes",
+          "Ducts",
+          "CableTray",
+          "Conduit"
+        ],
+        "tolerance_mm": 15,
+        "check_opening": true
+      }
+    },
+    {
+      "id": "s02_filtre",
+      "op": "filter_rows",
+      "from": "s01_tarama",
+      "params": {
+        "field": "seviye",
+        "value": "HATA",
+        "operator": "=="
+      }
+    },
+    {
+      "id": "s03_sayim",
+      "op": "show_count",
+      "from": "s02_filtre"
+    },
+    {
+      "id": "s04_onay",
+      "op": "preview_gate",
+      "from": "s01_tarama",
+      "params": {
+        "title": "MEP Geçiş Koordinasyonu — Boşluk Yerleştirilsin mi?"
+      }
+    },
+    {
+      "id": "s05_yerlesim",
+      "op": "place_opening",
+      "from": "s01_tarama",
+      "condition": "$s04_onay == confirmed",
+      "params": {
+        "family_name": "EG_Rezervasyon_Dikdortgen",
+        "type_name": "Standard",
+        "offset_mm": 50,
+        "skip_existing": true
+      }
+    },
+    {
+      "id": "s06_muhur",
+      "op": "coord_validate_penetration_firestop",
+      "from": "s01_tarama",
+      "condition": "$s04_onay == confirmed"
+    },
+    {
+      "id": "s07_val_satirlar",
+      "op": "validation_to_rows",
+      "from": "s06_muhur",
+      "condition": "$s04_onay == confirmed"
+    },
+    {
+      "id": "s08_html",
+      "op": "export_html_report",
+      "from": "s07_val_satirlar",
+      "params": {
+        "title": "MEP Geçiş Koordinasyon Raporu"
+      }
+    },
+    {
+      "id": "s09_goster",
+      "op": "show_result",
+      "from": "s05_yerlesim",
+      "params": {
+        "title": "Yerleştirme Tamamlandı"
+      }
+    }
+  ]
+}

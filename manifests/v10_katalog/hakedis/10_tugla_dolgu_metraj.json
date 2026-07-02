@@ -1,0 +1,118 @@
+{
+  "title": "Tuğla ve Dolgu Duvar Metrajı",
+  "description": "Mimari duvarların alanını hesaplar, tuğla miktarını calc_brick_quantity ile çıkarır, ÇŞB poz eşler ve m² + adet bazlı hakediş raporu üretir.",
+  "category": "Hakediş",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Walls elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "hakediş",
+    "tuğla",
+    "dolgu duvar",
+    "m2",
+    "adet",
+    "poz"
+  ],
+  "steps": [
+    {
+      "id": "s01_poz",
+      "op": "load_poz_data",
+      "params": {
+        "file": "csb_poz_2026.json"
+      }
+    },
+    {
+      "id": "s02_duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "s03_filtre",
+      "op": "filter_by_type",
+      "from": "s02_duvarlar",
+      "params": {
+        "type_name": "Tuğla"
+      }
+    },
+    {
+      "id": "s04_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s03_filtre",
+      "params": {
+        "param_names": [
+          "Type",
+          "Width",
+          "Area",
+          "TR_PozNo",
+          "TR_Malzeme"
+        ]
+      }
+    },
+    {
+      "id": "s05_alan",
+      "op": "wall_area",
+      "from": "s03_filtre"
+    },
+    {
+      "id": "s06_tugla",
+      "op": "calc_brick_quantity",
+      "from": "s05_alan",
+      "params": {
+        "area_m2": "Area",
+        "thickness_cm": "Width_cm",
+        "brick_type": "standard"
+      }
+    },
+    {
+      "id": "s07_poz_esle",
+      "op": "poz_match",
+      "from": "s06_tugla",
+      "params": {
+        "category_field": "Category",
+        "type_field": "Type"
+      }
+    },
+    {
+      "id": "s08_maliyet",
+      "op": "calc_cost",
+      "from": "s07_poz_esle",
+      "params": {
+        "quantity_field": "Area"
+      }
+    },
+    {
+      "id": "s09_tip_ozet",
+      "op": "cost_summary",
+      "from": "s08_maliyet",
+      "params": {
+        "group_by": "Type"
+      }
+    },
+    {
+      "id": "s10_excel",
+      "op": "export_xlsx",
+      "from": "s08_maliyet",
+      "params": {
+        "file_path": "EG_Tugla_Metraj.xlsx",
+        "sheet_name": "Tuğla Metraj",
+        "title": "Tuğla ve Dolgu Duvar Metrajı"
+      }
+    },
+    {
+      "id": "s11_goster",
+      "op": "show_table",
+      "from": "s09_tip_ozet",
+      "params": {
+        "title": "Duvar Tip Bazlı Metraj ve Maliyet"
+      }
+    }
+  ]
+}

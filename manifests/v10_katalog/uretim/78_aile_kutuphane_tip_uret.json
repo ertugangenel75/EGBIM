@@ -1,0 +1,119 @@
+{
+  "title": "Aile Kütüphane Kurulumu ve Tip Üretimi",
+  "description": "Bir .rfa ailesini projeye yükler, içine parametrik boyut ekler ve standart tipler üretir. EGBIM aile kütüphanesini tek manifest ile kurar.",
+  "category": "Üretim",
+  "version": "1.1.0",
+  "tags": [
+    "üretim",
+    "aile",
+    "tip",
+    "family",
+    "kütüphane",
+    "parametrik"
+  ],
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s00_sablon",
+      "op": "family_open_template",
+      "params": {
+        "template_path": "$INPUT:file_path:Aile şablonu (.rft):*.rft"
+      }
+    },
+    {
+      "id": "s01_param_ekle",
+      "op": "family_add_param",
+      "params": {
+        "family_path": "$INPUT:file_path:Düzenlenecek aile (.rfa):*.rfa",
+        "param_name": "$INPUT:string:Eklenecek parametre adı",
+        "param_type": "length",
+        "is_instance": false,
+        "group": "dimensions"
+      }
+    },
+    {
+      "id": "s02_tip_300",
+      "op": "family_type_create",
+      "params": {
+        "family_path": "$INPUT:file_path:Düzenlenecek aile (.rfa):*.rfa",
+        "type_name": "EG 300x300",
+        "params": {
+          "Genişlik": 300,
+          "Derinlik": 300
+        }
+      }
+    },
+    {
+      "id": "s03_tip_400",
+      "op": "family_type_create",
+      "params": {
+        "family_path": "$INPUT:file_path:Düzenlenecek aile (.rfa):*.rfa",
+        "type_name": "EG 400x400",
+        "params": {
+          "Genişlik": 400,
+          "Derinlik": 400
+        }
+      }
+    },
+    {
+      "id": "s04_projeye_yukle",
+      "op": "family_load_to_project",
+      "params": {
+        "family_path": "$INPUT:file_path:Düzenlenecek aile (.rfa):*.rfa",
+        "overwrite": true
+      }
+    },
+    {
+      "id": "s05_kontrol",
+      "op": "collect_families",
+      "params": {
+        "category": "Structural Columns"
+      }
+    },
+    {
+      "id": "s06_saglik",
+      "op": "family_health_check",
+      "from": "s05_kontrol",
+      "params": {
+        "expected_params": [
+          "EG_Donatı_Oranı"
+        ],
+        "max_types": 50,
+        "origin_threshold_m": 10
+      }
+    },
+    {
+      "id": "s07b_guncelle",
+      "op": "update_or_create_family",
+      "from": "s05_kontrol",
+      "params": {
+        "trace_key": "aile_kutuphane_kolon",
+        "family_name": "$INPUT:string:Aile adı",
+        "type_name": "EG 300x300",
+        "level_name": "$INPUT:level:Yerleşim seviyesi",
+        "update_type": true,
+        "update_location": false
+      }
+    },
+    {
+      "id": "s07_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s05_kontrol",
+      "params": {
+        "param_names": [
+          "Family Name",
+          "Type Count",
+          "Category"
+        ]
+      }
+    },
+    {
+      "id": "s08_goster",
+      "op": "show_table",
+      "from": "s07_satirlar",
+      "params": {
+        "title": "Kurulan Aile ve Tipler"
+      }
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "title": "C# Script Çalıştırıcı",
+  "description": "Roslyn ile custom C# scriptini manifest içinden çalıştırır, cache kontrolü yapar ve sonucu raporlar.",
+  "category": "Sistem",
+  "version": "1.0.0",
+  "tags": [
+    "csharp",
+    "script",
+    "roslyn",
+    "custom",
+    "otomasyon",
+    "geliştirici"
+  ],
+  "steps": [
+    {
+      "id": "s01_tum",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_Walls",
+          "OST_StructuralColumns"
+        ]
+      }
+    },
+    {
+      "id": "s02_script",
+      "op": "run_csharp_script",
+      "from": "s01_tum",
+      "params": {
+        "script_path": "scripts/param_toplu_yaz.cs",
+        "cache": true
+      }
+    },
+    {
+      "id": "s03_cache_bilgi",
+      "op": "clear_script_cache",
+      "params": {}
+    },
+    {
+      "id": "s04_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_tum",
+      "params": {
+        "param_names": [
+          "Category",
+          "Type",
+          "Level",
+          "ElementId"
+        ]
+      }
+    },
+    {
+      "id": "s05_goster",
+      "op": "show_result",
+      "from": "s02_script",
+      "params": {
+        "title": "Script Çalıştırma Sonucu"
+      }
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "title": "Devre Atama Kontrolü",
+  "description": "Aydınlatma armatürlerinin ve elektrik cihazlarının devre atamalarını kontrol eder, devresiz elemanları listeler.",
+  "category": "MEP Koordinasyon",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_LightingFixtures"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde LightingFixtures elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "elektrik",
+    "devre",
+    "aydınlatma",
+    "kontrol",
+    "qa"
+  ],
+  "steps": [
+    {
+      "id": "s01_armatürler",
+      "op": "collect_lighting_fixtures"
+    },
+    {
+      "id": "s02_cihazlar",
+      "op": "collect_lighting_devices"
+    },
+    {
+      "id": "s03_el_fixtures",
+      "op": "collect_electrical_fixtures"
+    },
+    {
+      "id": "s04_birlestir",
+      "op": "merge_lists",
+      "from_many": [
+        "s01_armatürler",
+        "s02_cihazlar",
+        "s03_el_fixtures"
+      ]
+    },
+    {
+      "id": "s05_devre",
+      "op": "elec_check_circuit_assigned",
+      "from": "s04_birlestir"
+    },
+    {
+      "id": "s06_acil",
+      "op": "elec_check_emergency_lighting",
+      "from": "s01_armatürler"
+    },
+    {
+      "id": "s07_lux",
+      "op": "elec_validate_lux_level",
+      "from": "s01_armatürler",
+      "params": {
+        "min_lux": 300
+      }
+    },
+    {
+      "id": "s08_satirlar",
+      "op": "validation_to_rows",
+      "from": "s05_devre"
+    },
+    {
+      "id": "s09_html",
+      "op": "export_html_report",
+      "from": "s08_satirlar",
+      "params": {
+        "title": "Devre Atama Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s10_excel",
+      "op": "export_xlsx",
+      "from": "s08_satirlar",
+      "params": {
+        "file_path": "EG_Devre_Kontrol.xlsx",
+        "sheet_name": "Devre Kontrol",
+        "title": "Devre Atama Kontrol"
+      }
+    },
+    {
+      "id": "s11_goster",
+      "op": "show_table",
+      "from": "s08_satirlar",
+      "params": {
+        "title": "Devresiz Elemanlar"
+      }
+    }
+  ]
+}

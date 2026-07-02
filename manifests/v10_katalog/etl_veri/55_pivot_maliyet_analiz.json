@@ -1,0 +1,115 @@
+{
+  "title": "Pivot Maliyet Analizi",
+  "description": "Maliyet verilerini kat × kategori pivot tablosunda gösterir, en yüksek maliyetli kalemleri öne çıkarır.",
+  "category": "ETL Veri",
+  "version": "1.0.0",
+  "tags": [
+    "pivot",
+    "maliyet",
+    "analiz",
+    "kat",
+    "kategori",
+    "excel"
+  ],
+  "steps": [
+    {
+      "id": "s01_poz",
+      "op": "load_poz_data",
+      "params": {
+        "file": "csb_poz_2026.json"
+      }
+    },
+    {
+      "id": "s02_tum",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Floors",
+          "OST_Walls",
+          "OST_StructuralFoundation"
+        ]
+      }
+    },
+    {
+      "id": "s03_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s02_tum",
+      "params": {
+        "param_names": [
+          "Category",
+          "Type",
+          "Level",
+          "Volume",
+          "Area",
+          "TR_PozNo"
+        ]
+      }
+    },
+    {
+      "id": "s04_poz_esle",
+      "op": "poz_match",
+      "from": "s03_satirlar",
+      "params": {
+        "category_field": "Category",
+        "type_field": "Type"
+      }
+    },
+    {
+      "id": "s05_maliyet",
+      "op": "calc_cost",
+      "from": "s04_poz_esle",
+      "params": {
+        "quantity_field": "Volume"
+      }
+    },
+    {
+      "id": "s06_pivot_kat_cat",
+      "op": "pivot_table",
+      "from": "s05_maliyet",
+      "params": {
+        "row_field": "Level",
+        "col_field": "Category",
+        "value_field": "cost"
+      }
+    },
+    {
+      "id": "s07_pivot_poz",
+      "op": "pivot_table",
+      "from": "s05_maliyet",
+      "params": {
+        "row_field": "poz_no",
+        "col_field": "Level",
+        "value_field": "cost"
+      }
+    },
+    {
+      "id": "s08_sirala",
+      "op": "sort_rows",
+      "from": "s05_maliyet",
+      "params": {
+        "field": "cost",
+        "descending": true
+      }
+    },
+    {
+      "id": "s09_excel",
+      "op": "export_xlsx",
+      "from": "s06_pivot_kat_cat",
+      "params": {
+        "file_path": "EG_Pivot_Maliyet.xlsx",
+        "sheet_name": "Kat×Kategori",
+        "title": "Pivot Maliyet Analizi"
+      }
+    },
+    {
+      "id": "s10_goster",
+      "op": "show_table",
+      "from": "s06_pivot_kat_cat",
+      "params": {
+        "title": "Kat × Kategori Maliyet Matrisi"
+      }
+    }
+  ]
+}

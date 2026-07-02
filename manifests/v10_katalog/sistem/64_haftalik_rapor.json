@@ -1,0 +1,114 @@
+{
+  "title": "Haftalık BIM İlerleme Raporu",
+  "description": "Proje bilgisini, eleman istatistiklerini, maliyet özetini ve WBS ilerlemesini birleştirerek haftalık PDF/Excel rapor üretir.",
+  "category": "Sistem",
+  "version": "1.0.0",
+  "tags": [
+    "haftalık",
+    "rapor",
+    "ilerleme",
+    "maliyet",
+    "wbs",
+    "pdf"
+  ],
+  "steps": [
+    {
+      "id": "s01_proje",
+      "op": "pm_get_project_info"
+    },
+    {
+      "id": "s02_poz",
+      "op": "load_poz_data",
+      "params": {
+        "file": "csb_poz_2026.json"
+      }
+    },
+    {
+      "id": "s03_tum",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Floors",
+          "OST_Walls"
+        ]
+      }
+    },
+    {
+      "id": "s04_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s03_tum",
+      "params": {
+        "param_names": [
+          "Category",
+          "Level",
+          "TR_WBS_Kodu",
+          "TR_PozNo",
+          "TR_IlerlemeYuzdesi",
+          "Volume"
+        ]
+      }
+    },
+    {
+      "id": "s05_wbs_ata",
+      "op": "assign_wbs_code",
+      "from": "s04_satirlar",
+      "params": {
+        "category_field": "Category"
+      }
+    },
+    {
+      "id": "s06_poz_esle",
+      "op": "poz_match",
+      "from": "s05_wbs_ata",
+      "params": {
+        "category_field": "Category",
+        "type_field": "Type"
+      }
+    },
+    {
+      "id": "s07_maliyet",
+      "op": "calc_cost",
+      "from": "s06_poz_esle",
+      "params": {
+        "quantity_field": "Volume"
+      }
+    },
+    {
+      "id": "s08_kat_ozet",
+      "op": "cost_by_level",
+      "from": "s07_maliyet"
+    },
+    {
+      "id": "s09_uyarilar",
+      "op": "qa_get_model_warnings"
+    },
+    {
+      "id": "s10_pdf",
+      "op": "export_pdf",
+      "from": "s08_kat_ozet",
+      "params": {
+        "title": "Haftalık BIM İlerleme Raporu"
+      }
+    },
+    {
+      "id": "s11_excel",
+      "op": "export_xlsx",
+      "from": "s07_maliyet",
+      "params": {
+        "file_path": "EG_Haftalik_Rapor.xlsx",
+        "sheet_name": "Haftalık Rapor",
+        "title": "Haftalık İlerleme"
+      }
+    },
+    {
+      "id": "s12_goster",
+      "op": "show_table",
+      "from": "s08_kat_ozet",
+      "params": {
+        "title": "Bu Haftanın Maliyet Özeti"
+      }
+    }
+  ]
+}

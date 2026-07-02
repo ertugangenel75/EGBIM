@@ -1,0 +1,83 @@
+{
+  "title": "4D Yapısal İnşaat Takvimi",
+  "description": "Yapısal elemanları inşaat takvimine bağlar, schedule_gate ile onay alır ve 4D simülasyon verisi üretir.",
+  "category": "Yapısal",
+  "version": "1.0.0",
+  "tags": [
+    "4d",
+    "takvim",
+    "inşaat",
+    "schedule",
+    "simülasyon",
+    "yapısal"
+  ],
+  "transaction_policy": "preview",
+  "steps": [
+    {
+      "id": "s01_yapisal",
+      "op": "structural_collect_all"
+    },
+    {
+      "id": "s02_4d",
+      "op": "schedule_collect_4d",
+      "from": "s01_yapisal",
+      "params": {
+        "operation_name": "4D Yapısal Takvim",
+        "project_start": "2026-01-01",
+        "project_end": "2027-01-01"
+      }
+    },
+    {
+      "id": "s03_onay",
+      "op": "schedule_gate",
+      "from": "s02_4d",
+      "params": {
+        "title": "4D Yapısal Takvim Önizlemesi"
+      }
+    },
+    {
+      "id": "s04_yaz",
+      "op": "set_param_from_schedule",
+      "from": "s02_4d",
+      "condition": "$s03_onay == confirmed",
+      "params": {
+        "schedule_step": "Construction Sequence",
+        "start_param": "TR_BaslangicTarihi",
+        "end_param": "TR_BitisTarihi"
+      }
+    },
+    {
+      "id": "s05_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_yapisal",
+      "params": {
+        "param_names": [
+          "Category",
+          "Type",
+          "Level",
+          "TR_BaslangicTarihi",
+          "TR_BitisTarihi",
+          "TR_WBS_Kodu"
+        ]
+      }
+    },
+    {
+      "id": "s06_excel",
+      "op": "export_xlsx",
+      "from": "s05_satirlar",
+      "params": {
+        "file_path": "EG_4D_Takvim.xlsx",
+        "sheet_name": "4D Takvim",
+        "title": "4D Yapısal İnşaat Takvimi"
+      }
+    },
+    {
+      "id": "s07_goster",
+      "op": "show_result",
+      "from": "s04_yaz",
+      "params": {
+        "title": "4D Takvim Yazıldı"
+      }
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "title": "Boru Eğim ve Çap Kontrolü",
+  "description": "Pis su ve yağmur suyu borularının eğimini ve çap uyumunu doğrular, sistemlerin ayrımını kontrol eder.",
+  "category": "MEP Koordinasyon",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_PipeCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde PipeCurves elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "boru",
+    "eğim",
+    "çap",
+    "pis su",
+    "sıhhi tesisat",
+    "kontrol"
+  ],
+  "steps": [
+    {
+      "id": "s01_borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "s02_boru_acc",
+      "op": "collect_pipe_accessories"
+    },
+    {
+      "id": "s03_egim",
+      "op": "plumbing_validate_pipe_slope",
+      "from": "s01_borular",
+      "params": {
+        "min_slope_pct": 2
+      }
+    },
+    {
+      "id": "s04_cap",
+      "op": "plumbing_validate_connector_diameter",
+      "from": "s01_borular",
+      "params": {
+        "expected_diameter_mm": 50,
+        "tolerance_mm": 5
+      }
+    },
+    {
+      "id": "s05_sistem",
+      "op": "plumbing_validate_system_separation",
+      "from": "s01_borular"
+    },
+    {
+      "id": "s06_debi",
+      "op": "plumbing_calc_flow_rate",
+      "from": "s01_borular"
+    },
+    {
+      "id": "s07_val_birlestir",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "s03_egim",
+        "s04_cap",
+        "s05_sistem"
+      ],
+      "params": {
+        "title": "Boru Eğim ve Çap Kontrolü"
+      }
+    },
+    {
+      "id": "s08_satirlar",
+      "op": "validation_to_rows",
+      "from": "s07_val_birlestir"
+    },
+    {
+      "id": "s09_html",
+      "op": "export_html_report",
+      "from": "s08_satirlar",
+      "params": {
+        "title": "Boru Eğim ve Çap Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s10_goster",
+      "op": "show_table",
+      "from": "s08_satirlar",
+      "params": {
+        "title": "Boru Kontrol Sonuçları"
+      }
+    }
+  ]
+}

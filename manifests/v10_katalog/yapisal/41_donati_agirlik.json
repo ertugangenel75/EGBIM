@@ -1,0 +1,83 @@
+{
+  "title": "Donatı Ağırlık Raporu",
+  "description": "Modeldeki tüm donatıları toplar, çap ve kat bazında ağırlık hesaplar, bükme listesi ve Excel raporu üretir.",
+  "category": "Yapısal",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rebar"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Rebar elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "donatı",
+    "ağırlık",
+    "çap",
+    "bükme",
+    "kg",
+    "yapısal"
+  ],
+  "steps": [
+    {
+      "id": "s01_donati",
+      "op": "collect_rebar"
+    },
+    {
+      "id": "s02_agirlik",
+      "op": "rebar_weight_calc",
+      "from": "s01_donati"
+    },
+    {
+      "id": "s03_cap_ozet",
+      "op": "rebar_summary_by_diameter",
+      "from": "s01_donati"
+    },
+    {
+      "id": "s04_kat_ozet",
+      "op": "rebar_summary_by_level",
+      "from": "s01_donati"
+    },
+    {
+      "id": "s05_tablo",
+      "op": "rebar_weight_table",
+      "from": "s01_donati"
+    },
+    {
+      "id": "s06_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_donati",
+      "params": {
+        "param_names": [
+          "Diameter",
+          "BarLength",
+          "BarType",
+          "HostId",
+          "Level"
+        ]
+      }
+    },
+    {
+      "id": "s07_excel",
+      "op": "export_xlsx",
+      "from": "s03_cap_ozet",
+      "params": {
+        "file_path": "EG_Donati_Agirlik.xlsx",
+        "sheet_name": "Donatı Özeti",
+        "title": "Donatı Ağırlık Raporu"
+      }
+    },
+    {
+      "id": "s08_goster",
+      "op": "show_table",
+      "from": "s03_cap_ozet",
+      "params": {
+        "title": "Çap Bazlı Donatı Özeti (kg)"
+      }
+    }
+  ]
+}

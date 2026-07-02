@@ -1,0 +1,98 @@
+{
+  "title": "Kapı Numaralama ve Eldiveni Tespiti",
+  "description": "Kapıları oda numarasına göre numaralandırır, kulpun hangi tarafta olduğunu tespit eder ve kapı-oda ilişki haritası üretir.",
+  "category": "Mimari",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Doors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Doors elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "kapı",
+    "numaralama",
+    "eldivenliği",
+    "oda ilişkisi",
+    "belgeleme"
+  ],
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_kapilar",
+      "op": "collect_doors"
+    },
+    {
+      "id": "s02_odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "s03_num",
+      "op": "door_number_by_room",
+      "from": "s01_kapilar",
+      "params": {
+        "param_name": "Mark",
+        "separator": "-",
+        "start_index": 1
+      }
+    },
+    {
+      "id": "s04_eldivenlik",
+      "op": "door_handing_detect",
+      "from": "s01_kapilar"
+    },
+    {
+      "id": "s05_yangin",
+      "op": "door_fire_rating_from_wall",
+      "from": "s01_kapilar",
+      "params": {
+        "wall_param": "Fire Rating",
+        "door_param": "TR_YanginSinifi",
+        "rating_map": "{}"
+      }
+    },
+    {
+      "id": "s06_oda_kapi",
+      "op": "room_door_relation_map",
+      "from": "s01_kapilar"
+    },
+    {
+      "id": "s07_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_kapilar",
+      "params": {
+        "param_names": [
+          "Mark",
+          "Type",
+          "Level",
+          "From Room",
+          "To Room",
+          "TR_YanginSinifi"
+        ]
+      }
+    },
+    {
+      "id": "s08_excel",
+      "op": "export_xlsx",
+      "from": "s07_satirlar",
+      "params": {
+        "file_path": "EG_Kapi_Listesi.xlsx",
+        "sheet_name": "Kapı Listesi",
+        "title": "Kapı Numaralama ve Eldivenlik"
+      }
+    },
+    {
+      "id": "s09_goster",
+      "op": "show_table",
+      "from": "s07_satirlar",
+      "params": {
+        "title": "Kapı Listesi"
+      }
+    }
+  ]
+}

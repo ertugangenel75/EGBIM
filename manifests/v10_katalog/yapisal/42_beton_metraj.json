@@ -1,0 +1,97 @@
+{
+  "title": "Beton Hacim Metrajı",
+  "description": "Kolon, kiriş, döşeme ve temel elemanlarının beton hacmini m³ cinsinden kat ve eleman tipine göre hesaplar.",
+  "category": "Yapısal",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_Columns"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde StructuralColumns/Columns elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "beton",
+    "hacim",
+    "m3",
+    "metraj",
+    "kat",
+    "yapısal"
+  ],
+  "steps": [
+    {
+      "id": "s01_kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "s02_kirisler",
+      "op": "collect_structural_framing"
+    },
+    {
+      "id": "s03_dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "s04_temeller",
+      "op": "collect_foundations"
+    },
+    {
+      "id": "s05_birlestir",
+      "op": "merge_lists",
+      "from_many": [
+        "s01_kolonlar",
+        "s02_kirisler",
+        "s03_dosemeler",
+        "s04_temeller"
+      ]
+    },
+    {
+      "id": "s06_beton",
+      "op": "beton_metraj",
+      "from": "s05_birlestir"
+    },
+    {
+      "id": "s07_kat_grup",
+      "op": "group_elements_by_level",
+      "from": "s05_birlestir"
+    },
+    {
+      "id": "s08_tip_grup",
+      "op": "group_elements_by_type",
+      "from": "s05_birlestir"
+    },
+    {
+      "id": "s09_pivot",
+      "op": "pivot_table",
+      "from": "s06_beton",
+      "params": {
+        "row_field": "Level",
+        "col_field": "Category",
+        "value_field": "Volume_m3"
+      }
+    },
+    {
+      "id": "s10_excel",
+      "op": "export_xlsx",
+      "from": "s09_pivot",
+      "params": {
+        "file_path": "EG_Beton_Metraj.xlsx",
+        "sheet_name": "Beton Hacim",
+        "title": "Beton Hacim Metrajı"
+      }
+    },
+    {
+      "id": "s11_goster",
+      "op": "show_table",
+      "from": "s09_pivot",
+      "params": {
+        "title": "Kat × Kategori Beton Hacim Matrisi"
+      }
+    }
+  ]
+}

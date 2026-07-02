@@ -1,0 +1,115 @@
+{
+  "title": "Bindirme ve Ankraj Uzunluğu Hesabı",
+  "description": "TS500'e göre donatı bindirme uzunluğu, ankraj uzunluğu ve minimum aralık hesabı yapar. Projenin beton/çelik sınıfına göre otomatik hesap.",
+  "category": "Yapısal",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rebar"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Rebar elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "bindirme",
+    "ankraj",
+    "donatı",
+    "ts500",
+    "hesap",
+    "yapısal"
+  ],
+  "steps": [
+    {
+      "id": "s01_donati",
+      "op": "collect_rebar"
+    },
+    {
+      "id": "s02_bindirme",
+      "op": "calc_lap_length",
+      "from": "s01_donati",
+      "params": {
+        "diameter_mm": 16,
+        "fck": 25,
+        "fyk": 420
+      }
+    },
+    {
+      "id": "s03_ankraj",
+      "op": "calc_anchorage_length",
+      "from": "s01_donati",
+      "params": {
+        "diameter_mm": 16,
+        "fck": 25,
+        "fyk": 420
+      }
+    },
+    {
+      "id": "s04_aralik",
+      "op": "calc_min_spacing",
+      "from": "s01_donati",
+      "params": {
+        "diameter_mm": 16,
+        "aggregate_size_mm": 16
+      }
+    },
+    {
+      "id": "s05_ts500_val",
+      "op": "validate_rebar_ts500",
+      "from": "s01_donati",
+      "params": {
+        "fck": 25,
+        "fyk": 420,
+        "cover_mm": 30
+      }
+    },
+    {
+      "id": "s06_cap_ozet",
+      "op": "rebar_summary_by_diameter",
+      "from": "s01_donati"
+    },
+    {
+      "id": "s07_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_donati",
+      "params": {
+        "param_names": [
+          "Diameter",
+          "BarType",
+          "LapLength",
+          "AnchorLength",
+          "HostId"
+        ]
+      }
+    },
+    {
+      "id": "s08_excel",
+      "op": "export_xlsx",
+      "from": "s07_satirlar",
+      "params": {
+        "file_path": "EG_Bindirme_Ankraj.xlsx",
+        "sheet_name": "Bindirme Hesabı",
+        "title": "Bindirme ve Ankraj Uzunlukları"
+      }
+    },
+    {
+      "id": "s09_html",
+      "op": "export_html_report",
+      "from": "s07_satirlar",
+      "params": {
+        "title": "Bindirme ve Ankraj Hesap Raporu"
+      }
+    },
+    {
+      "id": "s10_goster",
+      "op": "show_table",
+      "from": "s06_cap_ozet",
+      "params": {
+        "title": "Donatı Çap Bazlı Özet"
+      }
+    }
+  ]
+}

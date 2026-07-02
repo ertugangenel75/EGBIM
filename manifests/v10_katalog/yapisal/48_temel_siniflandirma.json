@@ -1,0 +1,96 @@
+{
+  "title": "Temel Sınıflandırma ve Metrajı",
+  "description": "Temel elemanlarını tipine göre sınıflandırır (tekil/sürekli/radye), hacim metrajını çıkarır ve temel raporu üretir.",
+  "category": "Yapısal",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralFoundation"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde StructuralFoundation elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "temel",
+    "sınıflandırma",
+    "tekil",
+    "sürekli",
+    "radye",
+    "metraj"
+  ],
+  "steps": [
+    {
+      "id": "s01_temeller",
+      "op": "collect_foundations"
+    },
+    {
+      "id": "s02_siniflandir",
+      "op": "classify_elements",
+      "from": "s01_temeller"
+    },
+    {
+      "id": "s03_canonik",
+      "op": "resolve_canonical_class",
+      "from": "s01_temeller",
+      "params": {
+        "type_name": "Type",
+        "category": "OST_StructuralFoundation"
+      }
+    },
+    {
+      "id": "s04_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_temeller",
+      "params": {
+        "param_names": [
+          "Type",
+          "Level",
+          "Volume",
+          "TR_BIM_KategoriKodu",
+          "TR_WBS_Kodu",
+          "TR_PozNo"
+        ]
+      }
+    },
+    {
+      "id": "s05_tip_grup",
+      "op": "group_elements_by_type",
+      "from": "s01_temeller"
+    },
+    {
+      "id": "s06_beton",
+      "op": "beton_metraj",
+      "from": "s01_temeller"
+    },
+    {
+      "id": "s07_wbs_ata",
+      "op": "assign_wbs_code",
+      "from": "s04_satirlar",
+      "params": {
+        "category_field": "Category"
+      }
+    },
+    {
+      "id": "s08_excel",
+      "op": "export_xlsx",
+      "from": "s04_satirlar",
+      "params": {
+        "file_path": "EG_Temel_Metraj.xlsx",
+        "sheet_name": "Temel Listesi",
+        "title": "Temel Sınıflandırma ve Metraj"
+      }
+    },
+    {
+      "id": "s09_goster",
+      "op": "show_table",
+      "from": "s05_tip_grup",
+      "params": {
+        "title": "Temel Tip Dağılımı"
+      }
+    }
+  ]
+}

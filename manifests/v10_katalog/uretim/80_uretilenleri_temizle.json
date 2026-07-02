@@ -1,0 +1,45 @@
+{
+  "title": "Üretilen Elemanları Temizle",
+  "description": "Daha önce trace_key ile üretilmiş elemanları bulur ve güvenli şekilde siler. confirm kilidi ile yanlışlıkla silmeyi engeller. Üretim manifestlerinin geri-alma karşılığıdır.",
+  "category": "Üretim",
+  "version": "1.1.0",
+  "tags": [
+    "üretim",
+    "temizlik",
+    "geri alma",
+    "trace",
+    "delete",
+    "bakım"
+  ],
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_mevcut_iz",
+      "op": "trace_find_existing",
+      "params": {
+        "trace_key": "$INPUT:string:Temizlenecek üretim etiketi (trace_key)"
+      }
+    },
+    {
+      "id": "s02_sayim",
+      "op": "show_count",
+      "from": "s01_mevcut_iz"
+    },
+    {
+      "id": "s03_sil",
+      "op": "delete_generated",
+      "params": {
+        "trace_key": "$INPUT:string:Temizlenecek üretim etiketi (trace_key)",
+        "confirm": true
+      }
+    },
+    {
+      "id": "s04_goster",
+      "op": "show_result",
+      "from": "s03_sil",
+      "params": {
+        "title": "Üretilen Kolonlar Temizlendi"
+      }
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "title": "Power BI Veri Hazırlama",
+  "description": "WBS kodu atar, maliyet hesaplar, ilerleme verisiyle bağlar ve Power BI için CSV çıktı üretir.",
+  "category": "ETL Veri",
+  "version": "1.0.0",
+  "tags": [
+    "powerbi",
+    "csv",
+    "wbs",
+    "maliyet",
+    "ilerleme",
+    "dashboard"
+  ],
+  "steps": [
+    {
+      "id": "s01_poz",
+      "op": "load_poz_data",
+      "params": {
+        "file": "csb_poz_2026.json"
+      }
+    },
+    {
+      "id": "s02_wbs",
+      "op": "load_wbs_mapping",
+      "params": {
+        "wbs_path": "revit_kategori_wbs.json"
+      }
+    },
+    {
+      "id": "s03_tum",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Floors",
+          "OST_Walls",
+          "OST_StructuralFoundation"
+        ]
+      }
+    },
+    {
+      "id": "s04_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s03_tum",
+      "params": {
+        "param_names": [
+          "Category",
+          "Type",
+          "Level",
+          "Volume",
+          "Area",
+          "TR_WBS_Kodu",
+          "TR_PozNo",
+          "TR_IlerlemeYuzdesi"
+        ]
+      }
+    },
+    {
+      "id": "s05_wbs_ata",
+      "op": "assign_wbs_code",
+      "from": "s04_satirlar",
+      "params": {
+        "category_field": "Category"
+      }
+    },
+    {
+      "id": "s06_poz_esle",
+      "op": "poz_match",
+      "from": "s05_wbs_ata",
+      "params": {
+        "category_field": "Category",
+        "type_field": "Type"
+      }
+    },
+    {
+      "id": "s07_maliyet",
+      "op": "calc_cost",
+      "from": "s06_poz_esle",
+      "params": {
+        "quantity_field": "Volume"
+      }
+    },
+    {
+      "id": "s08_wbs_link",
+      "op": "link_quantity_to_wbs",
+      "from": "s07_maliyet",
+      "params": {
+        "quantity_field": "Volume",
+        "wbs_field": "TR_WBS_Kodu"
+      }
+    },
+    {
+      "id": "s09_csv",
+      "op": "export_csv",
+      "from": "s07_maliyet",
+      "params": {
+        "file_path": "EG_PowerBI_Veri.csv"
+      }
+    },
+    {
+      "id": "s10_goster",
+      "op": "show_table",
+      "from": "s07_maliyet",
+      "params": {
+        "title": "Power BI Veri Önizleme",
+        "max_rows": 20
+      }
+    }
+  ]
+}

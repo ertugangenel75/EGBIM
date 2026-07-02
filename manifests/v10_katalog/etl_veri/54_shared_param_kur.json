@@ -1,0 +1,96 @@
+{
+  "title": "Shared Parametre Kurulum ve Doğrulama",
+  "description": "EGBIM_SharedParams.txt dosyasını Revit projesine yükler, grup filtresi uygular ve parametre varlığını doğrular.",
+  "category": "ETL Veri",
+  "version": "1.0.0",
+  "tags": [
+    "shared parameter",
+    "kurulum",
+    "doğrulama",
+    "egbim",
+    "tr bim"
+  ],
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_ekle",
+      "op": "add_shared_params",
+      "params": {
+        "spf_path": "EGBIM_SharedParams.txt",
+        "group_filter": "EGBIM"
+      }
+    },
+    {
+      "id": "s02_listele",
+      "op": "list_shared_params"
+    },
+    {
+      "id": "s03_tum",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_Walls",
+          "OST_StructuralColumns",
+          "OST_Floors"
+        ]
+      }
+    },
+    {
+      "id": "s04_val",
+      "op": "validate_required_params",
+      "from": "s03_tum",
+      "params": {
+        "required_params": [
+          "TR_BIM_KategoriKodu",
+          "TR_PozNo",
+          "TR_WBS_Kodu",
+          "TR_IFCTipi"
+        ]
+      }
+    },
+    {
+      "id": "s05_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s02_listele",
+      "params": {
+        "param_names": [
+          "Name",
+          "GUID",
+          "Group",
+          "DataType"
+        ]
+      }
+    },
+    {
+      "id": "s06_val_satirlar",
+      "op": "validation_to_rows",
+      "from": "s04_val"
+    },
+    {
+      "id": "s07_html",
+      "op": "export_html_report",
+      "from": "s05_satirlar",
+      "params": {
+        "title": "Shared Parametre Kurulum Raporu"
+      }
+    },
+    {
+      "id": "s08_excel",
+      "op": "export_xlsx",
+      "from": "s05_satirlar",
+      "params": {
+        "file_path": "EG_SharedParam_Liste.xlsx",
+        "sheet_name": "Parametreler",
+        "title": "Shared Parametre Listesi"
+      }
+    },
+    {
+      "id": "s09_goster",
+      "op": "show_result",
+      "from": "s01_ekle",
+      "params": {
+        "title": "Parametre Kurulum Sonucu"
+      }
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "title": "Duvara Host Aile Yerleştirme",
+  "description": "Seçili kattaki duvarlara host-based aile (priz, anahtar, armatür) otomatik yerleştirir. Belirli aralıkla ve yükseklikte konumlandırır, onay alır.",
+  "category": "Üretim",
+  "version": "1.1.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Walls elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "üretim",
+    "yerleştirme",
+    "duvar",
+    "elektrik",
+    "host",
+    "place"
+  ],
+  "transaction_policy": "preview",
+  "steps": [
+    {
+      "id": "s01_aile_kontrol",
+      "op": "family_ensure_loaded",
+      "params": {
+        "family_path": "$INPUT:file_path:Yerleştirilecek aile dosyası (.rfa):*.rfa"
+      }
+    },
+    {
+      "id": "s02_duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "s03_kat_filtre",
+      "op": "filter_by_level",
+      "from": "s02_duvarlar",
+      "params": {
+        "level_name": "$INPUT:level:Hangi kat"
+      }
+    },
+    {
+      "id": "s04_ic_duvar",
+      "op": "filter_by_type",
+      "from": "s03_kat_filtre",
+      "params": {
+        "type_name": "Genel - 200mm"
+      }
+    },
+    {
+      "id": "s05_sayim",
+      "op": "show_count",
+      "from": "s04_ic_duvar"
+    },
+    {
+      "id": "s06_onay",
+      "op": "preview_gate",
+      "from": "s04_ic_duvar",
+      "params": {
+        "title": "Yerleştirme — Duvarlara priz yerleştirilsin mi?"
+      }
+    },
+    {
+      "id": "s07_yerlesim",
+      "op": "place_family_on_wall",
+      "from": "s04_ic_duvar",
+      "condition": "$s06_onay == confirmed",
+      "params": {
+        "family_name": "$INPUT:family_type:Yerleştirilecek aile ve tip>>family_name",
+        "type_name": "$INPUT:family_type:Yerleştirilecek aile ve tip>>type_name",
+        "offset_mm": "$INPUT:number:Yerleştirme yüksekliği (mm):0:5000",
+        "spacing_mm": "$INPUT:number:Yatay aralık (mm):0:20000"
+      }
+    },
+    {
+      "id": "s08_goster",
+      "op": "show_result",
+      "from": "s07_yerlesim",
+      "params": {
+        "title": "Priz Yerleştirme Tamamlandı"
+      }
+    }
+  ]
+}

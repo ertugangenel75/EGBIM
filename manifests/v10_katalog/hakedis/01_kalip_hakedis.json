@@ -1,0 +1,124 @@
+{
+  "title": "Kalıp Hakediş",
+  "description": "Yapısal elemanların kalıp metrajını hesaplar, ÇŞB 2026 poz koduyla eşler, kat bazlı maliyet ve Excel hakediş raporu üretir.",
+  "category": "Hakediş",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Walls elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "hakediş",
+    "kalıp",
+    "metraj",
+    "poz",
+    "maliyet",
+    "csb2026"
+  ],
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_poz",
+      "op": "load_poz_data",
+      "params": {
+        "file": "csb_poz_2026.json"
+      }
+    },
+    {
+      "id": "s02_duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "s03_kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "s04_kirisler",
+      "op": "collect_structural_framing"
+    },
+    {
+      "id": "s05_dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "s06_temeller",
+      "op": "collect_foundations"
+    },
+    {
+      "id": "s07_kalip_duvar",
+      "op": "kalip_wall",
+      "from": "s02_duvarlar"
+    },
+    {
+      "id": "s08_kalip_doseme",
+      "op": "kalip_floor",
+      "from": "s05_dosemeler"
+    },
+    {
+      "id": "s09_ozet",
+      "op": "kalip_summary",
+      "from_many": [
+        "s07_kalip_duvar",
+        "s08_kalip_doseme"
+      ],
+      "params": {
+        "group_by": "kat"
+      }
+    },
+    {
+      "id": "s10_poz_esle",
+      "op": "poz_match",
+      "from": "s09_ozet",
+      "params": {
+        "category_field": "kategori",
+        "type_field": "tip"
+      }
+    },
+    {
+      "id": "s11_maliyet",
+      "op": "calc_cost",
+      "from": "s10_poz_esle",
+      "params": {
+        "quantity_field": "kalip_m2"
+      }
+    },
+    {
+      "id": "s12_kat_ozet",
+      "op": "cost_by_level",
+      "from": "s11_maliyet"
+    },
+    {
+      "id": "s13_poz_ozet",
+      "op": "cost_summary",
+      "from": "s11_maliyet",
+      "params": {
+        "group_by": "poz_no"
+      }
+    },
+    {
+      "id": "s14_excel",
+      "op": "export_xlsx",
+      "from": "s11_maliyet",
+      "params": {
+        "file_path": "EG_Kalip_Hakedis.xlsx",
+        "sheet_name": "Kalıp Hakediş",
+        "title": "Kalıp Hakediş"
+      }
+    },
+    {
+      "id": "s15_goster",
+      "op": "show_table",
+      "from": "s12_kat_ozet",
+      "params": {
+        "title": "Kat Bazlı Kalıp Maliyet"
+      }
+    }
+  ]
+}

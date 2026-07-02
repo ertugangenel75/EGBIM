@@ -1,0 +1,111 @@
+{
+  "title": "Beton Metraj Hakediş",
+  "description": "Kolon, kiriş, döşeme ve temel elemanların beton hacmini m³ cinsinden hesaplar, beton sınıfına göre poz eşler ve hakediş çıktısı üretir.",
+  "category": "Hakediş",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_Columns"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde StructuralColumns/Columns elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "hakediş",
+    "beton",
+    "m3",
+    "hacim",
+    "poz",
+    "csb2026"
+  ],
+  "steps": [
+    {
+      "id": "s01_poz",
+      "op": "load_poz_data",
+      "params": {
+        "file": "csb_poz_2026.json"
+      }
+    },
+    {
+      "id": "s02_kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "s03_kirisler",
+      "op": "collect_structural_framing"
+    },
+    {
+      "id": "s04_dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "s05_temeller",
+      "op": "collect_foundations"
+    },
+    {
+      "id": "s06_birlestir",
+      "op": "merge_lists",
+      "from_many": [
+        "s02_kolonlar",
+        "s03_kirisler",
+        "s04_dosemeler",
+        "s05_temeller"
+      ]
+    },
+    {
+      "id": "s07_beton",
+      "op": "beton_metraj",
+      "from": "s06_birlestir"
+    },
+    {
+      "id": "s08_kat_grup",
+      "op": "group_elements_by_level",
+      "from": "s06_birlestir"
+    },
+    {
+      "id": "s09_poz_esle",
+      "op": "poz_match",
+      "from": "s07_beton",
+      "params": {
+        "category_field": "Category",
+        "type_field": "Structural Material"
+      }
+    },
+    {
+      "id": "s10_maliyet",
+      "op": "calc_cost",
+      "from": "s09_poz_esle",
+      "params": {
+        "quantity_field": "Volume_m3"
+      }
+    },
+    {
+      "id": "s11_kat_ozet",
+      "op": "cost_by_level",
+      "from": "s10_maliyet"
+    },
+    {
+      "id": "s12_excel",
+      "op": "export_xlsx",
+      "from": "s10_maliyet",
+      "params": {
+        "file_path": "EG_Beton_Hakedis.xlsx",
+        "sheet_name": "Beton Hakediş",
+        "title": "Beton Metraj Hakediş"
+      }
+    },
+    {
+      "id": "s13_goster",
+      "op": "show_table",
+      "from": "s11_kat_ozet",
+      "params": {
+        "title": "Beton Hacim - Kat Özeti (m³)"
+      }
+    }
+  ]
+}

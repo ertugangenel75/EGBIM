@@ -1,0 +1,112 @@
+{
+  "title": "Odalardan Döşeme Üretimi",
+  "description": "Modeldeki odaların sınırlarından otomatik döşeme üretir. Her oda için kat planına göre döşeme oluşturur, onay alır ve metraj raporu üretir.",
+  "category": "Üretim",
+  "version": "1.1.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rooms"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Rooms elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "üretim",
+    "döşeme",
+    "oda",
+    "mimari",
+    "otomasyon",
+    "create"
+  ],
+  "transaction_policy": "preview",
+  "steps": [
+    {
+      "id": "s01_odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "s02_kat_filtre",
+      "op": "filter_by_level",
+      "from": "s01_odalar",
+      "params": {
+        "level_name": "$INPUT:level:Hangi kat"
+      }
+    },
+    {
+      "id": "s03_sayim",
+      "op": "show_count",
+      "from": "s02_kat_filtre"
+    },
+    {
+      "id": "s04_onay",
+      "op": "preview_gate",
+      "from": "s02_kat_filtre",
+      "params": {
+        "title": "Döşeme Üretimi — Oda sınırlarından döşeme oluşturulsun mu?"
+      }
+    },
+    {
+      "id": "s05_uret",
+      "op": "create_floor",
+      "from": "s02_kat_filtre",
+      "condition": "$s04_onay == confirmed",
+      "params": {
+        "type_name": "$INPUT:string:Döşeme tipi adı",
+        "level_name": "$INPUT:level:Hangi kat",
+        "offset_mm": 0
+      }
+    },
+    {
+      "id": "s06_iz",
+      "op": "trace_write",
+      "from": "s05_uret",
+      "condition": "$s04_onay == confirmed",
+      "params": {
+        "trace_key": "uretim_doseme_oda"
+      }
+    },
+    {
+      "id": "s07_hacim",
+      "op": "element_volume",
+      "from": "s05_uret",
+      "condition": "$s04_onay == confirmed"
+    },
+    {
+      "id": "s08_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s05_uret",
+      "condition": "$s04_onay == confirmed",
+      "params": {
+        "param_names": [
+          "Type",
+          "Level",
+          "Area",
+          "Volume"
+        ]
+      }
+    },
+    {
+      "id": "s09_excel",
+      "op": "export_xlsx",
+      "from": "s08_satirlar",
+      "condition": "$s04_onay == confirmed",
+      "params": {
+        "file_path": "EG_Uretilen_Dosemeler.xlsx",
+        "sheet_name": "Döşemeler",
+        "title": "Üretilen Döşemeler"
+      }
+    },
+    {
+      "id": "s10_goster",
+      "op": "show_result",
+      "from": "s05_uret",
+      "params": {
+        "title": "Döşeme Üretimi Tamamlandı"
+      }
+    }
+  ]
+}

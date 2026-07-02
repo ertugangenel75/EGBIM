@@ -1,0 +1,140 @@
+{
+  "title": "Yapısal Hakediş",
+  "description": "Kolon, kiriş, döşeme, temel ve yapısal duvarların metrajını çıkarır, ÇŞB 2026 poz koduyla eşler, kat bazlı Excel hakediş raporu üretir.",
+  "category": "Hakediş",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_Columns"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde StructuralColumns/Columns elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "hakediş",
+    "yapısal",
+    "beton",
+    "metraj",
+    "poz",
+    "csb2026"
+  ],
+  "steps": [
+    {
+      "id": "s01_poz",
+      "op": "load_poz_data",
+      "params": {
+        "file": "csb_poz_2026.json"
+      }
+    },
+    {
+      "id": "s02_kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "s03_kirisler",
+      "op": "collect_structural_framing"
+    },
+    {
+      "id": "s04_dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "s05_temeller",
+      "op": "collect_foundations"
+    },
+    {
+      "id": "s06_duvarlar",
+      "op": "collect_structural_walls"
+    },
+    {
+      "id": "s07_birlestir",
+      "op": "merge_lists",
+      "from_many": [
+        "s02_kolonlar",
+        "s03_kirisler",
+        "s04_dosemeler",
+        "s05_temeller",
+        "s06_duvarlar"
+      ]
+    },
+    {
+      "id": "s08_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s07_birlestir",
+      "params": {
+        "param_names": [
+          "Mark",
+          "Comments",
+          "TR_WBS_Kodu",
+          "TR_PozNo"
+        ]
+      }
+    },
+    {
+      "id": "s09_wbs_ata",
+      "op": "assign_wbs_code",
+      "from": "s08_satirlar",
+      "params": {
+        "category_field": "Category"
+      }
+    },
+    {
+      "id": "s10_poz_esle",
+      "op": "poz_match",
+      "from": "s09_wbs_ata",
+      "params": {
+        "category_field": "Category",
+        "type_field": "Type"
+      }
+    },
+    {
+      "id": "s11_beton",
+      "op": "beton_metraj",
+      "from": "s07_birlestir"
+    },
+    {
+      "id": "s12_maliyet",
+      "op": "calc_cost",
+      "from": "s10_poz_esle",
+      "params": {
+        "quantity_field": "Volume"
+      }
+    },
+    {
+      "id": "s13_kat_bazli",
+      "op": "cost_by_level",
+      "from": "s12_maliyet"
+    },
+    {
+      "id": "s14_poz_ozet",
+      "op": "cost_summary",
+      "from": "s12_maliyet",
+      "params": {
+        "group_by": "poz_no"
+      }
+    },
+    {
+      "id": "s15_excel",
+      "op": "export_xlsx",
+      "from": "s12_maliyet",
+      "params": {
+        "file_path": "EG_Yapi_Hakedis.xlsx",
+        "sheet_name": "Yapısal Hakediş",
+        "title": "Yapısal Hakediş"
+      }
+    },
+    {
+      "id": "s16_goster",
+      "op": "show_table",
+      "from": "s13_kat_bazli",
+      "params": {
+        "title": "Yapısal Hakediş - Kat Özeti"
+      }
+    }
+  ]
+}

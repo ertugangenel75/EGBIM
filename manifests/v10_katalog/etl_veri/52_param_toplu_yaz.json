@@ -1,0 +1,105 @@
+{
+  "title": "Parametre Toplu Yazma (Excel → Revit)",
+  "description": "Excel/CSV dosyasından parametre değerlerini okur ve Revit elemanlarına toplu yazar. ElementId ile eşleme yapar.",
+  "category": "ETL Veri",
+  "version": "1.0.0",
+  "tags": [
+    "parametre",
+    "toplu yazma",
+    "excel",
+    "csv",
+    "import",
+    "etl"
+  ],
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_veri",
+      "op": "excel_xml_read",
+      "params": {
+        "file_path": "EG_Param_Import.xlsx",
+        "sheet_name": "Parametreler",
+        "has_header": true
+      }
+    },
+    {
+      "id": "s02_schema_val",
+      "op": "table_validate_schema",
+      "from": "s01_veri",
+      "params": {
+        "required_fields": [
+          "ElementId",
+          "ParamName",
+          "Value"
+        ],
+        "optional_fields": [
+          "Category",
+          "Level"
+        ]
+      }
+    },
+    {
+      "id": "s03_tum",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_Walls",
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Floors",
+          "OST_Doors",
+          "OST_Windows"
+        ]
+      }
+    },
+    {
+      "id": "s04_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s03_tum",
+      "params": {
+        "param_names": [
+          "ElementId",
+          "Category",
+          "Type",
+          "Level"
+        ]
+      }
+    },
+    {
+      "id": "s05_join",
+      "op": "join_rows",
+      "from_many": [
+        "s04_satirlar",
+        "s01_veri"
+      ],
+      "params": {
+        "key_field": "ElementId"
+      }
+    },
+    {
+      "id": "s06_yaz",
+      "op": "write_param_from_rows",
+      "from": "s05_join",
+      "params": {
+        "param_name": "ParamName",
+        "value_field": "Value"
+      }
+    },
+    {
+      "id": "s07_html",
+      "op": "export_html_report",
+      "from": "s06_yaz",
+      "params": {
+        "title": "Parametre Toplu Yazma Raporu"
+      }
+    },
+    {
+      "id": "s08_goster",
+      "op": "show_result",
+      "from": "s06_yaz",
+      "params": {
+        "title": "Yazılan Parametre Sayısı"
+      }
+    }
+  ]
+}

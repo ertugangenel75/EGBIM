@@ -1,0 +1,101 @@
+{
+  "title": "Yangın Mühür Kontrolü",
+  "description": "MEP elemanlarının duvar ve döşeme geçişlerindeki yangın mühür uyumunu kontrol eder ve eksik mühürleri raporlar.",
+  "category": "MEP Koordinasyon",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_PipeCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde PipeCurves elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "yangın",
+    "mühür",
+    "geçiş",
+    "koordinasyon",
+    "kontrol"
+  ],
+  "steps": [
+    {
+      "id": "s01_borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "s02_kanallar",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "s03_kablo_tava",
+      "op": "collect_cable_trays"
+    },
+    {
+      "id": "s04_birlestir",
+      "op": "merge_lists",
+      "from_many": [
+        "s01_borular",
+        "s02_kanallar",
+        "s03_kablo_tava"
+      ]
+    },
+    {
+      "id": "s05_muhur",
+      "op": "coord_validate_penetration_firestop",
+      "from": "s04_birlestir"
+    },
+    {
+      "id": "s06_mesafe",
+      "op": "coord_check_clearance",
+      "from": "s04_birlestir",
+      "params": {
+        "min_clearance_mm": 50
+      }
+    },
+    {
+      "id": "s07_val_birlestir",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "s05_muhur"
+      ],
+      "params": {
+        "title": "Yangın Mühür Kontrolü"
+      }
+    },
+    {
+      "id": "s08_satirlar",
+      "op": "validation_to_rows",
+      "from": "s07_val_birlestir"
+    },
+    {
+      "id": "s09_html",
+      "op": "export_html_report",
+      "from": "s08_satirlar",
+      "params": {
+        "title": "Yangın Mühür Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s10_excel",
+      "op": "export_xlsx",
+      "from": "s08_satirlar",
+      "params": {
+        "file_path": "EG_Yangin_Muhur.xlsx",
+        "sheet_name": "Mühür Kontrol",
+        "title": "Yangın Mühür Kontrol"
+      }
+    },
+    {
+      "id": "s11_goster",
+      "op": "show_table",
+      "from": "s08_satirlar",
+      "params": {
+        "title": "Yangın Mühür Eksiklikleri"
+      }
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "title": "MEP Hakediş",
+  "description": "Kanal, boru, kablo taşıyıcı ve kondüit uzunluk metrajını çıkarır, poz eşler, disiplin bazlı Excel hakediş raporu üretir.",
+  "category": "Hakediş",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_DuctCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde DuctCurves elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "hakediş",
+    "mep",
+    "mekanik",
+    "elektrik",
+    "sıhhi",
+    "metraj"
+  ],
+  "steps": [
+    {
+      "id": "s01_poz",
+      "op": "load_poz_data",
+      "params": {
+        "file": "csb_poz_2026.json"
+      }
+    },
+    {
+      "id": "s02_kanallar",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "s03_borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "s04_kablo_tava",
+      "op": "collect_cable_trays"
+    },
+    {
+      "id": "s05_konduitler",
+      "op": "collect_conduits"
+    },
+    {
+      "id": "s06_mek_ekipman",
+      "op": "collect_mechanical_equipment"
+    },
+    {
+      "id": "s07_el_ekipman",
+      "op": "collect_electrical_equipment"
+    },
+    {
+      "id": "s08_mep_birlestir",
+      "op": "merge_lists",
+      "from_many": [
+        "s02_kanallar",
+        "s03_borular",
+        "s04_kablo_tava",
+        "s05_konduitler"
+      ]
+    },
+    {
+      "id": "s09_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s08_mep_birlestir",
+      "params": {
+        "param_names": [
+          "System Type",
+          "Diameter",
+          "Size",
+          "TR_PozNo"
+        ]
+      }
+    },
+    {
+      "id": "s10_poz_esle",
+      "op": "poz_match",
+      "from": "s09_satirlar",
+      "params": {
+        "category_field": "Category",
+        "type_field": "System Type"
+      }
+    },
+    {
+      "id": "s11_maliyet",
+      "op": "calc_cost",
+      "from": "s10_poz_esle",
+      "params": {
+        "quantity_field": "Length"
+      }
+    },
+    {
+      "id": "s12_disiplin_ozet",
+      "op": "cost_summary",
+      "from": "s11_maliyet",
+      "params": {
+        "group_by": "Category"
+      }
+    },
+    {
+      "id": "s13_kat_ozet",
+      "op": "cost_by_level",
+      "from": "s11_maliyet"
+    },
+    {
+      "id": "s14_excel",
+      "op": "export_xlsx",
+      "from": "s11_maliyet",
+      "params": {
+        "file_path": "EG_MEP_Hakedis.xlsx",
+        "sheet_name": "MEP Hakediş",
+        "title": "MEP Hakediş"
+      }
+    },
+    {
+      "id": "s15_goster",
+      "op": "show_table",
+      "from": "s12_disiplin_ozet",
+      "params": {
+        "title": "MEP Hakediş - Disiplin Özeti"
+      }
+    }
+  ]
+}

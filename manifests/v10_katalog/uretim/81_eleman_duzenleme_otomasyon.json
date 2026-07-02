@@ -1,0 +1,91 @@
+{
+  "title": "Eleman Düzenleme ve Çoğaltma",
+  "description": "Seçili elemanları taşır veya aynalayarak çoğaltır; ardından yeni oda ve nokta-bazlı aile yerleştirir. Tekrarlayan yerleşim düzenlerini otomatikleştirir.",
+  "category": "Üretim",
+  "version": "1.1.0",
+  "tags": [
+    "üretim",
+    "düzenleme",
+    "taşı",
+    "aynala",
+    "çoğalt",
+    "yerleştirme",
+    "kopyala"
+  ],
+  "transaction_policy": "preview",
+  "steps": [
+    {
+      "id": "s01_secili",
+      "op": "collect_selected"
+    },
+    {
+      "id": "s02_sayim",
+      "op": "show_count",
+      "from": "s01_secili"
+    },
+    {
+      "id": "s03_onay",
+      "op": "preview_gate",
+      "from": "s01_secili",
+      "params": {
+        "title": "Düzenleme — Seçili elemanlar aynalanarak çoğaltılsın mı?"
+      }
+    },
+    {
+      "id": "s04_aynala",
+      "op": "mirror_element",
+      "from": "s01_secili",
+      "condition": "$s03_onay == confirmed",
+      "params": {
+        "axis": "Y",
+        "pivot_x_mm": 0,
+        "pivot_y_mm": 0,
+        "copy": true
+      }
+    },
+    {
+      "id": "s04b_tasi",
+      "op": "move_element",
+      "from": "s01_secili",
+      "condition": "$s03_onay == confirmed",
+      "params": {
+        "dx_mm": "$INPUT:number:Taşıma X mesafesi (mm):-100000:100000",
+        "dy_mm": 0,
+        "dz_mm": 0
+      }
+    },
+    {
+      "id": "s05_oda_olustur",
+      "op": "create_room",
+      "condition": "$s03_onay == confirmed",
+      "params": {
+        "x_mm": 1000,
+        "y_mm": 1000,
+        "level_name": "$INPUT:level:Yeni oda seviyesi",
+        "name": "Yeni Mekan",
+        "number": "Z01"
+      }
+    },
+    {
+      "id": "s06_aile_yerlestir",
+      "op": "place_family",
+      "condition": "$s03_onay == confirmed",
+      "params": {
+        "family_name": "$INPUT:family_type:Yerleştirilecek aile ve tip>>family_name",
+        "type_name": "$INPUT:family_type:Yerleştirilecek aile ve tip>>type_name",
+        "level_name": "$INPUT:level:Yeni oda seviyesi",
+        "x_mm": 1000,
+        "y_mm": 1000,
+        "rotation_deg": 0
+      }
+    },
+    {
+      "id": "s07_goster",
+      "op": "show_result",
+      "from": "s04_aynala",
+      "params": {
+        "title": "Düzenleme Tamamlandı"
+      }
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "title": "Aile Sağlık Kontrolü",
+  "description": "Projede kullanılan Revit ailelerinin sağlığını kontrol eder: onaylı liste uyumu, orijin mesafesi, maksimum tip sayısı ve zorunlu parametreler.",
+  "category": "Teslim Kalite",
+  "version": "1.0.0",
+  "tags": [
+    "aile",
+    "family",
+    "sağlık",
+    "kontrol",
+    "qa",
+    "standart"
+  ],
+  "steps": [
+    {
+      "id": "s01_aileler",
+      "op": "collect_families",
+      "params": {
+        "category": ""
+      }
+    },
+    {
+      "id": "s02_saglik",
+      "op": "family_health_check",
+      "from": "s01_aileler",
+      "params": {
+        "expected_params": [
+          "TR_BIM_KategoriKodu",
+          "TR_Malzeme"
+        ],
+        "max_types": 50,
+        "origin_threshold_m": 10
+      }
+    },
+    {
+      "id": "s03_onaylanmis",
+      "op": "qa_check_approved_families"
+    },
+    {
+      "id": "s04_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_aileler",
+      "params": {
+        "param_names": [
+          "Family Name",
+          "Type Count",
+          "Origin Distance"
+        ]
+      }
+    },
+    {
+      "id": "s05_birlestir",
+      "op": "merge_rows",
+      "from_many": [
+        "s02_saglik",
+        "s03_onaylanmis"
+      ]
+    },
+    {
+      "id": "s06_excel",
+      "op": "export_xlsx",
+      "from": "s05_birlestir",
+      "params": {
+        "file_path": "EG_Aile_Saglik.xlsx",
+        "sheet_name": "Aile Kontrol",
+        "title": "Aile Sağlık Kontrolü"
+      }
+    },
+    {
+      "id": "s07_html",
+      "op": "export_html_report",
+      "from": "s05_birlestir",
+      "params": {
+        "title": "Aile Sağlık Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s08_goster",
+      "op": "show_table",
+      "from": "s05_birlestir",
+      "params": {
+        "title": "Aile Sağlık Durumu"
+      }
+    }
+  ]
+}

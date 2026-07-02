@@ -1,0 +1,86 @@
+{
+  "title": "Yapısal Malzeme Sınıfı Kontrolü",
+  "description": "Yapısal elemanların beton ve çelik malzeme sınıflarını doğrular, TBDY 2018 deprem parametrelerini kontrol eder.",
+  "category": "Yapısal",
+  "version": "1.0.0",
+  "tags": [
+    "malzeme",
+    "beton sınıfı",
+    "çelik",
+    "tbdy",
+    "deprem",
+    "kontrol"
+  ],
+  "steps": [
+    {
+      "id": "s01_yapisal",
+      "op": "structural_collect_all"
+    },
+    {
+      "id": "s02_malzeme",
+      "op": "structural_material_check",
+      "from": "s01_yapisal"
+    },
+    {
+      "id": "s03_tbdy",
+      "op": "structural_tbdy_params",
+      "from": "s01_yapisal",
+      "inputs": {
+        "deprem_bolgesi": "DD-2"
+      }
+    },
+    {
+      "id": "s04_kat_ozet",
+      "op": "structural_level_summary",
+      "from": "s01_yapisal"
+    },
+    {
+      "id": "s05_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_yapisal",
+      "params": {
+        "param_names": [
+          "Category",
+          "Type",
+          "Structural Material",
+          "Level",
+          "Mark"
+        ]
+      }
+    },
+    {
+      "id": "s06_malzeme_grup",
+      "op": "group_by",
+      "from": "s05_satirlar",
+      "params": {
+        "field": "Structural Material"
+      }
+    },
+    {
+      "id": "s07_html",
+      "op": "export_html_report",
+      "from": "s05_satirlar",
+      "params": {
+        "title": "Yapısal Malzeme Sınıfı Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s08_excel",
+      "op": "export_xlsx",
+      "from": "s05_satirlar",
+      "params": {
+        "file_path": "EG_Malzeme_Sinif.xlsx",
+        "sheet_name": "Malzeme Kontrol",
+        "title": "Yapısal Malzeme Sınıfı"
+      }
+    },
+    {
+      "id": "s09_goster",
+      "op": "show_table",
+      "from": "s06_malzeme_grup",
+      "params": {
+        "title": "Malzeme Sınıfı Dağılımı"
+      }
+    }
+  ]
+}

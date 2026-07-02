@@ -1,0 +1,107 @@
+{
+  "title": "Trace Delta Analizi ve Temizleme",
+  "description": "Önceki trace kayıtlarını bulur, mevcut model ile karşılaştırır, delta raporu üretir ve eski izleri temizler.",
+  "category": "Sistem",
+  "version": "1.0.0",
+  "tags": [
+    "trace",
+    "delta",
+    "karşılaştırma",
+    "temizleme",
+    "versiyon"
+  ],
+  "steps": [
+    {
+      "id": "s01_tum",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_Walls",
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Floors"
+        ]
+      }
+    },
+    {
+      "id": "s02_trace_bul",
+      "op": "trace_find_existing",
+      "from": "s01_tum",
+      "params": {
+        "trace_key": "egbim_snapshot"
+      }
+    },
+    {
+      "id": "s03_karsilastir",
+      "op": "compare_run_result",
+      "from": "s02_trace_bul",
+      "params": {
+        "trace_key": "egbim_snapshot"
+      }
+    },
+    {
+      "id": "s04_delta_pm",
+      "op": "pm_model_delta_summary"
+    },
+    {
+      "id": "s05_yeni_trace",
+      "op": "trace_write",
+      "from": "s01_tum",
+      "params": {
+        "trace_key": "egbim_snapshot"
+      }
+    },
+    {
+      "id": "s06_delta_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s03_karsilastir",
+      "params": {
+        "param_names": [
+          "ElementId",
+          "ChangeType",
+          "OldValue",
+          "NewValue",
+          "Parameter"
+        ]
+      }
+    },
+    {
+      "id": "s07_eklenenler",
+      "op": "filter_rows",
+      "from": "s06_delta_satirlar",
+      "params": {
+        "field": "ChangeType",
+        "value": "ADDED",
+        "operator": "=="
+      }
+    },
+    {
+      "id": "s08_silinenler",
+      "op": "filter_rows",
+      "from": "s06_delta_satirlar",
+      "params": {
+        "field": "ChangeType",
+        "value": "DELETED",
+        "operator": "=="
+      }
+    },
+    {
+      "id": "s09_excel",
+      "op": "export_xlsx",
+      "from": "s06_delta_satirlar",
+      "params": {
+        "file_path": "EG_Delta_Analiz.xlsx",
+        "sheet_name": "Delta",
+        "title": "Model Delta Analizi"
+      }
+    },
+    {
+      "id": "s10_goster",
+      "op": "show_table",
+      "from": "s06_delta_satirlar",
+      "params": {
+        "title": "Model Değişiklik Özeti"
+      }
+    }
+  ]
+}

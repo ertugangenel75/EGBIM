@@ -1,0 +1,104 @@
+{
+  "title": "Lux Hesabı ve Aydınlatma Raporu",
+  "description": "Oda bazında lux değeri hesaplar, minimum aydınlatma gereksinimlerini doğrular ve aydınlatma raporu üretir.",
+  "category": "ETL Veri",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rooms"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Rooms elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "lux",
+    "aydınlatma",
+    "oda",
+    "hesap",
+    "elektrik",
+    "rapor"
+  ],
+  "steps": [
+    {
+      "id": "s01_odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "s02_armuturler",
+      "op": "collect_lighting_fixtures"
+    },
+    {
+      "id": "s03_lux_hesap",
+      "op": "calc_room_lux",
+      "from": "s01_odalar",
+      "params": {
+        "lumen_param": "TR_Lumen",
+        "cu": 0.65,
+        "mf": 0.8
+      }
+    },
+    {
+      "id": "s04_lux_val",
+      "op": "elec_validate_lux_level",
+      "from": "s02_armuturler",
+      "params": {
+        "min_lux": 300
+      }
+    },
+    {
+      "id": "s05_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_odalar",
+      "params": {
+        "param_names": [
+          "Name",
+          "Number",
+          "Area",
+          "Level",
+          "TR_LuxDegeri",
+          "Department"
+        ]
+      }
+    },
+    {
+      "id": "s06_val_satirlar",
+      "op": "validation_to_rows",
+      "from": "s04_lux_val"
+    },
+    {
+      "id": "s07_kat_grup",
+      "op": "group_elements_by_level",
+      "from": "s01_odalar"
+    },
+    {
+      "id": "s08_html",
+      "op": "export_html_report",
+      "from": "s06_val_satirlar",
+      "params": {
+        "title": "Aydınlatma Lux Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s09_excel",
+      "op": "export_xlsx",
+      "from": "s05_satirlar",
+      "params": {
+        "file_path": "EG_Lux_Rapor.xlsx",
+        "sheet_name": "Aydınlatma",
+        "title": "Oda Lux Raporu"
+      }
+    },
+    {
+      "id": "s10_goster",
+      "op": "show_table",
+      "from": "s06_val_satirlar",
+      "params": {
+        "title": "Lux Kontrol Sonuçları"
+      }
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "title": "Erişebilirlik Kontrolü",
+  "description": "Kapı genişliklerini, ramp eğimlerini ve engelli erişim gereksinimlerini TSE 9111 kriterlerine göre doğrular.",
+  "category": "Mimari",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Doors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Doors elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "erişebilirlik",
+    "engelli",
+    "kapı genişliği",
+    "rampa",
+    "tse9111",
+    "kontrol"
+  ],
+  "steps": [
+    {
+      "id": "s01_kapilar",
+      "op": "collect_doors"
+    },
+    {
+      "id": "s02_rampalar",
+      "op": "collect_ramps"
+    },
+    {
+      "id": "s03_odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "s04_erisebilirlik",
+      "op": "arch_validate_accessibility",
+      "from": "s01_kapilar",
+      "params": {
+        "min_width_mm": 900
+      }
+    },
+    {
+      "id": "s05_kapi_val",
+      "op": "door_clearance_check",
+      "from": "s01_kapilar",
+      "params": {
+        "min_clear_width_mm": 900,
+        "min_latch_side_mm": 300,
+        "severity": "ERROR"
+      }
+    },
+    {
+      "id": "s06_temiz_alan",
+      "op": "get_door_wall_clearances",
+      "from": "s01_kapilar"
+    },
+    {
+      "id": "s07_val_birlestir",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "s04_erisebilirlik",
+        "s05_kapi_val"
+      ],
+      "params": {
+        "title": "Erişebilirlik Kontrolü"
+      }
+    },
+    {
+      "id": "s08_satirlar",
+      "op": "validation_to_rows",
+      "from": "s07_val_birlestir"
+    },
+    {
+      "id": "s09_html",
+      "op": "export_html_report",
+      "from": "s08_satirlar",
+      "params": {
+        "title": "Erişebilirlik Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s10_excel",
+      "op": "export_xlsx",
+      "from": "s08_satirlar",
+      "params": {
+        "file_path": "EG_Erisebilirlik.xlsx",
+        "sheet_name": "Erişebilirlik",
+        "title": "Erişebilirlik Kontrol"
+      }
+    },
+    {
+      "id": "s11_goster",
+      "op": "show_table",
+      "from": "s08_satirlar",
+      "params": {
+        "title": "Erişebilirlik Kontrol Sonuçları"
+      }
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "title": "Kalıp QA ve TS500 Kontrol",
+  "description": "Kalıp metrajını hesaplar, TS500 minimum kesit gereksinimlerini doğrular ve hatalı değerleri raporlar.",
+  "category": "Yapısal",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Walls elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "kalıp",
+    "qa",
+    "ts500",
+    "kesit",
+    "kontrol",
+    "yapısal"
+  ],
+  "steps": [
+    {
+      "id": "s01_duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "s02_dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "s03_kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "s04_kirisler",
+      "op": "collect_structural_framing"
+    },
+    {
+      "id": "s05_kalip_duvar",
+      "op": "kalip_wall",
+      "from": "s01_duvarlar"
+    },
+    {
+      "id": "s06_kalip_doseme",
+      "op": "kalip_floor",
+      "from": "s02_dosemeler"
+    },
+    {
+      "id": "s07_ts500",
+      "op": "structural_ts500_section",
+      "from_many": [
+        "s03_kolonlar",
+        "s04_kirisler"
+      ]
+    },
+    {
+      "id": "s08_donati",
+      "op": "collect_rebar"
+    },
+    {
+      "id": "s09_donati_val",
+      "op": "validate_rebar_ts500",
+      "from": "s08_donati",
+      "params": {
+        "fck": 25,
+        "fyk": 420,
+        "cover_mm": 30
+      }
+    },
+    {
+      "id": "s10_val_birlestir",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "s09_donati_val"
+      ],
+      "params": {
+        "title": "TS500 Kalıp QA"
+      }
+    },
+    {
+      "id": "s11_satirlar",
+      "op": "validation_to_rows",
+      "from": "s10_val_birlestir"
+    },
+    {
+      "id": "s12_html",
+      "op": "export_html_report",
+      "from": "s11_satirlar",
+      "params": {
+        "title": "Kalıp QA ve TS500 Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s13_goster",
+      "op": "show_table",
+      "from": "s11_satirlar",
+      "params": {
+        "title": "Kalıp QA Sonuçları"
+      }
+    }
+  ]
+}

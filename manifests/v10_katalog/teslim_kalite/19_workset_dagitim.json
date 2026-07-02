@@ -1,0 +1,100 @@
+{
+  "title": "Workset Dağılım Raporu",
+  "description": "Modeldeki elemanları workset'e göre dağıtır, kat bazında workset atar ve workset doluluk raporunu HTML/Excel olarak üretir.",
+  "category": "Teslim Kalite",
+  "version": "1.0.0",
+  "tags": [
+    "workset",
+    "dağılım",
+    "kat",
+    "bim yönetimi",
+    "rapor"
+  ],
+  "steps": [
+    {
+      "id": "s01_tum",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_Walls",
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Floors",
+          "OST_Doors",
+          "OST_Windows",
+          "OST_Rooms"
+        ]
+      }
+    },
+    {
+      "id": "s02_workset_val",
+      "op": "qa_validate_workset",
+      "from": "s01_tum",
+      "params": {
+        "expected_workset": ""
+      }
+    },
+    {
+      "id": "s03_kat_workset",
+      "op": "workset_by_level",
+      "from": "s01_tum"
+    },
+    {
+      "id": "s04_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_tum",
+      "params": {
+        "param_names": [
+          "Workset",
+          "Level",
+          "Category",
+          "Type"
+        ]
+      }
+    },
+    {
+      "id": "s05_workset_grup",
+      "op": "group_by",
+      "from": "s04_satirlar",
+      "params": {
+        "field": "Workset"
+      }
+    },
+    {
+      "id": "s06_kat_grup",
+      "op": "group_elements_by_level",
+      "from": "s01_tum"
+    },
+    {
+      "id": "s07_val_satirlar",
+      "op": "validation_to_rows",
+      "from": "s02_workset_val"
+    },
+    {
+      "id": "s08_html",
+      "op": "export_html_report",
+      "from": "s07_val_satirlar",
+      "params": {
+        "title": "Workset Dağılım Raporu"
+      }
+    },
+    {
+      "id": "s09_excel",
+      "op": "export_xlsx",
+      "from": "s04_satirlar",
+      "params": {
+        "file_path": "EG_Workset_Dagitim.xlsx",
+        "sheet_name": "Workset",
+        "title": "Workset Dağılım"
+      }
+    },
+    {
+      "id": "s10_goster",
+      "op": "show_table",
+      "from": "s05_workset_grup",
+      "params": {
+        "title": "Workset Bazlı Eleman Dağılımı"
+      }
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "title": "Grid ve Seviye Kurulumu (CSV'den)",
+  "description": "CSV/Excel dosyasından grid koordinatlarını ve seviye elevasyonlarını okuyarak Revit'te otomatik oluşturur.",
+  "category": "Sistem",
+  "version": "1.0.0",
+  "tags": [
+    "grid",
+    "seviye",
+    "kurulum",
+    "csv",
+    "otomasyon",
+    "başlangıç"
+  ],
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_seviye_veri",
+      "op": "csv_read",
+      "params": {
+        "file_path": "EG_Seviyeler.csv",
+        "delimiter": ",",
+        "has_header": true
+      }
+    },
+    {
+      "id": "s02_grid_veri",
+      "op": "csv_read",
+      "params": {
+        "file_path": "EG_Grid.csv",
+        "delimiter": ",",
+        "has_header": true
+      }
+    },
+    {
+      "id": "s03_schema_seviye",
+      "op": "table_validate_schema",
+      "from": "s01_seviye_veri",
+      "params": {
+        "required_fields": [
+          "Elevation_mm",
+          "Name"
+        ],
+        "optional_fields": [
+          "ComputationHeight"
+        ]
+      }
+    },
+    {
+      "id": "s04_schema_grid",
+      "op": "table_validate_schema",
+      "from": "s02_grid_veri",
+      "params": {
+        "required_fields": [
+          "Name",
+          "x1_mm",
+          "y1_mm",
+          "x2_mm",
+          "y2_mm"
+        ],
+        "optional_fields": []
+      }
+    },
+    {
+      "id": "s05_seviye_olustur",
+      "op": "create_level",
+      "from": "s01_seviye_veri",
+      "params": {
+        "elevation_mm": "Elevation_mm",
+        "name": "Name"
+      }
+    },
+    {
+      "id": "s06_grid_olustur",
+      "op": "create_grid",
+      "from": "s02_grid_veri",
+      "params": {
+        "x1_mm": "x1_mm",
+        "y1_mm": "y1_mm",
+        "x2_mm": "x2_mm"
+      }
+    },
+    {
+      "id": "s07_workset",
+      "op": "workset_by_level",
+      "from": "s05_seviye_olustur"
+    },
+    {
+      "id": "s08_seviye_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s05_seviye_olustur",
+      "params": {
+        "param_names": [
+          "Name",
+          "Elevation",
+          "Computation Height"
+        ]
+      }
+    },
+    {
+      "id": "s09_excel",
+      "op": "export_xlsx",
+      "from": "s08_seviye_satirlar",
+      "params": {
+        "file_path": "EG_Grid_Seviye.xlsx",
+        "sheet_name": "Seviyeler",
+        "title": "Grid ve Seviye Kurulum Raporu"
+      }
+    },
+    {
+      "id": "s10_goster",
+      "op": "show_table",
+      "from": "s08_seviye_satirlar",
+      "params": {
+        "title": "Oluşturulan Seviyeler"
+      }
+    }
+  ]
+}

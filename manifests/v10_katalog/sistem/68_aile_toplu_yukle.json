@@ -1,0 +1,97 @@
+{
+  "title": "Aile Toplu Yükleme ve Sağlık Kontrolü",
+  "description": "Belirtilen klasörden Revit ailelerini toplu yükler, sağlık kontrolü yapar ve yükleme raporunu üretir.",
+  "category": "Sistem",
+  "version": "1.0.0",
+  "tags": [
+    "aile",
+    "toplu yükleme",
+    "family",
+    "sağlık",
+    "kontrol",
+    "kütüphane"
+  ],
+  "steps": [
+    {
+      "id": "s01_yukle",
+      "op": "family_batch_load",
+      "params": {
+        "folder_path": "C:/EGBIM_Families",
+        "recursive": true
+      }
+    },
+    {
+      "id": "s02_aileler",
+      "op": "collect_families",
+      "params": {
+        "category": ""
+      }
+    },
+    {
+      "id": "s03_saglik",
+      "op": "family_health_check",
+      "from": "s02_aileler",
+      "params": {
+        "expected_params": [
+          "TR_BIM_KategoriKodu",
+          "TR_Malzeme"
+        ],
+        "max_types": 50,
+        "origin_threshold_m": 10
+      }
+    },
+    {
+      "id": "s04_onaylanmis",
+      "op": "qa_check_approved_families"
+    },
+    {
+      "id": "s05_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s02_aileler",
+      "params": {
+        "param_names": [
+          "Family Name",
+          "Type Count",
+          "Category",
+          "IsLoaded"
+        ]
+      }
+    },
+    {
+      "id": "s06_hata_filtre",
+      "op": "filter_rows",
+      "from": "s03_saglik",
+      "params": {
+        "field": "Status",
+        "value": "ERROR",
+        "operator": "=="
+      }
+    },
+    {
+      "id": "s07_excel",
+      "op": "export_xlsx",
+      "from": "s05_satirlar",
+      "params": {
+        "file_path": "EG_Aile_Yukle.xlsx",
+        "sheet_name": "Aile Listesi",
+        "title": "Toplu Aile Yükleme Raporu"
+      }
+    },
+    {
+      "id": "s08_html",
+      "op": "export_html_report",
+      "from": "s03_saglik",
+      "params": {
+        "title": "Aile Toplu Yükleme Raporu"
+      }
+    },
+    {
+      "id": "s09_goster",
+      "op": "show_table",
+      "from": "s05_satirlar",
+      "params": {
+        "title": "Yüklenen Aileler"
+      }
+    }
+  ]
+}

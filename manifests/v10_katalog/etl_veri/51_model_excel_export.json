@@ -1,0 +1,125 @@
+{
+  "title": "Model Tam Excel Export",
+  "description": "Modeldeki tüm ana kategorileri tek seferde toplar ve çok sayfalı Excel dosyasına aktarır. Veri yönetimi ve raporlama için merkezi çıktı.",
+  "category": "ETL Veri",
+  "version": "1.0.0",
+  "tags": [
+    "excel",
+    "export",
+    "model",
+    "tüm kategoriler",
+    "veri",
+    "etl"
+  ],
+  "steps": [
+    {
+      "id": "s01_yapisal",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Floors",
+          "OST_StructuralFoundation",
+          "OST_Walls"
+        ]
+      }
+    },
+    {
+      "id": "s02_mimari",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_Doors",
+          "OST_Windows",
+          "OST_Rooms",
+          "OST_Ceilings"
+        ]
+      }
+    },
+    {
+      "id": "s03_mep",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_DuctCurves",
+          "OST_PipeCurves",
+          "OST_CableTray",
+          "OST_Conduit"
+        ]
+      }
+    },
+    {
+      "id": "s04_yapisal_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_yapisal",
+      "params": {
+        "param_names": [
+          "Category",
+          "Type",
+          "Level",
+          "Volume",
+          "Area",
+          "Mark",
+          "TR_WBS_Kodu",
+          "TR_PozNo"
+        ]
+      }
+    },
+    {
+      "id": "s05_mimari_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s02_mimari",
+      "params": {
+        "param_names": [
+          "Category",
+          "Type",
+          "Level",
+          "Area",
+          "Mark"
+        ]
+      }
+    },
+    {
+      "id": "s06_mep_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s03_mep",
+      "params": {
+        "param_names": [
+          "Category",
+          "Type",
+          "Level",
+          "Length",
+          "System Type"
+        ]
+      }
+    },
+    {
+      "id": "s07_wbs_ata",
+      "op": "assign_wbs_code",
+      "from": "s04_yapisal_satirlar",
+      "params": {
+        "category_field": "Category"
+      }
+    },
+    {
+      "id": "s08_excel",
+      "op": "export_xlsx",
+      "from": "s04_yapisal_satirlar",
+      "params": {
+        "file_path": "EG_Model_Export.xlsx",
+        "sheet_name": "Yapısal",
+        "title": "Model Tam Excel Export"
+      }
+    },
+    {
+      "id": "s09_goster",
+      "op": "show_table",
+      "from": "s04_yapisal_satirlar",
+      "params": {
+        "title": "Model Export Önizleme",
+        "max_rows": 30
+      }
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "title": "Tavana Aydınlatma Yerleştirme",
+  "description": "Seçili kattaki tavanlara face-based aydınlatma armatürü otomatik yerleştirir. Tavan yüzeyine konumlandırır, onay alır ve aydınlatma raporu üretir.",
+  "category": "Üretim",
+  "version": "1.1.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Ceilings"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Ceilings elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "üretim",
+    "yerleştirme",
+    "tavan",
+    "aydınlatma",
+    "elektrik",
+    "place"
+  ],
+  "transaction_policy": "preview",
+  "steps": [
+    {
+      "id": "s01_aile_kontrol",
+      "op": "family_ensure_loaded",
+      "params": {
+        "family_path": "$INPUT:file_path:Aydınlatma ailesi (.rfa):*.rfa"
+      }
+    },
+    {
+      "id": "s02_tavanlar",
+      "op": "collect_ceilings"
+    },
+    {
+      "id": "s03_kat_filtre",
+      "op": "filter_by_level",
+      "from": "s02_tavanlar",
+      "params": {
+        "level_name": "$INPUT:level:Hangi kat"
+      }
+    },
+    {
+      "id": "s04_sayim",
+      "op": "show_count",
+      "from": "s03_kat_filtre"
+    },
+    {
+      "id": "s05_onay",
+      "op": "preview_gate",
+      "from": "s03_kat_filtre",
+      "params": {
+        "title": "Yerleştirme — Tavanlara LED panel yerleştirilsin mi?"
+      }
+    },
+    {
+      "id": "s06_yerlesim",
+      "op": "place_family_on_ceiling",
+      "from": "s03_kat_filtre",
+      "condition": "$s05_onay == confirmed",
+      "params": {
+        "family_name": "$INPUT:family_type:Armatür ailesi ve tipi>>family_name",
+        "type_name": "$INPUT:family_type:Armatür ailesi ve tipi>>type_name",
+        "offset_x_mm": 0,
+        "offset_y_mm": 0
+      }
+    },
+    {
+      "id": "s07_armaturler",
+      "op": "collect_lighting_fixtures",
+      "condition": "$s05_onay == confirmed"
+    },
+    {
+      "id": "s08_lux",
+      "op": "elec_validate_lux_level",
+      "from": "s07_armaturler",
+      "condition": "$s05_onay == confirmed"
+    },
+    {
+      "id": "s09_val_satirlar",
+      "op": "validation_to_rows",
+      "from": "s08_lux",
+      "condition": "$s05_onay == confirmed"
+    },
+    {
+      "id": "s10_html",
+      "op": "export_html_report",
+      "from": "s09_val_satirlar",
+      "condition": "$s05_onay == confirmed",
+      "params": {
+        "title": "Aydınlatma Yerleştirme Raporu"
+      }
+    },
+    {
+      "id": "s11_goster",
+      "op": "show_result",
+      "from": "s06_yerlesim",
+      "params": {
+        "title": "LED Panel Yerleştirme Tamamlandı"
+      }
+    }
+  ]
+}

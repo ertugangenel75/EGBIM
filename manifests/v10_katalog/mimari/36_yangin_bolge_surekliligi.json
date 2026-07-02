@@ -1,0 +1,107 @@
+{
+  "title": "Yangın Bölge Sürekliliği Kontrolü",
+  "description": "Yangın kesme bölgelerinin sürekliliğini kontrol eder, kapı yangın sınıflarını duvarla eşler ve ihlalleri raporlar.",
+  "category": "Mimari",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Walls elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "yangın bölge",
+    "fire rating",
+    "süreklilik",
+    "kapı",
+    "duvar",
+    "kontrol"
+  ],
+  "steps": [
+    {
+      "id": "s01_duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "s02_kapilar",
+      "op": "collect_doors"
+    },
+    {
+      "id": "s03_bolge_val",
+      "op": "arch_check_fire_rating_continuity",
+      "from": "s01_duvarlar",
+      "params": {
+        "min_fire_rating": 60
+      }
+    },
+    {
+      "id": "s04_kapi_yangin",
+      "op": "door_fire_rating_from_wall",
+      "from": "s02_kapilar",
+      "params": {
+        "wall_param": "Fire Rating",
+        "door_param": "TR_YanginSinifi",
+        "rating_map": "{}"
+      }
+    },
+    {
+      "id": "s05_sinir",
+      "op": "room_boundary_extract",
+      "from": "s01_duvarlar",
+      "params": {
+        "include_openings": true,
+        "fire_param": "Fire Rating"
+      }
+    },
+    {
+      "id": "s06_val_satirlar",
+      "op": "validation_to_rows",
+      "from": "s03_bolge_val"
+    },
+    {
+      "id": "s07_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s02_kapilar",
+      "params": {
+        "param_names": [
+          "Type",
+          "Fire Rating",
+          "From Room",
+          "To Room",
+          "TR_YanginSinifi"
+        ]
+      }
+    },
+    {
+      "id": "s08_html",
+      "op": "export_html_report",
+      "from": "s06_val_satirlar",
+      "params": {
+        "title": "Yangın Bölge Sürekliliği Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s09_excel",
+      "op": "export_xlsx",
+      "from": "s07_satirlar",
+      "params": {
+        "file_path": "EG_Yangin_Bolge.xlsx",
+        "sheet_name": "Yangın Bölge",
+        "title": "Yangın Bölge Kontrolü"
+      }
+    },
+    {
+      "id": "s10_goster",
+      "op": "show_table",
+      "from": "s06_val_satirlar",
+      "params": {
+        "title": "Yangın Bölge İhlalleri"
+      }
+    }
+  ]
+}

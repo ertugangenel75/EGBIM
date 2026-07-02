@@ -1,0 +1,95 @@
+{
+  "title": "Model Sağlığı Kontrolü",
+  "description": "Model uyarılarını, duplike elemanları, koordinat doğruluğunu ve boyut sınırlarını kontrol eder. Haftalık rutin model bakımı için tasarlanmıştır.",
+  "category": "Teslim Kalite",
+  "version": "1.0.0",
+  "tags": [
+    "model sağlığı",
+    "uyarı",
+    "duplike",
+    "koordinat",
+    "boyut",
+    "qa"
+  ],
+  "steps": [
+    {
+      "id": "s01_uyarilar",
+      "op": "qa_get_model_warnings"
+    },
+    {
+      "id": "s02_duplike",
+      "op": "qa_detect_duplicates",
+      "params": {
+        "tolerance_mm": 50
+      }
+    },
+    {
+      "id": "s03_koordinat",
+      "op": "qa_validate_coordinates"
+    },
+    {
+      "id": "s04_boyut",
+      "op": "qa_model_size_analysis"
+    },
+    {
+      "id": "s05_bos_param",
+      "op": "qa_find_empty_params"
+    },
+    {
+      "id": "s06_seviye",
+      "op": "qa_check_level_assigned"
+    },
+    {
+      "id": "s07_faz",
+      "op": "qa_validate_phase_consistency"
+    },
+    {
+      "id": "s08_uyari_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_uyarilar",
+      "params": {
+        "param_names": [
+          "Description",
+          "Severity"
+        ]
+      }
+    },
+    {
+      "id": "s09_duplike_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s02_duplike",
+      "params": {
+        "param_names": [
+          "Category",
+          "Type",
+          "Level"
+        ]
+      }
+    },
+    {
+      "id": "s10_birlestir",
+      "op": "merge_rows",
+      "from_many": [
+        "s08_uyari_satirlar",
+        "s09_duplike_satirlar"
+      ]
+    },
+    {
+      "id": "s11_html",
+      "op": "export_html_report",
+      "from": "s10_birlestir",
+      "params": {
+        "title": "Model Sağlığı Raporu"
+      }
+    },
+    {
+      "id": "s12_goster",
+      "op": "show_table",
+      "from": "s10_birlestir",
+      "params": {
+        "title": "Model Sağlığı Özeti",
+        "max_rows": 50
+      }
+    }
+  ]
+}

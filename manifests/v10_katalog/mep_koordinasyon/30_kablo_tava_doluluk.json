@@ -1,0 +1,100 @@
+{
+  "title": "Kablo Taşıyıcı Doluluk Kontrolü",
+  "description": "Kablo taşıyıcı ve kondüitlerin doluluk oranlarını kontrol eder, kapasiteye yaklaşan sistemleri önceliklendirir.",
+  "category": "MEP Koordinasyon",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_CableTray"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde CableTray elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "kablo taşıyıcı",
+    "kondüit",
+    "doluluk",
+    "elektrik",
+    "kontrol"
+  ],
+  "steps": [
+    {
+      "id": "s01_kablo_tava",
+      "op": "collect_cable_trays"
+    },
+    {
+      "id": "s02_konduit",
+      "op": "collect_conduits"
+    },
+    {
+      "id": "s03_tava_doluluk",
+      "op": "cable_tray_fill_check",
+      "from": "s01_kablo_tava",
+      "params": {
+        "fill_param": "Fill Ratio",
+        "max_fill_pct": 40
+      }
+    },
+    {
+      "id": "s04_konduit_doluluk",
+      "op": "conduit_fill_check",
+      "from": "s02_konduit",
+      "params": {
+        "count_param": "Conduit Count",
+        "area_param": "Fill Area",
+        "max_fill_pct": 40
+      }
+    },
+    {
+      "id": "s05_val_birlestir",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "s03_tava_doluluk",
+        "s04_konduit_doluluk"
+      ],
+      "params": {
+        "title": "Kablo Taşıyıcı Doluluk Kontrolü"
+      }
+    },
+    {
+      "id": "s06_satirlar",
+      "op": "validation_to_rows",
+      "from": "s05_val_birlestir"
+    },
+    {
+      "id": "s07_kat_grup",
+      "op": "group_elements_by_level",
+      "from": "s01_kablo_tava"
+    },
+    {
+      "id": "s08_html",
+      "op": "export_html_report",
+      "from": "s06_satirlar",
+      "params": {
+        "title": "Kablo Taşıyıcı Doluluk Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s09_excel",
+      "op": "export_xlsx",
+      "from": "s06_satirlar",
+      "params": {
+        "file_path": "EG_Kablo_Doluluk.xlsx",
+        "sheet_name": "Doluluk Kontrol",
+        "title": "Kablo Taşıyıcı Doluluk"
+      }
+    },
+    {
+      "id": "s10_goster",
+      "op": "show_table",
+      "from": "s06_satirlar",
+      "params": {
+        "title": "Doluluk Kontrol Sonuçları"
+      }
+    }
+  ]
+}

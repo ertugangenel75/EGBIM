@@ -1,0 +1,121 @@
+{
+  "title": "Kolon ve Kiriş Boyut Raporu",
+  "description": "Kolon ve kiriş boyutlarını doğrular, hizalama kontrolü yapar ve PDF boyut raporu üretir.",
+  "category": "Yapısal",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_Columns"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde StructuralColumns/Columns elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "kolon",
+    "kiriş",
+    "boyut",
+    "hizalama",
+    "kontrol",
+    "pdf"
+  ],
+  "steps": [
+    {
+      "id": "s01_kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "s02_kirisler",
+      "op": "collect_structural_framing"
+    },
+    {
+      "id": "s03_ts500",
+      "op": "structural_ts500_section",
+      "from_many": [
+        "s01_kolonlar",
+        "s02_kirisler"
+      ]
+    },
+    {
+      "id": "s04_sureklilik",
+      "op": "structural_continuity_check",
+      "from_many": [
+        "s01_kolonlar",
+        "s02_kirisler"
+      ]
+    },
+    {
+      "id": "s05_kat_ozet",
+      "op": "structural_level_summary",
+      "from_many": [
+        "s01_kolonlar",
+        "s02_kirisler"
+      ]
+    },
+    {
+      "id": "s06_kolon_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_kolonlar",
+      "params": {
+        "param_names": [
+          "Type",
+          "b",
+          "h",
+          "Level",
+          "Mark",
+          "Structural Material"
+        ]
+      }
+    },
+    {
+      "id": "s07_kiris_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s02_kirisler",
+      "params": {
+        "param_names": [
+          "Type",
+          "b",
+          "h",
+          "Level",
+          "Mark",
+          "Structural Material"
+        ]
+      }
+    },
+    {
+      "id": "s08_val_satirlar",
+      "op": "validation_to_rows",
+      "from": "s03_ts500"
+    },
+    {
+      "id": "s09_pdf",
+      "op": "export_pdf",
+      "from": "s08_val_satirlar",
+      "params": {
+        "title": "Kolon ve Kiriş Boyut Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s10_excel",
+      "op": "export_xlsx",
+      "from": "s06_kolon_satirlar",
+      "params": {
+        "file_path": "EG_Kolon_Kiris.xlsx",
+        "sheet_name": "Kolonlar",
+        "title": "Kolon ve Kiriş Boyut Listesi"
+      }
+    },
+    {
+      "id": "s11_goster",
+      "op": "show_table",
+      "from": "s05_kat_ozet",
+      "params": {
+        "title": "Yapısal Kat Özeti"
+      }
+    }
+  ]
+}

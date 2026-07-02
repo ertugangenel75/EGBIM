@@ -1,0 +1,114 @@
+{
+  "title": "Pencere ve Gün Işığı Kontrolü",
+  "description": "Penceresiz oda tespiti yapar, pencere-oda alan oranlarını kontrol eder ve gün ışığı yeterliliğini değerlendirir.",
+  "category": "Mimari",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Windows"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Windows elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "pencere",
+    "gün ışığı",
+    "oda",
+    "alan oranı",
+    "kontrol",
+    "mimari"
+  ],
+  "steps": [
+    {
+      "id": "s01_pencereler",
+      "op": "collect_windows"
+    },
+    {
+      "id": "s02_odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "s03_penceresiz",
+      "op": "arch_check_windowless_rooms",
+      "from": "s02_odalar"
+    },
+    {
+      "id": "s04_pencere_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_pencereler",
+      "params": {
+        "param_names": [
+          "Type",
+          "Width",
+          "Height",
+          "Sill Height",
+          "Area",
+          "Level",
+          "From Room"
+        ]
+      }
+    },
+    {
+      "id": "s05_oda_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s02_odalar",
+      "params": {
+        "param_names": [
+          "Name",
+          "Number",
+          "Area",
+          "Level",
+          "Department"
+        ]
+      }
+    },
+    {
+      "id": "s06_val_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s03_penceresiz",
+      "params": {
+        "param_names": [
+          "Name",
+          "Number",
+          "Area",
+          "Level"
+        ]
+      }
+    },
+    {
+      "id": "s07_kat_grup",
+      "op": "group_elements_by_level",
+      "from": "s01_pencereler"
+    },
+    {
+      "id": "s08_html",
+      "op": "export_html_report",
+      "from": "s06_val_satirlar",
+      "params": {
+        "title": "Penceresiz Oda ve Gün Işığı Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s09_excel",
+      "op": "export_xlsx",
+      "from": "s04_pencere_satirlar",
+      "params": {
+        "file_path": "EG_Pencere_Listesi.xlsx",
+        "sheet_name": "Pencereler",
+        "title": "Pencere Listesi"
+      }
+    },
+    {
+      "id": "s10_goster",
+      "op": "show_table",
+      "from": "s06_val_satirlar",
+      "params": {
+        "title": "Penceresiz Odalar"
+      }
+    }
+  ]
+}

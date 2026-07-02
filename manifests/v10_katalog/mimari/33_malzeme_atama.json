@@ -1,0 +1,104 @@
+{
+  "title": "Malzeme ve Kaplama Atama",
+  "description": "Oda kaplamalarını atar, malzeme keynote eşlemesi yapar ve finish schedule üretir.",
+  "category": "Mimari",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rooms"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Rooms elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "malzeme",
+    "kaplama",
+    "finish",
+    "keynote",
+    "oda",
+    "schedule"
+  ],
+  "steps": [
+    {
+      "id": "s01_odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "s02_duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "s03_dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "s04_tavanlar",
+      "op": "collect_ceilings"
+    },
+    {
+      "id": "s05_malzeme_val",
+      "op": "arch_check_material_assigned",
+      "from_many": [
+        "s02_duvarlar",
+        "s03_dosemeler",
+        "s04_tavanlar"
+      ]
+    },
+    {
+      "id": "s06_finish_matrix",
+      "op": "room_finish_matrix",
+      "from": "s01_odalar"
+    },
+    {
+      "id": "s07_finish_ata",
+      "op": "room_finish_assign",
+      "from": "s01_odalar",
+      "params": {}
+    },
+    {
+      "id": "s08_finish_val",
+      "op": "room_finish_validate",
+      "from": "s01_odalar"
+    },
+    {
+      "id": "s09_ifc_space",
+      "op": "room_to_ifc_space",
+      "from": "s01_odalar"
+    },
+    {
+      "id": "s10_val_satirlar",
+      "op": "validation_to_rows",
+      "from": "s05_malzeme_val"
+    },
+    {
+      "id": "s11_html",
+      "op": "export_html_report",
+      "from": "s10_val_satirlar",
+      "params": {
+        "title": "Malzeme Atama Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s12_excel",
+      "op": "export_xlsx",
+      "from": "s06_finish_matrix",
+      "params": {
+        "file_path": "EG_Finish_Schedule.xlsx",
+        "sheet_name": "Finish Schedule",
+        "title": "Oda Kaplama Listesi"
+      }
+    },
+    {
+      "id": "s13_goster",
+      "op": "show_table",
+      "from": "s06_finish_matrix",
+      "params": {
+        "title": "Oda Kaplama Matrisi"
+      }
+    }
+  ]
+}

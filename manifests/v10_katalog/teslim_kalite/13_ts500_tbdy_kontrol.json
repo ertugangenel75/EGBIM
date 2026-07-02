@@ -1,0 +1,115 @@
+{
+  "title": "TS500 / TBDY 2018 Yapısal Kontrol",
+  "description": "Yapısal elemanların TS500 kesit gereksinimlerini, TBDY 2018 deprem parametrelerini ve beton sınıfı uyumunu kontrol eder.",
+  "category": "Teslim Kalite",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rebar"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Rebar elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "ts500",
+    "tbdy",
+    "yapısal",
+    "deprem",
+    "beton",
+    "donatı",
+    "kontrol"
+  ],
+  "steps": [
+    {
+      "id": "s01_yapisal",
+      "op": "structural_collect_all"
+    },
+    {
+      "id": "s02_kesit",
+      "op": "structural_ts500_section",
+      "from": "s01_yapisal"
+    },
+    {
+      "id": "s03_malzeme",
+      "op": "structural_material_check",
+      "from": "s01_yapisal"
+    },
+    {
+      "id": "s04_tbdy",
+      "op": "structural_tbdy_params",
+      "from": "s01_yapisal",
+      "inputs": {
+        "deprem_bolgesi": "DD-2"
+      }
+    },
+    {
+      "id": "s05_sureklilik",
+      "op": "structural_continuity_check",
+      "from": "s01_yapisal"
+    },
+    {
+      "id": "s06_kat_ozet",
+      "op": "structural_level_summary",
+      "from": "s01_yapisal"
+    },
+    {
+      "id": "s07_donati",
+      "op": "collect_rebar"
+    },
+    {
+      "id": "s08_donati_ts500",
+      "op": "validate_rebar_ts500",
+      "from": "s07_donati",
+      "params": {
+        "fck": 25,
+        "fyk": 420,
+        "cover_mm": 30
+      }
+    },
+    {
+      "id": "s09_bindirme",
+      "op": "calc_lap_length",
+      "from": "s07_donati",
+      "params": {
+        "diameter_mm": 16,
+        "fck": 25,
+        "fyk": 420
+      }
+    },
+    {
+      "id": "s10_ankraj",
+      "op": "calc_anchorage_length",
+      "from": "s07_donati",
+      "params": {
+        "diameter_mm": 16,
+        "fck": 25,
+        "fyk": 420
+      }
+    },
+    {
+      "id": "s11_val_satirlar",
+      "op": "validation_to_rows",
+      "from": "s08_donati_ts500"
+    },
+    {
+      "id": "s12_html",
+      "op": "export_html_report",
+      "from": "s11_val_satirlar",
+      "params": {
+        "title": "TS500 / TBDY 2018 Yapısal Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s13_goster",
+      "op": "show_table",
+      "from": "s06_kat_ozet",
+      "params": {
+        "title": "Yapısal Kat Özeti"
+      }
+    }
+  ]
+}

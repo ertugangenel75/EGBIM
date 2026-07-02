@@ -1,0 +1,97 @@
+{
+  "title": "Malzeme ve IFC Semantik Eşleme",
+  "description": "Elemanları IFC tipine eşler, canonical sınıf çözümler ve malzeme keynote raporu üretir. IFC teslim hazırlığı için.",
+  "category": "ETL Veri",
+  "version": "1.0.0",
+  "tags": [
+    "malzeme",
+    "ifc",
+    "semantik",
+    "keynote",
+    "canonical",
+    "eşleme"
+  ],
+  "steps": [
+    {
+      "id": "s01_ifc_map",
+      "op": "load_ifc_mapping",
+      "params": {
+        "ifc_path": "ifc_mapping.json"
+      }
+    },
+    {
+      "id": "s02_tum",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_Walls",
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Floors",
+          "OST_Doors",
+          "OST_Windows"
+        ]
+      }
+    },
+    {
+      "id": "s03_siniflandir",
+      "op": "classify_elements",
+      "from": "s02_tum"
+    },
+    {
+      "id": "s04_ifc_map_op",
+      "op": "map_to_ifc",
+      "from": "s02_tum"
+    },
+    {
+      "id": "s05_disiplin",
+      "op": "resolve_discipline",
+      "from": "s02_tum",
+      "params": {
+        "category": "Category"
+      }
+    },
+    {
+      "id": "s06_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s02_tum",
+      "params": {
+        "param_names": [
+          "Category",
+          "Type",
+          "Level",
+          "TR_IFCTipi",
+          "TR_BIM_KategoriKodu",
+          "TR_Malzeme"
+        ]
+      }
+    },
+    {
+      "id": "s07_ifc_birlestir",
+      "op": "merge_rows",
+      "from_many": [
+        "s06_satirlar",
+        "s04_ifc_map_op"
+      ]
+    },
+    {
+      "id": "s08_excel",
+      "op": "export_xlsx",
+      "from": "s07_ifc_birlestir",
+      "params": {
+        "file_path": "EG_IFC_Esleme.xlsx",
+        "sheet_name": "IFC Eşleme",
+        "title": "Malzeme ve IFC Semantik Eşleme"
+      }
+    },
+    {
+      "id": "s09_goster",
+      "op": "show_table",
+      "from": "s06_satirlar",
+      "params": {
+        "title": "IFC Eşleme Önizleme",
+        "max_rows": 30
+      }
+    }
+  ]
+}

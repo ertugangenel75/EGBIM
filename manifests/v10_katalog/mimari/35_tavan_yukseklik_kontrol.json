@@ -1,0 +1,92 @@
+{
+  "title": "Tavan Yüksekliği Kontrolü",
+  "description": "Oda tavan yüksekliklerini minimum gereksinimle karşılaştırır, kat bazında ihlalleri listeler.",
+  "category": "Mimari",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rooms"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Rooms elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "tavan",
+    "yükseklik",
+    "oda",
+    "kontrol",
+    "mimari"
+  ],
+  "steps": [
+    {
+      "id": "s01_odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "s02_tavanlar",
+      "op": "collect_ceilings"
+    },
+    {
+      "id": "s03_yukseklik",
+      "op": "arch_validate_ceiling_height",
+      "from": "s01_odalar",
+      "params": {
+        "min_height_mm": 2400
+      }
+    },
+    {
+      "id": "s04_kat_grup",
+      "op": "group_elements_by_level",
+      "from": "s01_odalar"
+    },
+    {
+      "id": "s05_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_odalar",
+      "params": {
+        "param_names": [
+          "Name",
+          "Number",
+          "Level",
+          "Unbounded Height",
+          "Area"
+        ]
+      }
+    },
+    {
+      "id": "s06_val_satirlar",
+      "op": "validation_to_rows",
+      "from": "s03_yukseklik"
+    },
+    {
+      "id": "s07_html",
+      "op": "export_html_report",
+      "from": "s06_val_satirlar",
+      "params": {
+        "title": "Tavan Yüksekliği Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s08_excel",
+      "op": "export_xlsx",
+      "from": "s05_satirlar",
+      "params": {
+        "file_path": "EG_Tavan_Yukseklik.xlsx",
+        "sheet_name": "Tavan Yükseklikleri",
+        "title": "Oda Tavan Yüksekliği"
+      }
+    },
+    {
+      "id": "s09_goster",
+      "op": "show_table",
+      "from": "s06_val_satirlar",
+      "params": {
+        "title": "Tavan Yüksekliği İhlalleri"
+      }
+    }
+  ]
+}

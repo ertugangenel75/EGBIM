@@ -1,0 +1,108 @@
+{
+  "title": "Cephe Hakediş",
+  "description": "Giydirme cephe panellerinin tip ve alanını çıkarır, poz eşler, m² bazlı cephe hakediş raporu üretir.",
+  "category": "Hakediş",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_CurtainWallPanels"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde CurtainWallPanels elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "hakediş",
+    "cephe",
+    "curtain wall",
+    "m2",
+    "poz"
+  ],
+  "steps": [
+    {
+      "id": "s01_poz",
+      "op": "load_poz_data",
+      "params": {
+        "file": "csb_poz_2026.json"
+      }
+    },
+    {
+      "id": "s02_paneller",
+      "op": "collect_curtain_panels"
+    },
+    {
+      "id": "s03_cephe_duvarlar",
+      "op": "collect_curtain_walls"
+    },
+    {
+      "id": "s04_panel_matrix",
+      "op": "facade_panel_matrix",
+      "from": "s02_paneller"
+    },
+    {
+      "id": "s05_alan_tip",
+      "op": "facade_area_by_type",
+      "from": "s02_paneller"
+    },
+    {
+      "id": "s06_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s02_paneller",
+      "params": {
+        "param_names": [
+          "Family",
+          "Type",
+          "Area",
+          "TR_PozNo",
+          "TR_Malzeme"
+        ]
+      }
+    },
+    {
+      "id": "s07_poz_esle",
+      "op": "poz_match",
+      "from": "s06_satirlar",
+      "params": {
+        "category_field": "Category",
+        "type_field": "Type"
+      }
+    },
+    {
+      "id": "s08_maliyet",
+      "op": "calc_cost",
+      "from": "s07_poz_esle",
+      "params": {
+        "quantity_field": "Area"
+      }
+    },
+    {
+      "id": "s09_tip_ozet",
+      "op": "cost_summary",
+      "from": "s08_maliyet",
+      "params": {
+        "group_by": "Type"
+      }
+    },
+    {
+      "id": "s10_excel",
+      "op": "export_xlsx",
+      "from": "s08_maliyet",
+      "params": {
+        "file_path": "EG_Cephe_Hakedis.xlsx",
+        "sheet_name": "Cephe Hakediş",
+        "title": "Cephe Hakediş"
+      }
+    },
+    {
+      "id": "s11_goster",
+      "op": "show_table",
+      "from": "s09_tip_ozet",
+      "params": {
+        "title": "Cephe Tip Bazlı Maliyet"
+      }
+    }
+  ]
+}

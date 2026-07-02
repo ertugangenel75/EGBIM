@@ -1,0 +1,88 @@
+{
+  "title": "Faz Tutarlılık Kontrolü",
+  "description": "Modeldeki tüm elemanların faz atamalarını kontrol eder, faz tutarsızlıklarını ve yanlış faz demolished değerlerini raporlar.",
+  "category": "Teslim Kalite",
+  "version": "1.0.0",
+  "tags": [
+    "faz",
+    "phase",
+    "tutarlılık",
+    "qa",
+    "kontrol"
+  ],
+  "steps": [
+    {
+      "id": "s01_tum",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_Walls",
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Floors",
+          "OST_Doors",
+          "OST_Windows"
+        ]
+      }
+    },
+    {
+      "id": "s02_faz",
+      "op": "qa_validate_phase_consistency",
+      "from": "s01_tum"
+    },
+    {
+      "id": "s03_faz1",
+      "op": "collect_by_phase",
+      "params": {
+        "phase_name": "Faz 1"
+      }
+    },
+    {
+      "id": "s04_faz2",
+      "op": "collect_by_phase",
+      "params": {
+        "phase_name": "Faz 2"
+      }
+    },
+    {
+      "id": "s05_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_tum",
+      "params": {
+        "param_names": [
+          "Phase Created",
+          "Phase Demolished",
+          "Category",
+          "Level"
+        ]
+      }
+    },
+    {
+      "id": "s06_val_satirlar",
+      "op": "validation_to_rows",
+      "from": "s02_faz"
+    },
+    {
+      "id": "s07_kat_grup",
+      "op": "group_elements_by_level",
+      "from": "s01_tum"
+    },
+    {
+      "id": "s08_html",
+      "op": "export_html_report",
+      "from": "s06_val_satirlar",
+      "params": {
+        "title": "Faz Tutarlılık Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s09_goster",
+      "op": "show_table",
+      "from": "s05_satirlar",
+      "params": {
+        "title": "Faz Atama Durumu",
+        "max_rows": 100
+      }
+    }
+  ]
+}

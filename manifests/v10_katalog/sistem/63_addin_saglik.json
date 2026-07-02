@@ -1,0 +1,92 @@
+{
+  "title": "Add-in Sağlık ve Op Registry Kontrolü",
+  "description": "Yüklü Revit add-in'lerini tarar, devre dışı bırakılmış eklentileri listeler ve EGBIMOTO op registry'sinin sağlığını raporlar.",
+  "category": "Sistem",
+  "version": "1.0.0",
+  "tags": [
+    "add-in",
+    "sağlık",
+    "op registry",
+    "sistem",
+    "kontrol"
+  ],
+  "steps": [
+    {
+      "id": "s01_tarama",
+      "op": "eg_addin_scan",
+      "params": {
+        "revit_version": "2026",
+        "include_disabled": true
+      }
+    },
+    {
+      "id": "s02_saglik",
+      "op": "eg_health_snapshot",
+      "params": {
+        "format": "html",
+        "open": false,
+        "out_path": "EG_Addin_Saglik.html"
+      }
+    },
+    {
+      "id": "s03_op_saglik",
+      "op": "op_health_check"
+    },
+    {
+      "id": "s04_sistem",
+      "op": "system_info"
+    },
+    {
+      "id": "s05_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_tarama",
+      "params": {
+        "param_names": [
+          "Name",
+          "Version",
+          "Status",
+          "LoadTime",
+          "Publisher"
+        ]
+      }
+    },
+    {
+      "id": "s06_aktif_filtre",
+      "op": "filter_rows",
+      "from": "s05_satirlar",
+      "params": {
+        "field": "Status",
+        "value": "Active",
+        "operator": "=="
+      }
+    },
+    {
+      "id": "s07_devre_disi",
+      "op": "filter_rows",
+      "from": "s05_satirlar",
+      "params": {
+        "field": "Status",
+        "value": "Disabled",
+        "operator": "=="
+      }
+    },
+    {
+      "id": "s08_excel",
+      "op": "export_xlsx",
+      "from": "s05_satirlar",
+      "params": {
+        "file_path": "EG_Addin_Liste.xlsx",
+        "sheet_name": "Add-in Listesi",
+        "title": "Add-in Sağlık Raporu"
+      }
+    },
+    {
+      "id": "s09_goster",
+      "op": "show_table",
+      "from": "s05_satirlar",
+      "params": {
+        "title": "Add-in Durum Listesi"
+      }
+    }
+  ]
+}

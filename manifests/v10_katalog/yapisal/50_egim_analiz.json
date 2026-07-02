@@ -1,0 +1,107 @@
+{
+  "title": "Çatı ve Zemin Eğim Analizi",
+  "description": "Çatı ve ıslak hacim zeminlerinin eğim değerlerini analiz eder, minimum eğim gereksinimlerini kontrol eder.",
+  "category": "Yapısal",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Roofs"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Roofs elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "eğim",
+    "çatı",
+    "zemin",
+    "drenaj",
+    "ıslak hacim",
+    "analiz"
+  ],
+  "steps": [
+    {
+      "id": "s01_catalar",
+      "op": "collect_roofs"
+    },
+    {
+      "id": "s02_dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "s03_cat_egim",
+      "op": "slope_analysis",
+      "from": "s01_catalar"
+    },
+    {
+      "id": "s04_cat_val",
+      "op": "slope_validate",
+      "from": "s03_cat_egim"
+    },
+    {
+      "id": "s05_zemin_filtre",
+      "op": "filter_by_param",
+      "from": "s02_dosemeler",
+      "params": {
+        "param_name": "TR_IsHacimTipi",
+        "value": "IslakHacim",
+        "operator": "=="
+      }
+    },
+    {
+      "id": "s06_zemin_egim",
+      "op": "slope_analysis",
+      "from": "s05_zemin_filtre"
+    },
+    {
+      "id": "s07_zemin_val",
+      "op": "slope_validate",
+      "from": "s06_zemin_egim"
+    },
+    {
+      "id": "s08_val_birlestir",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "s04_cat_val",
+        "s07_zemin_val"
+      ],
+      "params": {
+        "title": "Eğim Analizi"
+      }
+    },
+    {
+      "id": "s09_satirlar",
+      "op": "validation_to_rows",
+      "from": "s08_val_birlestir"
+    },
+    {
+      "id": "s10_excel",
+      "op": "export_xlsx",
+      "from": "s09_satirlar",
+      "params": {
+        "file_path": "EG_Egim_Analiz.xlsx",
+        "sheet_name": "Eğim Analizi",
+        "title": "Çatı ve Zemin Eğim Analizi"
+      }
+    },
+    {
+      "id": "s11_html",
+      "op": "export_html_report",
+      "from": "s09_satirlar",
+      "params": {
+        "title": "Eğim Analiz Raporu"
+      }
+    },
+    {
+      "id": "s12_goster",
+      "op": "show_table",
+      "from": "s09_satirlar",
+      "params": {
+        "title": "Eğim Kontrol Sonuçları"
+      }
+    }
+  ]
+}

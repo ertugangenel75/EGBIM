@@ -1,0 +1,91 @@
+{
+  "title": "Adaptif Cephe Paneli Yerleştirme",
+  "description": "CSV nokta tablosundan adaptif cephe panellerini üretir. Her panel için gereken nokta sayısını gruplar ve adaptif bileşenleri yerleştirir. Parametrik cephe tasarımını otomatikleştirir.",
+  "category": "Üretim",
+  "version": "1.1.0",
+  "tags": [
+    "üretim",
+    "cephe",
+    "adaptif",
+    "panel",
+    "parametrik",
+    "place"
+  ],
+  "transaction_policy": "preview",
+  "steps": [
+    {
+      "id": "s01_aile_kontrol",
+      "op": "family_ensure_loaded",
+      "params": {
+        "family_path": "$INPUT:file_path:Adaptif panel ailesi (.rfa):*.rfa"
+      }
+    },
+    {
+      "id": "s02_oku",
+      "op": "csv_read",
+      "params": {
+        "file_path": "$INPUT:file_path:Cephe nokta dosyası (CSV):*.csv",
+        "delimiter": ",",
+        "has_header": true
+      }
+    },
+    {
+      "id": "s03_noktalar",
+      "op": "table_to_points",
+      "from": "s02_oku",
+      "params": {
+        "x_field": "x",
+        "y_field": "y",
+        "z_field": "z",
+        "unit": "mm"
+      }
+    },
+    {
+      "id": "s04_sayim",
+      "op": "show_count",
+      "from": "s03_noktalar"
+    },
+    {
+      "id": "s05_onay",
+      "op": "preview_gate",
+      "from": "s03_noktalar",
+      "params": {
+        "title": "Cephe Paneli — Noktalardan adaptif panel üretilsin mi?"
+      }
+    },
+    {
+      "id": "s06_uret",
+      "op": "place_adaptive_component_by_points",
+      "from": "s03_noktalar",
+      "condition": "$s05_onay == confirmed",
+      "params": {
+        "family_name": "$INPUT:family_type:Panel ailesi ve tipi>>family_name",
+        "type_name": "$INPUT:family_type:Panel ailesi ve tipi>>type_name",
+        "points_per_item": "$INPUT:number:Panel başına nokta sayısı:3:8"
+      }
+    },
+    {
+      "id": "s07_iz",
+      "op": "trace_write",
+      "from": "s06_uret",
+      "condition": "$s05_onay == confirmed",
+      "params": {
+        "trace_key": "uretim_cephe_panel"
+      }
+    },
+    {
+      "id": "s08_alan",
+      "op": "facade_area_by_type",
+      "from": "s06_uret",
+      "condition": "$s05_onay == confirmed"
+    },
+    {
+      "id": "s09_goster",
+      "op": "show_result",
+      "from": "s06_uret",
+      "params": {
+        "title": "Cephe Paneli Üretimi Tamamlandı"
+      }
+    }
+  ]
+}

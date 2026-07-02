@@ -1,0 +1,133 @@
+{
+  "title": "Kat Bazlı Toplam Hakediş",
+  "description": "Tüm yapısal ve mimari kategorileri kat bazında gruplar, WBS kodu atar ve kat bazlı toplam hakediş pivot tablosu üretir.",
+  "category": "Hakediş",
+  "version": "1.0.0",
+  "tags": [
+    "hakediş",
+    "kat",
+    "wbs",
+    "pivot",
+    "excel"
+  ],
+  "steps": [
+    {
+      "id": "s01_poz",
+      "op": "load_poz_data",
+      "params": {
+        "file": "csb_poz_2026.json"
+      }
+    },
+    {
+      "id": "s02_wbs",
+      "op": "load_wbs_mapping",
+      "params": {
+        "wbs_path": "revit_kategori_wbs.json"
+      }
+    },
+    {
+      "id": "s03_yapisal",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Floors",
+          "OST_StructuralFoundation",
+          "OST_Walls"
+        ]
+      }
+    },
+    {
+      "id": "s04_mimari",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_Doors",
+          "OST_Windows",
+          "OST_Ceilings",
+          "OST_Roofs"
+        ]
+      }
+    },
+    {
+      "id": "s05_birlestir",
+      "op": "merge_lists",
+      "from_many": [
+        "s03_yapisal",
+        "s04_mimari"
+      ]
+    },
+    {
+      "id": "s06_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s05_birlestir",
+      "params": {
+        "param_names": [
+          "Mark",
+          "Level",
+          "TR_WBS_Kodu",
+          "TR_PozNo"
+        ]
+      }
+    },
+    {
+      "id": "s07_wbs_ata",
+      "op": "assign_wbs_code",
+      "from": "s06_satirlar",
+      "params": {
+        "category_field": "Category"
+      }
+    },
+    {
+      "id": "s08_poz_esle",
+      "op": "poz_match",
+      "from": "s07_wbs_ata",
+      "params": {
+        "category_field": "Category",
+        "type_field": "Type"
+      }
+    },
+    {
+      "id": "s09_maliyet",
+      "op": "calc_cost",
+      "from": "s08_poz_esle",
+      "params": {
+        "quantity_field": "Volume"
+      }
+    },
+    {
+      "id": "s10_kat_ozet",
+      "op": "cost_by_level",
+      "from": "s09_maliyet"
+    },
+    {
+      "id": "s11_pivot",
+      "op": "pivot_table",
+      "from": "s09_maliyet",
+      "params": {
+        "row_field": "Level",
+        "col_field": "Category",
+        "value_field": "cost"
+      }
+    },
+    {
+      "id": "s12_excel",
+      "op": "export_xlsx",
+      "from": "s09_maliyet",
+      "params": {
+        "file_path": "EG_Kat_Hakedis.xlsx",
+        "sheet_name": "Kat Hakediş",
+        "title": "Kat Bazlı Toplam Hakediş"
+      }
+    },
+    {
+      "id": "s13_goster",
+      "op": "show_table",
+      "from": "s10_kat_ozet",
+      "params": {
+        "title": "Kat Bazlı Toplam Maliyet"
+      }
+    }
+  ]
+}

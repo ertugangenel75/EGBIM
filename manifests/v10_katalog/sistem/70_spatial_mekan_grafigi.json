@@ -1,0 +1,117 @@
+{
+  "title": "Bina Mekan Bağlantı Grafiği",
+  "description": "Binadaki tüm odaları ve kapıları kullanarak mekan bağlantı grafiği oluşturur, erişim analizi ve tahliye yolu için kullanılır.",
+  "category": "Sistem",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rooms"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Rooms elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "mekan grafiği",
+    "bağlantı",
+    "tahliye",
+    "erişim",
+    "analiz",
+    "spatial"
+  ],
+  "steps": [
+    {
+      "id": "s01_odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "s02_kapilar",
+      "op": "collect_doors"
+    },
+    {
+      "id": "s03_mekan_grafik",
+      "op": "build_spatial_graph",
+      "from": "s01_odalar",
+      "params": {
+        "include_exterior": true,
+        "deduplicate": true
+      }
+    },
+    {
+      "id": "s04_oda_kapi_map",
+      "op": "room_door_relation_map",
+      "from": "s02_kapilar"
+    },
+    {
+      "id": "s05_kilit_noktalar",
+      "op": "get_room_ceiling_center",
+      "from": "s01_odalar"
+    },
+    {
+      "id": "s06_grafik_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s03_mekan_grafik",
+      "params": {
+        "param_names": [
+          "RoomId",
+          "RoomName",
+          "ConnectedRooms",
+          "DoorCount",
+          "Area"
+        ]
+      }
+    },
+    {
+      "id": "s07_baglanti_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s04_oda_kapi_map",
+      "params": {
+        "param_names": [
+          "DoorId",
+          "FromRoom",
+          "ToRoom",
+          "DoorWidth",
+          "FireRating"
+        ]
+      }
+    },
+    {
+      "id": "s08_sort",
+      "op": "sort_rows",
+      "from": "s06_grafik_satirlar",
+      "params": {
+        "field": "ConnectedRooms",
+        "descending": true
+      }
+    },
+    {
+      "id": "s09_html",
+      "op": "export_html_report",
+      "from": "s06_grafik_satirlar",
+      "params": {
+        "title": "Bina Mekan Bağlantı Grafiği Raporu"
+      }
+    },
+    {
+      "id": "s10_excel",
+      "op": "export_xlsx",
+      "from": "s07_baglanti_satirlar",
+      "params": {
+        "file_path": "EG_Mekan_Grafigi.xlsx",
+        "sheet_name": "Mekan Grafiği",
+        "title": "Bina Mekan Bağlantı Analizi"
+      }
+    },
+    {
+      "id": "s11_goster",
+      "op": "show_table",
+      "from": "s08_sort",
+      "params": {
+        "title": "En Çok Bağlantılı Odalar"
+      }
+    }
+  ]
+}

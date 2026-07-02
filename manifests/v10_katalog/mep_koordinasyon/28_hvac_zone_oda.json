@@ -1,0 +1,94 @@
+{
+  "title": "HVAC Bölge ve Oda Eşleme",
+  "description": "Hava terminallerini odalara eşler, HVAC bölge atamalarını doğrular ve kat bazlı HVAC yük özetini üretir.",
+  "category": "MEP Koordinasyon",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_DuctTerminal"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde DuctTerminal elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "hvac",
+    "bölge",
+    "oda",
+    "hava terminali",
+    "mekanik"
+  ],
+  "steps": [
+    {
+      "id": "s01_terminaller",
+      "op": "collect_air_terminals"
+    },
+    {
+      "id": "s02_odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "s03_mek_ekipman",
+      "op": "collect_mechanical_equipment"
+    },
+    {
+      "id": "s04_terminal_esle",
+      "op": "mep_air_terminal_space_map",
+      "from": "s01_terminaller"
+    },
+    {
+      "id": "s05_hvac_zone",
+      "op": "mep_validate_space_hvac_zone",
+      "from": "s02_odalar"
+    },
+    {
+      "id": "s06_hava_hesap",
+      "op": "calc_ach_airflow",
+      "from": "s02_odalar",
+      "params": {
+        "area_m2": "Area",
+        "height_m": "Height",
+        "ach": 6
+      }
+    },
+    {
+      "id": "s07_val_satirlar",
+      "op": "validation_to_rows",
+      "from": "s05_hvac_zone"
+    },
+    {
+      "id": "s08_kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "s01_terminaller"
+    },
+    {
+      "id": "s09_html",
+      "op": "export_html_report",
+      "from": "s07_val_satirlar",
+      "params": {
+        "title": "HVAC Bölge ve Oda Eşleme Raporu"
+      }
+    },
+    {
+      "id": "s10_excel",
+      "op": "export_xlsx",
+      "from": "s04_terminal_esle",
+      "params": {
+        "file_path": "EG_HVAC_Zone.xlsx",
+        "sheet_name": "HVAC Bölge",
+        "title": "HVAC Bölge Eşleme"
+      }
+    },
+    {
+      "id": "s11_goster",
+      "op": "show_table",
+      "from": "s04_terminal_esle",
+      "params": {
+        "title": "Hava Terminali - Oda Eşleme"
+      }
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "title": "Excel'den Duvar Üretimi",
+  "description": "CSV başlangıç-bitiş koordinat tablosundan mimari duvarları üretir. Çizgilerden duvar oluşturur, yükseklik ve tip atar, onay alır ve metraj raporu üretir.",
+  "category": "Üretim",
+  "version": "1.1.0",
+  "tags": [
+    "üretim",
+    "duvar",
+    "mimari",
+    "excel",
+    "otomasyon",
+    "create"
+  ],
+  "transaction_policy": "preview",
+  "steps": [
+    {
+      "id": "s01_oku",
+      "op": "csv_read",
+      "params": {
+        "file_path": "$INPUT:file_path:Duvar koordinat dosyası (CSV):*.csv",
+        "delimiter": ",",
+        "has_header": true
+      }
+    },
+    {
+      "id": "s02_baslangic",
+      "op": "table_to_points",
+      "from": "s01_oku",
+      "params": {
+        "x_field": "x1",
+        "y_field": "y1",
+        "z_field": "z1",
+        "unit": "mm"
+      }
+    },
+    {
+      "id": "s03_bitis",
+      "op": "table_to_points",
+      "from": "s01_oku",
+      "params": {
+        "x_field": "x2",
+        "y_field": "y2",
+        "z_field": "z2",
+        "unit": "mm"
+      }
+    },
+    {
+      "id": "s04_egri",
+      "op": "list_zip",
+      "from": "s02_baslangic",
+      "inputs": {
+        "second_key": "s03_bitis"
+      }
+    },
+    {
+      "id": "s05_onay",
+      "op": "preview_gate",
+      "from": "s04_egri",
+      "params": {
+        "title": "Duvar Üretimi — Çizgilerden duvar oluşturulsun mu?"
+      }
+    },
+    {
+      "id": "s06_uret",
+      "op": "create_wall",
+      "from": "s04_egri",
+      "condition": "$s05_onay == confirmed",
+      "params": {
+        "mode": "from_lines",
+        "type_name": "$INPUT:string:Duvar tipi adı",
+        "level_name": "$INPUT:level:Duvar tabanı seviyesi",
+        "height_mm": "$INPUT:number:Duvar yüksekliği (mm):100:10000",
+        "reference": "centerline",
+        "structural": false,
+        "skip_existing": true
+      }
+    },
+    {
+      "id": "s07_iz",
+      "op": "trace_write",
+      "from": "s06_uret",
+      "condition": "$s05_onay == confirmed",
+      "params": {
+        "trace_key": "uretim_duvar_excel"
+      }
+    },
+    {
+      "id": "s08_alan",
+      "op": "wall_net_area",
+      "from": "s06_uret",
+      "condition": "$s05_onay == confirmed"
+    },
+    {
+      "id": "s09_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s06_uret",
+      "condition": "$s05_onay == confirmed",
+      "params": {
+        "param_names": [
+          "Type",
+          "Base Constraint",
+          "Length",
+          "Area"
+        ]
+      }
+    },
+    {
+      "id": "s10_excel",
+      "op": "export_xlsx",
+      "from": "s09_satirlar",
+      "condition": "$s05_onay == confirmed",
+      "params": {
+        "file_path": "EG_Uretilen_Duvarlar.xlsx",
+        "sheet_name": "Duvarlar",
+        "title": "Üretilen Duvarlar"
+      }
+    },
+    {
+      "id": "s11_goster",
+      "op": "show_result",
+      "from": "s06_uret",
+      "params": {
+        "title": "Duvar Üretimi Tamamlandı"
+      }
+    }
+  ]
+}

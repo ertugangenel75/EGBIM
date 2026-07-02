@@ -1,0 +1,131 @@
+{
+  "title": "IFC Teslim Paketi",
+  "description": "IDS doğrulaması yapar, IFC4 TR BIM formatında dışa aktarır ve BOQ Excel raporu üretir. ÇŞB 2026 teslim süreci için tek akış.",
+  "category": "Teslim Kalite",
+  "version": "1.0.0",
+  "tags": [
+    "ifc",
+    "teslim",
+    "ids",
+    "ifc4",
+    "boq",
+    "csb2026"
+  ],
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_ifc_map",
+      "op": "load_ifc_mapping",
+      "params": {
+        "ifc_path": "ifc_mapping.json"
+      }
+    },
+    {
+      "id": "s02_tum",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_Walls",
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Floors",
+          "OST_StructuralFoundation",
+          "OST_Rooms",
+          "OST_Doors",
+          "OST_Windows"
+        ]
+      }
+    },
+    {
+      "id": "s03_ifc_map",
+      "op": "map_to_ifc",
+      "from": "s02_tum"
+    },
+    {
+      "id": "s04_ids_kontrol",
+      "op": "validate_ids",
+      "from": "s02_tum",
+      "params": {
+        "ids_path": "ids_csb2026.ids"
+      }
+    },
+    {
+      "id": "s05_zorunlu",
+      "op": "validate_required_params",
+      "from": "s02_tum",
+      "params": {
+        "required_params": [
+          "TR_BIM_KategoriKodu",
+          "TR_IFCTipi",
+          "TR_PozNo"
+        ]
+      }
+    },
+    {
+      "id": "s06_val_birlestir",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "s04_ids_kontrol",
+        "s05_zorunlu"
+      ],
+      "params": {
+        "title": "IFC Teslim Doğrulama"
+      }
+    },
+    {
+      "id": "s07_val_satirlar",
+      "op": "validation_to_rows",
+      "from": "s06_val_birlestir"
+    },
+    {
+      "id": "s08_val_rapor",
+      "op": "export_validation_report",
+      "from": "s07_val_satirlar",
+      "params": {
+        "title": "IFC Teslim Doğrulama Raporu"
+      }
+    },
+    {
+      "id": "s09_ifc_export",
+      "op": "ifc_export",
+      "from": "s02_tum",
+      "params": {
+        "output_dir": "C:/EGBIM_Output/IFC",
+        "file_name": "EGBIM_Proje",
+        "ifc_version": "IFC4"
+      }
+    },
+    {
+      "id": "s10_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s02_tum",
+      "params": {
+        "param_names": [
+          "TR_BIM_KategoriKodu",
+          "TR_IFCTipi",
+          "TR_PozNo",
+          "Volume",
+          "Area"
+        ]
+      }
+    },
+    {
+      "id": "s11_boq_excel",
+      "op": "export_xlsx",
+      "from": "s10_satirlar",
+      "params": {
+        "file_path": "EG_IFC_BOQ.xlsx",
+        "sheet_name": "BOQ",
+        "title": "IFC Teslim BOQ"
+      }
+    },
+    {
+      "id": "s12_goster",
+      "op": "show_result",
+      "from": "s09_ifc_export",
+      "params": {
+        "title": "IFC Teslim Tamamlandı"
+      }
+    }
+  ]
+}

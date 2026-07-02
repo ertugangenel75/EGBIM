@@ -1,0 +1,101 @@
+{
+  "title": "İsimlendirme Standardı Kontrolü",
+  "description": "Workset isimlendirme kuralları, ÇŞB 2026 isimlendirme konvansiyonları ve TR BIM görünüm/sheet isimlendirmesini kontrol eder.",
+  "category": "Teslim Kalite",
+  "version": "1.0.0",
+  "tags": [
+    "isimlendirme",
+    "workset",
+    "standart",
+    "csb2026",
+    "qa"
+  ],
+  "steps": [
+    {
+      "id": "s01_proje",
+      "op": "pm_get_project_info"
+    },
+    {
+      "id": "s02_workset",
+      "op": "qa_validate_workset",
+      "params": {
+        "expected_workset": "Mimari"
+      }
+    },
+    {
+      "id": "s03_isimlendirme",
+      "op": "pm_validate_naming_convention",
+      "params": {
+        "name_pattern": "^[A-Z]{2}-[0-9]{3}"
+      }
+    },
+    {
+      "id": "s04_sheets",
+      "op": "collect_sheets"
+    },
+    {
+      "id": "s05_views",
+      "op": "collect_views",
+      "params": {
+        "view_type": "FloorPlan"
+      }
+    },
+    {
+      "id": "s06_sheet_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s04_sheets",
+      "params": {
+        "param_names": [
+          "Sheet Number",
+          "Sheet Name",
+          "Drawn By",
+          "Approved By"
+        ]
+      }
+    },
+    {
+      "id": "s07_view_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s05_views",
+      "params": {
+        "param_names": [
+          "View Name",
+          "View Template",
+          "Discipline"
+        ]
+      }
+    },
+    {
+      "id": "s08_val_birlestir",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "s02_workset",
+        "s03_isimlendirme"
+      ],
+      "params": {
+        "title": "İsimlendirme Standardı"
+      }
+    },
+    {
+      "id": "s09_val_satirlar",
+      "op": "validation_to_rows",
+      "from": "s08_val_birlestir"
+    },
+    {
+      "id": "s10_html",
+      "op": "export_html_report",
+      "from": "s09_val_satirlar",
+      "params": {
+        "title": "İsimlendirme Standardı Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s11_goster",
+      "op": "show_table",
+      "from": "s09_val_satirlar",
+      "params": {
+        "title": "İsimlendirme Kontrol Sonuçları"
+      }
+    }
+  ]
+}

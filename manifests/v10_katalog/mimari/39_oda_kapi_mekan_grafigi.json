@@ -1,0 +1,106 @@
+{
+  "title": "Oda-Kapı Mekan Grafiği",
+  "description": "Bina içi mekan bağlantı grafiğini oluşturur, oda-kapı ilişkilerini haritalandırır ve erişebilirlik grafiğini Excel'e aktarır.",
+  "category": "Mimari",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rooms"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Rooms elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "mekan grafiği",
+    "oda",
+    "kapı",
+    "bağlantı",
+    "analiz",
+    "spatial"
+  ],
+  "steps": [
+    {
+      "id": "s01_odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "s02_kapilar",
+      "op": "collect_doors"
+    },
+    {
+      "id": "s03_mekan_grafik",
+      "op": "build_spatial_graph",
+      "from": "s01_odalar",
+      "params": {
+        "include_exterior": false,
+        "deduplicate": true
+      }
+    },
+    {
+      "id": "s04_oda_kapi_map",
+      "op": "room_door_relation_map",
+      "from": "s01_odalar"
+    },
+    {
+      "id": "s05_oda_icindeki",
+      "op": "collect_doors_in_room",
+      "from": "s01_odalar"
+    },
+    {
+      "id": "s06_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s03_mekan_grafik",
+      "params": {
+        "param_names": [
+          "RoomId",
+          "RoomName",
+          "ConnectedRooms",
+          "DoorCount"
+        ]
+      }
+    },
+    {
+      "id": "s07_baglantilar",
+      "op": "elements_to_rows_with_params",
+      "from": "s04_oda_kapi_map",
+      "params": {
+        "param_names": [
+          "DoorId",
+          "FromRoom",
+          "ToRoom",
+          "DoorType"
+        ]
+      }
+    },
+    {
+      "id": "s08_html",
+      "op": "export_html_report",
+      "from": "s06_satirlar",
+      "params": {
+        "title": "Mekan Grafiği Raporu"
+      }
+    },
+    {
+      "id": "s09_excel",
+      "op": "export_xlsx",
+      "from": "s07_baglantilar",
+      "params": {
+        "file_path": "EG_Mekan_Grafigi.xlsx",
+        "sheet_name": "Mekan Bağlantı",
+        "title": "Oda-Kapı Mekan Grafiği"
+      }
+    },
+    {
+      "id": "s10_goster",
+      "op": "show_table",
+      "from": "s06_satirlar",
+      "params": {
+        "title": "Mekan Bağlantı Grafiği"
+      }
+    }
+  ]
+}

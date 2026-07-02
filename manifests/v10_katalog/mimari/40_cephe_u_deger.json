@@ -1,0 +1,102 @@
+{
+  "title": "Cephe U-Değeri ve Açıklık Oranı",
+  "description": "Giydirme cephe U-değerini kontrol eder, panel başına açıklık oranını hesaplar ve enerji performans raporunu üretir.",
+  "category": "Mimari",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_CurtainWallPanels"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde CurtainWallPanels elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "cephe",
+    "u-değeri",
+    "açıklık oranı",
+    "enerji",
+    "giydirme cephe"
+  ],
+  "steps": [
+    {
+      "id": "s01_paneller",
+      "op": "collect_curtain_panels"
+    },
+    {
+      "id": "s02_cephe_duvarlar",
+      "op": "collect_curtain_walls"
+    },
+    {
+      "id": "s03_u_deger",
+      "op": "facade_u_value_check",
+      "from": "s01_paneller"
+    },
+    {
+      "id": "s04_aciklik",
+      "op": "facade_opening_ratio",
+      "from": "s01_paneller"
+    },
+    {
+      "id": "s05_alan_tip",
+      "op": "facade_area_by_type",
+      "from": "s01_paneller"
+    },
+    {
+      "id": "s06_joint_val",
+      "op": "facade_joint_validate",
+      "from": "s01_paneller"
+    },
+    {
+      "id": "s07_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_paneller",
+      "params": {
+        "param_names": [
+          "Type",
+          "Area",
+          "U-Value",
+          "TR_Malzeme",
+          "TR_PozNo"
+        ]
+      }
+    },
+    {
+      "id": "s08_ozet",
+      "op": "cost_summary",
+      "from": "s07_satirlar",
+      "params": {
+        "group_by": "Type"
+      }
+    },
+    {
+      "id": "s09_html",
+      "op": "export_html_report",
+      "from": "s07_satirlar",
+      "params": {
+        "title": "Cephe U-Değeri ve Açıklık Oranı Raporu"
+      }
+    },
+    {
+      "id": "s10_excel",
+      "op": "export_xlsx",
+      "from": "s07_satirlar",
+      "params": {
+        "file_path": "EG_Cephe_Enerji.xlsx",
+        "sheet_name": "Cephe Enerji",
+        "title": "Cephe U-Değeri"
+      }
+    },
+    {
+      "id": "s11_goster",
+      "op": "show_table",
+      "from": "s05_alan_tip",
+      "params": {
+        "title": "Cephe Alan ve Tip Özeti"
+      }
+    }
+  ]
+}

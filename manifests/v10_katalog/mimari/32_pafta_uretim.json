@@ -1,0 +1,96 @@
+{
+  "title": "Otomatik Pafta Üretimi",
+  "description": "Görünüm şablonlarını uygular, kat planları için otomatik pafta (sheet) oluşturur ve görünümleri paftalara yerleştirir.",
+  "category": "Mimari",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Levels"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Levels elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "pafta",
+    "sheet",
+    "görünüm",
+    "şablon",
+    "otomasyon",
+    "belgeleme"
+  ],
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_seviyeler",
+      "op": "collect_levels"
+    },
+    {
+      "id": "s02_views",
+      "op": "collect_views",
+      "params": {
+        "view_type": "FloorPlan"
+      }
+    },
+    {
+      "id": "s03_template",
+      "op": "arch_apply_view_template",
+      "from": "s02_views",
+      "params": {
+        "template_name": "EG_Kat_Plani",
+        "view_name_contains": "KP"
+      }
+    },
+    {
+      "id": "s04_sheets",
+      "op": "arch_sheets_from_data",
+      "from": "s01_seviyeler"
+    },
+    {
+      "id": "s05_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s04_sheets",
+      "params": {
+        "param_names": [
+          "Sheet Number",
+          "Sheet Name",
+          "Revision",
+          "Drawn By"
+        ]
+      }
+    },
+    {
+      "id": "s06_view_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s02_views",
+      "params": {
+        "param_names": [
+          "View Name",
+          "View Template",
+          "Scale"
+        ]
+      }
+    },
+    {
+      "id": "s07_excel",
+      "op": "export_xlsx",
+      "from": "s05_satirlar",
+      "params": {
+        "file_path": "EG_Pafta_Listesi.xlsx",
+        "sheet_name": "Paftalar",
+        "title": "Pafta Listesi"
+      }
+    },
+    {
+      "id": "s08_goster",
+      "op": "show_table",
+      "from": "s05_satirlar",
+      "params": {
+        "title": "Oluşturulan Paftalar"
+      }
+    }
+  ]
+}

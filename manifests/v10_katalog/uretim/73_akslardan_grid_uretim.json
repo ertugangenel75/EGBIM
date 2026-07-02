@@ -1,0 +1,93 @@
+{
+  "title": "Akslardan Grid Üretimi",
+  "description": "CSV aks koordinat tablosundan Revit gridlerini (akslarını) otomatik üretir. Başlangıç-bitiş noktalarından eğri oluşturur ve isimlendirilmiş gridler yerleştirir.",
+  "category": "Üretim",
+  "version": "1.1.0",
+  "tags": [
+    "üretim",
+    "grid",
+    "aks",
+    "excel",
+    "otomasyon",
+    "create"
+  ],
+  "transaction_policy": "preview",
+  "steps": [
+    {
+      "id": "s01_oku",
+      "op": "csv_read",
+      "params": {
+        "file_path": "$INPUT:file_path:Aks koordinat dosyası (CSV):*.csv",
+        "delimiter": ",",
+        "has_header": true
+      }
+    },
+    {
+      "id": "s02_baslangic",
+      "op": "table_to_points",
+      "from": "s01_oku",
+      "params": {
+        "x_field": "x1",
+        "y_field": "y1",
+        "z_field": "z1",
+        "unit": "mm"
+      }
+    },
+    {
+      "id": "s03_bitis",
+      "op": "table_to_points",
+      "from": "s01_oku",
+      "params": {
+        "x_field": "x2",
+        "y_field": "y2",
+        "z_field": "z2",
+        "unit": "mm"
+      }
+    },
+    {
+      "id": "s04_egri",
+      "op": "list_zip",
+      "from": "s02_baslangic",
+      "inputs": {
+        "second_key": "s03_bitis"
+      }
+    },
+    {
+      "id": "s05_onay",
+      "op": "preview_gate",
+      "from": "s04_egri",
+      "params": {
+        "title": "Grid Üretimi — Akslar oluşturulsun mu?"
+      }
+    },
+    {
+      "id": "s06_uret",
+      "op": "create_grid_by_line",
+      "from": "s04_egri",
+      "condition": "$s05_onay == confirmed",
+      "params": {
+        "name_prefix": "$INPUT:string:Aks isim öneki (örn. A, X)",
+        "start_index": 1
+      }
+    },
+    {
+      "id": "s07_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s06_uret",
+      "condition": "$s05_onay == confirmed",
+      "params": {
+        "param_names": [
+          "Name"
+        ]
+      }
+    },
+    {
+      "id": "s08_goster",
+      "op": "show_table",
+      "from": "s07_satirlar",
+      "params": {
+        "title": "Üretilen Akslar"
+      }
+    }
+  ]
+}

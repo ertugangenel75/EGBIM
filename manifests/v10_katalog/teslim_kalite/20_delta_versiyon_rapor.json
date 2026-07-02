@@ -1,0 +1,100 @@
+{
+  "title": "Delta / Versiyon Karşılaştırma Raporu",
+  "description": "Önceki çalıştırma izlerini okur, mevcut modelle karşılaştırır ve ne değişti raporunu üretir. Haftalık koordinasyon toplantıları için kullanılır.",
+  "category": "Teslim Kalite",
+  "version": "1.0.0",
+  "tags": [
+    "delta",
+    "versiyon",
+    "karşılaştırma",
+    "trace",
+    "değişiklik"
+  ],
+  "steps": [
+    {
+      "id": "s01_tum",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_Walls",
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Floors"
+        ]
+      }
+    },
+    {
+      "id": "s02_checksum",
+      "op": "model_checksum",
+      "from": "s01_tum"
+    },
+    {
+      "id": "s03_trace_bul",
+      "op": "trace_find_existing",
+      "from": "s01_tum",
+      "params": {
+        "trace_key": "egbim_haftalik"
+      }
+    },
+    {
+      "id": "s04_karsilastir",
+      "op": "compare_run_result",
+      "from": "s03_trace_bul",
+      "params": {
+        "trace_key": "egbim_haftalik"
+      }
+    },
+    {
+      "id": "s05_delta_pm",
+      "op": "pm_model_delta_summary"
+    },
+    {
+      "id": "s06_trace_yaz",
+      "op": "trace_write",
+      "from": "s01_tum",
+      "params": {
+        "trace_key": "egbim_haftalik"
+      }
+    },
+    {
+      "id": "s07_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s04_karsilastir",
+      "params": {
+        "param_names": [
+          "ElementId",
+          "ChangeType",
+          "Parameter",
+          "OldValue",
+          "NewValue"
+        ]
+      }
+    },
+    {
+      "id": "s08_excel",
+      "op": "export_xlsx",
+      "from": "s07_satirlar",
+      "params": {
+        "file_path": "EG_Delta_Rapor.xlsx",
+        "sheet_name": "Delta",
+        "title": "Versiyon Delta Raporu"
+      }
+    },
+    {
+      "id": "s09_html",
+      "op": "export_html_report",
+      "from": "s07_satirlar",
+      "params": {
+        "title": "Model Değişiklik Delta Raporu"
+      }
+    },
+    {
+      "id": "s10_goster",
+      "op": "show_table",
+      "from": "s07_satirlar",
+      "params": {
+        "title": "Bu Haftanın Değişiklikleri"
+      }
+    }
+  ]
+}

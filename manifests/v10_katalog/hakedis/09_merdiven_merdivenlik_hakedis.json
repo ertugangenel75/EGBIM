@@ -1,0 +1,111 @@
+{
+  "title": "Merdiven ve Rampa Hakediş",
+  "description": "Merdiven, rampa ve korkuluk elemanlarının metrajını çıkarır, poz eşler ve hakediş raporu üretir.",
+  "category": "Hakediş",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Stairs"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Stairs elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "hakediş",
+    "merdiven",
+    "rampa",
+    "korkuluk",
+    "metraj"
+  ],
+  "steps": [
+    {
+      "id": "s01_poz",
+      "op": "load_poz_data",
+      "params": {
+        "file": "csb_poz_2026.json"
+      }
+    },
+    {
+      "id": "s02_merdivenler",
+      "op": "collect_stairs"
+    },
+    {
+      "id": "s03_rampalar",
+      "op": "collect_ramps"
+    },
+    {
+      "id": "s04_birlestir",
+      "op": "merge_lists",
+      "from_many": [
+        "s02_merdivenler",
+        "s03_rampalar"
+      ]
+    },
+    {
+      "id": "s05_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s04_birlestir",
+      "params": {
+        "param_names": [
+          "Family",
+          "Type",
+          "Actual Tread Depth",
+          "Actual Riser Height",
+          "TR_PozNo"
+        ]
+      }
+    },
+    {
+      "id": "s06_poz_esle",
+      "op": "poz_match",
+      "from": "s05_satirlar",
+      "params": {
+        "category_field": "Category",
+        "type_field": "Type"
+      }
+    },
+    {
+      "id": "s07_maliyet",
+      "op": "calc_cost",
+      "from": "s06_poz_esle",
+      "params": {
+        "quantity_field": "Area"
+      }
+    },
+    {
+      "id": "s08_kat_grup",
+      "op": "group_elements_by_level",
+      "from": "s04_birlestir"
+    },
+    {
+      "id": "s09_tip_ozet",
+      "op": "cost_summary",
+      "from": "s07_maliyet",
+      "params": {
+        "group_by": "Type"
+      }
+    },
+    {
+      "id": "s10_excel",
+      "op": "export_xlsx",
+      "from": "s07_maliyet",
+      "params": {
+        "file_path": "EG_Merdiven_Hakedis.xlsx",
+        "sheet_name": "Merdiven Hakediş",
+        "title": "Merdiven ve Rampa Hakediş"
+      }
+    },
+    {
+      "id": "s11_goster",
+      "op": "show_table",
+      "from": "s09_tip_ozet",
+      "params": {
+        "title": "Merdiven/Rampa Tip Bazlı Maliyet"
+      }
+    }
+  ]
+}

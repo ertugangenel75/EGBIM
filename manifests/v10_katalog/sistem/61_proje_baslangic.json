@@ -1,0 +1,83 @@
+{
+  "title": "Proje Başlangıç Kurulumu",
+  "description": "Yeni Revit projesinde EGBIM shared parametrelerini yükler, workset yapısını kurar, isimlendirme kurallarını uygular ve başlangıç sağlığını doğrular.",
+  "category": "Sistem",
+  "version": "1.0.0",
+  "tags": [
+    "proje başlangıç",
+    "shared param",
+    "workset",
+    "isimlendirme",
+    "kurulum"
+  ],
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_param_ekle",
+      "op": "add_shared_params",
+      "params": {
+        "spf_path": "EGBIM_SharedParams.txt",
+        "group_filter": "EGBIM"
+      }
+    },
+    {
+      "id": "s02_workset",
+      "op": "workset_by_level"
+    },
+    {
+      "id": "s03_isim",
+      "op": "pm_validate_naming_convention",
+      "params": {
+        "name_pattern": "^[A-Z]{2}-[0-9]{3}"
+      }
+    },
+    {
+      "id": "s04_proje_bilgi",
+      "op": "pm_get_project_info"
+    },
+    {
+      "id": "s05_param_listele",
+      "op": "list_shared_params"
+    },
+    {
+      "id": "s06_saglik",
+      "op": "eg_health_snapshot",
+      "params": {
+        "format": "html",
+        "open": false,
+        "out_path": "EG_Proje_Baslangic.html"
+      }
+    },
+    {
+      "id": "s07_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s05_param_listele",
+      "params": {
+        "param_names": [
+          "Name",
+          "Group",
+          "DataType",
+          "GUID"
+        ]
+      }
+    },
+    {
+      "id": "s08_excel",
+      "op": "export_xlsx",
+      "from": "s07_satirlar",
+      "params": {
+        "file_path": "EG_Proje_Baslangic.xlsx",
+        "sheet_name": "Kurulum",
+        "title": "Proje Başlangıç Raporu"
+      }
+    },
+    {
+      "id": "s09_goster",
+      "op": "show_result",
+      "from": "s01_param_ekle",
+      "params": {
+        "title": "Proje Kurulum Tamamlandı"
+      }
+    }
+  ]
+}

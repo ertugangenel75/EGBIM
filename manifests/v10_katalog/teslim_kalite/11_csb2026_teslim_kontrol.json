@@ -1,0 +1,133 @@
+{
+  "title": "ÇŞB 2026 Teslim Kontrolü",
+  "description": "ÇŞB 2026 zorunlu parametrelerini kontrol eder, IDS doğrulaması yapar ve IFC teslim hazırlığını raporlar. Proje teslimi öncesi çalıştırılır.",
+  "category": "Teslim Kalite",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Walls elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "csb2026",
+    "teslim",
+    "ids",
+    "ifc",
+    "zorunlu param",
+    "qa"
+  ],
+  "steps": [
+    {
+      "id": "s01_ifc_map",
+      "op": "load_ifc_mapping",
+      "params": {
+        "ifc_path": "ifc_mapping.json"
+      }
+    },
+    {
+      "id": "s02_param_map",
+      "op": "load_shared_param_map",
+      "params": {
+        "map_path": "shared_param_map.json"
+      }
+    },
+    {
+      "id": "s03_duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "s04_kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "s05_dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "s06_odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "s07_birlestir",
+      "op": "merge_lists",
+      "from_many": [
+        "s03_duvarlar",
+        "s04_kolonlar",
+        "s05_dosemeler",
+        "s06_odalar"
+      ]
+    },
+    {
+      "id": "s08_zorunlu_param",
+      "op": "validate_required_params",
+      "from": "s07_birlestir",
+      "params": {
+        "required_params": [
+          "TR_BIM_KategoriKodu",
+          "TR_BIM_DisiplinKodu",
+          "TR_PozNo",
+          "TR_WBS_Kodu"
+        ]
+      }
+    },
+    {
+      "id": "s09_ids_kontrol",
+      "op": "validate_ids",
+      "from": "s07_birlestir",
+      "params": {
+        "ids_path": "ids_csb2026.ids"
+      }
+    },
+    {
+      "id": "s10_koordinat",
+      "op": "qa_validate_coordinates"
+    },
+    {
+      "id": "s11_uyari",
+      "op": "qa_get_model_warnings"
+    },
+    {
+      "id": "s12_birlestir_val",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "s08_zorunlu_param",
+        "s09_ids_kontrol"
+      ],
+      "params": {
+        "title": "ÇŞB 2026 Teslim Kontrol"
+      }
+    },
+    {
+      "id": "s13_satirlar",
+      "op": "validation_to_rows",
+      "from": "s12_birlestir_val"
+    },
+    {
+      "id": "s14_html",
+      "op": "export_html_report",
+      "from": "s13_satirlar",
+      "params": {
+        "title": "ÇŞB 2026 Teslim Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s15_ozet",
+      "op": "validation_summary",
+      "from": "s12_birlestir_val"
+    },
+    {
+      "id": "s16_goster",
+      "op": "show_result",
+      "from": "s15_ozet",
+      "params": {
+        "title": "ÇŞB 2026 Teslim Durumu"
+      }
+    }
+  ]
+}

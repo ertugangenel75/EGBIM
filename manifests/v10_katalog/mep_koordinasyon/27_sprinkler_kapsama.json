@@ -1,0 +1,107 @@
+{
+  "title": "Sprinkler Kapsama ve Tasarım Yoğunluğu",
+  "description": "Sprinkler başlıklarının kapsama alanını doğrular, Hazen-Williams ile basınç hesabı yapar ve tasarım yoğunluğunu kontrol eder.",
+  "category": "MEP Koordinasyon",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Sprinklers"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Sprinklers elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "yangın",
+    "sprinkler",
+    "kapsama",
+    "hazen-williams",
+    "hidrolik"
+  ],
+  "steps": [
+    {
+      "id": "s01_sprinkler",
+      "op": "collect_sprinklers"
+    },
+    {
+      "id": "s02_borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "s03_odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "s04_kapsama",
+      "op": "fp_validate_sprinkler_coverage",
+      "from": "s01_sprinkler",
+      "params": {
+        "max_coverage_m2": 12
+      }
+    },
+    {
+      "id": "s05_yogunluk",
+      "op": "calc_sprinkler_design_density",
+      "from": "s01_sprinkler",
+      "params": {
+        "hazard_class": "OH1",
+        "system_type": "wet",
+        "area_m2": 144
+      }
+    },
+    {
+      "id": "s06_basinc",
+      "op": "calc_hazen_williams",
+      "from": "s02_borular",
+      "params": {
+        "flow_rate_lpm": 80,
+        "pipe_diam_mm": 25,
+        "c_factor": 120
+      }
+    },
+    {
+      "id": "s07_schedule",
+      "op": "sprinkler_head_schedule",
+      "from": "s01_sprinkler",
+      "params": {
+        "k_factor_param": "K-Factor",
+        "coverage_param": "Coverage Area",
+        "zone_param": "Zone"
+      }
+    },
+    {
+      "id": "s08_val_satirlar",
+      "op": "validation_to_rows",
+      "from": "s04_kapsama"
+    },
+    {
+      "id": "s09_html",
+      "op": "export_html_report",
+      "from": "s08_val_satirlar",
+      "params": {
+        "title": "Sprinkler Kapsama Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s10_excel",
+      "op": "export_xlsx",
+      "from": "s07_schedule",
+      "params": {
+        "file_path": "EG_Sprinkler_Schedule.xlsx",
+        "sheet_name": "Sprinkler Listesi",
+        "title": "Sprinkler Schedule"
+      }
+    },
+    {
+      "id": "s11_goster",
+      "op": "show_table",
+      "from": "s08_val_satirlar",
+      "params": {
+        "title": "Sprinkler Kapsama Sonuçları"
+      }
+    }
+  ]
+}

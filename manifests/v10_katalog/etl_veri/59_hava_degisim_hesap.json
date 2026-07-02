@@ -1,0 +1,101 @@
+{
+  "title": "Hava Değişim Sayısı Hesabı",
+  "description": "Odaların hacmine ve kullanım tipine göre gereken hava değişim sayısını hesaplar, yetersiz HVAC bölgelerini tespit eder.",
+  "category": "ETL Veri",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rooms"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Rooms elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "hava değişimi",
+    "hvac",
+    "ach",
+    "oda",
+    "mekanik",
+    "hesap"
+  ],
+  "steps": [
+    {
+      "id": "s01_odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "s02_terminaller",
+      "op": "collect_air_terminals"
+    },
+    {
+      "id": "s03_hava_hesap",
+      "op": "calc_ach_airflow",
+      "from": "s01_odalar",
+      "params": {
+        "area_m2": "Area",
+        "height_m": "Height",
+        "ach": 6
+      }
+    },
+    {
+      "id": "s04_hvac_val",
+      "op": "mep_validate_space_hvac_zone",
+      "from": "s01_odalar"
+    },
+    {
+      "id": "s05_terminal_map",
+      "op": "mep_air_terminal_space_map",
+      "from": "s02_terminaller"
+    },
+    {
+      "id": "s06_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_odalar",
+      "params": {
+        "param_names": [
+          "Name",
+          "Number",
+          "Area",
+          "Level",
+          "TR_HavaDebisi",
+          "TR_ACH"
+        ]
+      }
+    },
+    {
+      "id": "s07_val_satirlar",
+      "op": "validation_to_rows",
+      "from": "s04_hvac_val"
+    },
+    {
+      "id": "s08_html",
+      "op": "export_html_report",
+      "from": "s07_val_satirlar",
+      "params": {
+        "title": "Hava Değişim Sayısı Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s09_excel",
+      "op": "export_xlsx",
+      "from": "s06_satirlar",
+      "params": {
+        "file_path": "EG_ACH_Rapor.xlsx",
+        "sheet_name": "Hava Değişimi",
+        "title": "Oda Hava Değişim Sayısı"
+      }
+    },
+    {
+      "id": "s10_goster",
+      "op": "show_table",
+      "from": "s06_satirlar",
+      "params": {
+        "title": "Oda Hava Değişim Özeti"
+      }
+    }
+  ]
+}

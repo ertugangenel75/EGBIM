@@ -1,0 +1,109 @@
+{
+  "title": "Donatı Hakediş",
+  "description": "Modeldeki tüm donatıları toplar, çap bazında ağırlık hesaplar, ÇŞB 2026 poz koduyla eşler ve kg bazlı Excel hakediş raporu üretir.",
+  "category": "Hakediş",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rebar"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Rebar elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "hakediş",
+    "donatı",
+    "demir",
+    "kg",
+    "poz",
+    "csb2026"
+  ],
+  "steps": [
+    {
+      "id": "s01_poz",
+      "op": "load_poz_data",
+      "params": {
+        "file": "csb_poz_2026.json"
+      }
+    },
+    {
+      "id": "s02_donati",
+      "op": "collect_rebar"
+    },
+    {
+      "id": "s03_agirlik",
+      "op": "rebar_weight_calc",
+      "from": "s02_donati"
+    },
+    {
+      "id": "s04_cap_ozet",
+      "op": "rebar_summary_by_diameter",
+      "from": "s02_donati"
+    },
+    {
+      "id": "s05_kat_ozet",
+      "op": "rebar_summary_by_level",
+      "from": "s02_donati"
+    },
+    {
+      "id": "s06_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s02_donati",
+      "params": {
+        "param_names": [
+          "Diameter",
+          "BarLength",
+          "HostId",
+          "TR_PozNo"
+        ]
+      }
+    },
+    {
+      "id": "s07_poz_esle",
+      "op": "poz_match",
+      "from": "s06_satirlar",
+      "params": {
+        "category_field": "Category",
+        "type_field": "Diameter"
+      }
+    },
+    {
+      "id": "s08_maliyet",
+      "op": "calc_cost",
+      "from": "s07_poz_esle",
+      "params": {
+        "quantity_field": "Weight_kg"
+      }
+    },
+    {
+      "id": "s09_poz_ozet",
+      "op": "cost_summary",
+      "from": "s08_maliyet",
+      "params": {
+        "group_by": "poz_no"
+      }
+    },
+    {
+      "id": "s10_excel",
+      "op": "export_xlsx",
+      "from": "s08_maliyet",
+      "params": {
+        "file_path": "EG_Donati_Hakedis.xlsx",
+        "sheet_name": "Donatı Hakediş",
+        "title": "Donatı Hakediş"
+      }
+    },
+    {
+      "id": "s11_goster",
+      "op": "show_table",
+      "from": "s04_cap_ozet",
+      "params": {
+        "title": "Donatı Çap Özeti (kg)"
+      }
+    }
+  ]
+}

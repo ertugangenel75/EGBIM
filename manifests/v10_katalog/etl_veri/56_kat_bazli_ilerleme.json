@@ -1,0 +1,115 @@
+{
+  "title": "Kat Bazlı İlerleme ve WBS Bağlantısı",
+  "description": "Kat bazında eleman sayısı, hacim ve maliyet verilerini WBS koduyla bağlar ve ilerleme CSV/Excel üretir.",
+  "category": "ETL Veri",
+  "version": "1.0.0",
+  "tags": [
+    "ilerleme",
+    "kat",
+    "wbs",
+    "maliyet",
+    "csv",
+    "dashboard"
+  ],
+  "steps": [
+    {
+      "id": "s01_poz",
+      "op": "load_poz_data",
+      "params": {
+        "file": "csb_poz_2026.json"
+      }
+    },
+    {
+      "id": "s02_tum",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Floors",
+          "OST_Walls"
+        ]
+      }
+    },
+    {
+      "id": "s03_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s02_tum",
+      "params": {
+        "param_names": [
+          "Category",
+          "Level",
+          "Volume",
+          "TR_WBS_Kodu",
+          "TR_PozNo",
+          "TR_IlerlemeYuzdesi"
+        ]
+      }
+    },
+    {
+      "id": "s04_wbs_ata",
+      "op": "assign_wbs_code",
+      "from": "s03_satirlar",
+      "params": {
+        "category_field": "Category"
+      }
+    },
+    {
+      "id": "s05_poz_esle",
+      "op": "poz_match",
+      "from": "s04_wbs_ata",
+      "params": {
+        "category_field": "Category",
+        "type_field": "Type"
+      }
+    },
+    {
+      "id": "s06_maliyet",
+      "op": "calc_cost",
+      "from": "s05_poz_esle",
+      "params": {
+        "quantity_field": "Volume"
+      }
+    },
+    {
+      "id": "s07_kat_ozet",
+      "op": "cost_by_level",
+      "from": "s06_maliyet"
+    },
+    {
+      "id": "s08_wbs_link",
+      "op": "link_quantity_to_wbs",
+      "from": "s06_maliyet",
+      "params": {
+        "quantity_field": "Volume",
+        "wbs_field": "TR_WBS_Kodu"
+      }
+    },
+    {
+      "id": "s09_csv",
+      "op": "export_csv",
+      "from": "s07_kat_ozet",
+      "params": {
+        "file_path": "EG_Kat_Ilerleme.csv"
+      }
+    },
+    {
+      "id": "s10_excel",
+      "op": "export_xlsx",
+      "from": "s07_kat_ozet",
+      "params": {
+        "file_path": "EG_Kat_Ilerleme.xlsx",
+        "sheet_name": "Kat İlerleme",
+        "title": "Kat Bazlı İlerleme"
+      }
+    },
+    {
+      "id": "s11_goster",
+      "op": "show_table",
+      "from": "s07_kat_ozet",
+      "params": {
+        "title": "Kat Bazlı İlerleme ve Maliyet"
+      }
+    }
+  ]
+}

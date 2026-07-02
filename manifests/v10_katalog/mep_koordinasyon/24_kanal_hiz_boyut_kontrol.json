@@ -1,0 +1,109 @@
+{
+  "title": "Kanal Hız ve Boyut Kontrolü",
+  "description": "HVAC kanallarının hava hızını ve boyut sınırlarını doğrular, en-boy oranını kontrol eder ve aykırı değerleri raporlar.",
+  "category": "MEP Koordinasyon",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_DuctCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde DuctCurves elemanı bulunamadı"
+    }
+  ],
+  "tags": [
+    "kanal",
+    "hvac",
+    "hız",
+    "boyut",
+    "mep",
+    "kontrol"
+  ],
+  "steps": [
+    {
+      "id": "s01_kanallar",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "s02_hiz",
+      "op": "mep_validate_duct_velocity",
+      "from": "s01_kanallar",
+      "params": {
+        "max_velocity_m_s": 8
+      }
+    },
+    {
+      "id": "s03_boyut",
+      "op": "mep_validate_duct_size",
+      "from": "s01_kanallar",
+      "params": {
+        "min_size_mm": 100
+      }
+    },
+    {
+      "id": "s04_oran",
+      "op": "duct_aspect_ratio_check",
+      "from": "s01_kanallar",
+      "params": {
+        "max_ratio": 4,
+        "severity": "WARNING"
+      }
+    },
+    {
+      "id": "s05_egim",
+      "op": "mep_validate_duct_slope",
+      "from": "s01_kanallar",
+      "params": {
+        "min_slope_pct": 0.5
+      }
+    },
+    {
+      "id": "s06_val_birlestir",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "s02_hiz",
+        "s03_boyut"
+      ],
+      "params": {
+        "title": "Kanal Hız ve Boyut Kontrolü"
+      }
+    },
+    {
+      "id": "s07_satirlar",
+      "op": "validation_to_rows",
+      "from": "s06_val_birlestir"
+    },
+    {
+      "id": "s08_oran_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s04_oran",
+      "params": {
+        "param_names": [
+          "Size",
+          "Velocity",
+          "AspectRatio",
+          "Level"
+        ]
+      }
+    },
+    {
+      "id": "s09_html",
+      "op": "export_html_report",
+      "from": "s07_satirlar",
+      "params": {
+        "title": "Kanal Hız ve Boyut Kontrol Raporu"
+      }
+    },
+    {
+      "id": "s10_goster",
+      "op": "show_table",
+      "from": "s07_satirlar",
+      "params": {
+        "title": "Kanal Kontrol Sonuçları"
+      }
+    }
+  ]
+}
