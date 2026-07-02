@@ -1,0 +1,71 @@
+{
+  "title": "PM: BEP Parametre Doldurma Kontrolü",
+  "category": "proje_yonetimi",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "hepsi",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_Walls",
+          "OST_Floors",
+          "OST_Columns"
+        ]
+      }
+    },
+    {
+      "id": "kontrol",
+      "op": "pm_validate_lod",
+      "from": "hepsi",
+      "params": {
+        "lod_level": "BEP",
+        "required_params": [
+          "EGBIM_POZ_KODU",
+          "EGBIM_MALZEME",
+          "EGBIM_WBS_KODU",
+          "Mark"
+        ]
+      }
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "satırlar",
+      "params": {
+        "title": "BEP Parametre",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "kontrol"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    }
+  ],
+  "id": "pm06_bep_param",
+  "description": "PM: BEP Parametre Doldurma Kontrolü — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "proje",
+    "yonetim",
+    "workset"
+  ]
+}

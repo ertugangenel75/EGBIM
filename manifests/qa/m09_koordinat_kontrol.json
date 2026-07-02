@@ -1,0 +1,55 @@
+{
+  "title": "QA: Koordinat Sistemi Kontrolü",
+  "category": "qa",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "koord",
+      "op": "qa_validate_coordinates"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "koord",
+      "params": {
+        "title": "Koordinat Kontrolü",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "koord"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "kat_ozet"
+    }
+  ],
+  "id": "m09_koordinat_kontrol",
+  "description": "QA: Koordinat Sistemi Kontrolü — 5 adımlı otomasyon iş akışı.",
+  "tags": [
+    "qa",
+    "kalite",
+    "kontrol",
+    "validation"
+  ]
+}

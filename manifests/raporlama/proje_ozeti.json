@@ -1,0 +1,100 @@
+{
+  "title": "Proje Bilgi Kartı",
+  "description": "Proje adı, revit versiyonu, eleman sayısı, op kataloğu ve temel model istatistiklerini tek raporda sunar.",
+  "version": "1.0.0",
+  "category": "Raporlama",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "sistem",
+      "op": "system_info"
+    },
+    {
+      "id": "op_saglik",
+      "op": "op_health_check"
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "katlar",
+      "op": "collect_levels"
+    },
+    {
+      "id": "d_sayi",
+      "op": "element_count",
+      "from": "duvarlar"
+    },
+    {
+      "id": "k_sayi",
+      "op": "element_count",
+      "from": "kolonlar"
+    },
+    {
+      "id": "o_sayi",
+      "op": "element_count",
+      "from": "odalar"
+    },
+    {
+      "id": "r_sistem",
+      "op": "show_result",
+      "from": "sistem",
+      "params": {
+        "title": "Proje Bilgileri"
+      }
+    },
+    {
+      "id": "r_op",
+      "op": "show_result",
+      "from": "op_saglik",
+      "params": {
+        "title": "EGBIMOTO Sistem Durumu"
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "katlar"
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "kat_bazli"
+    },
+    {
+      "id": "xlsx_rapor",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "Proje Bilgi Kartı"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "rapor",
+    "report",
+    "export"
+  ]
+}

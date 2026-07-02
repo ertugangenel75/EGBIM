@@ -1,0 +1,48 @@
+{
+  "title": "PM: Proje Bilgi Kartı",
+  "category": "proje_yonetimi",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "bilgi",
+      "op": "pm_get_project_info"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "bilgi",
+      "params": {
+        "title": "Proje Bilgi Kartı",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "bilgi",
+      "params": {
+        "title": "PM: Proje Bilgi Kartı"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "bilgi"
+    }
+  ],
+  "id": "pm02_proje_bilgi_karti",
+  "description": "PM: Proje Bilgi Kartı — 4 adımlı otomasyon iş akışı.",
+  "tags": [
+    "proje",
+    "yonetim",
+    "workset"
+  ]
+}

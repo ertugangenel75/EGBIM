@@ -1,0 +1,65 @@
+{
+  "title": "PM: Model Delta / Değişim Raporu",
+  "category": "proje_yonetimi",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "hepsi",
+      "op": "merge_lists",
+      "from_many": [
+        "duvarlar",
+        "kolonlar"
+      ]
+    },
+    {
+      "id": "checksum",
+      "op": "model_checksum",
+      "from": "hepsi"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "checksum",
+      "params": {
+        "title": "Delta Raporu",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "checksum",
+      "params": {
+        "title": "PM: Model Delta / Değişim Raporu"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "kolonlar"
+    }
+  ],
+  "id": "pm05_delta_rapor",
+  "description": "PM: Model Delta / Değişim Raporu — 7 adımlı otomasyon iş akışı.",
+  "tags": [
+    "proje",
+    "yonetim",
+    "workset"
+  ]
+}

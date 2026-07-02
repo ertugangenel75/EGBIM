@@ -1,0 +1,64 @@
+{
+  "title": "QA: Model Boyut Analizi",
+  "category": "qa",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "analiz",
+      "op": "qa_model_size_analysis"
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "analiz",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Model Analizi"
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "analiz"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "kat_ozet"
+    },
+    {
+      "id": "html_rapor",
+      "op": "export_validation_report",
+      "from": "ozet",
+      "required": false,
+      "params": {
+        "title": "QA: Model Boyut Analizi"
+      }
+    }
+  ],
+  "id": "m10_model_boyut",
+  "description": "QA: Model Boyut Analizi — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "qa",
+    "kalite",
+    "kontrol",
+    "validation"
+  ]
+}

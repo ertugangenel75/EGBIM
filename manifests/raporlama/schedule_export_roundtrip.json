@@ -1,0 +1,36 @@
+{
+  "title": "Schedule → Excel (Round-trip Hazır)",
+  "description": "Bir Revit schedule'ını (cetvel) birebir görsel sadakatle Excel'e çıkarır. Her eleman satırına gizli bir UniqueId anchor sütunu (__egbimoto_uid__) eklenir; bu sayede kullanıcı Excel'de değer düzenleyip schedule_roundtrip_diff/apply ile modele geri yazabilir. Anchor, geçici alan + rollback ile alınır — model kalıcı olarak DEĞİŞMEZ. Round-trip uygun değilse (malzeme metrajı, gömülü, bağlı model) yalnızca görüntü çıktısı üretilir.",
+  "version": "1.0",
+  "category": "raporlama",
+  "tags": ["schedule", "cetvel", "excel", "round-trip", "anchor", "uid", "geri-yazma"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "cikar",
+      "op": "schedule_export_anchored",
+      "params": {
+        "schedule_name": "Kapı Tablosu",
+        "include_anchor": "true"
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "cikar",
+      "params": {
+        "title": "Schedule Önizleme (anchor dahil)",
+        "max_rows": 200
+      }
+    },
+    {
+      "id": "excel",
+      "op": "export_xlsx",
+      "from": "cikar",
+      "params": {
+        "sheet_name": "Schedule_Roundtrip",
+        "title": "Schedule Round-trip Çıktısı"
+      }
+    }
+  ]
+}

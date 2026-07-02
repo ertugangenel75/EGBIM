@@ -1,0 +1,97 @@
+{
+  "title": "PM: Tam Proje Özet Raporu",
+  "category": "proje_yonetimi",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "poz_yukle",
+      "op": "load_poz_data",
+      "required": false
+    },
+    {
+      "id": "proje",
+      "op": "pm_get_project_info"
+    },
+    {
+      "id": "boyut",
+      "op": "qa_model_size_analysis"
+    },
+    {
+      "id": "uyarilar",
+      "op": "qa_get_model_warnings"
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "hepsi",
+      "op": "merge_lists",
+      "from_many": [
+        "duvarlar",
+        "kolonlar"
+      ]
+    },
+    {
+      "id": "wbs",
+      "op": "assign_wbs_code",
+      "from": "hepsi"
+    },
+    {
+      "id": "poz",
+      "op": "poz_match",
+      "from": "wbs",
+      "params": {
+        "data_path": "poz/csb_poz_2026.json"
+      }
+    },
+    {
+      "id": "maliyet",
+      "op": "calc_cost",
+      "from": "poz"
+    },
+    {
+      "id": "ozet",
+      "op": "cost_summary",
+      "from": "maliyet"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "boyut",
+      "params": {
+        "title": "Tam Proje Raporu",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "ozet_2",
+      "op": "validation_summary",
+      "from": "ozet"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "ozet"
+    }
+  ],
+  "id": "pm10_tam_proje_raporu",
+  "description": "PM: Tam Proje Özet Raporu — 14 adımlı otomasyon iş akışı.",
+  "tags": [
+    "proje",
+    "yonetim",
+    "workset"
+  ]
+}

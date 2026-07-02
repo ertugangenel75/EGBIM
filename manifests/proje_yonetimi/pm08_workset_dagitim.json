@@ -1,0 +1,68 @@
+{
+  "title": "PM: Workset Dağılım Analizi",
+  "category": "proje_yonetimi",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "mep",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "yapisal",
+      "op": "collect_beams"
+    },
+    {
+      "id": "d_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "duvarlar",
+      "params": {
+        "param_names": [
+          "Workset",
+          "Level",
+          "Category"
+        ]
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "d_satirlar",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Workset Dağılımı"
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "yapisal"
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "kat_bazli",
+      "params": {
+        "title": "PM: Workset Dağılım Analizi"
+      }
+    }
+  ],
+  "id": "pm08_workset_dagitim",
+  "description": "PM: Workset Dağılım Analizi — 7 adımlı otomasyon iş akışı.",
+  "tags": [
+    "proje",
+    "yonetim",
+    "workset"
+  ]
+}

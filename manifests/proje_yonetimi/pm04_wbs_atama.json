@@ -1,0 +1,73 @@
+{
+  "title": "PM: WBS Kod Ataması",
+  "category": "proje_yonetimi",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "hepsi",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_Walls",
+          "OST_Floors",
+          "OST_Columns",
+          "OST_StructuralFraming"
+        ]
+      }
+    },
+    {
+      "id": "wbs",
+      "op": "assign_wbs_code",
+      "from": "hepsi"
+    },
+    {
+      "id": "kontrol",
+      "op": "validate_required_params",
+      "from": "hepsi",
+      "params": {
+        "required_params": [
+          "EGBIM_WBS_KODU"
+        ]
+      }
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "satırlar",
+      "params": {
+        "title": "WBS Atama",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "kontrol"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    }
+  ],
+  "id": "pm04_wbs_atama",
+  "description": "PM: WBS Kod Ataması — 7 adımlı otomasyon iş akışı.",
+  "tags": [
+    "proje",
+    "yonetim",
+    "workset"
+  ]
+}

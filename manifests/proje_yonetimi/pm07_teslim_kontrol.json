@@ -1,0 +1,69 @@
+{
+  "title": "PM: Teslim Öncesi Kontrol Listesi",
+  "category": "proje_yonetimi",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "uyarilar",
+      "op": "qa_get_model_warnings"
+    },
+    {
+      "id": "boyut",
+      "op": "qa_model_size_analysis"
+    },
+    {
+      "id": "koordinat",
+      "op": "qa_validate_coordinates"
+    },
+    {
+      "id": "proje",
+      "op": "pm_get_project_info"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "boyut",
+      "params": {
+        "title": "Teslim Öncesi Kontrol",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "uyarilar",
+        "boyut",
+        "koordinat"
+      ],
+      "params": {
+        "title": "PM: Teslim Öncesi Kontrol Listesi"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "birlesik"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "birlesik"
+    }
+  ],
+  "id": "pm07_teslim_kontrol",
+  "description": "PM: Teslim Öncesi Kontrol Listesi — 8 adımlı otomasyon iş akışı.",
+  "tags": [
+    "proje",
+    "yonetim",
+    "workset"
+  ]
+}

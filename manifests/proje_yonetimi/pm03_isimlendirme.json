@@ -1,0 +1,58 @@
+{
+  "title": "PM: İsimlendirme Standardı Kontrolü",
+  "category": "proje_yonetimi",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "tipler",
+      "op": "collect_types"
+    },
+    {
+      "id": "kontrol",
+      "op": "pm_validate_naming_convention",
+      "from": "tipler",
+      "params": {
+        "name_pattern": "^[A-ZÇŞĞÜÖİ]{2,4}-"
+      }
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "satırlar",
+      "params": {
+        "title": "İsimlendirme Standardı",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "kontrol"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    }
+  ],
+  "id": "pm03_isimlendirme",
+  "description": "PM: İsimlendirme Standardı Kontrolü — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "proje",
+    "yonetim",
+    "workset"
+  ]
+}

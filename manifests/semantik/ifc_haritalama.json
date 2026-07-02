@@ -1,0 +1,90 @@
+{
+  "title": "IFC Haritalama Raporu",
+  "description": "Revit kategori → IFC sınıfı eşlemesini tüm elemanlarda çalıştırır. IFC export öncesi eşleme doğrulama amaçlı.",
+  "version": "1.0.0",
+  "category": "Semantik",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "kirisler",
+      "op": "collect_beams"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "katlar",
+      "op": "collect_levels"
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_lists",
+      "from_many": [
+        "duvarlar",
+        "kolonlar",
+        "kirisler",
+        "dosemeler"
+      ]
+    },
+    {
+      "id": "ifc",
+      "op": "map_to_ifc",
+      "from": "birlesik"
+    },
+    {
+      "id": "disiplin",
+      "op": "classify_elements",
+      "from": "birlesik"
+    },
+    {
+      "id": "farkli",
+      "op": "distinct_rows",
+      "from": "ifc",
+      "params": {
+        "field": "ifc_sinifi"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "ifc",
+      "params": {
+        "title": "IFC Haritalama"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "ifc",
+      "params": {
+        "sheet_name": "IFC Mapping"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "semantik",
+    "analiz"
+  ]
+}

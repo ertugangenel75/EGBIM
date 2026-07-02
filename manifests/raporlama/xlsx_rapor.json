@@ -1,0 +1,84 @@
+{
+  "title": "Excel Metraj Raporu",
+  "description": "Duvar, kolon ve döşeme metrajını tek Excel dosyasına aktarır.",
+  "version": "1.0.0",
+  "category": "Raporlama",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "v_d",
+      "op": "wall_volume",
+      "from": "duvarlar"
+    },
+    {
+      "id": "v_k",
+      "op": "column_volume",
+      "from": "kolonlar"
+    },
+    {
+      "id": "v_f",
+      "op": "floor_volume",
+      "from": "dosemeler"
+    },
+    {
+      "id": "birlestir",
+      "op": "merge_rows",
+      "from_many": [
+        "v_d",
+        "v_k",
+        "v_f"
+      ]
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "birlestir",
+      "params": {
+        "sheet_name": "Metraj",
+        "title": "Metraj Raporu"
+      }
+    },
+    {
+      "id": "sonuc",
+      "op": "show_result",
+      "from": "xlsx",
+      "params": {
+        "title": "Excel Oluşturuldu"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "dosemeler"
+    }
+  ],
+  "tags": [
+    "rapor",
+    "report",
+    "export"
+  ]
+}

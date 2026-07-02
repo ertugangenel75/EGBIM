@@ -1,0 +1,71 @@
+{
+  "title": "PM: Parametre Doluluk Skoru",
+  "category": "proje_yonetimi",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "hepsi",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_Walls",
+          "OST_Floors",
+          "OST_Columns",
+          "OST_StructuralFraming",
+          "OST_Rooms"
+        ]
+      }
+    },
+    {
+      "id": "bos",
+      "op": "qa_find_empty_params",
+      "from": "hepsi",
+      "params": {
+        "param_names": [
+          "Mark",
+          "EGBIM_POZ_KODU",
+          "EGBIM_WBS_KODU"
+        ]
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "bos",
+      "params": {
+        "title": "Parametre Doluluk",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "bos"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "kat_ozet"
+    }
+  ],
+  "id": "pm09_param_doldurulmalik",
+  "description": "PM: Parametre Doluluk Skoru — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "proje",
+    "yonetim",
+    "workset"
+  ]
+}

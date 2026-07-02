@@ -1,0 +1,56 @@
+{
+  "title": "Excel → Schedule (Geri Yazma)",
+  "description": "Kullanıcının düzenlediği schedule satırlarını (anchor'lı, CSV/Excel'den okunmuş) canlı modelle karşılaştırır ve onaylanan değişiklikleri güvenle geri yazar. Her satır __egbimoto_uid__ ile elemana eşlenir. Sadece yazılabilir alanlar yazılır; her yazımdan sonra değer yeniden okunarak doğrulanır (sessiz Set hatalarına karşı). Tip parametresi yazımı tüm tipi etkilediği için ayrıca işaretlenir.",
+  "version": "1.0",
+  "category": "raporlama",
+  "tags": ["schedule", "cetvel", "excel", "import", "geri-yazma", "round-trip", "uid"],
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "oku",
+      "op": "csv_read",
+      "params": {
+        "file_path": "C:\\EGBIM\\schedule_duzenlenmis.csv",
+        "delimiter": ",",
+        "has_header": "true",
+        "encoding": "utf-8"
+      }
+    },
+    {
+      "id": "fark",
+      "op": "schedule_roundtrip_diff",
+      "from": "oku",
+      "params": {
+        "ignore_fields": ""
+      }
+    },
+    {
+      "id": "onizleme",
+      "op": "show_table",
+      "from": "fark",
+      "params": {
+        "title": "Değişiklik Önizleme (eski → yeni)",
+        "max_rows": 300
+      }
+    },
+    {
+      "id": "uygula",
+      "op": "schedule_roundtrip_apply",
+      "from": "fark",
+      "required": false,
+      "params": {
+        "apply_type_params": "true"
+      }
+    },
+    {
+      "id": "sonuc",
+      "op": "show_table",
+      "from": "uygula",
+      "required": false,
+      "params": {
+        "title": "Geri Yazma Sonuçları",
+        "max_rows": 300
+      }
+    }
+  ]
+}

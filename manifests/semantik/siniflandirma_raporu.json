@@ -1,0 +1,107 @@
+{
+  "title": "Semantik Sınıflandırma Raporu",
+  "description": "Tüm yapı elemanlarını EGBIM canonical class ve disiplin ile sınıflandırır. IFC, WBS ve poz eşleme için ön hazırlık adımı.",
+  "version": "1.0.0",
+  "category": "Semantik",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "kirisler",
+      "op": "collect_beams"
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "temeller",
+      "op": "collect_foundations"
+    },
+    {
+      "id": "catiler",
+      "op": "collect_roofs"
+    },
+    {
+      "id": "merdivenler",
+      "op": "collect_stairs"
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_lists",
+      "from_many": [
+        "kolonlar",
+        "kirisler",
+        "duvarlar",
+        "dosemeler",
+        "temeller",
+        "catiler",
+        "merdivenler"
+      ]
+    },
+    {
+      "id": "sinifla",
+      "op": "classify_elements",
+      "from": "birlesik"
+    },
+    {
+      "id": "wbs",
+      "op": "classify_by_wbs",
+      "from": "birlesik"
+    },
+    {
+      "id": "ifc",
+      "op": "map_to_ifc",
+      "from": "birlesik"
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "sinifla",
+      "params": {
+        "title": "Semantik Sınıflandırma"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "sinifla",
+      "params": {
+        "sheet_name": "Semantik"
+      },
+      "required": false
+    },
+    {
+      "id": "html",
+      "op": "export_html_report",
+      "from": "sinifla",
+      "params": {
+        "title": "Semantik Sınıflandırma Raporu"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "semantik",
+    "analiz"
+  ]
+}

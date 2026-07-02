@@ -1,0 +1,70 @@
+{
+  "title": "QA: Duplicate Element Tespiti",
+  "category": "qa",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "hepsi",
+      "op": "merge_lists",
+      "from_many": [
+        "duvarlar",
+        "kolonlar"
+      ]
+    },
+    {
+      "id": "duplar",
+      "op": "qa_detect_duplicates",
+      "from": "hepsi",
+      "params": {
+        "tolerance_mm": 15
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "duplar",
+      "params": {
+        "title": "Duplicate Eleman Raporu",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "duplar"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "duplar"
+    }
+  ],
+  "id": "m02_duplicate_tespiti",
+  "description": "QA: Duplicate Element Tespiti — 7 adımlı otomasyon iş akışı.",
+  "tags": [
+    "qa",
+    "kalite",
+    "kontrol",
+    "validation"
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "title": "Model İstatistik Raporu",
+  "description": "Tüm kategorilerdeki eleman sayılarını ve kat bazlı dağılımları pivot tablo olarak raporlar. Proje başlangıç özeti için.",
+  "version": "1.0.0",
+  "category": "Raporlama",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "kirisler",
+      "op": "collect_beams"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "temeller",
+      "op": "collect_foundations"
+    },
+    {
+      "id": "odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "kapılar",
+      "op": "collect_doors"
+    },
+    {
+      "id": "pencereler",
+      "op": "collect_windows"
+    },
+    {
+      "id": "merdivenler",
+      "op": "collect_stairs"
+    },
+    {
+      "id": "catiler",
+      "op": "collect_roofs"
+    },
+    {
+      "id": "n_d",
+      "op": "element_count",
+      "from": "duvarlar"
+    },
+    {
+      "id": "n_k",
+      "op": "element_count",
+      "from": "kolonlar"
+    },
+    {
+      "id": "n_ki",
+      "op": "element_count",
+      "from": "kirisler"
+    },
+    {
+      "id": "n_f",
+      "op": "element_count",
+      "from": "dosemeler"
+    },
+    {
+      "id": "n_t",
+      "op": "element_count",
+      "from": "temeller"
+    },
+    {
+      "id": "n_o",
+      "op": "element_count",
+      "from": "odalar"
+    },
+    {
+      "id": "kat_grup",
+      "op": "group_elements_by_level",
+      "from": "duvarlar"
+    },
+    {
+      "id": "r_ozet",
+      "op": "show_table",
+      "from": "kat_grup",
+      "params": {
+        "title": "Kat Bazlı Duvar Dağılımı"
+      }
+    },
+    {
+      "id": "sistem",
+      "op": "system_info"
+    },
+    {
+      "id": "r_sistem",
+      "op": "show_result",
+      "from": "sistem",
+      "params": {
+        "title": "Model Bilgileri"
+      }
+    },
+    {
+      "id": "xlsx_rapor",
+      "op": "export_xlsx",
+      "from": "sistem",
+      "params": {
+        "sheet_name": "Model İstatistik Raporu"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "rapor",
+    "report",
+    "export"
+  ]
+}

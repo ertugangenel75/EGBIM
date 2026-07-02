@@ -1,0 +1,76 @@
+{
+  "title": "QA: Seviye Ataması Kontrolü",
+  "category": "qa",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "mep",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "hepsi",
+      "op": "merge_lists",
+      "from_many": [
+        "mep",
+        "borular"
+      ]
+    },
+    {
+      "id": "kontrol",
+      "op": "qa_check_level_assigned",
+      "from": "hepsi"
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "satırlar",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Seviye Kontrolü"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kontrol"
+    },
+    {
+      "id": "html_rapor",
+      "op": "export_validation_report",
+      "from": "ozet",
+      "required": false,
+      "params": {
+        "title": "QA: Seviye Ataması Kontrolü"
+      }
+    }
+  ],
+  "id": "m03_seviye_atama",
+  "description": "QA: Seviye Ataması Kontrolü — 8 adımlı otomasyon iş akışı.",
+  "tags": [
+    "qa",
+    "kalite",
+    "kontrol",
+    "validation"
+  ]
+}

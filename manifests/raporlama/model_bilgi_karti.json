@@ -1,0 +1,63 @@
+{
+  "title": "Model Bilgi Kartı",
+  "description": "Proje bilgisi, eleman sayıları ve sistem durumunu gösterir.",
+  "version": "1.0.0",
+  "category": "Raporlama",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "bilgi",
+      "op": "system_info"
+    },
+    {
+      "id": "checksum",
+      "op": "model_checksum"
+    },
+    {
+      "id": "durum",
+      "op": "op_health_check"
+    },
+    {
+      "id": "g_bilgi",
+      "op": "show_table",
+      "from": "bilgi",
+      "params": {
+        "title": "Proje Bilgileri"
+      }
+    },
+    {
+      "id": "g_check",
+      "op": "show_table",
+      "from": "checksum",
+      "params": {
+        "title": "Model Eleman Sayıları"
+      }
+    },
+    {
+      "id": "xlsx_rapor",
+      "op": "export_xlsx",
+      "from": "durum",
+      "params": {
+        "sheet_name": "Model Bilgi Kartı"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "rapor",
+    "report",
+    "export"
+  ]
+}

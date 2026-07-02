@@ -1,0 +1,63 @@
+{
+  "title": "QA: Workset Kontrolü",
+  "category": "qa",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kontrol",
+      "op": "qa_validate_workset",
+      "from": "duvarlar",
+      "params": {
+        "expected_workset": "Mimari"
+      }
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "satırlar",
+      "params": {
+        "title": "Workset Kontrolü",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "kontrol"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    }
+  ],
+  "id": "m05_workset_kontrol",
+  "description": "QA: Workset Kontrolü — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "qa",
+    "kalite",
+    "kontrol",
+    "validation"
+  ]
+}

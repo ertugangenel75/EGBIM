@@ -1,0 +1,60 @@
+{
+  "title": "QA: Yerleştirilmemiş/Küçük Oda Tespiti",
+  "category": "qa",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "sorunlu",
+      "op": "qa_find_redundant_rooms",
+      "from": "odalar"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "sorunlu",
+      "params": {
+        "title": "Sorunlu Oda Raporu",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "odalar"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_bazli"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "kat_bazli"
+    }
+  ],
+  "id": "m07_oda_kontrol",
+  "description": "QA: Yerleştirilmemiş/Küçük Oda Tespiti — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "qa",
+    "kalite",
+    "kontrol",
+    "validation"
+  ]
+}

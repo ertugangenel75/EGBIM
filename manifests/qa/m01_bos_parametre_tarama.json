@@ -1,0 +1,81 @@
+{
+  "title": "QA: Boş Parametre Tarama",
+  "category": "qa",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "tummodel",
+      "op": "merge_lists",
+      "from_many": [
+        "duvarlar",
+        "dosemeler",
+        "kolonlar"
+      ]
+    },
+    {
+      "id": "bos_bul",
+      "op": "qa_find_empty_params",
+      "from": "tummodel",
+      "params": {
+        "param_names": [
+          "Mark",
+          "Comments",
+          "EGBIM_POZ_KODU",
+          "EGBIM_WBS_KODU"
+        ]
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "bos_bul",
+      "params": {
+        "title": "Boş Parametre Raporu",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "bos_bul"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "bos_bul"
+    }
+  ],
+  "id": "m01_bos_parametre_tarama",
+  "standard": "EGBIM-QA",
+  "description": "QA: Boş Parametre Tarama — 8 adımlı otomasyon iş akışı.",
+  "tags": [
+    "qa",
+    "kalite",
+    "kontrol",
+    "validation"
+  ]
+}

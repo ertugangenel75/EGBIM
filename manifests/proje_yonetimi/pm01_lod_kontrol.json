@@ -1,0 +1,71 @@
+{
+  "title": "PM: LOD Parametre Kontrolü",
+  "category": "proje_yonetimi",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "hepsi",
+      "op": "merge_lists",
+      "from_many": [
+        "duvarlar",
+        "kolonlar"
+      ]
+    },
+    {
+      "id": "kontrol",
+      "op": "pm_validate_lod",
+      "from": "hepsi",
+      "params": {
+        "lod_level": "LOD300",
+        "required_params": [
+          "EGBIM_POZ_KODU",
+          "EGBIM_WBS_KODU",
+          "Mark",
+          "Level"
+        ]
+      }
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "satırlar",
+      "params": {
+        "title": "LOD300 Kontrolü",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kontrol"
+    }
+  ],
+  "id": "pm01_lod_kontrol",
+  "description": "PM: LOD Parametre Kontrolü — 7 adımlı otomasyon iş akışı.",
+  "tags": [
+    "proje",
+    "yonetim",
+    "workset"
+  ]
+}

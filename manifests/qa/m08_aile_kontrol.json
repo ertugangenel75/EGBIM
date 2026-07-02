@@ -1,0 +1,67 @@
+{
+  "title": "QA: Onaylı Aile Listesi Kontrolü",
+  "category": "qa",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "aileler",
+      "op": "collect_families"
+    },
+    {
+      "id": "kontrol",
+      "op": "qa_check_approved_families",
+      "from": "aileler",
+      "params": {
+        "approved_family_keywords": [
+          "EGBIM",
+          "Standart",
+          "RFA"
+        ]
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "kontrol",
+      "params": {
+        "title": "Onaysız Aile Raporu",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "aileler"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_bazli"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "kat_bazli"
+    }
+  ],
+  "id": "m08_aile_kontrol",
+  "description": "QA: Onaylı Aile Listesi Kontrolü — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "qa",
+    "kalite",
+    "kontrol",
+    "validation"
+  ]
+}

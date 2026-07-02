@@ -1,0 +1,130 @@
+{
+  "title": "Teslim Öncesi Kontrol Paketi",
+  "description": "Model teslimi öncesi tam kontrol paketi: parametre doluluk, sıfır hacim, oda yerleşimi, TS500, IFC öncesi QA. Birleşik XLSX ve HTML.",
+  "version": "1.0.0",
+  "category": "Raporlama",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "donatı",
+      "op": "collect_rebar"
+    },
+    {
+      "id": "qa_yer",
+      "op": "check_unplaced_rooms",
+      "from": "odalar"
+    },
+    {
+      "id": "qa_cak",
+      "op": "check_overlapping_rooms",
+      "from": "odalar"
+    },
+    {
+      "id": "qa_hac",
+      "op": "check_zero_volume",
+      "from": "kolonlar"
+    },
+    {
+      "id": "qa_par",
+      "op": "validate_required_params",
+      "from": "duvarlar",
+      "params": {
+        "required_params": "Malzeme"
+      }
+    },
+    {
+      "id": "qa_ts5",
+      "op": "validate_rebar_ts500",
+      "from": "donatı",
+      "params": {
+        "fck": 30,
+        "fyk": 420,
+        "cover_mm": 30
+      }
+    },
+    {
+      "id": "birlestir",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "qa_yer",
+        "qa_cak",
+        "qa_hac",
+        "qa_par",
+        "qa_ts5"
+      ],
+      "params": {
+        "title": "Teslim Öncesi Tam Kontrol"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "birlestir"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "birlestir"
+    },
+    {
+      "id": "hatalar",
+      "op": "where",
+      "from": "satirlar",
+      "params": {
+        "field": "gecti",
+        "op": "eq",
+        "value": "Hayır"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "Teslim Kontrol"
+      }
+    },
+    {
+      "id": "html",
+      "op": "export_validation_report",
+      "from": "birlestir",
+      "params": {
+        "title": "Teslim Öncesi Kontrol"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "rapor",
+    "report",
+    "export"
+  ]
+}

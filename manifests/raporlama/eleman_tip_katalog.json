@@ -1,0 +1,109 @@
+{
+  "title": "Eleman Tip Kataloğu",
+  "description": "Modeldeki tüm aile tiplerini kategori bazında listeler, kullanım sayıları ve parametrelerini raporlar. Standartlaştırma için kullanılır.",
+  "version": "1.0.0",
+  "category": "Raporlama",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvar_tip",
+      "op": "collect_types",
+      "params": {
+        "category": "OST_Walls"
+      }
+    },
+    {
+      "id": "kolon_tip",
+      "op": "collect_types",
+      "params": {
+        "category": "OST_StructuralColumns"
+      }
+    },
+    {
+      "id": "doseme_tip",
+      "op": "collect_types",
+      "params": {
+        "category": "OST_Floors"
+      }
+    },
+    {
+      "id": "kapi_tip",
+      "op": "collect_types",
+      "params": {
+        "category": "OST_Doors"
+      }
+    },
+    {
+      "id": "pencere_tip",
+      "op": "collect_types",
+      "params": {
+        "category": "OST_Windows"
+      }
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "d_tipler",
+      "op": "type_get",
+      "from": "duvarlar"
+    },
+    {
+      "id": "k_tipler",
+      "op": "type_get",
+      "from": "kolonlar"
+    },
+    {
+      "id": "r_d",
+      "op": "show_table",
+      "from": "d_tipler",
+      "params": {
+        "title": "Duvar Tip Kullanımı"
+      }
+    },
+    {
+      "id": "r_k",
+      "op": "show_table",
+      "from": "k_tipler",
+      "params": {
+        "title": "Kolon Tip Kullanımı"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "d_tipler",
+      "params": {
+        "sheet_name": "Tip Kataloğu"
+      },
+      "required": false
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "kolonlar"
+    }
+  ],
+  "tags": [
+    "rapor",
+    "report",
+    "export"
+  ]
+}

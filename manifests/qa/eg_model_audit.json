@@ -1,0 +1,39 @@
+{
+  "title": "Model Audit — Kapsamlı Sağlık ve Denetim Raporu",
+  "description": "Model uyarılarını, çift elemanları ve workset uyumsuzluklarını tek raporda toplar. BIM koordinatörünün model teslim öncesi denetimi için tasarlanmıştır.",
+  "version": "1.0",
+  "category": "qa",
+  "tags": ["audit", "model_sagligi", "qa", "kontrol", "teslim_oncesi"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "uyarilar",
+      "op": "qa_get_model_warnings"
+    },
+    {
+      "id": "ciftler",
+      "op": "qa_detect_duplicates",
+      "params": {
+        "tolerance_mm": 5
+      }
+    },
+    {
+      "id": "uyari_rapor",
+      "op": "export_html_report",
+      "from": "uyarilar",
+      "required": false,
+      "params": {
+        "title": "Model Uyarıları"
+      }
+    },
+    {
+      "id": "cift_rapor",
+      "op": "export_html_report",
+      "from": "ciftler",
+      "required": false,
+      "params": {
+        "title": "Çift Eleman Tespiti"
+      }
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "title": "Standart Denetimi — Workset ve İsimlendirme Uyumu",
+  "description": "Elemanların doğru workset'te olup olmadığını ve ÇŞB 2026 isimlendirme kuralına uygunluğunu denetler. Çok kişili (worksharing) projelerde model disiplinini korur.",
+  "version": "1.0",
+  "category": "qa",
+  "tags": ["workset", "isimlendirme", "standart", "csb2026", "worksharing", "qa"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "elemanlar",
+      "op": "collect_multi",
+      "params": {
+        "categories": "OST_Walls,OST_Floors,OST_StructuralColumns,OST_StructuralFraming"
+      }
+    },
+    {
+      "id": "workset_kontrol",
+      "op": "qa_validate_workset",
+      "from": "elemanlar",
+      "required": false,
+      "params": {
+        "expected_workset": "Yapısal"
+      }
+    },
+    {
+      "id": "isim_kontrol",
+      "op": "pm_validate_naming_convention",
+      "from": "elemanlar",
+      "required": false,
+      "params": {
+        "name_pattern": "^[A-Z]{2,}_.+"
+      }
+    },
+    {
+      "id": "birlesik_rapor",
+      "op": "merge_validation_reports",
+      "from_many": ["workset_kontrol", "isim_kontrol"],
+      "params": {
+        "title": "Standart Denetimi — Workset + İsimlendirme"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "birlesik_rapor"
+    },
+    {
+      "id": "html_rapor",
+      "op": "export_validation_report",
+      "from": "birlesik_rapor",
+      "required": false,
+      "params": {
+        "title": "Standart Denetimi Raporu"
+      }
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "EGBIMOTO Kat Bazlı Workset Oluştur",
+  "description": "Her kat için aynı isimde User Workset oluşturur — TR BIM ISO 19650",
+  "category": "PROJE",
+  "version": "1.0",
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_kontrol",
+      "op": "workset_by_level",
+      "inputs": {
+        "prefix": "",
+        "suffix": "",
+        "dry_run": true
+      }
+    },
+    {
+      "id": "s02_preview",
+      "op": "preview_gate",
+      "from": "s01_kontrol",
+      "inputs": {
+        "title": "Kat Workset'leri Oluşturulsun mu?"
+      }
+    },
+    {
+      "id": "s03_olustur",
+      "op": "workset_by_level",
+      "condition": "$s02_preview == confirmed",
+      "inputs": {
+        "prefix": "",
+        "suffix": "",
+        "dry_run": false
+      }
+    },
+    {
+      "id": "s04_ozet",
+      "op": "show_result",
+      "from": "s03_olustur",
+      "inputs": {
+        "message": "Workset oluşturma tamamlandı"
+      }
+    }
+  ],
+  "tags": [
+    "proje",
+    "yonetim",
+    "workset"
+  ]
+}

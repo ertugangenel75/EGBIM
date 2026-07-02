@@ -1,0 +1,205 @@
+{
+  "title": "Family Standards QA — BIM Manager Denetimi",
+  "description": "Yüklü ailelerin standart kontrolü: aile adı, tip adı, shared parameter şeması, model geometry uyarıları, nested family tespiti.",
+  "category": "qa",
+  "version": "1.0",
+  "author": "EGBIM",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "category": "OST_Families",
+      "message": "Modelde yüklü aile yok"
+    },
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "family_health_check",
+      "message": "family_health_check kayıtlı değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "s01_collect",
+      "op": "collect_families",
+      "description": "Modeldeki tüm yüklü aileleri topla",
+      "required": true
+    },
+    {
+      "id": "s02_health",
+      "op": "family_health_check",
+      "from": "s01_collect",
+      "description": "Ana sağlık kontrolü: family_name, is_in_place, type_count, missing_params, has_origin_issue, nested_count. check_nested:true nested family tespiti için gerekli ama ağır — büyük projelerde false yap.",
+      "params": {
+        "expected_params": "EG_Disiplin,EG_KalemNo,Mark",
+        "max_types": 50,
+        "origin_threshold_m": 100.0,
+        "check_nested": true
+      },
+      "required": true
+    },
+    {
+      "id": "s03_error_families",
+      "op": "filter_rows",
+      "from": "s02_health",
+      "description": "Family Name / Shared Parameter / Origin — STATUS=ERROR olan aileler (boş ad, kategori yok, eksik param, origin sorunu).",
+      "params": {
+        "field": "status",
+        "operator": "eq",
+        "value": "ERROR"
+      },
+      "required": true
+    },
+    {
+      "id": "s04_missing_shared_params",
+      "op": "filter_rows",
+      "from": "s02_health",
+      "description": "Shared Parameter — expected_params'tan en az biri eksik olan aileler.",
+      "params": {
+        "field": "missing_params",
+        "operator": "not_eq",
+        "value": ""
+      },
+      "required": true
+    },
+    {
+      "id": "s05_nested_families",
+      "op": "filter_rows",
+      "from": "s02_health",
+      "description": "Nested Family — nested_count > 0 olan aileler. nested_count=-1 ise kontrol yapılmamış (check_nested:false).",
+      "params": {
+        "field": "nested_count",
+        "operator": "gt",
+        "value": "0"
+      },
+      "required": true
+    },
+    {
+      "id": "s06_inplace_families",
+      "op": "filter_rows",
+      "from": "s02_health",
+      "description": "Family Name / Standart dışı — In-place aile tespiti. In-place aileler taşınamaz ve paylaşılamaz.",
+      "params": {
+        "field": "is_in_place",
+        "operator": "eq",
+        "value": "True"
+      },
+      "required": true
+    },
+    {
+      "id": "s07_type_get",
+      "op": "type_get",
+      "from": "s01_collect",
+      "description": "Type Name — tüm aile tiplerini {tip, kategori, tip_id, kullanim_sayisi, aile} olarak listele.",
+      "required": true
+    },
+    {
+      "id": "s08_empty_type_names",
+      "op": "filter_rows",
+      "from": "s07_type_get",
+      "description": "Type Name doluluk — tip adı boş olan tipler.",
+      "params": {
+        "field": "tip",
+        "operator": "eq",
+        "value": ""
+      },
+      "required": true
+    },
+    {
+      "id": "s09_type_distribution",
+      "op": "group_by",
+      "from": "s07_type_get",
+      "description": "Aile başına tip sayısı dağılımı — 50 üzeri tip olan aileler max_types uyarısı alır.",
+      "params": {
+        "field": "aile"
+      },
+      "required": true
+    },
+    {
+      "id": "s10_geometry_warnings",
+      "op": "qa_get_model_warnings",
+      "description": "Geometry Warning — modelin tüm Revit uyarılarını topla.",
+      "required": true
+    },
+    {
+      "id": "s11_geometry_filter",
+      "op": "filter_rows",
+      "from": "s10_geometry_warnings",
+      "description": "Geometry Warning filtresi — açıklaması 'geometry' içeren uyarıları filtrele.",
+      "params": {
+        "field": "aciklama",
+        "operator": "contains",
+        "value": "geometry"
+      },
+      "required": true
+    },
+    {
+      "id": "s12_status_distribution",
+      "op": "group_by",
+      "from": "s02_health",
+      "description": "Genel durum dağılımı — OK / WARNING / ERROR aile sayıları.",
+      "params": {
+        "field": "status"
+      },
+      "required": true
+    },
+    {
+      "id": "s13_category_distribution",
+      "op": "group_by",
+      "from": "s02_health",
+      "description": "Kategori dağılımı — hangi Revit kategorisinden kaç aile yüklü.",
+      "params": {
+        "field": "category"
+      },
+      "required": true
+    },
+    {
+      "id": "s14_excel_full",
+      "op": "export_xlsx",
+      "from": "s02_health",
+      "description": "Excel — tüm aileler health raporu (ana tablo).",
+      "params": {
+        "sheet_name": "Family_Health",
+        "title": "Family Standards QA — Tam Rapor"
+      },
+      "required": false
+    },
+    {
+      "id": "s15_excel_errors",
+      "op": "export_xlsx",
+      "from": "s03_error_families",
+      "description": "Excel — sadece ERROR statüsündeki aileler.",
+      "params": {
+        "sheet_name": "Hatalar",
+        "title": "Family Standards — Hatalar"
+      },
+      "required": false
+    },
+    {
+      "id": "s16_excel_nested",
+      "op": "export_xlsx",
+      "from": "s05_nested_families",
+      "description": "Excel — nested family listesi.",
+      "params": {
+        "sheet_name": "Nested_Families",
+        "title": "Nested Family Raporu"
+      },
+      "required": false
+    },
+    {
+      "id": "s17_excel_warnings",
+      "op": "export_xlsx",
+      "from": "s11_geometry_filter",
+      "description": "Excel — geometry warning listesi.",
+      "params": {
+        "sheet_name": "Geometry_Warnings",
+        "title": "Geometry Uyarıları"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "qa",
+    "kalite",
+    "kontrol",
+    "validation"
+  ]
+}

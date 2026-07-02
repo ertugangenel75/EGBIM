@@ -1,0 +1,97 @@
+{
+  "title": "Haftalık İlerleme Raporu",
+  "description": "Model checksum, eleman sayıları, doğrulama durumu ve eksik parametreleri haftalık kontrol paketi olarak üretir. XLSX + HTML.",
+  "version": "1.0.0",
+  "category": "Raporlama",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "checksum",
+      "op": "model_checksum"
+    },
+    {
+      "id": "sistem",
+      "op": "system_info"
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "qa_param",
+      "op": "validate_required_params",
+      "from": "duvarlar",
+      "params": {
+        "required_params": "Malzeme,Yorumlar"
+      }
+    },
+    {
+      "id": "qa_oda",
+      "op": "check_unplaced_rooms",
+      "from": "odalar"
+    },
+    {
+      "id": "birlestir",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "qa_param",
+        "qa_oda"
+      ],
+      "params": {
+        "title": "Haftalık QA"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "birlestir"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "birlestir"
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "Haftalık QA"
+      }
+    },
+    {
+      "id": "html",
+      "op": "export_html_report",
+      "from": "satirlar",
+      "params": {
+        "title": "Haftalık İlerleme Raporu"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "rapor",
+    "report",
+    "export"
+  ]
+}
