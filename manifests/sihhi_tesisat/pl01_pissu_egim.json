@@ -1,0 +1,63 @@
+{
+  "title": "Sıhhi: Pissu Boru Eğim Kontrolü",
+  "category": "sihhi_tesisat",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_PipeCurves",
+        "OST_PlumbingFixtures"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde sıhhi tesisat elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "kontrol",
+      "op": "plumbing_validate_pipe_slope",
+      "from": "borular",
+      "params": {
+        "min_slope_pct": 1.0
+      }
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "satırlar",
+      "params": {
+        "title": "Pissu Eğim",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "kontrol"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    }
+  ],
+  "id": "pl01_pissu_egim",
+  "description": "Sıhhi: Pissu Boru Eğim Kontrolü — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "sihhi",
+    "tesisat",
+    "boru",
+    "plumbing"
+  ]
+}

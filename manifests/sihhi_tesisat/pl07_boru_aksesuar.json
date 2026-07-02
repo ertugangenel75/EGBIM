@@ -1,0 +1,73 @@
+{
+  "title": "Sıhhi: Boru Aksesuar Listesi",
+  "category": "sihhi_tesisat",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_PipeCurves",
+        "OST_PlumbingFixtures"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde sıhhi tesisat elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "aksesuar",
+      "op": "collect_pipe_accessories"
+    },
+    {
+      "id": "parcalar",
+      "op": "collect_pipe_fittings"
+    },
+    {
+      "id": "hepsi",
+      "op": "merge_lists",
+      "from_many": [
+        "aksesuar",
+        "parcalar"
+      ]
+    },
+    {
+      "id": "satırlar",
+      "op": "elements_to_rows_with_params",
+      "from": "hepsi",
+      "params": {
+        "param_names": [
+          "Family",
+          "Type",
+          "System Name",
+          "Level"
+        ]
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "satırlar",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Aksesuar"
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "hepsi",
+      "params": {
+        "title": "Sıhhi: Boru Aksesuar Listesi"
+      }
+    }
+  ],
+  "id": "pl07_boru_aksesuar",
+  "description": "Sıhhi: Boru Aksesuar Listesi — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "sihhi",
+    "tesisat",
+    "boru",
+    "plumbing"
+  ]
+}

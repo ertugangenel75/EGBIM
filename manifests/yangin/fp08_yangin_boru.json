@@ -1,0 +1,76 @@
+{
+  "title": "Yangın: Yangın Borusu Sistem Raporu",
+  "category": "yangin",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_FireAlarmDevices",
+        "OST_Sprinklers",
+        "OST_PipeCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yangın elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "yangin_boru",
+      "op": "filter_by_param",
+      "from": "borular",
+      "params": {
+        "param_name": "System Classification",
+        "contains": "Fire"
+      }
+    },
+    {
+      "id": "satırlar",
+      "op": "elements_to_rows_with_params",
+      "from": "yangin_boru",
+      "params": {
+        "param_names": [
+          "Level",
+          "System Name",
+          "Diameter",
+          "Length"
+        ]
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "satırlar",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Yangın Borusu"
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_type",
+      "from": "borular"
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "kat_bazli",
+      "params": {
+        "title": "Yangın: Yangın Borusu Sistem Raporu"
+      }
+    }
+  ],
+  "id": "fp08_yangin_boru",
+  "description": "Yangın: Yangın Borusu Sistem Raporu — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "yangin",
+    "fire",
+    "sprinkler",
+    "nfpa"
+  ]
+}

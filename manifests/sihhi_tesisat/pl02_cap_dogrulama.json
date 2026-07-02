@@ -1,0 +1,64 @@
+{
+  "title": "Sıhhi: Bağlantı Çapı Doğrulama",
+  "category": "sihhi_tesisat",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_PipeCurves",
+        "OST_PlumbingFixtures"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde sıhhi tesisat elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "armatürler",
+      "op": "collect_plumbing_fixtures"
+    },
+    {
+      "id": "kontrol",
+      "op": "plumbing_validate_connector_diameter",
+      "from": "armatürler",
+      "params": {
+        "expected_diameter_mm": 50,
+        "tolerance_mm": 5
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "kontrol",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Bağlantı Çapı"
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "kontrol"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "kat_ozet"
+    }
+  ],
+  "id": "pl02_cap_dogrulama",
+  "description": "Sıhhi: Bağlantı Çapı Doğrulama — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "sihhi",
+    "tesisat",
+    "boru",
+    "plumbing"
+  ]
+}

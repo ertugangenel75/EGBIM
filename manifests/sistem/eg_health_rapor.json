@@ -1,0 +1,26 @@
+{
+  "title": "EGBIMOTO — Sistem Sağlık Raporu",
+  "description": "RAM, CPU, Disk, OS ve aktif Revit modeli hakkında HTML rapor üretir ve tarayıcıda açar.",
+  "version": "1.0",
+  "category": "sistem",
+  "transaction_policy": "none",
+  "tags": ["sistem", "saglik", "rapor", "health"],
+  "steps": [
+    {
+      "id": "health",
+      "op": "eg_health_snapshot",
+      "params": {
+        "format": "html",
+        "open": true
+      }
+    },
+    {
+      "id": "log",
+      "op": "echo",
+      "from": "health",
+      "params": {
+        "value": "Rapor oluşturuldu."
+      }
+    }
+  ]
+}

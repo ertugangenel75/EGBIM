@@ -1,0 +1,80 @@
+{
+  "title": "Sıhhi: Kat Bazlı Sıhhi Özet",
+  "category": "sihhi_tesisat",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_PipeCurves",
+        "OST_PlumbingFixtures"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde sıhhi tesisat elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "armatürler",
+      "op": "collect_plumbing_fixtures"
+    },
+    {
+      "id": "b_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "borular",
+      "params": {
+        "param_names": [
+          "Level",
+          "System Name",
+          "Length"
+        ]
+      }
+    },
+    {
+      "id": "a_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "armatürler",
+      "params": {
+        "param_names": [
+          "Level",
+          "Family"
+        ]
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "b_satirlar",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Kat Sıhhi"
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_type",
+      "from": "armatürler"
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "kat_bazli",
+      "params": {
+        "title": "Sıhhi: Kat Bazlı Sıhhi Özet"
+      }
+    }
+  ],
+  "id": "pl08_kat_bazli_sihhi",
+  "description": "Sıhhi: Kat Bazlı Sıhhi Özet — 7 adımlı otomasyon iş akışı.",
+  "tags": [
+    "sihhi",
+    "tesisat",
+    "boru",
+    "plumbing"
+  ]
+}

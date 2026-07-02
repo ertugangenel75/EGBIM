@@ -1,0 +1,279 @@
+{
+  "title": "Yangın Kapısı QA — Tam Kontrol",
+  "description": "Fire door kalite denetimi: yangın dayanımı, eksik parametre, duplicate, host duvar karşılaştırması, kat/bölge dağılımı, Excel + HTML çıktı, trend snapshot.",
+  "category": "yangin",
+  "version": "1.0",
+  "author": "EGBIM",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "category": "OST_Doors",
+      "message": "Modelde kapı elementi yok"
+    },
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "collect_doors",
+      "message": "collect_doors op kayıtlı değil"
+    },
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "door_fire_rating_from_wall",
+      "message": "door_fire_rating_from_wall op kayıtlı değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "s01_collect",
+      "op": "collect_doors",
+      "description": "Modeldeki tüm kapı örneklerini topla",
+      "required": true
+    },
+    {
+      "id": "s02_missing_params",
+      "op": "qa_find_empty_params",
+      "from": "s01_collect",
+      "description": "Missing Parameter — zorunlu yangın kapısı parametrelerinin doluluk taraması",
+      "params": {
+        "param_names": [
+          "Fire Rating",
+          "Mark",
+          "EG_YanginDayanim",
+          "EG_YanginBolgesi",
+          "EgressDoor",
+          "Width",
+          "Height"
+        ]
+      },
+      "required": true
+    },
+    {
+      "id": "s03_fire_rating_filled",
+      "op": "param_filled_check",
+      "from": "s01_collect",
+      "description": "Type bazlı — Fire Rating parametresi dolu mu?",
+      "params": {
+        "param_name": "Fire Rating",
+        "severity": "ERROR"
+      },
+      "required": true
+    },
+    {
+      "id": "s04_fire_rating_range",
+      "op": "param_range_check",
+      "from": "s01_collect",
+      "description": "Invalid Value — Fire Rating değeri 30-240 dakika aralığında mı?",
+      "params": {
+        "param_name": "Fire Rating",
+        "min": 30,
+        "max": 240,
+        "severity": "ERROR"
+      },
+      "required": true
+    },
+    {
+      "id": "s05_mark_filled",
+      "op": "param_filled_check",
+      "from": "s01_collect",
+      "description": "Instance bazlı — Mark (kapı numarası) dolu mu?",
+      "params": {
+        "param_name": "Mark",
+        "severity": "ERROR"
+      },
+      "required": true
+    },
+    {
+      "id": "s06_eg_yangin_dayanim_filled",
+      "op": "param_filled_check",
+      "from": "s01_collect",
+      "description": "Instance bazlı — EG_YanginDayanim (TR BIM özel param) dolu mu?",
+      "params": {
+        "param_name": "EG_YanginDayanim",
+        "severity": "ERROR"
+      },
+      "required": true
+    },
+    {
+      "id": "s07_egress_door_filled",
+      "op": "param_filled_check",
+      "from": "s01_collect",
+      "description": "Egress Route ilişkisi — EgressDoor parametresi atanmış mı? (Revit built-in egress flag)",
+      "params": {
+        "param_name": "EgressDoor",
+        "severity": "WARNING"
+      },
+      "required": true
+    },
+    {
+      "id": "s08_exit_door_param",
+      "op": "param_filled_check",
+      "from": "s01_collect",
+      "description": "Exit Door ilişkisi — EG_YanginBolgesi parametresi atanmış mı? Bölge ataması exit yönünü doğrular.",
+      "params": {
+        "param_name": "EG_YanginBolgesi",
+        "severity": "WARNING"
+      },
+      "required": true
+    },
+    {
+      "id": "s09_duplicate_positional",
+      "op": "qa_detect_duplicates",
+      "from": "s01_collect",
+      "description": "Duplicate Value — aynı konumda birden fazla kapı var mı? (BBox bazlı 50mm tolerans)",
+      "params": {
+        "tolerance_mm": 50
+      },
+      "required": true
+    },
+    {
+      "id": "s10_handing_detect",
+      "op": "door_handing_detect",
+      "from": "s01_collect",
+      "description": "Exit Door açılış yönü — L/R el ve inward/outward tespiti. Egress için 'outward' beklenir.",
+      "required": true
+    },
+    {
+      "id": "s11_clearance_check",
+      "op": "door_clearance_check",
+      "from": "s01_collect",
+      "description": "TS 9111 erişilebilirlik — minimum temiz açıklık ve menteşe yan boşluk kontrolü",
+      "params": {
+        "min_clear_width_mm": 900,
+        "min_latch_side_mm": 300,
+        "severity": "WARNING"
+      },
+      "required": true
+    },
+    {
+      "id": "s12_host_wall_rating",
+      "op": "door_fire_rating_from_wall",
+      "from": "s01_collect",
+      "description": "Host Wall Fire Rating karşılaştırması — host duvarın yangın sınıfını EG_YanginDayanim parametresine yazar. Fark varsa uyarı kaydedilir.",
+      "params": {
+        "wall_param": "Yangın Dayanım Süresi",
+        "door_param": "EG_YanginDayanim",
+        "rating_map": "60:EI60,90:EI90,120:EI120,30:EI30"
+      },
+      "required": false
+    },
+    {
+      "id": "s13_merge",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "s03_fire_rating_filled",
+        "s04_fire_rating_range",
+        "s05_mark_filled",
+        "s06_eg_yangin_dayanim_filled",
+        "s07_egress_door_filled",
+        "s08_exit_door_param",
+        "s11_clearance_check"
+      ],
+      "description": "Tüm ValidationReport çıktılarını tek raporda birleştir",
+      "params": {
+        "title": "Yangın Kapısı — Birleşik QA Raporu"
+      },
+      "required": true
+    },
+    {
+      "id": "s14_summary",
+      "op": "validation_summary",
+      "from": "s13_merge",
+      "description": "Birleşik raporun özeti: toplam/geçti/kaldı sayıları",
+      "required": true
+    },
+    {
+      "id": "s15_all_params_rows",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_collect",
+      "description": "Tüm kapıları satır listesine çevir — Level/Zone/Type raporları ve trend snapshot için ortak veri tabanı",
+      "params": {
+        "param_names": "Fire Rating,Mark,EG_YanginDayanim,EG_YanginBolgesi,EgressDoor,Width,Height,Comments"
+      },
+      "required": true
+    },
+    {
+      "id": "s16_level_report",
+      "op": "group_by",
+      "from": "s15_all_params_rows",
+      "description": "Level bazlı rapor — her kattaki yangın kapısı sayısı ve dağılımı",
+      "params": {
+        "field": "kat"
+      },
+      "required": true
+    },
+    {
+      "id": "s17_zone_report",
+      "op": "group_by",
+      "from": "s15_all_params_rows",
+      "description": "Zone bazlı rapor — EG_YanginBolgesi parametresine göre dağılım",
+      "params": {
+        "field": "EG_YanginBolgesi"
+      },
+      "required": true
+    },
+    {
+      "id": "s18_type_report",
+      "op": "group_by",
+      "from": "s15_all_params_rows",
+      "description": "Type bazlı kontrol — tip adına göre kapı dağılımı. Duplicate Mark tipik olarak aynı tipin birden fazla kullanımını gösterir.",
+      "params": {
+        "field": "tip"
+      },
+      "required": true
+    },
+    {
+      "id": "s19_fire_rating_distribution",
+      "op": "group_by",
+      "from": "s15_all_params_rows",
+      "description": "Fire Rating dağılımı — projede hangi yangın sınıflarının kullanıldığını gösterir (Invalid Value dağılım analizi)",
+      "params": {
+        "field": "Fire Rating"
+      },
+      "required": true
+    },
+    {
+      "id": "s20_qa_to_rows",
+      "op": "validation_to_rows",
+      "from": "s13_merge",
+      "description": "QA sonuçlarını Excel'e aktarmak için satır formatına çevir",
+      "required": true
+    },
+    {
+      "id": "s21_excel_qa",
+      "op": "export_xlsx",
+      "from": "s20_qa_to_rows",
+      "description": "Excel çıktı — QA sonuç tablosu (hata/geçti listesi)",
+      "params": {
+        "sheet_name": "YanginKapisi_QA",
+        "title": "Yangın Kapısı QA Sonuçları"
+      },
+      "required": false
+    },
+    {
+      "id": "s22_html_report",
+      "op": "export_validation_report",
+      "from": "s13_merge",
+      "description": "HTML rapor — birleşik QA raporu (tarayıcıda açılır)",
+      "params": {
+        "title": "Yangın Kapısı QA Raporu"
+      },
+      "required": false
+    },
+    {
+      "id": "s23_trend_snapshot",
+      "op": "export_xlsx",
+      "from": "s15_all_params_rows",
+      "description": "Trend raporu — tüm kapı parametrelerinin zaman damgalı snapshot'ı. Her çalıştırmada yeni dosya oluşturarak trend takibi sağlar. Önceki çalıştırma dosyasıyla karşılaştırma Excel'de manuel veya Power BI ile yapılır.",
+      "params": {
+        "sheet_name": "Trend_Snapshot",
+        "title": "Yangın Kapıları — Trend Referans"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "yangin",
+    "fire",
+    "sprinkler",
+    "nfpa"
+  ]
+}

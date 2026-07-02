@@ -1,0 +1,37 @@
+{
+  "id": "fp15_algilama_sondurme_qa",
+  "title": "Yangın: Algılama ve Söndürme Sistemi QA",
+  "description": "Dedektör kapsama alanı hesabı (NFPA 72) ve söndürme ajanı tip uygunluk kontrolü pipeline'ı.",
+  "category": "YANGIN",
+  "version": "1.0",
+  "tags": ["yangin","dedektör","kapsama","sondurme","ajan","nfpa72","qa"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_kapsama",
+      "op": "fp_detection_coverage",
+      "inputs": {
+        "oda_alani_m2":       "$INPUT:oda_alani_m2:100",
+        "dedektör_tipi":      "$INPUT:dedektör_tipi:duman",
+        "tavan_yuksekligi_m": "$INPUT:tavan_yuksekligi_m:2.7",
+        "mevcut_sayi":        "$INPUT:mevcut_sayi:0"
+      }
+    },
+    {
+      "id": "s02_ajan",
+      "op": "fp_suppression_agent_qa",
+      "inputs": {
+        "ajan_tipi": "$INPUT:ajan_tipi:su",
+        "alan_tipi": "$INPUT:alan_tipi:genel_ofis"
+      }
+    },
+    {
+      "id": "s03_rapor",
+      "op": "export_html_report",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/algilama_sondurme_qa.html",
+        "title": "Algılama ve Söndürme QA Raporu"
+      }
+    }
+  ]
+}

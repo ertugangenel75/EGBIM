@@ -1,0 +1,37 @@
+{
+  "title": "EGBIMOTO — Add-in Temizleme (Hız Optimizasyonu)",
+  "description": "Zorunlu olmayan add-in'leri .EGdisabled yaparak Revit başlatma süresini kısaltır. Bir sonraki Revit açılışında etkili olur. Geri almak için eg_addin_restore_all kullanın.",
+  "version": "1.0",
+  "category": "sistem",
+  "transaction_policy": "none",
+  "tags": ["sistem", "addin", "optimize", "performans"],
+  "steps": [
+    {
+      "id": "once_tara",
+      "op": "eg_addin_scan",
+      "params": {
+        "include_disabled": false
+      }
+    },
+    {
+      "id": "devre_disi",
+      "op": "eg_addin_disable_unused",
+      "params": {
+        "keep": [
+          "EGBIMOTO.addin",
+          "pyRevit.addin",
+          "Naviate.addin",
+          "BIMLink.addin"
+        ]
+      }
+    },
+    {
+      "id": "sonuc",
+      "op": "show_result",
+      "from": "devre_disi",
+      "params": {
+        "title": "Add-in Devre Dışı"
+      }
+    }
+  ]
+}

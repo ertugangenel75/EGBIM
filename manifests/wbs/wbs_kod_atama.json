@@ -1,0 +1,109 @@
+{
+  "title": "WBS Kodu Atama",
+  "description": "Elemanları WBS haritalama tablosuna göre sınıflandırır ve WBS kodunu EGBIM_WBS parametresine yazar.",
+  "version": "1.0.0",
+  "category": "WBS",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "kirisler",
+      "op": "collect_beams"
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_lists",
+      "from_many": [
+        "kolonlar",
+        "kirisler",
+        "duvarlar",
+        "dosemeler"
+      ]
+    },
+    {
+      "id": "wbs",
+      "op": "classify_by_wbs",
+      "from": "birlesik"
+    },
+    {
+      "id": "wbs_ata",
+      "op": "assign_wbs_code",
+      "from": "birlesik",
+      "required": false
+    },
+    {
+      "id": "yaz",
+      "op": "write_param_from_rows",
+      "from": "wbs",
+      "params": {
+        "param_name": "EGBIM_WBS",
+        "value_field": "wbs_kodu"
+      }
+    },
+    {
+      "id": "dogrula",
+      "op": "param_filled_check",
+      "from": "birlesik",
+      "params": {
+        "param_name": "EGBIM_WBS",
+        "severity": "WARNING"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "dogrula"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "dogrula"
+    },
+    {
+      "id": "html_rapor",
+      "op": "export_validation_report",
+      "from": "satirlar",
+      "params": {
+        "title": "WBS Kodu Atama"
+      },
+      "required": false
+    },
+    {
+      "id": "xlsx_rapor",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "WBS Kodu Atama"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "wbs",
+    "is_kirilim",
+    "proje"
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "title": "WBS Miktar Bağlama",
+  "description": "Hesaplanan metrajları (hacim/alan/uzunluk) WBS iş kalemlerine bağlar. Keşif ve hakediş baz raporu.",
+  "version": "1.0.0",
+  "category": "WBS",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "poz_yukle",
+      "op": "load_poz_data",
+      "required": false
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "kirisler",
+      "op": "collect_beams"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "donatı",
+      "op": "collect_rebar"
+    },
+    {
+      "id": "v_k",
+      "op": "column_volume",
+      "from": "kolonlar"
+    },
+    {
+      "id": "v_ki",
+      "op": "beam_volume",
+      "from": "kirisler"
+    },
+    {
+      "id": "v_d",
+      "op": "floor_volume",
+      "from": "dosemeler"
+    },
+    {
+      "id": "v_du",
+      "op": "wall_volume",
+      "from": "duvarlar"
+    },
+    {
+      "id": "don_kg",
+      "op": "rebar_total_weight",
+      "from": "donatı"
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_lists",
+      "from_many": [
+        "v_k",
+        "v_ki",
+        "v_d",
+        "v_du"
+      ]
+    },
+    {
+      "id": "wbs",
+      "op": "classify_by_wbs",
+      "from": "birlesik"
+    },
+    {
+      "id": "poz",
+      "op": "poz_match",
+      "from": "birlesik"
+    },
+    {
+      "id": "maliyet",
+      "op": "calc_cost",
+      "from": "poz",
+      "params": {
+        "quantity_field": "hacim_m3"
+      }
+    },
+    {
+      "id": "link",
+      "op": "link_quantity_to_wbs",
+      "from": "maliyet",
+      "required": false
+    },
+    {
+      "id": "kat_ozet",
+      "op": "cost_by_level",
+      "from": "maliyet"
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "kat_ozet",
+      "params": {
+        "title": "WBS Miktar-Maliyet"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "maliyet",
+      "params": {
+        "sheet_name": "WBS Miktar"
+      },
+      "required": false
+    },
+    {
+      "id": "html",
+      "op": "export_wbs_report",
+      "from": "maliyet",
+      "required": false
+    }
+  ],
+  "tags": [
+    "wbs",
+    "is_kirilim",
+    "proje"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "fp13_yangin_pompasi",
+  "title": "Yangın: Pompa Schedule ve HP Hesabı",
+  "description": "Yangın pompası schedule doğrulaması (Main/Jockey/Diesel) ve HP hesabı (NFPA 20).",
+  "category": "YANGIN",
+  "version": "1.0",
+  "tags": ["yangin","pompa","hp","nfpa20","jockey","diesel","schedule"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_schedule",
+      "op": "fp_pump_schedule_validate",
+      "inputs": {
+        "ana_pompa_lpm": "$INPUT:ana_pompa_lpm:1500",
+        "ana_pompa_bar": "$INPUT:ana_pompa_bar:10",
+        "kat_sayisi":    "$INPUT:kat_sayisi:10",
+        "diesel_gerekli": true
+      }
+    },
+    {
+      "id": "s02_hp",
+      "op": "fp_pump_hp_calc",
+      "inputs": {
+        "debi_lpm":       "$INPUT:ana_pompa_lpm:1500",
+        "toplam_yuk_m":   "$INPUT:toplam_yuk_m:80",
+        "pompa_verim":    0.70,
+        "motor_verim":    0.90,
+        "guvenlik_faktor": 1.25
+      }
+    },
+    {
+      "id": "s03_rapor",
+      "op": "export_html_report",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/yangin_pompa.html",
+        "title": "Yangın Pompası Schedule ve HP Raporu"
+      }
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "fp12_standpipe_sistem",
+  "title": "Yangın: Standpipe Sistem QA (DN + Basınç + FDC)",
+  "description": "Standpipe riser DN boyutu, basınç/PRV hesabı ve FDC temizlik mesafesi pipeline'ı (NFPA 14).",
+  "category": "YANGIN",
+  "version": "1.0",
+  "tags": ["yangin","standpipe","prv","fdc","nfpa14","riser"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_dn",
+      "op": "fp_standpipe_qa",
+      "inputs": {
+        "bina_yuksekligi_m": "$INPUT:bina_yuksekligi_m:30",
+        "mevcut_dn_mm":      "$INPUT:mevcut_dn_mm:0",
+        "sistem_tipi":       "$INPUT:sistem_tipi:islak",
+        "kat_sayisi":        "$INPUT:kat_sayisi:10"
+      }
+    },
+    {
+      "id": "s02_basinc",
+      "op": "fp_standpipe_pressure",
+      "inputs": {
+        "bina_yuksekligi_m": "$INPUT:bina_yuksekligi_m:30",
+        "pompa_basinc_bar":  "$INPUT:pompa_basinc_bar:10",
+        "kat_yuksekligi_m":  3.0,
+        "max_hortum_bar":    6.9
+      }
+    },
+    {
+      "id": "s03_fdc",
+      "op": "fp_fdc_clearance_check",
+      "inputs": {
+        "min_aff_mm":      450,
+        "min_temizlik_mm": 3000,
+        "write_back":      false
+      }
+    },
+    {
+      "id": "s04_rapor",
+      "op": "export_html_report",
+      "from": "s02_basinc",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/standpipe_qa.html",
+        "title": "Standpipe Sistem QA Raporu"
+      }
+    }
+  ]
+}

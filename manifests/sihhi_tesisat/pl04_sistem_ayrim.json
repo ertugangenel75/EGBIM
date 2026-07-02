@@ -1,0 +1,60 @@
+{
+  "title": "Sıhhi: Sıcak/Soğuk Su Sistem Ayrımı",
+  "category": "sihhi_tesisat",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_PipeCurves",
+        "OST_PlumbingFixtures"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde sıhhi tesisat elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "kontrol",
+      "op": "plumbing_validate_system_separation",
+      "from": "borular"
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "kontrol",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Sistem Ayrımı"
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "kontrol"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "kat_ozet"
+    }
+  ],
+  "id": "pl04_sistem_ayrim",
+  "description": "Sıhhi: Sıcak/Soğuk Su Sistem Ayrımı — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "sihhi",
+    "tesisat",
+    "boru",
+    "plumbing"
+  ]
+}

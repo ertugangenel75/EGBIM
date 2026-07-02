@@ -1,0 +1,119 @@
+{
+  "id": "pl16_tam_sihhi_sistem_hesap",
+  "title": "Sıhhi: Tam Sistem Hesap Pipeline (10 Op)",
+  "description": "Sıhhi tesisat tam ön hesap akışı: LPD talebi → depo boyutu → pompa gücü → pik talep → basınç zonlama → statik basınç → hız kontrolü → armatür yükseklikleri → ölü hat → HWC sirkülasyon. Tek manifest ile projenin tüm sıhhi ön hesapları tamamlanır.",
+  "category": "SIHHI_TESISAT",
+  "version": "1.0",
+  "tags": [
+    "sihhi","tesisat","su","depo","pompa","pik","basinc","zon","prv",
+    "riser","lpd","hiz","olu_hat","hwc","sirkulasyon","en806","pipeline"
+  ],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_talep",
+      "op": "plumbing_demand_lpd",
+      "description": "1) Günlük su talebi (LPD)",
+      "inputs": {
+        "bina_tipi":   "$INPUT:bina_tipi:konut",
+        "kisi_sayisi": "$INPUT:kisi_sayisi:100"
+      }
+    },
+    {
+      "id": "s02_depo",
+      "op": "plumbing_storage_tank_size",
+      "description": "2) Suction + OHT depo boyutu",
+      "from": "s01_talep",
+      "input_map": { "gunluk_talep_m3": "gunluk_talep_m3" },
+      "inputs": { "tampon_katsayi": 1.15, "suction_oran": 0.55 }
+    },
+    {
+      "id": "s03_pompa",
+      "op": "plumbing_pump_hp_calc",
+      "description": "3) Pompa güç hesabı",
+      "inputs": {
+        "debi_m3_s":     "$INPUT:debi_m3_s:0.005",
+        "toplam_yuk_m":  "$INPUT:toplam_yuk_m:30",
+        "pompa_verim":   0.70,
+        "motor_verim":   0.90,
+        "servis_faktor": 1.15
+      }
+    },
+    {
+      "id": "s04_pik",
+      "op": "plumbing_peak_demand",
+      "description": "4) Pik talep + riser DN",
+      "inputs": {
+        "daire_sayisi":    "$INPUT:daire_sayisi:20",
+        "birim_pik_l_dak": 8.0,
+        "hesap_turu":      "$INPUT:hesap_turu:konut"
+      }
+    },
+    {
+      "id": "s05_zon",
+      "op": "plumbing_pressure_zone",
+      "description": "5) Basınç zonlama + PRV",
+      "inputs": {
+        "kat_sayisi":       "$INPUT:kat_sayisi:15",
+        "kat_yuksekligi_m": "$INPUT:kat_yuksekligi_m:3.0",
+        "max_basinc_bar":   3.5,
+        "min_basinc_bar":   1.0
+      }
+    },
+    {
+      "id": "s06_statik",
+      "op": "plumbing_static_pressure",
+      "description": "6) Statik basınç (bodrum kat kontrolü)",
+      "inputs": {
+        "yukseklik_m":      "$INPUT:bina_yuksekligi_m:45",
+        "sicaklik_c":       20.0,
+        "giris_basinc_bar": 0.0
+      }
+    },
+    {
+      "id": "s07_hiz",
+      "op": "plumbing_water_velocity",
+      "description": "7) Riser hız kontrolü",
+      "inputs": {
+        "debi_l_s":  "$INPUT:riser_debi_l_s:2.67",
+        "ic_cap_mm": "$INPUT:riser_cap_mm:50",
+        "boru_tipi": "soguk"
+      }
+    },
+    {
+      "id": "s08_armatur",
+      "op": "plumbing_fixture_clearance",
+      "description": "8) Armatür montaj yükseklikleri QA",
+      "inputs": {
+        "tolerance_mm": 50,
+        "write_back":   false
+      }
+    },
+    {
+      "id": "s09_olu_hat",
+      "op": "plumbing_dead_leg_check",
+      "description": "9) Ölü hat lejyonella kontrolü",
+      "inputs": { "max_uzunluk_katsayi": 20.0 }
+    },
+    {
+      "id": "s10_hwc",
+      "op": "plumbing_hwc_return",
+      "description": "10) HWC sirkülasyon debi ve boru",
+      "inputs": {
+        "isi_kaybi_w":        "$INPUT:isi_kaybi_w:2000",
+        "besleme_sicaklik_c": 65.0,
+        "donus_sicaklik_c":   55.0,
+        "ic_cap_mm":          "$INPUT:hwc_cap_mm:20"
+      }
+    },
+    {
+      "id": "s11_rapor",
+      "op": "export_html_report",
+      "description": "11) Tam hesap raporu",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/tam_sihhi_sistem_hesap.html",
+        "title":       "Sıhhi Tesisat Tam Sistem Hesap Raporu (10 Op)"
+      }
+    }
+  ]
+}

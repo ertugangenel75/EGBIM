@@ -1,0 +1,84 @@
+{
+  "title": "Yangın: Sprinkler Geometrik Aralık Denetimi",
+  "description": "Modeldeki sprinkler başlarının birbirine olan fiili mesafesini Türk Yangın Yönetmeliği tehlike sınıfı aralık sınırıyla karşılaştırır. Mevcut fp01 (parametre tabanlı kapsama) manifestinden farklı olarak, bu manifest GEOMETRİK mesafe analizi yapar (sprinkler XYZ konumları üzerinden en yakın komşu). fire_hose_cabinet_spacing_check op'u generic nokta-mesafe analizi yaptığı için sprinkler listesine de uygulanır — max_spacing_m parametresi tehlike sınıfına göre ayarlanır. Aralık sınır değerleri data/validation/tr_yangin_sprinkler_aralik.json ruleset tablosundan alınır (orta tehlike: 4.0m, yüksek tehlike: 3.7m, düşük tehlike: 4.6m). Farklı tehlike sınıfı için hazard_class ve max_spacing_m değerlerini ruleset tablosuna göre değiştirin. Önce tasarım yoğunluğu/kapsama hesaplanır (Ek-8/B), sonra geometrik aralık doğrulanır.",
+  "_ruleset_ref": "data/validation/tr_yangin_sprinkler_aralik.json",
+  "version": "1.0",
+  "category": "yangin",
+  "id": "fp11_sprinkler_aralik",
+  "standard": "TR_YANGIN_YONETMELIGI",
+  "tags": ["yangin", "fire", "sprinkler", "aralik", "spacing", "geometrik", "ek-8b", "tr-yonetmelik"],
+  "transaction_policy": "none",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Sprinklers"
+      ],
+      "min_count": 2,
+      "on_fail": "ABORT",
+      "message": "Modelde aralık kontrolü için en az 2 sprinkler başı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "yogunluk",
+      "op": "calc_sprinkler_design_density",
+      "params": {
+        "hazard_class": "orta_2",
+        "system_type": "islak"
+      }
+    },
+    {
+      "id": "yogunluk_tablo",
+      "op": "show_table",
+      "from": "yogunluk",
+      "params": {
+        "title": "Tasarım Yoğunluğu ve Gerekli Debi (Ek-8/B)"
+      }
+    },
+    {
+      "id": "sprinkler",
+      "op": "collect_sprinklers"
+    },
+    {
+      "id": "aralik_kontrol",
+      "op": "fire_hose_cabinet_spacing_check",
+      "from": "sprinkler",
+      "params": {
+        "max_spacing_m": 4.0,
+        "hose_length_m": 2.3
+      }
+    },
+    {
+      "id": "aralik_satir",
+      "op": "validation_to_rows",
+      "from": "aralik_kontrol"
+    },
+    {
+      "id": "aralik_tablo",
+      "op": "show_table",
+      "from": "aralik_satir",
+      "params": {
+        "title": "Sprinkler Geometrik Aralık Denetimi (max 4.0m — orta tehlike)",
+        "max_rows": 300
+      }
+    },
+    {
+      "id": "kapsama_param",
+      "op": "fp_validate_sprinkler_coverage",
+      "from": "sprinkler",
+      "params": {
+        "max_coverage_m2": 12.0
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "aralik_satir",
+      "required": false,
+      "params": {
+        "title": "Sprinkler Aralık Denetim Raporu (TR Yangın Yönetmeliği)"
+      }
+    }
+  ]
+}

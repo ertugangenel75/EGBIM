@@ -1,0 +1,88 @@
+{
+  "title": "Sıhhi: WBS Maliyet Zinciri",
+  "category": "sihhi_tesisat",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_PipeCurves",
+        "OST_PlumbingFixtures"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde sıhhi tesisat elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "poz_yukle",
+      "op": "load_poz_data",
+      "required": false
+    },
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "armatürler",
+      "op": "collect_plumbing_fixtures"
+    },
+    {
+      "id": "hepsi",
+      "op": "merge_lists",
+      "from_many": [
+        "borular",
+        "armatürler"
+      ]
+    },
+    {
+      "id": "wbs",
+      "op": "assign_wbs_code",
+      "from": "hepsi"
+    },
+    {
+      "id": "poz",
+      "op": "poz_match",
+      "from": "wbs",
+      "params": {
+        "data_path": "poz/csb_poz_2026.json"
+      }
+    },
+    {
+      "id": "maliyet",
+      "op": "calc_cost",
+      "from": "poz"
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "maliyet",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Sıhhi Maliyet"
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "maliyet",
+      "params": {
+        "title": "Sıhhi: WBS Maliyet Zinciri"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "armatürler"
+    }
+  ],
+  "id": "pl10_wbs_sihhi",
+  "description": "Sıhhi: WBS Maliyet Zinciri — 10 adımlı otomasyon iş akışı.",
+  "tags": [
+    "sihhi",
+    "tesisat",
+    "boru",
+    "plumbing"
+  ]
+}

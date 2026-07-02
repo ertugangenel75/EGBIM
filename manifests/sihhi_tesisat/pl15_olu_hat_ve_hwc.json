@@ -1,0 +1,37 @@
+{
+  "id": "pl15_olu_hat_ve_hwc",
+  "title": "Sıhhi: Ölü Hat Kontrolü ve HWC Sirkülasyon",
+  "description": "Lejyonella riski için ölü hat uzunluk kontrolü (ASHRAE 188) ve sıcak su sirkülasyon (HWC) debi/boru boyutu hesabı (BS 8558).",
+  "category": "SIHHI_TESISAT",
+  "version": "1.0",
+  "tags": ["sihhi","olu_hat","hwc","sirkulasyon","lejyonella","ashrae188","bs8558"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_olu_hat",
+      "op": "plumbing_dead_leg_check",
+      "inputs": {
+        "max_uzunluk_katsayi": 20.0
+      }
+    },
+    {
+      "id": "s02_hwc",
+      "op": "plumbing_hwc_return",
+      "inputs": {
+        "isi_kaybi_w":        "$INPUT:isi_kaybi_w:2000",
+        "besleme_sicaklik_c": 65.0,
+        "donus_sicaklik_c":   55.0,
+        "ic_cap_mm":          "$INPUT:ic_cap_mm:20"
+      }
+    },
+    {
+      "id": "s03_olu_hat_rapor",
+      "op": "export_html_report",
+      "from": "s01_olu_hat",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/olu_hat_hwc.html",
+        "title": "Ölü Hat ve HWC Sirkülasyon Raporu"
+      }
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "pl14_boru_hiz_kontrol",
+  "title": "Sıhhi: Boru Su Hız Kontrolü",
+  "description": "Revit modelindeki su borularının hız kontrolü. EN 806-3: soğuk max 2.0 m/s, sıcak max 1.5 m/s, atık max 3.0 m/s, min 0.6 m/s.",
+  "category": "SIHHI_TESISAT",
+  "version": "1.0",
+  "tags": ["sihhi","boru","hiz","en806","qa"],
+  "transaction_policy": "none",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": ["OST_PipeCurves"],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde boru bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "s01_borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "s02_hiz",
+      "op": "plumbing_water_velocity",
+      "from": "s01_borular",
+      "inputs": {
+        "boru_tipi": "$INPUT:boru_tipi:soguk"
+      }
+    },
+    {
+      "id": "s03_filtre",
+      "op": "filter_rows",
+      "from": "s02_hiz",
+      "inputs": {
+        "field": "durum",
+        "exclude_values": ["UYGUN"]
+      }
+    },
+    {
+      "id": "s04_rapor",
+      "op": "export_html_report",
+      "from": "s03_filtre",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/boru_hiz_kontrol.html",
+        "title": "Boru Su Hız Kontrol Raporu"
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "EGBIMOTO — Add-in Tam Geri Yükleme",
+  "description": "Daha önce EGBIMOTO veya rst-c tarafından devre dışı bırakılan tüm add-in'leri (.EGdisabled, .RSTdisabled) geri yükler. Bir sonraki Revit açılışında etkili olur.",
+  "version": "1.0",
+  "category": "sistem",
+  "transaction_policy": "none",
+  "tags": ["sistem", "addin", "geri_yukle", "restore"],
+  "steps": [
+    {
+      "id": "geri_yukle",
+      "op": "eg_addin_restore_all"
+    },
+    {
+      "id": "sonuc",
+      "op": "show_result",
+      "from": "geri_yukle",
+      "params": {
+        "title": "Add-in Geri Yükleme"
+      }
+    }
+  ]
+}

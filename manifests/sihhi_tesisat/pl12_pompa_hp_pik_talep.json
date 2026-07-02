@@ -1,0 +1,39 @@
+{
+  "id": "pl12_pompa_hp_pik_talep",
+  "title": "Sıhhi: Pompa Güç Hesabı ve Pik Talep",
+  "description": "Pompa Ph/Pb/Pm hesabı (IEC motor seçimi) ve konut/birim bazlı pik talep (Qp=8×N) ile riser DN önerisi.",
+  "category": "SIHHI_TESISAT",
+  "version": "1.0",
+  "tags": ["sihhi","pompa","pik_talep","riser","hp","en806"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_pompa",
+      "op": "plumbing_pump_hp_calc",
+      "inputs": {
+        "debi_m3_s":     "$INPUT:debi_m3_s:0.005",
+        "toplam_yuk_m":  "$INPUT:toplam_yuk_m:30",
+        "pompa_verim":   0.70,
+        "motor_verim":   0.90,
+        "servis_faktor": 1.15
+      }
+    },
+    {
+      "id": "s02_pik",
+      "op": "plumbing_peak_demand",
+      "inputs": {
+        "daire_sayisi":    "$INPUT:daire_sayisi:20",
+        "birim_pik_l_dak": 8.0,
+        "hesap_turu":      "$INPUT:hesap_turu:konut"
+      }
+    },
+    {
+      "id": "s03_rapor",
+      "op": "export_html_report",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/pompa_pik.html",
+        "title": "Pompa Güç ve Pik Talep Raporu"
+      }
+    }
+  ]
+}

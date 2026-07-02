@@ -1,0 +1,71 @@
+{
+  "title": "Yangın: Sprinkler Cihaz Listesi",
+  "category": "yangin",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_FireAlarmDevices",
+        "OST_Sprinklers",
+        "OST_PipeCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yangın elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "sprinkler",
+      "op": "collect_sprinklers"
+    },
+    {
+      "id": "satırlar",
+      "op": "elements_to_rows_with_params",
+      "from": "sprinkler",
+      "params": {
+        "param_names": [
+          "Family",
+          "Type",
+          "Level",
+          "System Name",
+          "Mark"
+        ]
+      }
+    },
+    {
+      "id": "grup",
+      "op": "group_by",
+      "from": "satırlar",
+      "params": {
+        "group_by": "Type"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "satırlar",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Sprinkler"
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "grup",
+      "params": {
+        "title": "Yangın: Sprinkler Cihaz Listesi"
+      }
+    }
+  ],
+  "id": "fp09_sprinkler_listesi",
+  "description": "Yangın: Sprinkler Cihaz Listesi — 5 adımlı otomasyon iş akışı.",
+  "tags": [
+    "yangin",
+    "fire",
+    "sprinkler",
+    "nfpa"
+  ]
+}

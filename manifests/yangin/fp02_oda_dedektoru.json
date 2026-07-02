@@ -1,0 +1,100 @@
+{
+  "title": "Yangın: Oda Dedektör Doğrulama",
+  "category": "yangin",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_FireAlarmDevices",
+        "OST_Sprinklers",
+        "OST_PipeCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yangın elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "sinifla",
+      "op": "fa_classify_room_detector",
+      "from": "odalar",
+      "params": {
+        "heat_detector_keywords": [
+          "mutfak",
+          "kitchen",
+          "mekanik",
+          "mechanical",
+          "garaj",
+          "garage",
+          "jeneratör",
+          "kazan",
+          "trafo"
+        ]
+      }
+    },
+    {
+      "id": "cihazlar",
+      "op": "collect_fire_alarm_devices"
+    },
+    {
+      "id": "kontrol",
+      "op": "fa_validate_device_in_room",
+      "from": "sinifla",
+      "params": {
+        "fa_devices": "$cihazlar",
+        "smoke_keywords": [
+          "smoke",
+          "duman",
+          "fsd",
+          "optik"
+        ],
+        "heat_keywords": [
+          "heat",
+          "ısı",
+          "fhd",
+          "rate-of-rise",
+          "sabit"
+        ]
+      }
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "satırlar",
+      "params": {
+        "title": "FA Oda Dedektör",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "kontrol"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    }
+  ],
+  "id": "fp02_oda_dedektoru",
+  "standard": "NFPA72",
+  "description": "Yangın: Oda Dedektör Doğrulama — 8 adımlı otomasyon iş akışı.",
+  "tags": [
+    "yangin",
+    "fire",
+    "sprinkler",
+    "nfpa"
+  ]
+}

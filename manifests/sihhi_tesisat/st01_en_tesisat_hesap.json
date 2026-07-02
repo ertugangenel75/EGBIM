@@ -1,0 +1,22 @@
+{
+  "title": "EGBIMOTO Sihhi Tesisat EN Hesap (Kurulum + Atama + Hesap + Cetvel)",
+  "description": "EN 12056-2 (drenaj) + EN 806-3 (su besleme) tam akisi: 1) shared parametreleri yukle, 2) armaturlere DU/LU ata, 3) borulara talep + cap hesabi, 4) hesap cetveli (HTML). Once armaturlere EG_BinaKullanim ve borulara sistem adi tanimli olmalidir.",
+  "category": "SIHHI_TESISAT",
+  "version": "1.0",
+  "transaction_policy": "atomic",
+  "steps": [
+    { "id": "s01_kurulum", "op": "plumbing_setup_params" },
+    { "id": "s02_birim_ata", "op": "plumbing_assign_units", "inputs": { "overwrite": false } },
+    {
+      "id": "s03_hesap",
+      "op": "plumbing_calc_en",
+      "inputs": { "pipe_role": "auto", "min_slope_pct": 1.0, "max_fill_pct": 70 }
+    },
+    {
+      "id": "s04_cetvel",
+      "op": "plumbing_schedule",
+      "inputs": { "output_path": "C:/EGBIM_Output/sihhi_tesisat_cetveli.html" }
+    }
+  ],
+  "tags": ["sihhi", "tesisat", "drenaj", "su", "en12056", "en806", "boru", "boyutlandirma", "metraj"]
+}

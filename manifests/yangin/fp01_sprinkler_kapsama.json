@@ -1,0 +1,68 @@
+{
+  "title": "Yangın: Sprinkler Kapsama Alanı",
+  "category": "yangin",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_FireAlarmDevices",
+        "OST_Sprinklers",
+        "OST_PipeCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yangın elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "sprinkler",
+      "op": "collect_sprinklers"
+    },
+    {
+      "id": "kontrol",
+      "op": "fp_validate_sprinkler_coverage",
+      "from": "sprinkler",
+      "params": {
+        "max_coverage_m2": 12.0
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "kontrol",
+      "params": {
+        "title": "Sprinkler Kapsama",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_type",
+      "from": "sprinkler"
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "kat_bazli",
+      "params": {
+        "title": "Yangın: Sprinkler Kapsama Alanı"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "kat_bazli"
+    }
+  ],
+  "id": "fp01_sprinkler_kapsama",
+  "standard": "NFPA13",
+  "description": "Yangın: Sprinkler Kapsama Alanı — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "yangin",
+    "fire",
+    "sprinkler",
+    "nfpa"
+  ]
+}

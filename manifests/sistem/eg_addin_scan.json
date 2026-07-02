@@ -1,0 +1,27 @@
+{
+  "title": "EGBIMOTO — Add-in Tarama Raporu",
+  "description": "Sistemdeki tüm Revit add-in'leri (aktif ve devre dışı) listeler, HTML tablo olarak raporlar.",
+  "version": "1.0",
+  "category": "sistem",
+  "transaction_policy": "none",
+  "tags": ["sistem", "addin", "tarama"],
+  "steps": [
+    {
+      "id": "tarama",
+      "op": "eg_addin_scan",
+      "params": {
+        "include_disabled": true
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "tarama",
+      "params": {
+        "title": "Kurulu Revit Add-in'ler",
+        "columns": ["fileName", "disabled", "name", "type", "directory"],
+        "open": true
+      }
+    }
+  ]
+}

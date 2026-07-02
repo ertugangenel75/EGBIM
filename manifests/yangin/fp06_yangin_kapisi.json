@@ -1,0 +1,67 @@
+{
+  "title": "Yangın: Yangın Kapısı Rating Kontrolü",
+  "category": "yangin",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_FireAlarmDevices",
+        "OST_Sprinklers",
+        "OST_PipeCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yangın elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kapilar",
+      "op": "collect_doors"
+    },
+    {
+      "id": "kontrol",
+      "op": "arch_check_fire_rating_continuity",
+      "from": "kapilar",
+      "params": {
+        "min_fire_rating": "60"
+      }
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "satırlar",
+      "params": {
+        "title": "Yangın Kapısı",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_type",
+      "from": "kapilar"
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "kat_bazli",
+      "params": {
+        "title": "Yangın: Yangın Kapısı Rating Kontrolü"
+      }
+    }
+  ],
+  "id": "fp06_yangin_kapisi",
+  "description": "Yangın: Yangın Kapısı Rating Kontrolü — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "yangin",
+    "fire",
+    "sprinkler",
+    "nfpa"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "fp16_tahliye_mimari_qa",
+  "title": "Yangın: Tahliye ve Mimari QA (Çıkış Yolu + Kapı + Kompartıman)",
+  "description": "Tahliye yolu genişliği/mesafesi, acil çıkış işaretleri, yangın kapısı rating ve kompartıman alanı kontrolü.",
+  "category": "YANGIN",
+  "version": "1.0",
+  "tags": ["yangin","tahliye","cikis_yolu","kompartiman","yangin_kapisi","en1838","tr_yangin_yon"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_tahliye",
+      "op": "fp_evacuation_route_check",
+      "inputs": {
+        "yol_tipi":          "$INPUT:yol_tipi:koridor",
+        "mevcut_genislik_m": "$INPUT:mevcut_genislik_m:1.4",
+        "kisi_sayisi":       "$INPUT:kisi_sayisi:50",
+        "cikis_mesafesi_m":  "$INPUT:cikis_mesafesi_m:45",
+        "sprinkler_var":     "$INPUT:sprinkler_var:false"
+      }
+    },
+    {
+      "id": "s02_isaret",
+      "op": "fp_exit_sign_spacing",
+      "inputs": {
+        "koridor_uzunlugu_m":   "$INPUT:koridor_uzunlugu_m:60",
+        "isaret_yuksekligi_mm": 150,
+        "mevcut_isaret_sayisi": "$INPUT:mevcut_isaret_sayisi:0",
+        "montaj_yuksekligi_m":  2.2
+      }
+    },
+    {
+      "id": "s03_kapi",
+      "op": "fp_fire_door_rating_check",
+      "inputs": {
+        "min_rating_dak": "$INPUT:min_rating_dak:60",
+        "write_back":     false
+      }
+    },
+    {
+      "id": "s04_kompartiman",
+      "op": "fp_compartment_area_check",
+      "inputs": {
+        "bina_kullanimi":         "$INPUT:bina_kullanimi:ofis",
+        "kompartiman_alani_m2":   "$INPUT:kompartiman_alani_m2:2000",
+        "kat_sayisi":             "$INPUT:kat_sayisi:3",
+        "sprinkler_var":          "$INPUT:sprinkler_var:false"
+      }
+    },
+    {
+      "id": "s05_rapor",
+      "op": "export_html_report",
+      "from": "s04_kompartiman",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/tahliye_mimari_qa.html",
+        "title": "Tahliye ve Mimari Yangın QA Raporu"
+      }
+    }
+  ]
+}

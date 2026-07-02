@@ -1,0 +1,132 @@
+{
+  "title": "WBS Yapısal Rapor",
+  "description": "Yapısal elemanları WBS kodlarına bağlar, hacim ve maliyet bazında WBS iş kalemi özeti üretir.",
+  "version": "1.0.0",
+  "category": "WBS",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "poz_yukle",
+      "op": "load_poz_data",
+      "required": false
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "kirisler",
+      "op": "collect_beams"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "temeller",
+      "op": "collect_foundations"
+    },
+    {
+      "id": "v_k",
+      "op": "column_volume",
+      "from": "kolonlar"
+    },
+    {
+      "id": "v_ki",
+      "op": "beam_volume",
+      "from": "kirisler"
+    },
+    {
+      "id": "v_d",
+      "op": "floor_volume",
+      "from": "dosemeler"
+    },
+    {
+      "id": "v_t",
+      "op": "foundation_volume",
+      "from": "temeller"
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_lists",
+      "from_many": [
+        "v_k",
+        "v_ki",
+        "v_d",
+        "v_t"
+      ]
+    },
+    {
+      "id": "wbs",
+      "op": "classify_by_wbs",
+      "from": "birlesik"
+    },
+    {
+      "id": "poz",
+      "op": "poz_match",
+      "from": "birlesik"
+    },
+    {
+      "id": "maliyet",
+      "op": "calc_cost",
+      "from": "poz",
+      "params": {
+        "quantity_field": "hacim_m3"
+      }
+    },
+    {
+      "id": "wbs_ozet",
+      "op": "cost_summary",
+      "from": "maliyet",
+      "params": {
+        "group_by": "kategori"
+      }
+    },
+    {
+      "id": "wbs_link",
+      "op": "link_quantity_to_wbs",
+      "from": "wbs_ozet",
+      "required": false
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "wbs_ozet",
+      "params": {
+        "title": "WBS Yapısal Özeti"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "wbs_ozet",
+      "params": {
+        "sheet_name": "WBS Yapısal"
+      },
+      "required": false
+    },
+    {
+      "id": "html",
+      "op": "export_wbs_report",
+      "from": "wbs_ozet",
+      "required": false
+    }
+  ],
+  "tags": [
+    "wbs",
+    "is_kirilim",
+    "proje"
+  ]
+}

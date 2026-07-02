@@ -1,0 +1,71 @@
+{
+  "title": "Sıhhi: Boru Metraj Raporu",
+  "category": "sihhi_tesisat",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_PipeCurves",
+        "OST_PlumbingFixtures"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde sıhhi tesisat elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "uzunluk",
+      "op": "mep_total_length",
+      "from": "borular"
+    },
+    {
+      "id": "sistem",
+      "op": "mep_by_system",
+      "from": "borular"
+    },
+    {
+      "id": "satırlar",
+      "op": "elements_to_rows_with_params",
+      "from": "borular",
+      "params": {
+        "param_names": [
+          "Level",
+          "System Name",
+          "Diameter",
+          "Length"
+        ]
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "satırlar",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Boru Metraj"
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "sistem",
+      "params": {
+        "title": "Sıhhi: Boru Metraj Raporu"
+      }
+    }
+  ],
+  "id": "pl06_boru_metraj",
+  "description": "Sıhhi: Boru Metraj Raporu — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "sihhi",
+    "tesisat",
+    "boru",
+    "plumbing"
+  ]
+}

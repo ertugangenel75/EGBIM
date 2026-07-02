@@ -1,0 +1,60 @@
+{
+  "title": "Sıhhi: Armatür Oda Ataması",
+  "category": "sihhi_tesisat",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_PipeCurves",
+        "OST_PlumbingFixtures"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde sıhhi tesisat elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "armatürler",
+      "op": "collect_plumbing_fixtures"
+    },
+    {
+      "id": "kontrol",
+      "op": "plumbing_check_fixture_room_assigned",
+      "from": "armatürler"
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "satırlar",
+      "params": {
+        "title": "Armatür Oda",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "kontrol"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    }
+  ],
+  "id": "pl03_oda_atama",
+  "description": "Sıhhi: Armatür Oda Ataması — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "sihhi",
+    "tesisat",
+    "boru",
+    "plumbing"
+  ]
+}

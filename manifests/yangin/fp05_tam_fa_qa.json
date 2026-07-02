@@ -1,0 +1,110 @@
+{
+  "title": "Yangın: Tam FA Sistem QA",
+  "category": "yangin",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_FireAlarmDevices",
+        "OST_Sprinklers",
+        "OST_PipeCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yangın elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "cihazlar",
+      "op": "collect_fire_alarm_devices"
+    },
+    {
+      "id": "sinifla",
+      "op": "fa_classify_room_detector",
+      "from": "odalar",
+      "params": {
+        "heat_detector_keywords": [
+          "mutfak",
+          "mekanik",
+          "garaj",
+          "kazan"
+        ]
+      }
+    },
+    {
+      "id": "oda_kontrol",
+      "op": "fa_validate_device_in_room",
+      "from": "sinifla",
+      "params": {
+        "fa_devices": "$cihazlar",
+        "smoke_keywords": [
+          "duman",
+          "smoke"
+        ],
+        "heat_keywords": [
+          "ısı",
+          "heat"
+        ]
+      }
+    },
+    {
+      "id": "aff_kontrol",
+      "op": "fa_validate_mounting_height",
+      "from": "cihazlar",
+      "params": {
+        "min_aff_mm": 2000,
+        "max_aff_mm": 2400
+      }
+    },
+    {
+      "id": "loop_kontrol",
+      "op": "fa_validate_circuit_assigned",
+      "from": "cihazlar"
+    },
+    {
+      "id": "birles",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "oda_kontrol",
+        "aff_kontrol",
+        "loop_kontrol"
+      ],
+      "params": {
+        "title": "FA Tam QA"
+      }
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "birles"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "satırlar",
+      "params": {
+        "title": "FA Tam QA Raporu",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "birles"
+    }
+  ],
+  "id": "fp05_tam_fa_qa",
+  "description": "Yangın: Tam FA Sistem QA — 10 adımlı otomasyon iş akışı.",
+  "tags": [
+    "yangin",
+    "fire",
+    "sprinkler",
+    "nfpa"
+  ]
+}

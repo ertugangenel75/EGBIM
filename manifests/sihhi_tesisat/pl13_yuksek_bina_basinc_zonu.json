@@ -1,0 +1,39 @@
+{
+  "id": "pl13_yuksek_bina_basinc_zonu",
+  "title": "Sıhhi: Yüksek Bina Basınç Zonlama",
+  "description": "Kat sayısına göre basınç zonları, PRV konumları ve statik basınç hesabı. Kural: max 3.5 bar/zon, ≤10-11 kat/zon.",
+  "category": "SIHHI_TESISAT",
+  "version": "1.0",
+  "tags": ["sihhi","basinc","zon","prv","yuksek_bina","en806"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_basinc",
+      "op": "plumbing_static_pressure",
+      "inputs": {
+        "yukseklik_m":      "$INPUT:bina_yuksekligi_m:45",
+        "sicaklik_c":       20.0,
+        "giris_basinc_bar": 0.0
+      }
+    },
+    {
+      "id": "s02_zonlama",
+      "op": "plumbing_pressure_zone",
+      "inputs": {
+        "kat_sayisi":       "$INPUT:kat_sayisi:15",
+        "kat_yuksekligi_m": "$INPUT:kat_yuksekligi_m:3.0",
+        "max_basinc_bar":   3.5,
+        "min_basinc_bar":   1.0
+      }
+    },
+    {
+      "id": "s03_rapor",
+      "op": "export_html_report",
+      "from": "s02_zonlama",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/basinc_zon.html",
+        "title": "Yüksek Bina Basınç Zonlama Raporu"
+      }
+    }
+  ]
+}

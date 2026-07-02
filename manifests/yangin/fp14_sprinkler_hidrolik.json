@@ -1,0 +1,38 @@
+{
+  "id": "fp14_sprinkler_hidrolik",
+  "title": "Yangın: Sprinkler Hidrolik ve Sıcaklık Sınıfı",
+  "description": "Sprinkler K-faktörü hidrolik hesabı (Q=K×√P) ve sıcaklık sınıfı doğrulaması (NFPA 13 / TS EN 12845).",
+  "category": "YANGIN",
+  "version": "1.0",
+  "tags": ["yangin","sprinkler","hidrolik","k_faktoru","sicaklik_sinifi","nfpa13","en12845"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_hidrolik",
+      "op": "fp_sprinkler_hydraulic",
+      "inputs": {
+        "k_faktoru":            "$INPUT:k_faktoru:K80",
+        "isletme_basinc_bar":   "$INPUT:isletme_basinc_bar:0.5",
+        "sprinkler_sayisi":     "$INPUT:sprinkler_sayisi:4",
+        "tehlike_sinifi":       "$INPUT:tehlike_sinifi:orta_1"
+      }
+    },
+    {
+      "id": "s02_sicaklik",
+      "op": "fp_sprinkler_temp_class",
+      "inputs": {
+        "ortam_sicaklik_c": "$INPUT:ortam_sicaklik_c:38",
+        "mevcut_sinif":     "$INPUT:mevcut_sinif:68C",
+        "guvenlik_marji_c": 30.0
+      }
+    },
+    {
+      "id": "s03_rapor",
+      "op": "export_html_report",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/sprinkler_hidrolik.html",
+        "title": "Sprinkler Hidrolik ve Sıcaklık Sınıfı Raporu"
+      }
+    }
+  ]
+}

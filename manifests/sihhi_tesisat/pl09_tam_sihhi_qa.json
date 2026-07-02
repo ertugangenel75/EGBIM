@@ -1,0 +1,78 @@
+{
+  "title": "Sıhhi: Tam Sıhhi Tesisat QA",
+  "category": "sihhi_tesisat",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_PipeCurves",
+        "OST_PlumbingFixtures"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde sıhhi tesisat elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "armatürler",
+      "op": "collect_plumbing_fixtures"
+    },
+    {
+      "id": "egim",
+      "op": "plumbing_validate_pipe_slope",
+      "from": "borular",
+      "params": {
+        "min_slope_pct": 1.0
+      }
+    },
+    {
+      "id": "oda",
+      "op": "plumbing_check_fixture_room_assigned",
+      "from": "armatürler"
+    },
+    {
+      "id": "birles",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "egim",
+        "oda"
+      ],
+      "params": {
+        "title": "Sıhhi QA"
+      }
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "birles"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "satırlar",
+      "params": {
+        "title": "Sıhhi Tesisat QA",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "birles"
+    }
+  ],
+  "id": "pl09_tam_sihhi_qa",
+  "description": "Sıhhi: Tam Sıhhi Tesisat QA — 8 adımlı otomasyon iş akışı.",
+  "tags": [
+    "sihhi",
+    "tesisat",
+    "boru",
+    "plumbing"
+  ]
+}

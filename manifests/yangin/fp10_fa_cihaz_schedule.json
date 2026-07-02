@@ -1,0 +1,71 @@
+{
+  "title": "Yangın: FA Cihaz Schedule",
+  "category": "yangin",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_FireAlarmDevices",
+        "OST_Sprinklers",
+        "OST_PipeCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yangın elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "cihazlar",
+      "op": "collect_fire_alarm_devices"
+    },
+    {
+      "id": "satırlar",
+      "op": "elements_to_rows_with_params",
+      "from": "cihazlar",
+      "params": {
+        "param_names": [
+          "Family",
+          "Type",
+          "Level",
+          "Circuit",
+          "Mark"
+        ]
+      }
+    },
+    {
+      "id": "grup",
+      "op": "group_by",
+      "from": "satırlar",
+      "params": {
+        "group_by": "Type"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "satırlar",
+      "params": {
+        "output_path": "",
+        "sheet_name": "FA Schedule"
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "grup",
+      "params": {
+        "title": "Yangın: FA Cihaz Schedule"
+      }
+    }
+  ],
+  "id": "fp10_fa_cihaz_schedule",
+  "description": "Yangın: FA Cihaz Schedule — 5 adımlı otomasyon iş akışı.",
+  "tags": [
+    "yangin",
+    "fire",
+    "sprinkler",
+    "nfpa"
+  ]
+}

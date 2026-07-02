@@ -1,0 +1,35 @@
+{
+  "id": "pl11_gunluk_su_talebi_depo",
+  "title": "Sıhhi: Günlük Su Talebi ve Depo Boyutlandırma",
+  "description": "Bina tipine ve kişi sayısına göre günlük su talebini (LPD) hesaplar, suction tank ve OHT hacimlerini boyutlandırır.",
+  "category": "SIHHI_TESISAT",
+  "version": "1.0",
+  "tags": ["sihhi","su","depo","lpd","en806","boyutlandirma"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_talep",
+      "op": "plumbing_demand_lpd",
+      "inputs": {
+        "bina_tipi":   "$INPUT:bina_tipi:konut",
+        "kisi_sayisi": "$INPUT:kisi_sayisi:100"
+      }
+    },
+    {
+      "id": "s02_depo",
+      "op": "plumbing_storage_tank_size",
+      "from": "s01_talep",
+      "input_map": { "gunluk_talep_m3": "gunluk_talep_m3" },
+      "inputs": { "tampon_katsayi": 1.15, "suction_oran": 0.55 }
+    },
+    {
+      "id": "s03_rapor",
+      "op": "export_html_report",
+      "from": "s02_depo",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/su_talebi_depo.html",
+        "title": "Günlük Su Talebi ve Depo Boyutlandırma"
+      }
+    }
+  ]
+}

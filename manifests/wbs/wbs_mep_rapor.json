@@ -1,0 +1,86 @@
+{
+  "title": "WBS MEP Raporu",
+  "description": "MEP elemanlarını WBS kodu ile sınıflandırır, uzunluk ve eleman sayısı bazında WBS ağacı oluşturur.",
+  "version": "1.0.0",
+  "category": "WBS",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kanallar",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "kablo",
+      "op": "collect_cable_trays"
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_lists",
+      "from_many": [
+        "kanallar",
+        "borular",
+        "kablo"
+      ]
+    },
+    {
+      "id": "wbs",
+      "op": "classify_by_wbs",
+      "from": "birlesik"
+    },
+    {
+      "id": "sys_ozet",
+      "op": "mep_by_system",
+      "from": "kanallar"
+    },
+    {
+      "id": "wbs_link",
+      "op": "link_quantity_to_wbs",
+      "from": "sys_ozet",
+      "required": false
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "wbs",
+      "params": {
+        "title": "WBS MEP Sınıflandırma"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "wbs",
+      "params": {
+        "sheet_name": "WBS MEP"
+      },
+      "required": false
+    },
+    {
+      "id": "wbs_html",
+      "op": "export_wbs_report",
+      "from": "sys_ozet",
+      "required": false
+    }
+  ],
+  "tags": [
+    "wbs",
+    "is_kirilim",
+    "proje"
+  ]
+}

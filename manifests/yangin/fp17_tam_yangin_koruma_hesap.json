@@ -1,0 +1,147 @@
+{
+  "id": "fp17_tam_yangin_koruma_hesap",
+  "title": "Yangın: Tam Koruma Sistemi Pipeline (13 Op)",
+  "description": "Yangın koruma tam ön hesap akışı: standpipe QA → basınç/PRV → FDC → pompa schedule → pompa HP → sprinkler hidrolik → sıcaklık sınıfı → dedektör kapsama → söndürme ajanı → tahliye yolu → çıkış işareti → yangın kapısı → kompartıman. Tek manifest ile projenin tüm yangın ön hesapları.",
+  "category": "YANGIN",
+  "version": "1.0",
+  "tags": [
+    "yangin","standpipe","prv","fdc","pompa","sprinkler","dedektör","tahliye",
+    "kompartiman","yangin_kapisi","nfpa13","nfpa14","nfpa20","nfpa72",
+    "ts_en_12845","tr_yangin_yon","pipeline"
+  ],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_standpipe",
+      "op": "fp_standpipe_qa",
+      "description": "1) Standpipe riser DN ve tip",
+      "inputs": {
+        "bina_yuksekligi_m": "$INPUT:bina_yuksekligi_m:30",
+        "mevcut_dn_mm": 0, "sistem_tipi": "islak",
+        "kat_sayisi": "$INPUT:kat_sayisi:10"
+      }
+    },
+    {
+      "id": "s02_basinc",
+      "op": "fp_standpipe_pressure",
+      "description": "2) Standpipe basınç + PRV",
+      "inputs": {
+        "bina_yuksekligi_m": "$INPUT:bina_yuksekligi_m:30",
+        "pompa_basinc_bar": "$INPUT:pompa_basinc_bar:10",
+        "kat_yuksekligi_m": 3.0, "max_hortum_bar": 6.9
+      }
+    },
+    {
+      "id": "s03_fdc",
+      "op": "fp_fdc_clearance_check",
+      "description": "3) FDC temizlik kontrolü",
+      "inputs": {"min_aff_mm": 450, "min_temizlik_mm": 3000}
+    },
+    {
+      "id": "s04_pompa_sch",
+      "op": "fp_pump_schedule_validate",
+      "description": "4) Pompa schedule (Main/Jockey/Diesel)",
+      "inputs": {
+        "ana_pompa_lpm": "$INPUT:ana_pompa_lpm:1500",
+        "ana_pompa_bar": "$INPUT:ana_pompa_bar:10",
+        "kat_sayisi": "$INPUT:kat_sayisi:10", "diesel_gerekli": true
+      }
+    },
+    {
+      "id": "s05_pompa_hp",
+      "op": "fp_pump_hp_calc",
+      "description": "5) Pompa HP hesabı",
+      "inputs": {
+        "debi_lpm": "$INPUT:ana_pompa_lpm:1500",
+        "toplam_yuk_m": "$INPUT:toplam_yuk_m:80",
+        "pompa_verim": 0.70, "motor_verim": 0.90, "guvenlik_faktor": 1.25
+      }
+    },
+    {
+      "id": "s06_sprinkler_hid",
+      "op": "fp_sprinkler_hydraulic",
+      "description": "6) Sprinkler hidrolik (Q=K×√P)",
+      "inputs": {
+        "k_faktoru": "$INPUT:k_faktoru:K80",
+        "isletme_basinc_bar": "$INPUT:isletme_basinc_bar:0.5",
+        "sprinkler_sayisi": "$INPUT:sprinkler_sayisi:4",
+        "tehlike_sinifi": "$INPUT:tehlike_sinifi:orta_1"
+      }
+    },
+    {
+      "id": "s07_sprinkler_temp",
+      "op": "fp_sprinkler_temp_class",
+      "description": "7) Sprinkler sıcaklık sınıfı",
+      "inputs": {
+        "ortam_sicaklik_c": "$INPUT:ortam_sicaklik_c:38",
+        "mevcut_sinif": "$INPUT:mevcut_sinif:68C", "guvenlik_marji_c": 30.0
+      }
+    },
+    {
+      "id": "s08_dedektör",
+      "op": "fp_detection_coverage",
+      "description": "8) Dedektör kapsama alanı",
+      "inputs": {
+        "oda_alani_m2": "$INPUT:oda_alani_m2:100",
+        "dedektör_tipi": "$INPUT:dedektör_tipi:duman",
+        "tavan_yuksekligi_m": "$INPUT:tavan_yuksekligi_m:2.7"
+      }
+    },
+    {
+      "id": "s09_ajan",
+      "op": "fp_suppression_agent_qa",
+      "description": "9) Söndürme ajanı uygunluk",
+      "inputs": {
+        "ajan_tipi": "$INPUT:ajan_tipi:su",
+        "alan_tipi": "$INPUT:alan_tipi:genel_ofis"
+      }
+    },
+    {
+      "id": "s10_tahliye",
+      "op": "fp_evacuation_route_check",
+      "description": "10) Tahliye yolu genişlik/mesafe",
+      "inputs": {
+        "yol_tipi": "koridor",
+        "mevcut_genislik_m": "$INPUT:koridor_genislik_m:1.4",
+        "kisi_sayisi": "$INPUT:kisi_sayisi:10",
+        "cikis_mesafesi_m": "$INPUT:cikis_mesafesi_m:45",
+        "sprinkler_var": "$INPUT:sprinkler_var:false"
+      }
+    },
+    {
+      "id": "s11_isaret",
+      "op": "fp_exit_sign_spacing",
+      "description": "11) Acil çıkış işareti",
+      "inputs": {
+        "koridor_uzunlugu_m": "$INPUT:koridor_uzunlugu_m:60",
+        "isaret_yuksekligi_mm": 150, "montaj_yuksekligi_m": 2.2
+      }
+    },
+    {
+      "id": "s12_kapi",
+      "op": "fp_fire_door_rating_check",
+      "description": "12) Yangın kapısı rating",
+      "inputs": {"min_rating_dak": "$INPUT:min_rating_dak:60"}
+    },
+    {
+      "id": "s13_kompartiman",
+      "op": "fp_compartment_area_check",
+      "description": "13) Kompartıman alanı",
+      "inputs": {
+        "bina_kullanimi": "$INPUT:bina_kullanimi:ofis",
+        "kompartiman_alani_m2": "$INPUT:kompartiman_alani_m2:2000",
+        "kat_sayisi": "$INPUT:kat_sayisi:3",
+        "sprinkler_var": "$INPUT:sprinkler_var:false"
+      }
+    },
+    {
+      "id": "s14_rapor",
+      "op": "export_html_report",
+      "description": "14) Tam rapor",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/tam_yangin_koruma_hesap.html",
+        "title": "Yangın Koruma Tam Sistem Hesap Raporu (13 Op)"
+      }
+    }
+  ]
+}

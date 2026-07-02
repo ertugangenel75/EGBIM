@@ -1,0 +1,131 @@
+{
+  "title": "WBS Tam Maliyet Raporu",
+  "description": "Tüm yapısal elemanları WBS koduna bağlar ve detaylı maliyet raporu üretir.",
+  "version": "1.0.0",
+  "category": "WBS",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "poz_data",
+      "op": "load_poz_data"
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "poz_d",
+      "op": "poz_match",
+      "from": "duvarlar"
+    },
+    {
+      "id": "poz_k",
+      "op": "poz_match",
+      "from": "kolonlar"
+    },
+    {
+      "id": "poz_f",
+      "op": "poz_match",
+      "from": "dosemeler"
+    },
+    {
+      "id": "kalip_d",
+      "op": "kalip_wall",
+      "from": "duvarlar"
+    },
+    {
+      "id": "kalip_k",
+      "op": "kalip_column",
+      "from": "kolonlar"
+    },
+    {
+      "id": "kalip_f",
+      "op": "kalip_floor",
+      "from": "dosemeler"
+    },
+    {
+      "id": "mal_d",
+      "op": "calc_cost",
+      "from": "poz_d"
+    },
+    {
+      "id": "mal_k",
+      "op": "calc_cost",
+      "from": "poz_k"
+    },
+    {
+      "id": "mal_f",
+      "op": "calc_cost",
+      "from": "poz_f"
+    },
+    {
+      "id": "tum_maliyet",
+      "op": "merge_rows",
+      "from_many": [
+        "mal_d",
+        "mal_k",
+        "mal_f"
+      ]
+    },
+    {
+      "id": "wbs",
+      "op": "assign_wbs_code",
+      "from": "tum_maliyet"
+    },
+    {
+      "id": "wbs_link",
+      "op": "link_quantity_to_wbs",
+      "from": "wbs"
+    },
+    {
+      "id": "ozet",
+      "op": "show_table",
+      "from": "wbs_link",
+      "params": {
+        "title": "WBS Maliyet Özeti"
+      }
+    },
+    {
+      "id": "html",
+      "op": "export_wbs_report",
+      "from": "wbs_link",
+      "params": {
+        "title": "WBS Tam Maliyet Raporu"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "wbs_link",
+      "params": {
+        "sheet_name": "WBS Maliyet"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "wbs",
+    "is_kirilim",
+    "proje"
+  ]
+}
