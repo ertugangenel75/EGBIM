@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "dgSpecHash": "H4O/2fvqwyo=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ERTUGAN\\Desktop\\egbimoto_v12\\src\\EGBIMOTO.Addin\\EGBIMOTO.Addin.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ERTUGAN\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.4\\microsoft.codeanalysis.analyzers.3.3.4.nupkg.sha512",
+    "C:\\Users\\ERTUGAN\\.nuget\\packages\\microsoft.codeanalysis.common\\4.9.2\\microsoft.codeanalysis.common.4.9.2.nupkg.sha512",
+    "C:\\Users\\ERTUGAN\\.nuget\\packages\\microsoft.codeanalysis.csharp\\4.9.2\\microsoft.codeanalysis.csharp.4.9.2.nupkg.sha512",
+    "C:\\Users\\ERTUGAN\\.nuget\\packages\\microsoft.codeanalysis.csharp.scripting\\4.9.2\\microsoft.codeanalysis.csharp.scripting.4.9.2.nupkg.sha512",
+    "C:\\Users\\ERTUGAN\\.nuget\\packages\\microsoft.codeanalysis.scripting.common\\4.9.2\\microsoft.codeanalysis.scripting.common.4.9.2.nupkg.sha512",
+    "C:\\Users\\ERTUGAN\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\ERTUGAN\\.nuget\\packages\\microsoft.web.webview2\\1.0.2739.15\\microsoft.web.webview2.1.0.2739.15.nupkg.sha512",
+    "C:\\Users\\ERTUGAN\\.nuget\\packages\\system.collections.immutable\\8.0.0\\system.collections.immutable.8.0.0.nupkg.sha512",
+    "C:\\Users\\ERTUGAN\\.nuget\\packages\\system.reflection.metadata\\8.0.0\\system.reflection.metadata.8.0.0.nupkg.sha512",
+    "C:\\Users\\ERTUGAN\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
