@@ -1,0 +1,27 @@
+<Project>
+
+  <!--
+    Directory.Build.props — Tüm projeler için ortak MSBuild değişkenleri.
+
+    MSBuild bu dosyayı, derlenen her .csproj'un BULUNDUĞU dizinden başlayıp
+    YUKARI doğru tarayarak otomatik bulur ve projeden ÖNCE içe aktarır.
+    Bu dosya repo kökünde olduğu için src/EGBIMOTO.Addin, src/EGBIMOTO.Core
+    ve src/EGBIMOTO.Bootstrap derlemelerinin hepsinde geçerli olur.
+
+    RepoRoot:
+      Repo kök dizininin MUTLAK yolu (sonunda ayraç ile).
+      $(MSBuildThisFileDirectory) bu .props dosyasının bulunduğu dizindir
+      (= repo kökü), yani çalışma dizininden veya hangi csproj derlendiğinden
+      BAĞIMSIZDIR.
+
+      EGBIMOTO.Addin.csproj'daki CopyAssets target'ı bunu kullanarak
+      manifests\, data\, op_contracts.json ve categories.json dosyalarını
+      derleme çıktısına kopyalar. Bu değişken tanımlı olmadan kopyalama
+      sessizce başarısız olur (kaynaklar çıktı klasörüne hiç gitmez).
+  -->
+
+  <PropertyGroup>
+    <RepoRoot>$([MSBuild]::EnsureTrailingSlash('$(MSBuildThisFileDirectory)'))</RepoRoot>
+  </PropertyGroup>
+
+</Project>

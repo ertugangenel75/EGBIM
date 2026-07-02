@@ -1,0 +1,175 @@
+{
+  "_comment": "EGBIMOTO Ribbon Özelleştirme — bu dosyayı düzenleyerek ribbon'u yapılandırın",
+  "_doc": "manifests: { id, display_name } nesnesi VEYA düz string kabul edilir.",
+  "panels": [
+    {
+      "name": "Sık Kullanılan",
+      "groups": [
+        {
+          "label": "Sıhhi\nTam",
+          "icon": "sihhi.png",
+          "manifests": [
+            { "id": "pl16_tam_sihhi_sistem_hesap", "display_name": "Tam Sıhhi Hesap" }
+          ]
+        },
+        {
+          "label": "Yangın\nTam",
+          "icon": "yangin.png",
+          "manifests": [
+            { "id": "fp17_tam_yangin_koruma_hesap", "display_name": "Tam Yangın Koruma" }
+          ]
+        },
+        {
+          "label": "Elektrik\nTam",
+          "icon": "elektrik.png",
+          "manifests": [
+            { "id": "el16_tam_elektrik_hesap", "display_name": "Tam Elektrik Hesap" }
+          ]
+        },
+        {
+          "label": "Mekanik\nTam",
+          "icon": "mekanik.png",
+          "manifests": [
+            { "id": "me17_tam_mek_hesap", "display_name": "Tam Mekanik HVAC" }
+          ]
+        },
+        {
+          "label": "Yapısal\nTam",
+          "icon": "yapisal.png",
+          "manifests": [
+            { "id": "s15_tam_yapisal_hesap", "display_name": "Tam Yapısal Hesap" }
+          ]
+        },
+        {
+          "label": "MEP\nBoşluk",
+          "icon": "mep.png",
+          "manifests": [
+            { "id": "mep05_tam_bosluk_workflow", "display_name": "MEP Boşluk Tam Workflow" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MEP Hesap",
+      "groups": [
+        {
+          "label": "Sıhhi",
+          "icon": "sihhi.png",
+          "tooltip": "Sıhhi tesisat hesap manifestleri",
+          "manifests": [
+            { "id": "pl16_tam_sihhi_sistem_hesap",  "display_name": "Tam Sıhhi Hesap" },
+            { "id": "pl11_gunluk_su_talebi_depo",   "display_name": "Su Talebi / Depo" },
+            { "id": "pl12_pompa_hp_pik_talep",       "display_name": "Pompa HP" },
+            { "id": "pl13_yuksek_bina_basinc_zonu",  "display_name": "Basınç Zonu" },
+            { "id": "pl14_boru_hiz_kontrol",          "display_name": "Boru Hız" },
+            { "id": "pl15_olu_hat_ve_hwc",            "display_name": "Ölü Hat / HWC" }
+          ]
+        },
+        {
+          "label": "Elektrik",
+          "icon": "elektrik.png",
+          "manifests": [
+            { "id": "el16_tam_elektrik_hesap",    "display_name": "Tam Elektrik" },
+            { "id": "el11_gerilim_dusumu_hesap",  "display_name": "Gerilim Düşümü" },
+            { "id": "el12_panel_guc_analiz",       "display_name": "Panel Güç" },
+            { "id": "el13_tesisat_guvenligi_qa",   "display_name": "Tesisat Güvenliği QA" },
+            { "id": "el14_kablo_tava_qa",          "display_name": "Kablo Tava QA" },
+            { "id": "el15_yedek_guc_sistemi",      "display_name": "Jeneratör / UPS" }
+          ]
+        },
+        {
+          "label": "Yangın",
+          "icon": "yangin.png",
+          "manifests": [
+            { "id": "fp17_tam_yangin_koruma_hesap", "display_name": "Tam Yangın" },
+            { "id": "fp12_standpipe_sistem",         "display_name": "Standpipe" },
+            { "id": "fp13_yangin_pompasi",            "display_name": "Pompa" },
+            { "id": "fp14_sprinkler_hidrolik",        "display_name": "Sprinkler Hidrolik" },
+            { "id": "fp15_algilama_sondurme_qa",      "display_name": "Algılama / Söndürme QA" },
+            { "id": "fp16_tahliye_mimari_qa",         "display_name": "Tahliye QA" }
+          ]
+        },
+        {
+          "label": "Mekanik",
+          "icon": "mekanik.png",
+          "manifests": [
+            { "id": "me17_tam_mek_hesap",                "display_name": "Tam Mekanik" },
+            { "id": "me12_isi_yuku_ahu",                  "display_name": "Isı Yükü / AHU" },
+            { "id": "me13_oda_sogutma_ve_taze_hava",      "display_name": "Oda Soğutma / Taze Hava" },
+            { "id": "me14_basinc_hepa_qa",                "display_name": "Basınç / HEPA QA" },
+            { "id": "me15_ach_zon_denge",                 "display_name": "ACH / Zon Denge" },
+            { "id": "me16_chiller_cop",                   "display_name": "Chiller COP" }
+          ]
+        },
+        {
+          "label": "MEP Boşluk",
+          "icon": "mep.png",
+          "manifests": [
+            { "id": "mep05_tam_bosluk_workflow",  "display_name": "Tam Workflow" },
+            { "id": "mep01_bosluk_tespit",         "display_name": "Boşluk Tespit" },
+            { "id": "mep02_bosluk_validate_ec2",   "display_name": "EC-2 Doğrulama" },
+            { "id": "mep03_bcf_export",             "display_name": "BCF İhraç" },
+            { "id": "mep04_lento_yer",              "display_name": "Lento Ekle" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Yapısal",
+      "groups": [
+        {
+          "label": "Donatı / Beton",
+          "icon": "donati.png",
+          "manifests": [
+            { "id": "s11_donati_bindirme_ankraj",  "display_name": "Bindirme / Ankraj" },
+            { "id": "s12_beton_sinifi_kesit_qa",   "display_name": "Beton / Kiriş / Perde" }
+          ]
+        },
+        {
+          "label": "Döşeme / Temel",
+          "icon": "temel.png",
+          "manifests": [
+            { "id": "s13_doseme_temel_hesap",  "display_name": "Döşeme / Temel" },
+            { "id": "s14_celik_bulon_kalip",   "display_name": "Bulon / Kalıp" },
+            { "id": "s15_tam_yapisal_hesap",   "display_name": "Tam Yapısal" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "QA/Rapor",
+      "groups": [
+        {
+          "label": "Model QA",
+          "icon": "qa.png",
+          "manifests": [
+            { "id": "model_sagligi",       "display_name": "Model Sağlığı" },
+            { "id": "eg_model_audit",      "display_name": "Model Audit" },
+            { "id": "m06_model_uyarilari", "display_name": "Uyarı Raporu" },
+            { "id": "m02_duplicate_tespiti","display_name": "Duplicate Tespiti" },
+            { "id": "m09_koordinat_kontrol","display_name": "Koordinat Kontrol" }
+          ]
+        },
+        {
+          "label": "Teslim",
+          "icon": "teslim.png",
+          "manifests": [
+            { "id": "11_csb2026_teslim_kontrol", "display_name": "ÇŞB 2026 Teslim" },
+            { "id": "pm07_teslim_kontrol",         "display_name": "BIM Teslim" },
+            { "id": "ifc_readiness_qa",            "display_name": "IFC Hazırlık" },
+            { "id": "pm10_tam_proje_raporu",       "display_name": "Tam Proje Raporu" }
+          ]
+        },
+        {
+          "label": "Koordinasyon",
+          "icon": "koord.png",
+          "manifests": [
+            { "id": "c01_mep_yapisal_cakisma", "display_name": "MEP/Yapısal Çakışma" },
+            { "id": "c08_koordinasyon_raporu",  "display_name": "Koordinasyon Raporu" },
+            { "id": "eg_clash_matrisi",         "display_name": "Çakışma Matrisi" }
+          ]
+        }
+      ]
+    }
+  ]
+}
