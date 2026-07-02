@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "egbimoto": {
+      "command": "python",
+      "args": ["C:/Users/ERTUGAN/Desktop/egbimoto_v11/mcp_bridge/egbimoto_mcp_bridge.py"],
+      "env": {
+        "EGBIMOTO_HOST": "127.0.0.1",
+        "EGBIMOTO_PORT": "5577",
+        "EGBIMOTO_TOKEN": "",
+        "EGBIMOTO_TIMEOUT": "180"
+      }
+    }
+  }
+}
