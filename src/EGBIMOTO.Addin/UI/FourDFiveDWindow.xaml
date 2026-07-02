@@ -1,0 +1,250 @@
+<Window x:Class="EGBIMOTO.Addin.UI.FourDFiveDWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        Title="EGBIMOTO — 4D/5D Yapım Simülasyonu"
+        Width="1440" Height="860"
+        MinWidth="1100" MinHeight="650"
+        WindowStartupLocation="CenterScreen"
+        Background="#0E0E1A"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResize">
+
+    <Window.Resources>
+        <!-- Ortak fırçalar -->
+        <SolidColorBrush x:Key="BgDeep"     Color="#0E0E1A"/>
+        <SolidColorBrush x:Key="BgPanel"    Color="#16162A"/>
+        <SolidColorBrush x:Key="BgCard"     Color="#1F1F35"/>
+        <SolidColorBrush x:Key="AccentBlue" Color="#5B9BD5"/>
+        <SolidColorBrush x:Key="AccentOrange" Color="#ED7D31"/>
+        <SolidColorBrush x:Key="AccentGreen"  Color="#70AD47"/>
+        <SolidColorBrush x:Key="TextPrimary"  Color="#E0E0E0"/>
+        <SolidColorBrush x:Key="TextMuted"    Color="#888899"/>
+
+        <!-- Buton stili -->
+        <Style x:Key="EgButton" TargetType="Button">
+            <Setter Property="Background"   Value="#2A2A3E"/>
+            <Setter Property="Foreground"   Value="#E0E0E0"/>
+            <Setter Property="BorderBrush"  Value="#383860"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding"      Value="16,6"/>
+            <Setter Property="FontSize"     Value="12"/>
+            <Setter Property="Cursor"       Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#38385A"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#1A1A30"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Confirm butonu -->
+        <Style x:Key="EgButtonConfirm" TargetType="Button" BasedOn="{StaticResource EgButton}">
+            <Setter Property="Background"  Value="#1A4A1A"/>
+            <Setter Property="BorderBrush" Value="#70AD47"/>
+            <Setter Property="Foreground"  Value="#70AD47"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#2A6A2A"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Cancel butonu -->
+        <Style x:Key="EgButtonCancel" TargetType="Button" BasedOn="{StaticResource EgButton}">
+            <Setter Property="Background"  Value="#3A1A1A"/>
+            <Setter Property="BorderBrush" Value="#C0504D"/>
+            <Setter Property="Foreground"  Value="#C0504D"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#5A2020"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <!-- Dış çerçeve — yuvarlak köşe + gölge -->
+    <Border CornerRadius="10"
+            BorderBrush="#2A2A4A"
+            BorderThickness="1"
+            Background="{StaticResource BgDeep}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"/>    <!-- Başlık çubuğu -->
+                <RowDefinition Height="*"/>     <!-- WebView2 -->
+                <RowDefinition Height="Auto"/>  <!-- Stats / uyarı -->
+                <RowDefinition Height="52"/>    <!-- Butonlar -->
+            </Grid.RowDefinitions>
+
+            <!-- ── BAŞLIK ÇUBUĞU ─────────────────────────────────────────── -->
+            <Border Grid.Row="0"
+                    Background="#12122A"
+                    CornerRadius="10,10,0,0"
+                    MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Grid Margin="16,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- EGBIMOTO logosu + başlık -->
+                    <StackPanel Grid.Column="0" Orientation="Horizontal"
+                                VerticalAlignment="Center" Margin="0,0,16,0">
+                        <TextBlock Text="◈" FontSize="18" Foreground="#5B9BD5"
+                                   VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock Text="EGBIMOTO" FontSize="12" FontWeight="Bold"
+                                   Foreground="#5B9BD5" VerticalAlignment="Center"/>
+                        <TextBlock Text=" /" FontSize="12" Foreground="#555577"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock x:Name="TitleText" Text="4D/5D Yapım Simülasyonu"
+                                   FontSize="12" Foreground="#D0D0E8"
+                                   VerticalAlignment="Center" Margin="4,0,0,0"/>
+                    </StackPanel>
+
+                    <!-- Tarih aralığı + eleman sayısı -->
+                    <StackPanel Grid.Column="1" Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <Border Background="#1A2A1A" CornerRadius="10"
+                                Padding="10,3" Margin="4,0">
+                            <TextBlock x:Name="DateRangeText"
+                                       Text="— / —"
+                                       FontSize="11" Foreground="#70AD47"/>
+                        </Border>
+                        <Border Background="#2A2A1A" CornerRadius="10"
+                                Padding="10,3" Margin="4,0">
+                            <TextBlock x:Name="CountBadge"
+                                       Text="0 eleman"
+                                       FontSize="11" Foreground="#FFC000"/>
+                        </Border>
+                        <!-- Stats rozetleri -->
+                        <StackPanel x:Name="StatsPanel" Orientation="Horizontal"/>
+                    </StackPanel>
+
+                    <!-- Kapat butonu -->
+                    <Button Grid.Column="2" Content="✕"
+                            Width="30" Height="30"
+                            Background="Transparent" BorderThickness="0"
+                            Foreground="#556" FontSize="14"
+                            Cursor="Hand"
+                            Click="CloseWindow_Click"
+                            VerticalAlignment="Center">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    CornerRadius="4" Width="30" Height="30">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#3A1A1A"/>
+                                                    <Setter Property="Foreground" Value="#C0504D"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Foreground" Value="#556677"/>
+                                <Setter Property="FontSize"   Value="14"/>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- ── WEBVIEW2 — 4D/5D VIEWER ─────────────────────────────── -->
+            <Border Grid.Row="1" Margin="0">
+                <wv2:WebView2 x:Name="WebView" />
+            </Border>
+
+            <!-- ── UYARI BANDI ──────────────────────────────────────────── -->
+            <Border x:Name="WarningBorder"
+                    Grid.Row="2"
+                    Background="#2A200A"
+                    BorderBrush="#6B4800"
+                    BorderThickness="0,1,0,0"
+                    Padding="16,6"
+                    Visibility="Collapsed">
+                <TextBlock x:Name="WarningText"
+                           FontSize="11"
+                           Foreground="#FFC000"
+                           TextWrapping="Wrap"/>
+            </Border>
+
+            <!-- ── ALT BUTON ÇUBUĞU ──────────────────────────────────────── -->
+            <Border Grid.Row="3"
+                    Background="#0C0C20"
+                    BorderBrush="#1A1A30"
+                    BorderThickness="0,1,0,0"
+                    CornerRadius="0,0,10,10">
+                <Grid Margin="16,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Sol: kamera reset + animasyon hız -->
+                    <StackPanel Grid.Column="0" Orientation="Horizontal"
+                                VerticalAlignment="Center">
+                        <Button x:Name="ResetCameraBtn" Style="{StaticResource EgButton}"
+                                Content="⊙ Kamera Sıfırla" Margin="0,0,8,0"
+                                Click="ResetCamera_Click"/>
+                        <Button x:Name="ExportBtn" Style="{StaticResource EgButton}"
+                                Content="📊 Excel Raporu" Margin="0,0,8,0"
+                                Click="Export_Click"/>
+                        <TextBlock Text="Hız:" VerticalAlignment="Center"
+                                   Foreground="#888899" FontSize="11" Margin="8,0,4,0"/>
+                        <ComboBox x:Name="SpeedCombo"
+                                  Width="80" Height="28"
+                                  Background="#1F1F35"
+                                  Foreground="#D0D0E8"
+                                  BorderBrush="#383860"
+                                  FontSize="11"
+                                  VerticalContentAlignment="Center"
+                                  SelectionChanged="SpeedCombo_SelectionChanged">
+                            <ComboBoxItem Content="0.5×" Tag="0.5"/>
+                            <ComboBoxItem Content="1×"   Tag="1"   IsSelected="True"/>
+                            <ComboBoxItem Content="2×"   Tag="2"/>
+                            <ComboBoxItem Content="5×"   Tag="5"/>
+                            <ComboBoxItem Content="10×"  Tag="10"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <!-- Sağ: Onayla / İptal -->
+                    <StackPanel Grid.Column="1" Orientation="Horizontal"
+                                VerticalAlignment="Center">
+                        <Button x:Name="CancelBtn"  Style="{StaticResource EgButtonCancel}"
+                                Content="✗ İptal"     Margin="0,0,8,0"
+                                Click="Cancel_Click"/>
+                        <Button x:Name="ConfirmBtn" Style="{StaticResource EgButtonConfirm}"
+                                Content="✓ Onayla ve Uygula"
+                                Click="Confirm_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

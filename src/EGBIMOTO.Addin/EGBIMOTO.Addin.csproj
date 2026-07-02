@@ -1,0 +1,124 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <PlatformTarget>x64</PlatformTarget>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RootNamespace>EGBIMOTO.Addin</RootNamespace>
+    <AssemblyName>EGBIMOTO.Addin</AssemblyName>
+    <Version>14.0.0</Version>
+    <Authors>Ertuğan Genel</Authors>
+    <Company>EGBIM</Company>
+    <Copyright>Copyright 2026 Ertuğan Genel</Copyright>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <!-- ── Revit Version Seçimi ──────────────────────────────────────────
+         Derleme: dotnet build -p:RevitVersion=2025
+         Varsayılan: 2026
+    ─────────────────────────────────────────────────────────────────── -->
+    <RevitVersion Condition="'$(RevitVersion)'==''">2026</RevitVersion>
+
+    <!-- RevitApiPath — versiyona göre otomatik -->
+    <RevitApiPath Condition="'$(RevitVersion)'=='2024'">C:\Program Files\Autodesk\Revit 2024</RevitApiPath>
+    <RevitApiPath Condition="'$(RevitVersion)'=='2025'">C:\Program Files\Autodesk\Revit 2025</RevitApiPath>
+    <RevitApiPath Condition="'$(RevitVersion)'=='2026'">C:\Program Files\Autodesk\Revit 2026</RevitApiPath>
+  </PropertyGroup>
+
+  <!-- ── Revit API sürüm derleme sabitleri ────────────────────────────── -->
+  <PropertyGroup Condition="'$(RevitVersion)'=='2024'">
+    <DefineConstants>REVIT2024</DefineConstants>
+    <AssemblyVersion>14.0.0.2024</AssemblyVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(RevitVersion)'=='2025'">
+    <DefineConstants>REVIT2025</DefineConstants>
+    <AssemblyVersion>14.0.0.2025</AssemblyVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(RevitVersion)'=='2026'">
+    <DefineConstants>REVIT2026</DefineConstants>
+    <AssemblyVersion>14.0.0.2026</AssemblyVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="RevitAPI">
+      <HintPath>$(RevitApiPath)\RevitAPI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>$(RevitApiPath)\RevitAPIUI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EGBIMOTO.Core\EGBIMOTO.Core.csproj"/>
+  </ItemGroup>
+
+  <!-- v4.1: Preview-Confirm — WebView2 -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2739.15" />
+  </ItemGroup>
+
+  <!-- v7.1: Roslyn — runtime C# script desteği (run_csharp_script op) -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.9.2" />
+  </ItemGroup>
+
+  <!-- v7.0: Resources — Preview + 4D/5D -->
+  <ItemGroup>
+    <Content Include="Resources\preview_viewer.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\4d5d_viewer.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\three.min.js" Condition="Exists('Resources\three.min.js')">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <!-- v12.1: Ribbon ikonları — Resources\Icons\*.png (32px LargeImage + 16px Image) -->
+  <ItemGroup>
+    <Content Include="Resources\Icons\*.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <!-- Build sonrası asset kopyalama
+       $(TargetDir) = derleme çıktısının MUTLAK yolu (sonunda ayraç ile).
+       $(OutputPath) görece olabilir ve ayraçla bitmeyebilir; TargetDir daha güvenli.
+       $(RepoRoot) Directory.Build.props'ta tanımlanır. -->
+  <Target Name="CopyAssets" AfterTargets="Build">
+    <ItemGroup>
+      <ManifestFiles    Include="$(RepoRoot)manifests\**\*"/>
+      <DataFiles        Include="$(RepoRoot)data\**\*"/>
+      <ContractsFiles   Include="$(RepoRoot)op_contracts.json"/>
+      <CategoriesFiles  Include="$(RepoRoot)categories.json"/>
+      <RibbonCfgFiles   Include="$(RepoRoot)ribbon_config.json"/>
+    </ItemGroup>
+
+    <!-- Kaynakların gerçekten bulunduğunu doğrula — eksikse build'i anlamlı hatayla durdur -->
+    <Error Condition="!Exists('$(RepoRoot)op_contracts.json')"
+           Text="CopyAssets: op_contracts.json bulunamadı (RepoRoot=$(RepoRoot)). Directory.Build.props eksik veya repo kökü yanlış." />
+
+    <Copy SourceFiles="@(ManifestFiles)"
+          DestinationFiles="@(ManifestFiles->'$(TargetDir)manifests\%(RecursiveDir)%(Filename)%(Extension)')"
+          SkipUnchangedFiles="true"/>
+    <Copy SourceFiles="@(DataFiles)"
+          DestinationFiles="@(DataFiles->'$(TargetDir)data\%(RecursiveDir)%(Filename)%(Extension)')"
+          SkipUnchangedFiles="true"/>
+    <Copy SourceFiles="@(ContractsFiles)"
+          DestinationFiles="$(TargetDir)op_contracts.json"
+          SkipUnchangedFiles="true"/>
+    <Copy SourceFiles="@(CategoriesFiles)"
+          DestinationFiles="$(TargetDir)categories.json"
+          SkipUnchangedFiles="true"/>
+    <!-- v12.1: ribbon_config.json — RibbonBuilder.LoadConfig addinDir kökünden okur;
+         kopyalanmazsa config hiç yüklenmez ve ribbon hep varsayılana düşer. -->
+    <Copy SourceFiles="@(RibbonCfgFiles)"
+          DestinationFiles="$(TargetDir)ribbon_config.json"
+          SkipUnchangedFiles="true"
+          Condition="Exists('$(RepoRoot)ribbon_config.json')"/>
+  </Target>
+</Project>

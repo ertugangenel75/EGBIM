@@ -1,0 +1,397 @@
+<Window x:Class="EGBIMOTO.Addin.UI.ManifestBrowserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="EGBIMOTO — Manifest Browser"
+        Height="720" Width="980"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E2E">
+    <Window.Resources>
+        <SolidColorBrush x:Key="BgPanel"     Color="#2A2A3E"/>
+        <SolidColorBrush x:Key="BgHover"     Color="#313150"/>
+        <SolidColorBrush x:Key="AccentBlue"  Color="#7B9FFF"/>
+        <SolidColorBrush x:Key="AccentGreen" Color="#50FA7B"/>
+        <SolidColorBrush x:Key="AccentCyan"  Color="#8BE9FD"/>
+        <SolidColorBrush x:Key="AccentWarn"  Color="#FFB86C"/>
+        <SolidColorBrush x:Key="AccentRed"   Color="#FF5555"/>
+        <SolidColorBrush x:Key="AccentPurple" Color="#BD93F9"/>
+        <SolidColorBrush x:Key="TextMain"    Color="#F8F8F2"/>
+        <SolidColorBrush x:Key="TextMuted"   Color="#9090A8"/>
+        <SolidColorBrush x:Key="BorderColor" Color="#44445A"/>
+
+        <!-- v11: Disiplin renkleri — kategori rozeti arka planı -->
+        <SolidColorBrush x:Key="DisciplineSihhi"    Color="#1A3A4A"/>
+        <SolidColorBrush x:Key="DisciplineElektrik"  Color="#3A3010"/>
+        <SolidColorBrush x:Key="DisciplineYangin"    Color="#3A1818"/>
+        <SolidColorBrush x:Key="DisciplineMekanik"   Color="#1A3020"/>
+        <SolidColorBrush x:Key="DisciplineYapisal"   Color="#3A2010"/>
+        <SolidColorBrush x:Key="DisciplineQA"        Color="#2A1A3A"/>
+        <SolidColorBrush x:Key="DisciplineMimari"    Color="#1A2A3A"/>
+        <SolidColorBrush x:Key="DisciplineIFC"       Color="#203020"/>
+        <SolidColorBrush x:Key="DisciplineGenel"     Color="#2A2A3E"/>
+
+        <!-- v11: Disiplin metin renkleri -->
+        <SolidColorBrush x:Key="DisciplineSihhiFg"    Color="#4FC3F7"/>
+        <SolidColorBrush x:Key="DisciplineElektrikFg"  Color="#FFD54F"/>
+        <SolidColorBrush x:Key="DisciplineYanginFg"    Color="#EF9A9A"/>
+        <SolidColorBrush x:Key="DisciplineMekanikFg"   Color="#81C784"/>
+        <SolidColorBrush x:Key="DisciplineYapisalFg"   Color="#FFAB66"/>
+        <SolidColorBrush x:Key="DisciplineQAFg"        Color="#CE93D8"/>
+        <SolidColorBrush x:Key="DisciplineMimariFg"    Color="#80DEEA"/>
+        <SolidColorBrush x:Key="DisciplineIFCFg"       Color="#A5D6A7"/>
+        <SolidColorBrush x:Key="DisciplineGenelFg"     Color="#9090A8"/>
+
+        <Style x:Key="ManifestItem" TargetType="ListBoxItem">
+            <Setter Property="Background"  Value="Transparent"/>
+            <Setter Property="Padding"     Value="10,6"/>
+            <Setter Property="Cursor"      Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="4" Margin="0,1">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="{StaticResource BgHover}"/></Trigger>
+                            <Trigger Property="IsSelected"  Value="True"><Setter Property="Background" Value="#3D3D6B"/></Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="PrimaryBtn" TargetType="Button">
+            <Setter Property="Background"      Value="{StaticResource AccentBlue}"/>
+            <Setter Property="Foreground"      Value="#1E1E2E"/>
+            <Setter Property="FontWeight"      Value="Bold"/>
+            <Setter Property="Padding"         Value="20,8"/>
+            <Setter Property="Cursor"          Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="6" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#A0BFFF"/></Trigger>
+                            <Trigger Property="IsEnabled"   Value="False"><Setter Property="Background" Value="#44445A"/><Setter Property="Foreground" Value="{StaticResource TextMuted}"/></Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SecondaryBtn" TargetType="Button" BasedOn="{StaticResource PrimaryBtn}">
+            <Setter Property="Background"      Value="{StaticResource BgPanel}"/>
+            <Setter Property="Foreground"      Value="{StaticResource TextMain}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush"     Value="{StaticResource BorderColor}"/>
+        </Style>
+
+        <!-- Kategori filtre çipi (A) -->
+        <Style x:Key="CategoryChip" TargetType="ToggleButton">
+            <Setter Property="Cursor"          Value="Hand"/>
+            <Setter Property="Margin"          Value="0,0,5,5"/>
+            <Setter Property="FontSize"        Value="11"/>
+            <Setter Property="Foreground"      Value="{StaticResource TextMuted}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="chipBorder" Background="{StaticResource BgPanel}"
+                                BorderBrush="{StaticResource BorderColor}" BorderThickness="1"
+                                CornerRadius="12" Padding="10,4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="chipBorder" Property="Background" Value="{StaticResource BgHover}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="chipBorder" Property="Background" Value="{StaticResource AccentBlue}"/>
+                                <Setter TargetName="chipBorder" Property="BorderBrush" Value="{StaticResource AccentBlue}"/>
+                                <Setter Property="Foreground" Value="#1E1E2E"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Başlık + Arama -->
+        <Grid Grid.Row="0" Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="EGBIMOTO Manifest Browser" FontSize="16" FontWeight="Bold" Foreground="{StaticResource AccentBlue}"/>
+                <TextBlock x:Name="txtManifestCount" FontSize="11" Foreground="{StaticResource TextMuted}" Text="Yükleniyor..."/>
+            </StackPanel>
+            <Border Grid.Column="1" Background="{StaticResource BgPanel}" CornerRadius="6" Padding="8,4"
+                    BorderBrush="{StaticResource BorderColor}" BorderThickness="1">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="🔍 " Foreground="{StaticResource TextMuted}" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtSearch" Width="220" Background="Transparent" BorderThickness="0"
+                             Foreground="{StaticResource TextMain}" VerticalAlignment="Center"
+                             TextChanged="TxtSearch_TextChanged"/>
+                    <Border Width="1" Background="{StaticResource BorderColor}" Margin="8,2" />
+                    <Button x:Name="btnAddManifest" Content="➕ Ekle" Style="{StaticResource SecondaryBtn}"
+                            Click="BtnAddManifest_Click" Margin="0,0,4,0"
+                            ToolTip="Bir manifest JSON dosyası ekle (doğrulanıp User klasörüne kopyalanır)"/>
+                    <Button x:Name="btnRemoveManifest" Content="🗑 Kaldır" Style="{StaticResource SecondaryBtn}"
+                            Click="BtnRemoveManifest_Click" IsEnabled="False"
+                            ToolTip="Seçili User/Project manifest'ini sil (Built-in silinemez)"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Scope seçici: V10 Katalog (default) / Tümü -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,6">
+            <TextBlock Text="Görünüm:" Foreground="{StaticResource TextMuted}" FontSize="11"
+                       VerticalAlignment="Center" Margin="0,0,8,0"/>
+            <RadioButton x:Name="rbScopeV10" Content="⭐ V10 Katalog (70)" GroupName="scope"
+                         IsChecked="True" Foreground="{StaticResource TextMain}" FontSize="11"
+                         VerticalAlignment="Center" Margin="0,0,12,0"
+                         Checked="RbScope_Changed"
+                         ToolTip="Yeni 70 manifestlik güncel katalog"/>
+            <RadioButton x:Name="rbScopeAll" Content="📚 Tümü (eski dahil)" GroupName="scope"
+                         Foreground="{StaticResource TextMain}" FontSize="11"
+                         VerticalAlignment="Center"
+                         Checked="RbScope_Changed"
+                         ToolTip="Eski manifestler dahil tüm built-in + user + project"/>
+        </StackPanel>
+
+        <!-- Kategori çipleri (A) -->
+        <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled"
+                      MaxHeight="68" Margin="0,0,0,8">
+            <WrapPanel x:Name="pnlCategories"/>
+        </ScrollViewer>
+
+        <!-- Ana İçerik -->
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320" MinWidth="220" MaxWidth="540"/>
+                <ColumnDefinition Width="6"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Manifest listesi -->
+            <Border Grid.Column="0" Background="{StaticResource BgPanel}" CornerRadius="8" Padding="6"
+                    BorderBrush="{StaticResource BorderColor}" BorderThickness="1">
+                <!-- v11: VirtualizingStackPanel — 459 manifest ile UI donmasını önler -->
+                <ListBox x:Name="lstManifests" Background="Transparent" BorderThickness="0"
+                         ItemContainerStyle="{StaticResource ManifestItem}"
+                         SelectionChanged="LstManifests_SelectionChanged"
+                         VirtualizingStackPanel.IsVirtualizing="True"
+                         VirtualizingStackPanel.VirtualizationMode="Recycling"
+                         ScrollViewer.IsDeferredScrollingEnabled="False"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel IsItemsHost="True"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <!-- Kaynak rozeti -->
+                                        <Border Background="{Binding SourceBrush}" CornerRadius="3"
+                                                Padding="4,0" Margin="0,0,4,1" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding SourceLabel}" FontSize="8" FontWeight="Bold"
+                                                       Foreground="#1E1E2E"/>
+                                        </Border>
+                                        <!-- v11: Disiplin rengi ile kategori rozeti -->
+                                        <Border Background="{Binding DisciplineBg}" CornerRadius="3"
+                                                Padding="5,0" Margin="0,0,4,1" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Category}" FontSize="9" FontWeight="Bold"
+                                                       Foreground="{Binding DisciplineFg}"/>
+                                        </Border>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding Title}" Foreground="{StaticResource TextMain}"
+                                               FontSize="12" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding ScoreText}" FontSize="9" Foreground="{StaticResource TextMuted}"/>
+                                </StackPanel>
+                                <Border Grid.Column="1" Background="{Binding TagBrush}" CornerRadius="4"
+                                        Padding="5,2" VerticalAlignment="Center" Margin="4,0,0,0">
+                                    <TextBlock Text="{Binding TagText}" FontSize="9" FontWeight="Bold" Foreground="#1E1E2E"/>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+
+            <GridSplitter Grid.Column="1" Width="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                          Background="Transparent" Cursor="SizeWE" ShowsPreview="False"/>
+
+            <!-- Detay paneli -->
+            <Border Grid.Column="2" Background="{StaticResource BgPanel}" CornerRadius="8" Padding="16"
+                    BorderBrush="{StaticResource BorderColor}" BorderThickness="1">
+                <Grid>
+                    <StackPanel x:Name="pnlDetail" Visibility="Collapsed">
+                        <Grid Margin="0,0,0,6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="txtDetailTitle" FontSize="15" FontWeight="Bold"
+                                       Foreground="{StaticResource TextMain}" TextWrapping="Wrap"/>
+                            <Border Grid.Column="1" x:Name="scoreBadge" CornerRadius="6" Padding="8,3" VerticalAlignment="Top">
+                                <TextBlock x:Name="txtScore" FontSize="13" FontWeight="Bold" Foreground="#1E1E2E"/>
+                            </Border>
+                        </Grid>
+
+                        <TextBlock x:Name="txtDetailDesc" Foreground="{StaticResource TextMuted}"
+                                   FontSize="12" TextWrapping="Wrap" Margin="0,0,0,10"/>
+
+                        <!-- Tag çipleri (B) -->
+                        <StackPanel x:Name="pnlTagsSection" Margin="0,0,0,10" Visibility="Collapsed">
+                            <TextBlock Text="ETİKETLER" FontSize="9" FontWeight="Bold"
+                                       Foreground="{StaticResource AccentPurple}" Opacity="0.8" Margin="0,0,0,5"/>
+                            <WrapPanel x:Name="pnlTags"/>
+                        </StackPanel>
+
+                        <!-- Faz göstergeleri -->
+                        <StackPanel Margin="0,0,0,10">
+                            <TextBlock Text="FAZ DURUMU" FontSize="9" FontWeight="Bold"
+                                       Foreground="{StaticResource AccentBlue}" Opacity="0.8" Margin="0,0,0,5"/>
+                            <WrapPanel x:Name="pnlPhases"/>
+                        </StackPanel>
+
+                        <ScrollViewer x:Name="scrollLintIssues" MaxHeight="70"
+                                      VerticalScrollBarVisibility="Auto" Margin="0,0,0,10" Visibility="Collapsed">
+                            <ItemsControl x:Name="lstLintIssues">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" Foreground="{StaticResource AccentWarn}"
+                                                   FontSize="10" TextWrapping="Wrap" Margin="0,1"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+
+                        <TextBlock Text="ADIMLAR" FontSize="9" FontWeight="Bold"
+                                   Foreground="{StaticResource AccentBlue}" Opacity="0.8" Margin="0,0,0,5"/>
+                        <ScrollViewer MaxHeight="170" VerticalScrollBarVisibility="Auto">
+                            <ItemsControl x:Name="lstSteps">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Margin="0,2" Padding="8,5" Background="{Binding RowBg}" CornerRadius="4">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{Binding StatusIcon}" FontSize="11"
+                                                           Margin="0,0,6,0" Foreground="{Binding StatusBrush}"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding Id}"
+                                                           Foreground="{StaticResource AccentBlue}"
+                                                           FontFamily="Consolas" FontSize="11" Margin="0,0,10,0"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding Op}"
+                                                           Foreground="{StaticResource TextMain}"
+                                                           FontFamily="Consolas" FontSize="11"/>
+                                                <TextBlock Grid.Column="3" Text="{Binding RightText}"
+                                                           Foreground="{StaticResource TextMuted}" FontSize="10"/>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+
+                        <TextBlock x:Name="txtFilePath" Foreground="{StaticResource TextMuted}"
+                                   FontSize="10" Margin="0,10,0,0" TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                    <TextBlock x:Name="txtNoSelection" Text="← Soldan bir manifest seçin"
+                               Foreground="{StaticResource TextMuted}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13"/>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Progress bar (C) -->
+        <Grid Grid.Row="4" Margin="0,8,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Background="#23233A" CornerRadius="4" Height="14">
+                <Border x:Name="progressFill" Background="{StaticResource AccentBlue}" CornerRadius="4"
+                        HorizontalAlignment="Left" Width="0"/>
+            </Border>
+            <TextBlock Grid.Column="1" x:Name="txtProgress" Margin="8,0,0,0" FontSize="10"
+                       Foreground="{StaticResource TextMuted}" VerticalAlignment="Center" Text=""/>
+        </Grid>
+
+        <!-- Log + Sonuç (C + D) -->
+        <Border Grid.Row="5" Background="{StaticResource BgPanel}" CornerRadius="6"
+                Margin="0,8,0,0" BorderBrush="{StaticResource BorderColor}" BorderThickness="1">
+            <ScrollViewer x:Name="logScroll" VerticalScrollBarVisibility="Auto">
+                <TextBlock x:Name="txtLog" FontFamily="Consolas" FontSize="11"
+                           Foreground="{StaticResource TextMuted}" Padding="8"
+                           TextWrapping="Wrap" Text="Hazır."/>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Sonuç özeti + Butonlar (D) -->
+        <Grid Grid.Row="6" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="8"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="8"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="8"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="8"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Telemetri rozeti (D) -->
+            <Border Grid.Column="0" x:Name="telemetryBadge" Background="#23233A" CornerRadius="6"
+                    Padding="10,5" VerticalAlignment="Center" Visibility="Collapsed" Margin="0,0,10,0">
+                <TextBlock x:Name="txtTelemetry" FontSize="10" FontFamily="Consolas"
+                           Foreground="{StaticResource AccentCyan}"/>
+            </Border>
+
+            <TextBlock Grid.Column="1" x:Name="txtStatus" Foreground="{StaticResource TextMuted}"
+                       VerticalAlignment="Center" FontSize="11"/>
+
+            <!-- Raporu Aç (D) -->
+            <Button Grid.Column="2" Content="📄 Raporu Aç" x:Name="btnOpenReport"
+                    Style="{StaticResource SecondaryBtn}" Visibility="Collapsed" Click="BtnOpenReport_Click"/>
+            <Button Grid.Column="4" Content="▶  Çalıştır" x:Name="btnRun"
+                    Style="{StaticResource PrimaryBtn}" IsEnabled="False" Click="BtnRun_Click"/>
+            <Button Grid.Column="6" Content="⚡ Pattern Üret"
+                    Style="{StaticResource SecondaryBtn}" Click="BtnPatternGenerate_Click"
+                    ToolTip="API key gerekmez — anahtar kelime analizi (%65-85 doğruluk)"/>
+            <Button Grid.Column="8" Content="🤖 AI Üret"
+                    Style="{StaticResource SecondaryBtn}" Click="BtnAiGenerate_Click"
+                    ToolTip="Claude API — doğal dil anlayışı (%90-95 doğruluk), API key gerekir"/>
+            <Button Grid.Column="10" Content="Kapat" Style="{StaticResource SecondaryBtn}" Click="BtnClose_Click"/>
+        </Grid>
+    </Grid>
+</Window>

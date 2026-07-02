@@ -1,0 +1,84 @@
+<UserControl x:Class="EGBIMOTO.Addin.UI.Inspector.ElementInspectorPane"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             MinWidth="260"
+             Background="#1E1E2E">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="BgPanel"     Color="#2A2A3E"/>
+        <SolidColorBrush x:Key="BgHover"     Color="#313150"/>
+        <SolidColorBrush x:Key="AccentBlue"  Color="#7B9FFF"/>
+        <SolidColorBrush x:Key="AccentGreen" Color="#50FA7B"/>
+        <SolidColorBrush x:Key="AccentRed"   Color="#FF5555"/>
+        <SolidColorBrush x:Key="TextMain"    Color="#F8F8F2"/>
+        <SolidColorBrush x:Key="TextMuted"   Color="#9090A8"/>
+        <SolidColorBrush x:Key="BorderColor" Color="#44445A"/>
+
+        <Style x:Key="SectionHeader" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TextMuted}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize"   Value="11"/>
+            <Setter Property="Margin"     Value="0,14,0,4"/>
+        </Style>
+        <Style x:Key="ParamRow" TargetType="Border">
+            <Setter Property="Padding" Value="6,3"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Margin" Value="0,0,0,2"/>
+        </Style>
+        <Style x:Key="LinkItem" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource AccentBlue}"/>
+            <Setter Property="Cursor"     Value="Hand"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin"     Value="0,0,0,4"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <!-- Eleman seçilmemişken -->
+        <TextBlock x:Name="EmptyStateText"
+                   Text="Modelde bir eleman seçin."
+                   Foreground="{StaticResource TextMuted}"
+                   TextWrapping="Wrap" Margin="12" VerticalAlignment="Top"/>
+
+        <!-- Çoklu seçim -->
+        <TextBlock x:Name="MultiSelectText"
+                   Foreground="{StaticResource TextMuted}"
+                   TextWrapping="Wrap" Margin="12" VerticalAlignment="Top"
+                   Visibility="Collapsed"/>
+
+        <ScrollViewer x:Name="DetailScroll" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+            <StackPanel Margin="12,10,12,20">
+
+                <!-- Başlık -->
+                <TextBlock x:Name="ElementTitleText" FontSize="15" FontWeight="Bold"
+                           Foreground="{StaticResource TextMain}" TextWrapping="Wrap"/>
+                <TextBlock x:Name="ElementSubtitleText" FontSize="11"
+                           Foreground="{StaticResource TextMuted}" Margin="0,2,0,0" TextWrapping="Wrap"/>
+
+                <!-- TR_ Parametre Sağlığı -->
+                <TextBlock Text="TR_BIM PARAMETRE SAĞLIĞI" Style="{StaticResource SectionHeader}"/>
+                <TextBlock x:Name="ParamHealthSummary" FontSize="11"
+                           Foreground="{StaticResource TextMuted}" Margin="0,0,0,6"/>
+                <ItemsControl x:Name="ParamHealthList"/>
+
+                <!-- İlgili Manifestler -->
+                <TextBlock Text="İLGİLİ MANİFESTLER" Style="{StaticResource SectionHeader}"/>
+                <ItemsControl x:Name="RelatedManifestsList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Style="{StaticResource LinkItem}"
+                                       MouseLeftButtonUp="ManifestLink_Click" Tag="{Binding}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock x:Name="NoManifestsText" Text="Bu kategori için tanımlı manifest yok."
+                           Foreground="{StaticResource TextMuted}" FontStyle="Italic" FontSize="11"
+                           Visibility="Collapsed"/>
+
+                <Button x:Name="OpenBrowserBtn" Content="📋 Manifest Browser'ı Aç"
+                        Click="OpenBrowser_Click" Margin="0,14,0,0" Padding="10,6"
+                        Background="{StaticResource BgPanel}" Foreground="{StaticResource TextMain}"
+                        BorderBrush="{StaticResource BorderColor}" BorderThickness="1" Cursor="Hand"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

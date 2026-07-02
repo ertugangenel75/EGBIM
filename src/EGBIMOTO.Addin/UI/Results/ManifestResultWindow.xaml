@@ -1,0 +1,156 @@
+<Window x:Class="EGBIMOTO.Addin.UI.Results.ManifestResultWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="EGBIMOTO — Sonuç"
+        Height="640" Width="900"
+        MinHeight="360" MinWidth="560"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E2E">
+    <Window.Resources>
+        <SolidColorBrush x:Key="BgPanel"     Color="#2A2A3E"/>
+        <SolidColorBrush x:Key="BgHover"     Color="#313150"/>
+        <SolidColorBrush x:Key="AccentBlue"  Color="#7B9FFF"/>
+        <SolidColorBrush x:Key="AccentGreen" Color="#50FA7B"/>
+        <SolidColorBrush x:Key="AccentWarn"  Color="#FFB86C"/>
+        <SolidColorBrush x:Key="AccentRed"   Color="#FF5555"/>
+        <SolidColorBrush x:Key="TextMain"    Color="#F8F8F2"/>
+        <SolidColorBrush x:Key="TextMuted"   Color="#9090A8"/>
+        <SolidColorBrush x:Key="BorderColor" Color="#44445A"/>
+
+        <Style x:Key="ActionBtn" TargetType="Button">
+            <Setter Property="Background"      Value="{StaticResource BgPanel}"/>
+            <Setter Property="Foreground"      Value="{StaticResource TextMain}"/>
+            <Setter Property="Padding"         Value="14,7"/>
+            <Setter Property="Margin"          Value="0,0,8,0"/>
+            <Setter Property="Cursor"          Value="Hand"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush"     Value="{StaticResource BorderColor}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource BgHover}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="{StaticResource TextMuted}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SummaryChip" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource BgPanel}"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="Margin" Value="0,0,8,0"/>
+        </Style>
+
+        <Style TargetType="DataGrid">
+            <Setter Property="Background"          Value="{StaticResource BgPanel}"/>
+            <Setter Property="Foreground"          Value="{StaticResource TextMain}"/>
+            <Setter Property="BorderBrush"         Value="{StaticResource BorderColor}"/>
+            <Setter Property="BorderThickness"     Value="1"/>
+            <Setter Property="RowBackground"       Value="{StaticResource BgPanel}"/>
+            <Setter Property="AlternatingRowBackground" Value="#26263A"/>
+            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="HeadersVisibility"   Value="Column"/>
+            <Setter Property="AutoGenerateColumns" Value="True"/>
+            <Setter Property="CanUserAddRows"      Value="False"/>
+            <Setter Property="IsReadOnly"          Value="True"/>
+            <Setter Property="SelectionMode"       Value="Extended"/>
+            <Setter Property="SelectionUnit"       Value="FullRow"/>
+        </Style>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#232335"/>
+            <Setter Property="Foreground" Value="{StaticResource TextMuted}"/>
+            <Setter Property="Padding"    Value="8,6"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="BorderThickness" Value="0,0,1,1"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style TargetType="DataGridCell">
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridCell">
+                        <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#3D3D6B"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Başlık -->
+        <TextBlock x:Name="TitleText" Grid.Row="0"
+                   Text="EGBIMOTO Sonuç" FontSize="18" FontWeight="Bold"
+                   Foreground="{StaticResource TextMain}" Margin="0,0,0,10"/>
+
+        <!-- Özet çipleri -->
+        <ItemsControl x:Name="SummaryPanel" Grid.Row="1" Margin="0,0,0,12">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate><StackPanel Orientation="Horizontal"/></ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Style="{StaticResource SummaryChip}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Key}" Foreground="{StaticResource TextMuted}" Margin="0,0,6,0"/>
+                            <TextBlock Text="{Binding Value}" Foreground="{StaticResource TextMain}" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!-- Tablo -->
+        <DataGrid x:Name="ResultGrid" Grid.Row="2"
+                  SelectionChanged="ResultGrid_SelectionChanged"/>
+
+        <!-- Alt eylem çubuğu -->
+        <Grid Grid.Row="3" Margin="0,14,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="StatusText" Grid.Column="0"
+                       Foreground="{StaticResource TextMuted}"
+                       VerticalAlignment="Center"/>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button x:Name="ShowInModelBtn" Style="{StaticResource ActionBtn}"
+                        Content="🔍 Modelde Göster" Click="ShowInModel_Click" IsEnabled="False"/>
+                <Button x:Name="ExportCsvBtn" Style="{StaticResource ActionBtn}"
+                        Content="📄 CSV'ye Aktar" Click="ExportCsv_Click"/>
+                <Button x:Name="CloseBtn" Style="{StaticResource ActionBtn}"
+                        Content="Kapat" Click="Close_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
