@@ -1,0 +1,11 @@
+C:\Users\ERTUGAN\Desktop\egbimoto_v12\src\EGBIMOTO.Core\bin\x64\Release\net8.0-windows\EGBIMOTO.Core.deps.json
+C:\Users\ERTUGAN\Desktop\egbimoto_v12\src\EGBIMOTO.Core\bin\x64\Release\net8.0-windows\EGBIMOTO.Core.dll
+C:\Users\ERTUGAN\Desktop\egbimoto_v12\src\EGBIMOTO.Core\bin\x64\Release\net8.0-windows\EGBIMOTO.Core.pdb
+C:\Users\ERTUGAN\Desktop\egbimoto_v12\src\EGBIMOTO.Core\obj\x64\Release\net8.0-windows\EGBIMOTO.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ERTUGAN\Desktop\egbimoto_v12\src\EGBIMOTO.Core\obj\x64\Release\net8.0-windows\EGBIMOTO.Core.AssemblyInfoInputs.cache
+C:\Users\ERTUGAN\Desktop\egbimoto_v12\src\EGBIMOTO.Core\obj\x64\Release\net8.0-windows\EGBIMOTO.Core.AssemblyInfo.cs
+C:\Users\ERTUGAN\Desktop\egbimoto_v12\src\EGBIMOTO.Core\obj\x64\Release\net8.0-windows\EGBIMOTO.Core.csproj.CoreCompileInputs.cache
+C:\Users\ERTUGAN\Desktop\egbimoto_v12\src\EGBIMOTO.Core\obj\x64\Release\net8.0-windows\EGBIMOTO.Core.dll
+C:\Users\ERTUGAN\Desktop\egbimoto_v12\src\EGBIMOTO.Core\obj\x64\Release\net8.0-windows\refint\EGBIMOTO.Core.dll
+C:\Users\ERTUGAN\Desktop\egbimoto_v12\src\EGBIMOTO.Core\obj\x64\Release\net8.0-windows\EGBIMOTO.Core.pdb
+C:\Users\ERTUGAN\Desktop\egbimoto_v12\src\EGBIMOTO.Core\obj\x64\Release\net8.0-windows\ref\EGBIMOTO.Core.dll
