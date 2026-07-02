@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    EGBIMOTO.Bootstrap — Küçük, sabit thunk DLL.
+    .addin dosyası bunu yükler. Görevi: engine'i
+    %AppData%\EGBIMOTO\R<ver>\app\EGBIMOTO.Addin.dll'den AssemblyDependencyResolver
+    ile yükleyip IExternalApplication çağrılarını ona yönlendirmek.
+
+    Bu DLL ASLA değişmez (yeni Revit sürümü hariç). Engine güncellemesi
+    sadece app\ klasörünü değiştirir — .addin ve Bootstrap.dll sabit kalır.
+
+    HİBRİT MOD: Engine app\ altında BULUNAMAZSA, Bootstrap kendi yanındaki
+    EGBIMOTO.Addin.dll'i (klasik tek-DLL kurulum) yükler. Böylece hem MSI ile
+    kurulan ayrık engine hem de manuel kopyalanan tek-DLL çalışır.
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <PlatformTarget>x64</PlatformTarget>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RootNamespace>EGBIMOTO.Bootstrap</RootNamespace>
+    <AssemblyName>EGBIMOTO.Bootstrap</AssemblyName>
+    <Version>12.0.0</Version>
+    <Authors>Ertuğan Genel</Authors>
+    <Company>EGBIM</Company>
+    <Copyright>Copyright 2026 Ertuğan Genel</Copyright>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <AssemblyVersion>12.0.0.0</AssemblyVersion>
+
+    <!-- Revit sürümü (engine yolu için RNN üretir) -->
+    <RevitVersion Condition="'$(RevitVersion)'==''">2026</RevitVersion>
+    <RevitApiPath Condition="'$(RevitVersion)'=='2024'">C:\Program Files\Autodesk\Revit 2024</RevitApiPath>
+    <RevitApiPath Condition="'$(RevitVersion)'=='2025'">C:\Program Files\Autodesk\Revit 2025</RevitApiPath>
+    <RevitApiPath Condition="'$(RevitVersion)'=='2026'">C:\Program Files\Autodesk\Revit 2026</RevitApiPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="RevitAPI">
+      <HintPath>$(RevitApiPath)\RevitAPI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>$(RevitApiPath)\RevitAPIUI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>
