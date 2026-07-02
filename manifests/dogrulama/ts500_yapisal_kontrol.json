@@ -1,0 +1,92 @@
+{
+  "title": "TS500 Yapısal Doğrulama",
+  "description": "Tüm donatıları TS500 + TBDY 2018 kurallarına göre kontrol eder. Minimum çap ve bindirme boyu doğrulaması.",
+  "version": "1.0.0",
+  "category": "Doğrulama",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "donatı",
+      "op": "collect_rebar"
+    },
+    {
+      "id": "ts500",
+      "op": "validate_rebar_ts500",
+      "from": "donatı",
+      "params": {
+        "fck": 30,
+        "fyk": 420,
+        "cover_mm": 30
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "ts500"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "ts500"
+    },
+    {
+      "id": "hatalar",
+      "op": "where",
+      "from": "satirlar",
+      "params": {
+        "field": "gecti",
+        "op": "eq",
+        "value": "Hayır"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "hatalar",
+      "params": {
+        "title": "TS500 Hataları"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "TS500 Kontrol"
+      },
+      "required": false
+    },
+    {
+      "id": "html",
+      "op": "export_validation_report",
+      "from": "ts500",
+      "params": {
+        "title": "TS500 Doğrulama Raporu"
+      },
+      "required": false
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "ts500"
+    }
+  ],
+  "tags": [
+    "dogrulama",
+    "qa",
+    "kalite",
+    "validation"
+  ]
+}

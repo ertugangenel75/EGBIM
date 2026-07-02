@@ -1,0 +1,78 @@
+{
+  "title": "QA Duvar Doğrulama",
+  "description": "Duvarları toplar, sınıflandırır ve QA kurallarına göre doğrular.",
+  "version": "1.0.0",
+  "category": "Doğrulama",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "siniflandir",
+      "op": "classify_elements",
+      "from": "duvarlar"
+    },
+    {
+      "id": "qa_kontrol",
+      "op": "validate_qa",
+      "from": "siniflandir"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "qa_kontrol"
+    },
+    {
+      "id": "goster",
+      "op": "show_table",
+      "from": "qa_kontrol",
+      "params": {
+        "title": "QA Doğrulama Sonuçları",
+        "max_rows": 30
+      }
+    },
+    {
+      "id": "csv",
+      "op": "export_csv",
+      "from": "qa_kontrol",
+      "required": false,
+      "params": {
+        "file_name": "qa_duvar_sonuc.csv"
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "qa_kontrol"
+    },
+    {
+      "id": "html_rapor",
+      "op": "export_validation_report",
+      "from": "kat_ozet",
+      "required": false,
+      "params": {
+        "title": "QA Duvar Doğrulama"
+      }
+    }
+  ],
+  "tags": [
+    "dogrulama",
+    "qa",
+    "kalite",
+    "validation"
+  ]
+}

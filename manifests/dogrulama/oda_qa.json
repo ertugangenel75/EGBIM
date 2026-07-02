@@ -1,0 +1,80 @@
+{
+  "title": "Oda QA — Çakışma & Yerleştirilmemiş",
+  "description": "Tüm odaları toplar; çakışan ve yerleştirilmemiş odaları tespit eder, HTML ve XLSX raporlar.",
+  "version": "1.0.0",
+  "category": "Doğrulama",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "cakisma",
+      "op": "check_overlapping_rooms",
+      "from": "odalar"
+    },
+    {
+      "id": "yerlestir",
+      "op": "check_unplaced_rooms",
+      "from": "odalar"
+    },
+    {
+      "id": "birlestir",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "cakisma",
+        "yerlestir"
+      ],
+      "params": {
+        "title": "Oda QA Birleşik Rapor"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "birlestir"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "birlestir"
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "Oda QA"
+      },
+      "required": false
+    },
+    {
+      "id": "html",
+      "op": "export_validation_report",
+      "from": "birlestir",
+      "params": {
+        "title": "Oda QA Raporu"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "dogrulama",
+    "qa",
+    "kalite",
+    "validation"
+  ]
+}

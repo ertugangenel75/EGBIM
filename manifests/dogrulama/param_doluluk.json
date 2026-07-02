@@ -1,0 +1,101 @@
+{
+  "title": "Model Parametre Doluluk Raporu",
+  "description": "Tüm kategorilerde EG_Poz ve EG_WBS parametrelerini kontrol eder.",
+  "version": "1.0.0",
+  "category": "Doğrulama",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "kontrol_d",
+      "op": "param_validate_schema",
+      "from": "duvarlar",
+      "params": {
+        "required_params": [
+          "EG_Poz",
+          "EG_WBS"
+        ]
+      }
+    },
+    {
+      "id": "kontrol_k",
+      "op": "param_validate_schema",
+      "from": "kolonlar",
+      "params": {
+        "required_params": [
+          "EG_Poz",
+          "EG_WBS"
+        ]
+      }
+    },
+    {
+      "id": "birlestir",
+      "op": "merge_rows",
+      "from_many": [
+        "kontrol_d",
+        "kontrol_k"
+      ]
+    },
+    {
+      "id": "hata_fil",
+      "op": "filter_rows",
+      "from": "birlestir",
+      "params": {
+        "field": "passed",
+        "operator": "eq",
+        "value": "False"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "hata_fil",
+      "params": {
+        "title": "Eksik Parametreler"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "birlestir",
+      "params": {
+        "sheet_name": "Param Kontrolü"
+      },
+      "required": false
+    },
+    {
+      "id": "html_rapor",
+      "op": "export_validation_report",
+      "from": "birlestir",
+      "required": false,
+      "params": {
+        "title": "Model Parametre Doluluk Raporu"
+      }
+    }
+  ],
+  "tags": [
+    "dogrulama",
+    "qa",
+    "kalite",
+    "validation"
+  ]
+}

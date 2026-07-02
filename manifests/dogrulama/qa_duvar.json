@@ -1,0 +1,75 @@
+{
+  "title": "QA Duvar Doğrulama",
+  "description": "QA kural matrisini yükler ve duvar listesine uygular.",
+  "version": "1.0.0",
+  "category": "Doğrulama",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "qa_rules",
+      "op": "load_qa_matrix"
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "satırlar",
+      "op": "elements_to_rows",
+      "from": "duvarlar"
+    },
+    {
+      "id": "dogrula",
+      "op": "validate_qa",
+      "from": "duvarlar",
+      "params": {
+        "rules_path": "data/semantic/qa_wall_rules.json"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "dogrula"
+    },
+    {
+      "id": "rapor",
+      "op": "show_result",
+      "from": "ozet",
+      "params": {
+        "title": "QA Duvar Özeti"
+      }
+    },
+    {
+      "id": "html",
+      "op": "export_validation_report",
+      "from": "dogrula",
+      "params": {
+        "title": "QA Duvar Raporu"
+      },
+      "required": false
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "dogrula"
+    }
+  ],
+  "tags": [
+    "dogrulama",
+    "qa",
+    "kalite",
+    "validation"
+  ]
+}

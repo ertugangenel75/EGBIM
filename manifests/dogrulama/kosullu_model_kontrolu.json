@@ -1,0 +1,119 @@
+{
+  "title": "Koşullu Model Kontrolü (DAG Örnek)",
+  "description": "condition + depends_on + $varName kullanımını gösteren örnek.\nDuvar sayısı > 0 ise QA çalışır, = 0 ise uyarı loglanır.",
+  "version": "1.0.0",
+  "category": "Doğrulama",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls",
+      "cache": true
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns",
+      "cache": true
+    },
+    {
+      "id": "duvar_sayisi",
+      "op": "element_count",
+      "from": "duvarlar"
+    },
+    {
+      "id": "kolon_sayisi",
+      "op": "element_count",
+      "from": "kolonlar"
+    },
+    {
+      "id": "qa_duvar",
+      "op": "param_filled_check",
+      "from": "duvarlar",
+      "condition": "$duvar_sayisi > 0",
+      "params": {
+        "param_name": "FireRating",
+        "severity": "WARNING"
+      }
+    },
+    {
+      "id": "qa_kolon",
+      "op": "param_filled_check",
+      "from": "kolonlar",
+      "condition": "$kolon_sayisi > 0",
+      "params": {
+        "param_name": "EGBIM_PozNo",
+        "severity": "ERROR"
+      }
+    },
+    {
+      "id": "bos_model_uyari",
+      "op": "log_message",
+      "condition": "$duvar_sayisi == 0",
+      "required": false,
+      "params": {
+        "message": "Model boş — duvar bulunamadı, QA atlandı."
+      }
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "qa_duvar",
+        "qa_kolon"
+      ],
+      "depends_on": [
+        "bos_model_uyari"
+      ],
+      "params": {
+        "title": "Koşullu Model QA"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "birlesik"
+    },
+    {
+      "id": "excel",
+      "op": "export_xlsx",
+      "from": "birlesik",
+      "required": false,
+      "params": {
+        "file_path": "",
+        "sheet_name": "QA Sonuçları"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "birlesik"
+    },
+    {
+      "id": "html_rapor",
+      "op": "export_validation_report",
+      "from": "ozet",
+      "required": false,
+      "params": {
+        "title": "Koşullu Model Kontrolü (DAG Örnek)"
+      }
+    }
+  ],
+  "tags": [
+    "dogrulama",
+    "qa",
+    "kalite",
+    "validation"
+  ]
+}

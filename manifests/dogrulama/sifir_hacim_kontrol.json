@@ -1,0 +1,105 @@
+{
+  "title": "Sıfır Hacim Kontrolü",
+  "description": "Tüm yapısal ve mimari hacim elemanlarını kontrol eder, sıfır hacimli sorunlu elemanları raporlar.",
+  "version": "1.0.0",
+  "category": "Doğrulama",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "temeller",
+      "op": "collect_foundations"
+    },
+    {
+      "id": "qa_d",
+      "op": "check_zero_volume",
+      "from": "duvarlar"
+    },
+    {
+      "id": "qa_k",
+      "op": "check_zero_volume",
+      "from": "kolonlar"
+    },
+    {
+      "id": "qa_f",
+      "op": "check_zero_volume",
+      "from": "dosemeler"
+    },
+    {
+      "id": "qa_t",
+      "op": "check_zero_volume",
+      "from": "temeller"
+    },
+    {
+      "id": "birlestir",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "qa_d",
+        "qa_k",
+        "qa_f",
+        "qa_t"
+      ],
+      "params": {
+        "title": "Sıfır Hacim Kontrolü — Tüm Yapısal"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "birlestir"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "birlestir"
+    },
+    {
+      "id": "hatalar",
+      "op": "where",
+      "from": "satirlar",
+      "params": {
+        "field": "gecti",
+        "op": "eq",
+        "value": "Hayır"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "hatalar",
+      "params": {
+        "sheet_name": "Sıfır Hacim"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "dogrulama",
+    "qa",
+    "kalite",
+    "validation"
+  ]
+}

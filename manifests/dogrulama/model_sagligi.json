@@ -1,0 +1,114 @@
+{
+  "title": "Model Sağlığı Kontrol Paketi",
+  "description": "Tek tıkla kapsamlı model sağlık denetimi: sıfır hacim, yerleştirilmemiş oda, çakışan oda, parametre doluluk. Birleşik rapor.",
+  "version": "1.0.0",
+  "category": "Doğrulama",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "qa_cakisma",
+      "op": "check_overlapping_rooms",
+      "from": "odalar"
+    },
+    {
+      "id": "qa_yer",
+      "op": "check_unplaced_rooms",
+      "from": "odalar"
+    },
+    {
+      "id": "qa_hacim_d",
+      "op": "check_zero_volume",
+      "from": "duvarlar"
+    },
+    {
+      "id": "qa_hacim_k",
+      "op": "check_zero_volume",
+      "from": "kolonlar"
+    },
+    {
+      "id": "qa_param",
+      "op": "param_filled_check",
+      "from": "duvarlar",
+      "params": {
+        "param_name": "Malzeme",
+        "severity": "WARNING"
+      }
+    },
+    {
+      "id": "birlestir",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "qa_cakisma",
+        "qa_yer",
+        "qa_hacim_d",
+        "qa_hacim_k",
+        "qa_param"
+      ],
+      "params": {
+        "title": "Model Sağlığı — Tam Kontrol"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "birlestir"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "birlestir"
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "Model Sağlığı"
+      },
+      "required": false
+    },
+    {
+      "id": "html",
+      "op": "export_validation_report",
+      "from": "birlestir",
+      "params": {
+        "title": "Model Sağlığı Raporu"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "dogrulama",
+    "qa",
+    "kalite",
+    "validation"
+  ]
+}

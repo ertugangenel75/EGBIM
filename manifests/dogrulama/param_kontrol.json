@@ -1,0 +1,81 @@
+{
+  "title": "Parametre Varlık Kontrolü",
+  "description": "Duvar ve kolonlarda belirtilen parametrenin varlığını kontrol eder.",
+  "version": "1.0.0",
+  "category": "Doğrulama",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "sinifla",
+      "op": "classify_elements",
+      "from": "duvarlar"
+    },
+    {
+      "id": "kontrol",
+      "op": "param_exists_check",
+      "from": "sinifla",
+      "params": {
+        "param_name": "canonical_class",
+        "severity": "WARNING"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kontrol"
+    },
+    {
+      "id": "goster",
+      "op": "show_table",
+      "from": "kontrol",
+      "params": {
+        "title": "Parametre Kontrol Sonuçları"
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "kontrol"
+    },
+    {
+      "id": "html_rapor",
+      "op": "export_validation_report",
+      "from": "kat_ozet",
+      "params": {
+        "title": "Parametre Varlık Kontrolü"
+      },
+      "required": false
+    },
+    {
+      "id": "xlsx_rapor",
+      "op": "export_xlsx",
+      "from": "kat_ozet",
+      "params": {
+        "sheet_name": "Parametre Varlık Kontrolü"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "dogrulama",
+    "qa",
+    "kalite",
+    "validation"
+  ]
+}

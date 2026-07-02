@@ -1,0 +1,117 @@
+{
+  "title": "Kapsamlı Parametre QA",
+  "description": "Zorunlu EGBIM parametrelerinin varlığını ve doluluk kontrolünü tüm kategorilerde yapar.",
+  "version": "1.0.0",
+  "category": "Doğrulama",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "qa_d",
+      "op": "validate_required_params",
+      "from": "duvarlar",
+      "params": {
+        "required_params": "Malzeme,Yorumlar"
+      }
+    },
+    {
+      "id": "qa_k",
+      "op": "validate_required_params",
+      "from": "kolonlar",
+      "params": {
+        "required_params": "Yapısal Malzeme,Mark"
+      }
+    },
+    {
+      "id": "qa_f",
+      "op": "validate_required_params",
+      "from": "dosemeler",
+      "params": {
+        "required_params": "Malzeme"
+      }
+    },
+    {
+      "id": "qa_o",
+      "op": "param_filled_check",
+      "from": "odalar",
+      "params": {
+        "param_name": "Adı",
+        "severity": "WARNING"
+      }
+    },
+    {
+      "id": "birlestir",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "qa_d",
+        "qa_k",
+        "qa_f",
+        "qa_o"
+      ],
+      "params": {
+        "title": "Kapsamlı Parametre QA"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "birlestir"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "birlestir"
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "Param QA"
+      },
+      "required": false
+    },
+    {
+      "id": "html",
+      "op": "export_validation_report",
+      "from": "birlestir",
+      "params": {
+        "title": "Kapsamlı Parametre QA"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "dogrulama",
+    "qa",
+    "kalite",
+    "validation"
+  ]
+}
