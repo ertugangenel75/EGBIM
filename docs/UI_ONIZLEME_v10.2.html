@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>EGBIMOTO Manifest Browser — UI Önizleme (v10.2)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #1E1E2E; color: #F8F8F2;
+    padding: 12px; font-size: 13px;
+  }
+  .muted { color: #9090A8; }
+  .blue { color: #7B9FFF; }
+  .green { color: #50FA7B; }
+  .purple { color: #BD93F9; }
+  .cyan { color: #8BE9FD; }
+  .warn { color: #FFB86C; }
+  .red { color: #FF5555; }
+  .panel { background: #2A2A3E; border: 1px solid #44445A; border-radius: 8px; }
+
+  /* Başlık */
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .header h1 { font-size: 16px; color: #7B9FFF; }
+  .search { background: #2A2A3E; border: 1px solid #44445A; border-radius: 6px; padding: 6px 10px; }
+  .search input { background: transparent; border: 0; color: #F8F8F2; outline: none; width: 200px; }
+
+  /* A — Kategori çipleri */
+  .cats { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
+  .chip {
+    background: #2A2A3E; border: 1px solid #44445A; border-radius: 12px;
+    padding: 4px 10px; font-size: 11px; color: #9090A8; cursor: pointer;
+  }
+  .chip.active { background: #7B9FFF; border-color: #7B9FFF; color: #1E1E2E; font-weight: bold; }
+  .chip:hover:not(.active) { background: #313150; }
+
+  /* Ana içerik */
+  .main { display: grid; grid-template-columns: 320px 6px 1fr; height: 420px; }
+  .list { padding: 6px; overflow-y: auto; }
+  .item { padding: 8px 10px; border-radius: 4px; cursor: pointer; margin: 1px 0; }
+  .item:hover { background: #313150; }
+  .item.sel { background: #3D3D6B; }
+  .item .cat { font-size: 9px; font-weight: bold; color: #7B9FFF; opacity: .7; }
+  .item .title { font-size: 12px; }
+  .item .score { font-size: 9px; color: #9090A8; }
+  .item-row { display: flex; justify-content: space-between; align-items: center; }
+  .tag-badge { font-size: 9px; font-weight: bold; color: #1E1E2E; padding: 2px 5px; border-radius: 4px; }
+
+  .detail { padding: 16px; overflow-y: auto; }
+  .detail-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+  .detail-head h2 { font-size: 15px; }
+  .score-badge { padding: 3px 8px; border-radius: 6px; font-size: 13px; font-weight: bold; color: #1E1E2E; }
+  .section-label { font-size: 9px; font-weight: bold; opacity: .8; margin: 10px 0 5px; }
+
+  /* B — Tag çipleri (detay) */
+  .tag-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag-chip {
+    background: #3A3252; border: 1px solid #BD93F9; border-radius: 10px;
+    padding: 2px 8px; font-size: 10px; color: #BD93F9; cursor: pointer;
+  }
+
+  /* Faz */
+  .phases { display: flex; flex-wrap: wrap; gap: 4px; }
+  .phase { font-size: 9px; font-weight: bold; padding: 2px 5px; border-radius: 3px; }
+  .phase.on { background: #286B3F; color: #50FA7B; }
+  .phase.off { background: #5A2828; color: #FF5555; }
+  .phase.pattern { background: #282A4A; border: 1px solid #6C63FF; color: #BD93F9; }
+
+  /* Adımlar (C: canlı durum) */
+  .steps { margin-top: 4px; }
+  .step { padding: 5px 8px; border-radius: 4px; margin: 2px 0; display: flex; align-items: center; gap: 8px; font-family: Consolas, monospace; font-size: 11px; }
+  .step.pending { background: #313150; }
+  .step.ok { background: #223A2A; }
+  .step.fail { background: #3A2222; }
+  .step .icon { width: 14px; }
+  .step .sid { color: #7B9FFF; }
+  .step .sop { flex: 1; }
+  .step .sms { color: #9090A8; font-size: 10px; }
+
+  /* C — Progress bar */
+  .progress-wrap { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+  .progress-bg { flex: 1; background: #23233A; border-radius: 4px; height: 14px; overflow: hidden; }
+  .progress-fill { background: #7B9FFF; height: 14px; border-radius: 4px; width: 71%; transition: width .3s; }
+
+  /* Log */
+  .log { background: #2A2A3E; border: 1px solid #44445A; border-radius: 6px; padding: 8px; margin-top: 8px; font-family: Consolas, monospace; font-size: 11px; color: #9090A8; height: 80px; overflow-y: auto; }
+  .log .ok-line { color: #50FA7B; }
+
+  /* D — Sonuç + butonlar */
+  .footer { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+  .telemetry { background: #23233A; border-radius: 6px; padding: 5px 10px; font-size: 10px; font-family: Consolas; color: #8BE9FD; }
+  .status { flex: 1; font-size: 11px; }
+  .btn { padding: 8px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; border: 0; }
+  .btn-primary { background: #7B9FFF; color: #1E1E2E; }
+  .btn-secondary { background: #2A2A3E; color: #F8F8F2; border: 1px solid #44445A; }
+
+  .note { background: #282A4A; border-left: 3px solid #6C63FF; padding: 8px 12px; margin-bottom: 12px; border-radius: 4px; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<div class="note">
+  📐 <b>EGBIMOTO Manifest Browser v10.2 — UI Önizleme.</b>
+  Bu statik bir mockup'tır (gerçek Revit penceresi değil). Yeni eklenen 4 özelliği gösterir:
+  <span class="cyan">A</span> kategori çipleri, <span class="cyan">B</span> tag çipleri,
+  <span class="cyan">C</span> canlı progress + adım durumu, <span class="cyan">D</span> telemetri rozeti + rapor butonu.
+</div>
+
+<!-- Başlık -->
+<div class="header">
+  <div>
+    <h1>EGBIMOTO Manifest Browser</h1>
+    <div class="muted" style="font-size:11px;">5 / 222 manifest</div>
+  </div>
+  <div class="search">🔍 <input value="koordinasyon" readonly></div>
+</div>
+
+<!-- A: Kategori çipleri -->
+<div class="cats">
+  <div class="chip">Tümü (222)</div>
+  <div class="chip">metraj (19)</div>
+  <div class="chip active">koordinasyon (15)</div>
+  <div class="chip">dogrulama (12)</div>
+  <div class="chip">qa (13)</div>
+  <div class="chip">mimari (12)</div>
+  <div class="chip">yangin (11)</div>
+  <div class="chip">elektrik (10)</div>
+  <div class="chip">ifc (5)</div>
+</div>
+
+<!-- Ana içerik -->
+<div class="main">
+  <!-- Liste -->
+  <div class="panel list">
+    <div class="item">
+      <div class="item-row">
+        <div>
+          <div class="cat">KOORDINASYON</div>
+          <div class="title">MEP × Yapısal Çakışma</div>
+          <div class="score">7/10 · MEP · 4 adım</div>
+        </div>
+        <div class="tag-badge" style="background:#50FA7B;">MEP</div>
+      </div>
+    </div>
+    <div class="item sel">
+      <div class="item-row">
+        <div>
+          <div class="cat">KOORDINASYON</div>
+          <div class="title">Çakışma Matrisi — MEP × Yapısal Hard Clash</div>
+          <div class="score">9/10 · CLASH · 5 adım</div>
+        </div>
+        <div class="tag-badge" style="background:#50FA7B;">A+</div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-row">
+        <div>
+          <div class="cat">KOORDINASYON</div>
+          <div class="title">Minimum Mesafe Kontrolü</div>
+          <div class="score">8/10 · QA · 6 adım</div>
+        </div>
+        <div class="tag-badge" style="background:#8BE9FD;">A</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:transparent;"></div>
+
+  <!-- Detay -->
+  <div class="panel detail">
+    <div class="detail-head">
+      <h2>Çakışma Matrisi — MEP × Yapısal Hard Clash Raporu</h2>
+      <div class="score-badge" style="background:#50FA7B;">9/10</div>
+    </div>
+    <div class="muted" style="font-size:12px;">
+      MEP elemanları ile yapısal elemanlar arasındaki katı çakışmaları tespit eder,
+      kesişim hacmine göre önceliklendirir ve rapor üretir.
+    </div>
+
+    <!-- B: Tag çipleri -->
+    <div class="section-label purple">ETİKETLER</div>
+    <div class="tag-chips">
+      <div class="tag-chip">#clash</div>
+      <div class="tag-chip">#cakisma</div>
+      <div class="tag-chip">#koordinasyon</div>
+      <div class="tag-chip">#mep</div>
+      <div class="tag-chip">#yapisal</div>
+      <div class="tag-chip">#navisworks</div>
+    </div>
+
+    <!-- Faz -->
+    <div class="section-label blue">FAZ DURUMU</div>
+    <div class="phases">
+      <span class="phase off">✗ PRECHECK</span>
+      <span class="phase on">✓ COLLECT</span>
+      <span class="phase off">✗ VALIDATE</span>
+      <span class="phase on">✓ AGGREGATE</span>
+      <span class="phase off">✗ SUMMARY</span>
+      <span class="phase on">✓ ROWS</span>
+      <span class="phase on">✓ EXPORT</span>
+      <span class="phase pattern">CLASH</span>
+    </div>
+
+    <!-- Adımlar: C canlı durum -->
+    <div class="section-label blue">ADIMLAR</div>
+    <div class="steps">
+      <div class="step ok"><span class="icon green">✓</span><span class="sid">cakismalar</span><span class="sop">clash_detect_matrix</span><span class="sms">847ms</span></div>
+      <div class="step ok"><span class="icon green">✓</span><span class="sid">oncelikli</span><span class="sop">clash_severity_sort</span><span class="sms">12ms</span></div>
+      <div class="step ok"><span class="icon green">✓</span><span class="sid">tablo</span><span class="sop">show_table</span><span class="sms">34ms</span></div>
+      <div class="step pending"><span class="icon muted">○</span><span class="sid">html_rapor</span><span class="sop">export_html_report</span><span class="sms">← oncelikli</span></div>
+      <div class="step pending"><span class="icon muted">○</span><span class="sid">excel</span><span class="sop">export_xlsx</span><span class="sms">← oncelikli</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- C: Progress bar -->
+<div class="progress-wrap">
+  <div class="progress-bg"><div class="progress-fill"></div></div>
+  <span class="muted" style="font-size:10px;">3/5</span>
+</div>
+
+<!-- Log -->
+<div class="log">
+  <div class="ok-line">✓ cakismalar (clash_detect_matrix) 847ms</div>
+  <div class="ok-line">✓ oncelikli (clash_severity_sort) 12ms</div>
+  <div class="ok-line">✓ tablo (show_table) 34ms</div>
+  <div>  [ClashOps] A grubu: 142 eleman, B grubu: 38 eleman</div>
+  <div>  [ClashOps] Toplam 7 hard clash tespit edildi.</div>
+</div>
+
+<!-- D: Sonuç + butonlar -->
+<div class="footer">
+  <div class="telemetry">5 adım · 1240ms · ⚡2 önbellek</div>
+  <div class="status green">✅ Tamamlandı — Çakışma Matrisi</div>
+  <button class="btn btn-secondary">📄 Raporu Aç</button>
+  <button class="btn btn-primary">▶ Çalıştır</button>
+  <button class="btn btn-secondary">⚡ Pattern Üret</button>
+  <button class="btn btn-secondary">🤖 AI Üret</button>
+  <button class="btn btn-secondary">Kapat</button>
+</div>
+
+</body>
+</html>
