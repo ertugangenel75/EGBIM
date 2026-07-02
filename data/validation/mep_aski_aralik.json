@@ -1,0 +1,26 @@
+{
+  "_source": "MEP askı (hanger) aralık referansı — boyut bantlı (size-banded) spec tablosu. EG ofis tarama varsayılanları.",
+  "_note": "Bu tablo karar destek/tarama referansıdır; resmi standart metni değildir. Askı aralıkları boru/kanal malzemesi, dolu/boş ağırlık, sismik bölge ve proje şartnamesine göre değişir. Yetkili mühendis onayı esastır. Değerler çelik boru (dolu) ve standart galvaniz kanal varsayımıyla verilmiştir.",
+  "_schema": {
+    "size_min_mm": "boyut bandı alt sınır (dahil)",
+    "size_max_mm": "boyut bandı üst sınır (dahil)",
+    "max_spacing_m": "iki askı arası maksimum yatay mesafe (m)",
+    "end_setback_m": "hat ucundan / fitting'den ilk askıya boşluk (m)",
+    "rod_diameter_mm": "önerilen askı çubuğu çapı (mm)"
+  },
+  "pipe_hanger_specs": [
+    { "size_min_mm": 0,   "size_max_mm": 25,  "max_spacing_m": 2.0, "end_setback_m": 0.3, "rod_diameter_mm": 8,  "note": "DN8–DN25 küçük çaplı boru" },
+    { "size_min_mm": 26,  "size_max_mm": 50,  "max_spacing_m": 2.5, "end_setback_m": 0.3, "rod_diameter_mm": 8,  "note": "DN32–DN50" },
+    { "size_min_mm": 51,  "size_max_mm": 80,  "max_spacing_m": 3.0, "end_setback_m": 0.3, "rod_diameter_mm": 10, "note": "DN65–DN80" },
+    { "size_min_mm": 81,  "size_max_mm": 100, "max_spacing_m": 3.5, "end_setback_m": 0.3, "rod_diameter_mm": 10, "note": "DN100" },
+    { "size_min_mm": 101, "size_max_mm": 150, "max_spacing_m": 4.5, "end_setback_m": 0.3, "rod_diameter_mm": 12, "note": "DN125–DN150" },
+    { "size_min_mm": 151, "size_max_mm": 200, "max_spacing_m": 5.0, "end_setback_m": 0.3, "rod_diameter_mm": 16, "note": "DN200" },
+    { "size_min_mm": 201, "size_max_mm": 300, "max_spacing_m": 6.0, "end_setback_m": 0.3, "rod_diameter_mm": 20, "note": "DN250–DN300" }
+  ],
+  "duct_hanger_specs": [
+    { "size_min_mm": 0,    "size_max_mm": 750,  "max_spacing_m": 2.4, "end_setback_m": 0.3, "rod_diameter_mm": 8,  "note": "Küçük kanal (≤750mm kenar)" },
+    { "size_min_mm": 751,  "size_max_mm": 1500, "max_spacing_m": 2.4, "end_setback_m": 0.3, "rod_diameter_mm": 10, "note": "Orta kanal" },
+    { "size_min_mm": 1501, "size_max_mm": 2250, "max_spacing_m": 2.0, "end_setback_m": 0.3, "rod_diameter_mm": 12, "note": "Büyük kanal — daha sık askı" },
+    { "size_min_mm": 2251, "size_max_mm": 9999, "max_spacing_m": 1.5, "end_setback_m": 0.3, "rod_diameter_mm": 16, "note": "Çok büyük kanal" }
+  ]
+}

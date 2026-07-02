@@ -1,0 +1,32 @@
+# EGBIM Kolon Ön Boyutlandırma Shared Parameters — TBDY 2018 / TS 500
+# Sürüm: 1.0 | Tarih: 2026-06 | TBDY 2018 Bölüm 7.3 / TS 500 Bölüm 7.4
+# Kapsam: Betonarme kolon kesit koşulları kontrolü ve ön boyutlandırma önerisi.
+# GUID'ler SABİTTİR — bu dosya bir kez üretildi, değiştirilmemelidir.
+# Prefix e6b3 (elektrik e6b1, sıhhi e6b2'den farklı, çakışma yok).
+# NOT: EG_BetonSinif EGBIMOTO'da zaten tanımlı; burada TEKRAR edilmez. Op onu okur.
+# Do not edit manually.
+*META	VERSION	MINVERSION
+META	2	1
+*GROUP	ID	NAME
+GROUP	1	EG-KOLON GİRDİ (Kullanıcı)
+GROUP	2	EG-KOLON ÇIKTI (Hesap Motoru)
+*PARAM	GUID	NAME	DATATYPE	DATACATEGORY	GROUP	VISIBLE	DESCRIPTION	USERMODIFIABLE	HIDEWHENNOVALUE
+PARAM	e6b30001-0001-0001-0001-000000000001	EG_Ndm	NUMBER		1	1	Deprem etkili eksenel basınç kuvveti Ndm (kN) — G+Q+E en büyüğü. Analiz sonucu. Boşsa yük alanından tahmin edilir	1	0
+PARAM	e6b30001-0001-0001-0001-000000000002	EG_YukAlani	NUMBER		1	1	Kolonun taşıdığı döşeme yük alanı (m²) — Ndm tahmini için (analiz yoksa)	1	0
+PARAM	e6b30001-0001-0001-0001-000000000003	EG_KatSayisi	INTEGER		1	1	Kolonun üzerindeki kat sayısı — Ndm tahmini için	1	0
+PARAM	e6b30001-0001-0001-0001-000000000004	EG_BirimYuk	NUMBER		1	1	Yaklaşık kat birim yükü (kN/m²) — Ndm tahmini için (boşsa 12 varsayılır)	1	0
+PARAM	e6b30001-0001-0001-0001-000000000005	EG_fck_Override	NUMBER		1	1	Beton karakteristik basınç dayanımı fck (MPa) — EG_BetonSinif yoksa bu kullanılır	1	0
+PARAM	e6b30001-0001-0001-0001-000000000006	EG_KolonTipi	TEXT		1	1	Kolon tipi: dikdortgen/dairesel (boşsa geometriden tahmin)	1	0
+PARAM	e6b30001-0001-0001-0001-000000000007	EG_DuktiliteDuzeyi	TEXT		1	1	Süneklik düzeyi: yuksek/sinirli (TBDY min boyut: yuksek=300mm)	1	0
+PARAM	e6b30001-0001-0001-0001-000000000008	EG_MevcutB	NUMBER		2	1	Okunan/girilen kolon kısa kenar b (mm)	0	0
+PARAM	e6b30001-0001-0001-0001-000000000009	EG_MevcutH	NUMBER		2	1	Okunan/girilen kolon uzun kenar h (mm)	0	0
+PARAM	e6b30001-0001-0001-0001-00000000000a	EG_MevcutAc	NUMBER		2	1	Mevcut kolon kesit alanı Ac (mm²)	0	0
+PARAM	e6b30001-0001-0001-0001-00000000000b	EG_KullanilanNdm	NUMBER		2	1	Hesapta kullanılan Ndm (kN) — girilen veya tahmin edilen	0	0
+PARAM	e6b30001-0001-0001-0001-00000000000c	EG_GerekenAc_TBDY	NUMBER		2	1	TBDY 7.3.1.2 gereği min kesit alanı Ac=Ndm/(0.40fck) (mm²)	0	0
+PARAM	e6b30001-0001-0001-0001-00000000000d	EG_OneriBoyut	NUMBER		2	1	Önerilen min kare kolon boyutu (mm) — TBDY + alan koşulu	0	0
+PARAM	e6b30001-0001-0001-0001-00000000000e	EG_MinBoyutKontrol	TEXT		2	1	Min boyut (300mm dik / 350mm dairesel) kontrolü: UYGUN/YETERSIZ	0	0
+PARAM	e6b30001-0001-0001-0001-00000000000f	EG_EksenelKontrol_TBDY	TEXT		2	1	TBDY eksenel sınır Ac≥Ndm/0.40fck: UYGUN/YETERSIZ	0	0
+PARAM	e6b30001-0001-0001-0001-000000000010	EG_EksenelKontrol_TS500	TEXT		2	1	TS 500 sınır Nd≤0.9·fcd·Ac: UYGUN/YETERSIZ	0	0
+PARAM	e6b30001-0001-0001-0001-000000000011	EG_KirisKolonAyrim	TEXT		2	1	Kiriş/kolon ayrımı Nd≤0.10·Ac·fck (kiriş ise): bilgi	0	0
+PARAM	e6b30001-0001-0001-0001-000000000012	EG_KolonDurumu	TEXT		2	1	Genel durum: UYGUN / BOYUT_YETERSIZ / EKSENEL_YETERSIZ / BUYUT	0	0
+PARAM	e6b30001-0001-0001-0001-000000000013	EG_HesapTarihi	TEXT		2	1	Hesabın yapıldığı tarih/saat	0	0

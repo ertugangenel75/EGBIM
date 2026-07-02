@@ -1,0 +1,46 @@
+{
+  "_source": "EGBIMOTO QA Wall Rules",
+  "_aciklama": "Duvar QA kuralları — semantic + validation merge v2",
+  "rules": [
+    {
+      "id": "QA_WALL_FIRE_RATING",
+      "category": "OST_Walls",
+      "property": "FireRating",
+      "operator": "exists",
+      "severity": "Error",
+      "message": "Duvar yangın dayanım sınıfı (FireRating) eksik"
+    },
+    {
+      "id": "QA_WALL_MATERIAL",
+      "category": "OST_Walls",
+      "property": "Malzeme",
+      "operator": "exists",
+      "severity": "Warning",
+      "message": "Duvar malzemesi atanmamış"
+    },
+    {
+      "id": "QA_WALL_TYPE_MARK",
+      "category": "OST_Walls",
+      "property": "Type Mark",
+      "operator": "exists",
+      "severity": "Warning",
+      "message": "Duvar tipi Type Mark değeri eksik"
+    },
+    {
+      "id": "QA_WALL_LOAD_BEARING",
+      "category": "OST_Walls",
+      "property": "TR_IsTasiyici",
+      "operator": "exists",
+      "severity": "Info",
+      "message": "TR_IsTasiyici parametresi eksik"
+    },
+    {
+      "id": "QA_WALL_IS_EXTERNAL",
+      "category": "OST_Walls",
+      "property": "TR_IsDisEleman",
+      "operator": "exists",
+      "severity": "Info",
+      "message": "TR_IsDisEleman parametresi eksik"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "rates": [
+    {
+      "poz_no": "WALL_AREA",
+      "description": "Sample wall area construction item",
+      "unit": "m2",
+      "unit_price": 1250.00,
+      "currency": "TRY",
+      "source": "sample"
+    },
+    {
+      "poz_no": "DOOR_COUNT",
+      "description": "Sample interior door item",
+      "unit": "adet",
+      "unit_price": 8500.00,
+      "currency": "TRY",
+      "source": "sample"
+    },
+    {
+      "poz_no": "ROOM_AREA",
+      "description": "Sample room finish item",
+      "unit": "m2",
+      "unit_price": 650.00,
+      "currency": "TRY",
+      "source": "sample"
+    }
+  ]
+}

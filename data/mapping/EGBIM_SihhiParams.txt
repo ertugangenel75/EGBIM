@@ -1,0 +1,34 @@
+# EGBIM Sıhhi Tesisat Hesap Shared Parameters — EN 12056-2 / EN 806-3
+# Sürüm: 1.0 | Tarih: 2026-06 | EN 12056-2 (drenaj) / EN 806-3 (su besleme)
+# Kapsam: Armatür DU/LU değerleri, drenaj/su talebi, boru boyutlandırma, kapasite.
+# GUID'ler SABİTTİR — bu dosya bir kez üretildi, değiştirilmemelidir.
+# Prefix e6b2 (elektrik e6b1'den farklı, çakışma yok).
+# Do not edit manually.
+*META	VERSION	MINVERSION
+META	2	1
+*GROUP	ID	NAME
+GROUP	1	EG-SIHHI ARMATÜR (Girdi)
+GROUP	2	EG-SIHHI BORU GİRDİ (Kullanıcı)
+GROUP	3	EG-SIHHI ÇIKTI (Hesap Motoru)
+*PARAM	GUID	NAME	DATATYPE	DATACATEGORY	GROUP	VISIBLE	DESCRIPTION	USERMODIFIABLE	HIDEWHENNOVALUE
+PARAM	e6b20001-0001-0001-0001-000000000001	EG_ArmaturTipi	TEXT		1	1	Armatür tipi: lavabo/wc/dus/kuvet/eviye/pisuar/yer_suzgeci vb. (DU/LU eşleşmesi için)	1	0
+PARAM	e6b20001-0001-0001-0001-000000000002	EG_DU	NUMBER		1	1	Drenaj birimi DU (l/s) — EN 12056-2 Tablo 2. Boşsa armatür tipinden atanır	1	0
+PARAM	e6b20001-0001-0001-0001-000000000003	EG_LU_Soguk	NUMBER		1	1	Soğuk su yük birimi LU — EN 806-3. Boşsa armatür tipinden atanır	1	0
+PARAM	e6b20001-0001-0001-0001-000000000004	EG_LU_Sicak	NUMBER		1	1	Sıcak su yük birimi LU — EN 806-3. Boşsa armatür tipinden atanır	1	0
+PARAM	e6b20001-0001-0001-0001-000000000005	EG_DrenajSistem	TEXT		2	1	Drenaj boru sistemi: pissu/atik/yagmur (boru sınıflandırması)	1	0
+PARAM	e6b20001-0001-0001-0001-000000000006	EG_SuSistem	TEXT		2	1	Su besleme sistemi: soguk/sicak/geri_donus	1	0
+PARAM	e6b20001-0001-0001-0001-000000000007	EG_BinaKullanim	TEXT		2	1	Bina kullanım tipi: konut/ofis/hastane/okul/restoran/kamu/lab (K faktörü için)	1	0
+PARAM	e6b20001-0001-0001-0001-000000000008	EG_SistemTipi	INTEGER		2	1	EN 12056 sistem tipi 1-4 (boşsa 1) — drenaj kapasite tablosu	1	0
+PARAM	e6b20001-0001-0001-0001-000000000009	EG_BoruMalzeme	TEXT		2	1	Boru malzemesi: PVC/PP/CTP/HDPE/bakir/celik (bilgi amaçlı)	1	0
+PARAM	e6b20001-0001-0001-0001-00000000000a	EG_SuruekliDebi	NUMBER		2	1	Sürekli akış Qc (l/s) — pompa/soğutma vb. (eşzamanlılığa tabi değil)	1	0
+PARAM	e6b20001-0001-0001-0001-00000000000b	EG_ToplamDU	NUMBER		3	1	Bu boru bölümüne bağlı toplam DU (l/s)	0	0
+PARAM	e6b20001-0001-0001-0001-00000000000c	EG_AtikDebi_Qww	NUMBER		3	1	Atık su debisi Qww = K×√ΣDU (l/s) — EN 12056-2	0	0
+PARAM	e6b20001-0001-0001-0001-00000000000d	EG_ToplamLU	NUMBER		3	1	Bu boru bölümüne bağlı toplam LU (su besleme)	0	0
+PARAM	e6b20001-0001-0001-0001-00000000000e	EG_TasarimDebi_QD	NUMBER		3	1	Tasarım debisi QD (l/s) — EN 806-3 eşzamanlı talep	0	0
+PARAM	e6b20001-0001-0001-0001-00000000000f	EG_OneriCap_DN	NUMBER		3	1	Önerilen anma çapı DN (mm)	0	0
+PARAM	e6b20001-0001-0001-0001-000000000010	EG_BoruKapasite	NUMBER		3	1	Seçilen çapın hidrolik kapasitesi Qmax (l/s)	0	0
+PARAM	e6b20001-0001-0001-0001-000000000011	EG_DolulukOrani	NUMBER		3	1	Drenaj dolum oranı h/d (%) — EN 12056 tipik %50-70	0	0
+PARAM	e6b20001-0001-0001-0001-000000000012	EG_AkisHizi	NUMBER		3	1	Akış hızı (m/s) — su besleme sınır 2 m/s riser, drenaj min 0.7 m/s	0	0
+PARAM	e6b20001-0001-0001-0001-000000000013	EG_EgimYuzde	NUMBER		3	1	Drenaj eğimi (%) — okunan veya önerilen	0	0
+PARAM	e6b20001-0001-0001-0001-000000000014	EG_HesapDurumu	TEXT		3	1	Durum: UYGUN / CAP_YETERSIZ / EGIM_YETERSIZ / HIZ_DUSUK / DOLULUK_ASILDI	0	0
+PARAM	e6b20001-0001-0001-0001-000000000015	EG_HesapTarihi	TEXT		3	1	Hesabın yapıldığı tarih/saat	0	0

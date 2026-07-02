@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ids>
+  <specifications>
+    <specification name="Wall Basic Property Check" ifcVersion="IFC4">
+      <requirements>
+        <property>
+          <propertySet>Pset_WallCommon</propertySet>
+          <baseName>FireRating</baseName>
+        </property>
+      </requirements>
+    </specification>
+  </specifications>
+</ids>

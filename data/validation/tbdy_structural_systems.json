@@ -1,0 +1,1036 @@
+{
+  "_source": "EG_PARAM_MATRIX_V3 — 05_STRUCTURAL_RULES",
+  "_count": 103,
+  "systems": [
+    {
+      "system_code": "A11",
+      "material_type": "RC",
+      "system_family": "RC_FRAME",
+      "ductility_level": "Yüksek",
+      "system_name_tr": "Deprem etkilerinin tamamının moment aktaran süneklik düzeyi yüksek betonarme çerçevelerle karşılandığı binalar",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "A12",
+      "material_type": "RC",
+      "system_family": "RC_WALL",
+      "ductility_level": "Yüksek",
+      "system_name_tr": "Deprem etkilerinin tamamının süneklik düzeyi yüksek bağ kirişli (boşluklu) betonarme perdelerle karşılandığı binalar",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "A13",
+      "material_type": "RC",
+      "system_family": "RC_WALL",
+      "ductility_level": "Yüksek",
+      "system_name_tr": "Deprem etkilerinin tamamının süneklik düzeyi yüksek boşluksuz betonarme perdelerle karşılandığı binalar",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "A14",
+      "material_type": "RC",
+      "system_family": "RC_DUAL",
+      "ductility_level": "Yüksek",
+      "system_name_tr": "Yüksek betonarme çerçeve + yüksek bağ kirişli betonarme perde",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "A15",
+      "material_type": "RC",
+      "system_family": "RC_DUAL",
+      "ductility_level": "Yüksek",
+      "system_name_tr": "Yüksek betonarme çerçeve + yüksek boşluksuz betonarme perde",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "A16",
+      "material_type": "RC",
+      "system_family": "RC_COLUMN_ONLY",
+      "ductility_level": "Yüksek",
+      "system_name_tr": "Çatı düzeyindeki bağlantıları mafsallı, H≤12 m tek katlı yüksek betonarme kolon sistemi",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "A21",
+      "material_type": "RC",
+      "system_family": "RC_DUAL",
+      "ductility_level": "Karma",
+      "system_name_tr": "Sınırlı betonarme çerçeve + yüksek bağ kirişli betonarme perde",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "A22",
+      "material_type": "RC",
+      "system_family": "RC_DUAL",
+      "ductility_level": "Karma",
+      "system_name_tr": "Sınırlı betonarme çerçeve + yüksek boşluksuz betonarme perde",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "A23",
+      "material_type": "RC",
+      "system_family": "RC_DUAL",
+      "ductility_level": "Karma",
+      "system_name_tr": "Sınırlı tek doğrultulu dişli döşemeli çerçeve + yüksek bağ kirişli perde",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "A24",
+      "material_type": "RC",
+      "system_family": "RC_DUAL",
+      "ductility_level": "Karma",
+      "system_name_tr": "Sınırlı tek doğrultulu dişli döşemeli çerçeve + yüksek boşluksuz perde",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "A31",
+      "material_type": "RC",
+      "system_family": "RC_FRAME",
+      "ductility_level": "Sınırlı",
+      "system_name_tr": "Deprem etkilerinin tamamının moment aktaran süneklik düzeyi sınırlı betonarme çerçevelerle karşılandığı binalar",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "A32",
+      "material_type": "RC",
+      "system_family": "RC_WALL",
+      "ductility_level": "Sınırlı",
+      "system_name_tr": "Deprem etkilerinin tamamının süneklik düzeyi sınırlı boşluksuz betonarme perdelerle karşılandığı binalar",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "A33",
+      "material_type": "RC",
+      "system_family": "RC_DUAL",
+      "ductility_level": "Sınırlı",
+      "system_name_tr": "Sınırlı betonarme çerçeve + sınırlı boşluksuz betonarme perde",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "C11",
+      "material_type": "Steel",
+      "system_family": "STEEL_MRF",
+      "ductility_level": "Yüksek",
+      "system_name_tr": "Deprem etkilerinin tamamının moment aktaran süneklik düzeyi yüksek çelik çerçevelerle karşılandığı binalar",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "C12",
+      "material_type": "Steel",
+      "system_family": "STEEL_CBF",
+      "ductility_level": "Yüksek",
+      "system_name_tr": "Deprem etkilerinin tamamının süneklik düzeyi yüksek dışmerkez veya burkulması önlenmiş merkezi çaprazlı çelik çerçevelerle karşılandığı binalar",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "C13",
+      "material_type": "Steel",
+      "system_family": "STEEL_CBF",
+      "ductility_level": "Yüksek",
+      "system_name_tr": "Deprem etkilerinin tamamının süneklik düzeyi yüksek merkezi çaprazlı çelik çerçevelerle karşılandığı binalar",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "C14",
+      "material_type": "Steel",
+      "system_family": "STEEL_DUAL",
+      "ductility_level": "Yüksek",
+      "system_name_tr": "Yüksek çelik çerçeve + yüksek dışmerkez/BRB/bağ kirişli betonarme perde",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "C15",
+      "material_type": "Steel",
+      "system_family": "STEEL_DUAL",
+      "ductility_level": "Yüksek",
+      "system_name_tr": "Yüksek çelik çerçeve + yüksek merkezi çapraz / yüksek boşluksuz perde",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "C16",
+      "material_type": "Steel",
+      "system_family": "STEEL_COLUMN_ONLY",
+      "ductility_level": "Yüksek",
+      "system_name_tr": "Çatı düzeyindeki bağlantıları mafsallı, H≤12 m tek katlı yüksek çelik kolon sistemi",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "C21",
+      "material_type": "Steel",
+      "system_family": "STEEL_DUAL",
+      "ductility_level": "Karma",
+      "system_name_tr": "Sınırlı çelik çerçeve + yüksek dışmerkez/BRB/bağ kirişli betonarme perde",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "C22",
+      "material_type": "Steel",
+      "system_family": "STEEL_DUAL",
+      "ductility_level": "Karma",
+      "system_name_tr": "Sınırlı çelik çerçeve + yüksek merkezi çapraz / yüksek boşluksuz perde",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "C31",
+      "material_type": "Steel",
+      "system_family": "STEEL_MRF",
+      "ductility_level": "Sınırlı",
+      "system_name_tr": "Deprem etkilerinin tamamının moment aktaran süneklik düzeyi sınırlı çelik çerçevelerle karşılandığı binalar",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "C32",
+      "material_type": "Steel",
+      "system_family": "STEEL_CBF",
+      "ductility_level": "Sınırlı",
+      "system_name_tr": "Deprem etkilerinin tamamının süneklik düzeyi sınırlı merkezi çaprazlı çelik çerçevelerle karşılandığı binalar",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "C33",
+      "material_type": "Steel",
+      "system_family": "STEEL_DUAL",
+      "ductility_level": "Sınırlı",
+      "system_name_tr": "Sınırlı çelik çerçeve + sınırlı merkezi çaprazlı çelik çerçeve",
+      "source_ref": "TBDY 2018 Tablo 4.1",
+      "status": "Official",
+      "source_url": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf"
+    },
+    {
+      "system_code": "■ R/D/BYS KURALLARI — İzinli Sistem ve BYS Operatörleri",
+      "material_type": null,
+      "system_family": null,
+      "ductility_level": null,
+      "system_name_tr": null,
+      "source_ref": null,
+      "status": null,
+      "source_url": null
+    },
+    {
+      "system_code": "SystemCode",
+      "material_type": "R",
+      "system_family": "D",
+      "ductility_level": "AllowedBYSOperator",
+      "system_name_tr": "AllowedBYSValue",
+      "source_ref": "HeightMax_m",
+      "status": "MaterialType",
+      "source_url": "SystemFamily"
+    },
+    {
+      "system_code": "A11",
+      "material_type": "8",
+      "system_family": "3",
+      "ductility_level": "GE",
+      "system_name_tr": "3",
+      "source_ref": "9999",
+      "status": "RC",
+      "source_url": "RC_FRAME"
+    },
+    {
+      "system_code": "A12",
+      "material_type": "7",
+      "system_family": "2.5",
+      "ductility_level": "GE",
+      "system_name_tr": "2",
+      "source_ref": "9999",
+      "status": "RC",
+      "source_url": "RC_WALL"
+    },
+    {
+      "system_code": "A13",
+      "material_type": "6",
+      "system_family": "2.5",
+      "ductility_level": "GE",
+      "system_name_tr": "2",
+      "source_ref": "9999",
+      "status": "RC",
+      "source_url": "RC_WALL"
+    },
+    {
+      "system_code": "A14",
+      "material_type": "8",
+      "system_family": "2.5",
+      "ductility_level": "GE",
+      "system_name_tr": "2",
+      "source_ref": "9999",
+      "status": "RC",
+      "source_url": "RC_DUAL"
+    },
+    {
+      "system_code": "A15",
+      "material_type": "7",
+      "system_family": "2.5",
+      "ductility_level": "GE",
+      "system_name_tr": "2",
+      "source_ref": "9999",
+      "status": "RC",
+      "source_url": "RC_DUAL"
+    },
+    {
+      "system_code": "A16",
+      "material_type": "3",
+      "system_family": "2",
+      "ductility_level": null,
+      "system_name_tr": "0",
+      "source_ref": "12",
+      "status": "RC",
+      "source_url": "RC_COLUMN_ONLY"
+    },
+    {
+      "system_code": "A21",
+      "material_type": "6",
+      "system_family": "2.5",
+      "ductility_level": "GE",
+      "system_name_tr": "4",
+      "source_ref": "9999",
+      "status": "RC",
+      "source_url": "RC_DUAL"
+    },
+    {
+      "system_code": "A22",
+      "material_type": "5",
+      "system_family": "2.5",
+      "ductility_level": "GE",
+      "system_name_tr": "4",
+      "source_ref": "9999",
+      "status": "RC",
+      "source_url": "RC_DUAL"
+    },
+    {
+      "system_code": "A23",
+      "material_type": "6",
+      "system_family": "2.5",
+      "ductility_level": "GE",
+      "system_name_tr": "6",
+      "source_ref": "9999",
+      "status": "RC",
+      "source_url": "RC_DUAL"
+    },
+    {
+      "system_code": "A24",
+      "material_type": "5",
+      "system_family": "2.5",
+      "ductility_level": "GE",
+      "system_name_tr": "6",
+      "source_ref": "9999",
+      "status": "RC",
+      "source_url": "RC_DUAL"
+    },
+    {
+      "system_code": "A31",
+      "material_type": "4",
+      "system_family": "2.5",
+      "ductility_level": "GE",
+      "system_name_tr": "7",
+      "source_ref": "9999",
+      "status": "RC",
+      "source_url": "RC_FRAME"
+    },
+    {
+      "system_code": "A32",
+      "material_type": "4",
+      "system_family": "2",
+      "ductility_level": "GE",
+      "system_name_tr": "6",
+      "source_ref": "9999",
+      "status": "RC",
+      "source_url": "RC_WALL"
+    },
+    {
+      "system_code": "A33",
+      "material_type": "4",
+      "system_family": "2",
+      "ductility_level": "GE",
+      "system_name_tr": "6",
+      "source_ref": "9999",
+      "status": "RC",
+      "source_url": "RC_DUAL"
+    },
+    {
+      "system_code": "C11",
+      "material_type": "8",
+      "system_family": "3",
+      "ductility_level": "GE",
+      "system_name_tr": "3",
+      "source_ref": "9999",
+      "status": "Steel",
+      "source_url": "STEEL_MRF"
+    },
+    {
+      "system_code": "C12",
+      "material_type": "8",
+      "system_family": "2.5",
+      "ductility_level": "GE",
+      "system_name_tr": "2",
+      "source_ref": "9999",
+      "status": "Steel",
+      "source_url": "STEEL_CBF"
+    },
+    {
+      "system_code": "C13",
+      "material_type": "5",
+      "system_family": "2",
+      "ductility_level": "GE",
+      "system_name_tr": "4",
+      "source_ref": "9999",
+      "status": "Steel",
+      "source_url": "STEEL_CBF"
+    },
+    {
+      "system_code": "C14",
+      "material_type": "8",
+      "system_family": "3",
+      "ductility_level": "GE",
+      "system_name_tr": "2",
+      "source_ref": "9999",
+      "status": "Steel",
+      "source_url": "STEEL_DUAL"
+    },
+    {
+      "system_code": "C15",
+      "material_type": "6",
+      "system_family": "2.5",
+      "ductility_level": "GE",
+      "system_name_tr": "2",
+      "source_ref": "9999",
+      "status": "Steel",
+      "source_url": "STEEL_DUAL"
+    },
+    {
+      "system_code": "C16",
+      "material_type": "4",
+      "system_family": "2",
+      "ductility_level": null,
+      "system_name_tr": "0",
+      "source_ref": "12",
+      "status": "Steel",
+      "source_url": "STEEL_COLUMN_ONLY"
+    },
+    {
+      "system_code": "C21",
+      "material_type": "6",
+      "system_family": "2.5",
+      "ductility_level": "GE",
+      "system_name_tr": "4",
+      "source_ref": "9999",
+      "status": "Steel",
+      "source_url": "STEEL_DUAL"
+    },
+    {
+      "system_code": "C22",
+      "material_type": "5",
+      "system_family": "2",
+      "ductility_level": "GE",
+      "system_name_tr": "4",
+      "source_ref": "9999",
+      "status": "Steel",
+      "source_url": "STEEL_DUAL"
+    },
+    {
+      "system_code": "C31",
+      "material_type": "4",
+      "system_family": "2.5",
+      "ductility_level": "GE",
+      "system_name_tr": "7",
+      "source_ref": "9999",
+      "status": "Steel",
+      "source_url": "STEEL_MRF"
+    },
+    {
+      "system_code": "C32",
+      "material_type": "3",
+      "system_family": "2",
+      "ductility_level": "EQ",
+      "system_name_tr": "8",
+      "source_ref": "9999",
+      "status": "Steel",
+      "source_url": "STEEL_CBF"
+    },
+    {
+      "system_code": "C33",
+      "material_type": "4",
+      "system_family": "2",
+      "ductility_level": "GE",
+      "system_name_tr": "7",
+      "source_ref": "9999",
+      "status": "Steel",
+      "source_url": "STEEL_DUAL"
+    },
+    {
+      "system_code": "■ DTS RULES — Deprem Tasarım Sınıfı (TBDY Tablo 3.2)",
+      "material_type": null,
+      "system_family": null,
+      "ductility_level": null,
+      "system_name_tr": null,
+      "source_ref": null,
+      "status": null,
+      "source_url": null
+    },
+    {
+      "system_code": "BKSGroup",
+      "material_type": "SDS_Min",
+      "system_family": "SDS_Max_Excl",
+      "ductility_level": "DTS_Result",
+      "system_name_tr": "RangeText",
+      "source_ref": "SourceRef",
+      "status": "SourceURL",
+      "source_url": null
+    },
+    {
+      "system_code": "BKS1",
+      "material_type": "0",
+      "system_family": "0.33",
+      "ductility_level": "DTS 4a",
+      "system_name_tr": "SDS < 0.33",
+      "source_ref": "TBDY 2018 Tablo 3.2",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "BKS1",
+      "material_type": "0.33",
+      "system_family": "0.5",
+      "ductility_level": "DTS 3a",
+      "system_name_tr": "0.33 ≤ SDS < 0.50",
+      "source_ref": "TBDY 2018 Tablo 3.2",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "BKS1",
+      "material_type": "0.5",
+      "system_family": "0.75",
+      "ductility_level": "DTS 2a",
+      "system_name_tr": "0.50 ≤ SDS < 0.75",
+      "source_ref": "TBDY 2018 Tablo 3.2",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "BKS1",
+      "material_type": "0.75",
+      "system_family": "999",
+      "ductility_level": "DTS 1a",
+      "system_name_tr": "0.75 ≤ SDS",
+      "source_ref": "TBDY 2018 Tablo 3.2",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "BKS2-BKS3",
+      "material_type": "0",
+      "system_family": "0.33",
+      "ductility_level": "DTS 4",
+      "system_name_tr": "SDS < 0.33",
+      "source_ref": "TBDY 2018 Tablo 3.2",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "BKS2-BKS3",
+      "material_type": "0.33",
+      "system_family": "0.5",
+      "ductility_level": "DTS 3",
+      "system_name_tr": "0.33 ≤ SDS < 0.50",
+      "source_ref": "TBDY 2018 Tablo 3.2",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "BKS2-BKS3",
+      "material_type": "0.5",
+      "system_family": "0.75",
+      "ductility_level": "DTS 2",
+      "system_name_tr": "0.50 ≤ SDS < 0.75",
+      "source_ref": "TBDY 2018 Tablo 3.2",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "BKS2-BKS3",
+      "material_type": "0.75",
+      "system_family": "999",
+      "ductility_level": "DTS 1",
+      "system_name_tr": "0.75 ≤ SDS",
+      "source_ref": "TBDY 2018 Tablo 3.2",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "■ BYS RULES — Bina Yükseklik Sınıfları (TBDY Tablo 3.3)",
+      "material_type": null,
+      "system_family": null,
+      "ductility_level": null,
+      "system_name_tr": null,
+      "source_ref": null,
+      "status": null,
+      "source_url": null
+    },
+    {
+      "system_code": "DTSGroup",
+      "material_type": "HN_Min_Excl",
+      "system_family": "HN_Max_Incl",
+      "ductility_level": "BYS_Result",
+      "system_name_tr": "Note",
+      "source_ref": "SourceRef",
+      "status": "SourceURL",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 1/1a/2/2a",
+      "material_type": "70",
+      "system_family": "999",
+      "ductility_level": "1",
+      "system_name_tr": "IF HN > alt_sınır ve HN ≤ üst_sınır",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 1/1a/2/2a",
+      "material_type": "56",
+      "system_family": "70",
+      "ductility_level": "2",
+      "system_name_tr": "IF HN > alt_sınır ve HN ≤ üst_sınır",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 1/1a/2/2a",
+      "material_type": "42",
+      "system_family": "56",
+      "ductility_level": "3",
+      "system_name_tr": "IF HN > alt_sınır ve HN ≤ üst_sınır",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 1/1a/2/2a",
+      "material_type": "28",
+      "system_family": "42",
+      "ductility_level": "4",
+      "system_name_tr": "IF HN > alt_sınır ve HN ≤ üst_sınır",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 1/1a/2/2a",
+      "material_type": "17.5",
+      "system_family": "28",
+      "ductility_level": "5",
+      "system_name_tr": "IF HN > alt_sınır ve HN ≤ üst_sınır",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 1/1a/2/2a",
+      "material_type": "10.5",
+      "system_family": "17.5",
+      "ductility_level": "6",
+      "system_name_tr": "IF HN > alt_sınır ve HN ≤ üst_sınır",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 1/1a/2/2a",
+      "material_type": "7",
+      "system_family": "10.5",
+      "ductility_level": "7",
+      "system_name_tr": "IF HN > alt_sınır ve HN ≤ üst_sınır",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 1/1a/2/2a",
+      "material_type": "-999",
+      "system_family": "7",
+      "ductility_level": "8",
+      "system_name_tr": "IF HN > alt_sınır ve HN ≤ üst_sınır",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 3/3a",
+      "material_type": "91",
+      "system_family": "999",
+      "ductility_level": "1",
+      "system_name_tr": "IF HN > alt_sınır ve HN ≤ üst_sınır",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 3/3a",
+      "material_type": "70",
+      "system_family": "91",
+      "ductility_level": "2",
+      "system_name_tr": "IF HN > alt_sınır ve HN ≤ üst_sınır",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 3/3a",
+      "material_type": "56",
+      "system_family": "70",
+      "ductility_level": "3",
+      "system_name_tr": "IF HN > alt_sınır ve HN ≤ üst_sınır",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 3/3a",
+      "material_type": "42",
+      "system_family": "56",
+      "ductility_level": "4",
+      "system_name_tr": "IF HN > alt_sınır ve HN ≤ üst_sınır",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 3/3a",
+      "material_type": "28",
+      "system_family": "42",
+      "ductility_level": "5",
+      "system_name_tr": "IF HN > alt_sınır ve HN ≤ üst_sınır",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 3/3a",
+      "material_type": "17.5",
+      "system_family": "28",
+      "ductility_level": "6",
+      "system_name_tr": "IF HN > alt_sınır ve HN ≤ üst_sınır",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 3/3a",
+      "material_type": "10.5",
+      "system_family": "17.5",
+      "ductility_level": "7",
+      "system_name_tr": "IF HN > alt_sınır ve HN ≤ üst_sınır",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 3/3a",
+      "material_type": "-999",
+      "system_family": "10.5",
+      "ductility_level": "8",
+      "system_name_tr": "IF HN > alt_sınır ve HN ≤ üst_sınır",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 4/4a",
+      "material_type": "105",
+      "system_family": "999",
+      "ductility_level": "1",
+      "system_name_tr": "Tabloda yalnız bu aralıklar verilmiştir",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 4/4a",
+      "material_type": "91",
+      "system_family": "105",
+      "ductility_level": "2",
+      "system_name_tr": "Tabloda yalnız bu aralıklar verilmiştir",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 4/4a",
+      "material_type": "56",
+      "system_family": "91",
+      "ductility_level": "3",
+      "system_name_tr": "Tabloda yalnız bu aralıklar verilmiştir",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "DTS 4/4a",
+      "material_type": "-999",
+      "system_family": "10.5",
+      "ductility_level": "8",
+      "system_name_tr": "Tabloda yalnız bu aralıklar verilmiştir",
+      "source_ref": "TBDY 2018 Tablo 3.3",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "■ BUILDING USE — BKS ve Bina Önem Katsayısı (Tablo 3.1)",
+      "material_type": null,
+      "system_family": null,
+      "ductility_level": null,
+      "system_name_tr": null,
+      "source_ref": null,
+      "status": null,
+      "source_url": null
+    },
+    {
+      "system_code": "BuildingUseCode",
+      "material_type": "BuildingUseName_TR",
+      "system_family": "ImportanceFactor_I",
+      "ductility_level": "UseGroup",
+      "system_name_tr": "Examples",
+      "source_ref": "SourceRef",
+      "status": "SourceURL",
+      "source_url": null
+    },
+    {
+      "system_code": "BKS1",
+      "material_type": "Deprem sonrası kullanımı gereken; insanların uzun süreli ve yoğun bulunduğu; değerli eşya saklanan ve tehlikeli madde içeren binalar",
+      "system_family": "1.5",
+      "ductility_level": "CRITICAL",
+      "system_name_tr": "Hastane, itfaiye, haberleşme/ulaşım terminalleri, enerji tesisleri, yönetim binaları, okullar, yurtlar, cezaevleri, müzeler, tehlikeli madde depoları",
+      "source_ref": "TBDY 2018 Tablo 3.1",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "BKS2",
+      "material_type": "İnsanların kısa süreli ve yoğun olarak bulunduğu binalar",
+      "system_family": "1.2",
+      "ductility_level": "ASSEMBLY",
+      "system_name_tr": "Alışveriş merkezi, spor tesisi, sinema, tiyatro, konser salonu, ibadethane",
+      "source_ref": "TBDY 2018 Tablo 3.1",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "BKS3",
+      "material_type": "Diğer binalar",
+      "system_family": "1",
+      "ductility_level": "STANDARD",
+      "system_name_tr": "Konut, işyeri, otel, endüstri yapısı vb.",
+      "source_ref": "TBDY 2018 Tablo 3.1",
+      "status": "https://www.afad.gov.tr/kurumlar/afad.gov.tr/2309/files/TBDY_2018.pdf",
+      "source_url": null
+    },
+    {
+      "system_code": "■ SITE FS — Yerel Zemin Etki Katsayıları Fs (Tablo 2.1)",
+      "material_type": null,
+      "system_family": null,
+      "ductility_level": null,
+      "system_name_tr": null,
+      "source_ref": null,
+      "status": null,
+      "source_url": null
+    },
+    {
+      "system_code": "SiteClass",
+      "material_type": "FS_Ss_0_25",
+      "system_family": "FS_Ss_0_50",
+      "ductility_level": "FS_Ss_0_75",
+      "system_name_tr": "FS_Ss_1_00",
+      "source_ref": "FS_Ss_1_25",
+      "status": "FS_Ss_1_50plus",
+      "source_url": "Notes"
+    },
+    {
+      "system_code": "ZA",
+      "material_type": "0.8",
+      "system_family": "0.8",
+      "ductility_level": "0.8",
+      "system_name_tr": "0.8",
+      "source_ref": "0.8",
+      "status": "0.8",
+      "source_url": "Sabit"
+    },
+    {
+      "system_code": "ZB",
+      "material_type": "0.9",
+      "system_family": "0.9",
+      "ductility_level": "0.9",
+      "system_name_tr": "0.9",
+      "source_ref": "0.9",
+      "status": "0.9",
+      "source_url": "Sabit"
+    },
+    {
+      "system_code": "ZC",
+      "material_type": "1.3",
+      "system_family": "1.3",
+      "ductility_level": "1.2",
+      "system_name_tr": "1.2",
+      "source_ref": "1.2",
+      "status": "1.2",
+      "source_url": "0.75 sonrası sabit 1.2"
+    },
+    {
+      "system_code": "ZD",
+      "material_type": "1.6",
+      "system_family": "1.4",
+      "ductility_level": "1.2",
+      "system_name_tr": "1.1",
+      "source_ref": "1",
+      "status": "1",
+      "source_url": "Doğrusal enterpolasyon uygulanabilir"
+    },
+    {
+      "system_code": "ZE",
+      "material_type": "2.4",
+      "system_family": "1.7",
+      "ductility_level": "1.3",
+      "system_name_tr": "1.1",
+      "source_ref": "0.9",
+      "status": "0.8",
+      "source_url": "Doğrusal enterpolasyon uygulanabilir"
+    },
+    {
+      "system_code": "ZF",
+      "material_type": null,
+      "system_family": null,
+      "ductility_level": null,
+      "system_name_tr": null,
+      "source_ref": null,
+      "status": null,
+      "source_url": "Sahaya özel zemin davranış analizi gerekir"
+    },
+    {
+      "system_code": "■ SITE F1 — Yerel Zemin Etki Katsayıları F1 (Tablo 2.2)",
+      "material_type": null,
+      "system_family": null,
+      "ductility_level": null,
+      "system_name_tr": null,
+      "source_ref": null,
+      "status": null,
+      "source_url": null
+    },
+    {
+      "system_code": "SiteClass",
+      "material_type": "F1_S1_0_10",
+      "system_family": "F1_S1_0_20",
+      "ductility_level": "F1_S1_0_30",
+      "system_name_tr": "F1_S1_0_40",
+      "source_ref": "F1_S1_0_50",
+      "status": "F1_S1_0_60plus",
+      "source_url": "Notes"
+    },
+    {
+      "system_code": "ZA",
+      "material_type": "0.8",
+      "system_family": "0.8",
+      "ductility_level": "0.8",
+      "system_name_tr": "0.8",
+      "source_ref": "0.8",
+      "status": "0.8",
+      "source_url": "Sabit"
+    },
+    {
+      "system_code": "ZB",
+      "material_type": "0.8",
+      "system_family": "0.8",
+      "ductility_level": "0.8",
+      "system_name_tr": "0.8",
+      "source_ref": "0.8",
+      "status": "0.8",
+      "source_url": "Sabit"
+    },
+    {
+      "system_code": "ZC",
+      "material_type": "1.5",
+      "system_family": "1.5",
+      "ductility_level": "1.5",
+      "system_name_tr": "1.5",
+      "source_ref": "1.5",
+      "status": "1.4",
+      "source_url": "0.50 sonrası 1.4'e düşer"
+    },
+    {
+      "system_code": "ZD",
+      "material_type": "2.4",
+      "system_family": "2.2",
+      "ductility_level": "2",
+      "system_name_tr": "1.9",
+      "source_ref": "1.8",
+      "status": "1.7",
+      "source_url": "Doğrusal enterpolasyon uygulanabilir"
+    },
+    {
+      "system_code": "ZE",
+      "material_type": "4.2",
+      "system_family": "3.3",
+      "ductility_level": "2.8",
+      "system_name_tr": "2.4",
+      "source_ref": "2.2",
+      "status": "2",
+      "source_url": "Doğrusal enterpolasyon uygulanabilir"
+    },
+    {
+      "system_code": "ZF",
+      "material_type": null,
+      "system_family": null,
+      "ductility_level": null,
+      "system_name_tr": null,
+      "source_ref": null,
+      "status": null,
+      "source_url": "Sahaya özel zemin davranış analizi gerekir"
+    }
+  ]
+}

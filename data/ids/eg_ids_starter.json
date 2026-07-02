@@ -1,0 +1,511 @@
+{
+  "_source": "EG_ids_starter.xml",
+  "_count": 72,
+  "_aciklama": "IDS starter şablon — yeni IDS üretimi için temel spec listesi",
+  "specs": [
+    {
+      "name": "TR_ProjeNo",
+      "entity": "IfcElement",
+      "property": "ProjeNo",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_ProjeAdi",
+      "entity": "IfcElement",
+      "property": "ProjeAdi",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_ProjeAsamasi",
+      "entity": "IfcElement",
+      "property": "ProjeAsamasi",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_DuvarUDegeri",
+      "entity": "IfcWall",
+      "property": "ThermalTransmittance",
+      "data_type": "NUMBER",
+      "required": "true"
+    },
+    {
+      "name": "TR_DuvarUDegeri",
+      "entity": "IfcWall",
+      "property": "ThermalTransmittance",
+      "data_type": "NUMBER",
+      "required": "true"
+    },
+    {
+      "name": "TR_CatiUDegeri",
+      "entity": "IfcRoof",
+      "property": "ThermalTransmittance",
+      "data_type": "NUMBER",
+      "required": "true"
+    },
+    {
+      "name": "TR_CatiUDegeri",
+      "entity": "IfcRoof",
+      "property": "ThermalTransmittance",
+      "data_type": "NUMBER",
+      "required": "true"
+    },
+    {
+      "name": "TR_Disiplin",
+      "entity": "IfcElement",
+      "property": "Disiplin",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_IFCSurumu",
+      "entity": "IfcElement",
+      "property": "IFCSurumu",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_ModelDurumu",
+      "entity": "IfcElement",
+      "property": "ModelDurumu",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_DuvarREI",
+      "entity": "IfcWall",
+      "property": "FireRating",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_DuvarSesYalitim",
+      "entity": "IfcWall",
+      "property": "AcousticRating",
+      "data_type": "NUMBER",
+      "required": "true"
+    },
+    {
+      "name": "TR_DuvarUDegeri",
+      "entity": "IfcWall",
+      "property": "ThermalTransmittance",
+      "data_type": "NUMBER",
+      "required": "true"
+    },
+    {
+      "name": "TR_DuvarUDegeri",
+      "entity": "IfcWall",
+      "property": "ThermalTransmittance",
+      "data_type": "NUMBER",
+      "required": "true"
+    },
+    {
+      "name": "TR_KapiTipi",
+      "entity": "IfcDoor",
+      "property": "Reference",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_KapiYangınSinifi",
+      "entity": "IfcDoor",
+      "property": "FireRating",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_KapiEngelli",
+      "entity": "IfcDoor",
+      "property": "HandicapAccessible",
+      "data_type": "YESNO",
+      "required": "true"
+    },
+    {
+      "name": "TR_KapiUDegeri",
+      "entity": "IfcDoor",
+      "property": "ThermalTransmittance",
+      "data_type": "NUMBER",
+      "required": "true"
+    },
+    {
+      "name": "TR_KapiSesYalitim",
+      "entity": "IfcDoor",
+      "property": "AcousticRating",
+      "data_type": "NUMBER",
+      "required": "true"
+    },
+    {
+      "name": "TR_PencereTipi",
+      "entity": "IfcWindow",
+      "property": "Reference",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_PencereUDegeri",
+      "entity": "IfcWindow",
+      "property": "ThermalTransmittance",
+      "data_type": "NUMBER",
+      "required": "true"
+    },
+    {
+      "name": "TR_PencereSesYalitim",
+      "entity": "IfcWindow",
+      "property": "AcousticRating",
+      "data_type": "NUMBER",
+      "required": "true"
+    },
+    {
+      "name": "TR_DosemeREI",
+      "entity": "IfcSlab",
+      "property": "FireRating",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_DosemeUDegeri",
+      "entity": "IfcSlab",
+      "property": "ThermalTransmittance",
+      "data_type": "NUMBER",
+      "required": "true"
+    },
+    {
+      "name": "TR_DosemeSesYalitim",
+      "entity": "IfcSlab",
+      "property": "AcousticRating",
+      "data_type": "NUMBER",
+      "required": "true"
+    },
+    {
+      "name": "TR_CatiTipi",
+      "entity": "IfcRoof",
+      "property": "Reference",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_CatiUDegeri",
+      "entity": "IfcRoof",
+      "property": "ThermalTransmittance",
+      "data_type": "NUMBER",
+      "required": "true"
+    },
+    {
+      "name": "TR_CatiUDegeri",
+      "entity": "IfcRoof",
+      "property": "ThermalTransmittance",
+      "data_type": "NUMBER",
+      "required": "true"
+    },
+    {
+      "name": "TR_CatiREI",
+      "entity": "IfcRoof",
+      "property": "FireRating",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_SinifSistemi",
+      "entity": "IfcElement",
+      "property": "SinifSistemi",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_SinifKod1",
+      "entity": "IfcElement",
+      "property": "SinifKod1",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_SinifKod2",
+      "entity": "IfcElement",
+      "property": "SinifKod2",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_SinifKod3",
+      "entity": "IfcElement",
+      "property": "SinifKod3",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_SinifAdi",
+      "entity": "IfcElement",
+      "property": "SinifAdi",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_IsDisEleman",
+      "entity": "IfcWall",
+      "property": "IsExternal",
+      "data_type": "YESNO",
+      "required": "true"
+    },
+    {
+      "name": "TR_IsTasiyici",
+      "entity": "IfcBeam | IfcColumn | IfcSlab | IfcWall",
+      "property": "LoadBearing",
+      "data_type": "YESNO",
+      "required": "true"
+    },
+    {
+      "name": "TR_BES_AnaKod",
+      "entity": "IfcElement",
+      "property": "BESAnaKod",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_BES_AltKod",
+      "entity": "IfcElement",
+      "property": "BESAltKod",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_BES_ElemanKodu",
+      "entity": "IfcElement",
+      "property": "BESElemanKodu",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_BES_ElemanAdi",
+      "entity": "IfcElement",
+      "property": "BESElemanAdi",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_CSB_PozNo",
+      "entity": "IfcElement",
+      "property": "PozNo",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_CSB_PozAnaGrup",
+      "entity": "IfcElement",
+      "property": "PozAnaGrup",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_CSB_PozAltGrup",
+      "entity": "IfcElement",
+      "property": "PozAltGrup",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_CSB_RayicKod",
+      "entity": "IfcElement",
+      "property": "RayicKod",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_CSB_2026_SinifGrupKodu",
+      "entity": "IfcElement",
+      "property": "CSB2026SinifGrupKodu",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_CSB_2026_SinifGrupAdi",
+      "entity": "IfcElement",
+      "property": "CSB2026SinifGrupAdi",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_CSB_2026_BirimMaliyet",
+      "entity": "IfcElement",
+      "property": "CSB2026BirimMaliyet",
+      "data_type": "NUMBER",
+      "required": "true"
+    },
+    {
+      "name": "TR_MahalKodu",
+      "entity": "IfcElement",
+      "property": "MahalKodu | Reference",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_MahalAdi",
+      "entity": "IfcElement",
+      "property": "MahalAdi",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_MahalFonksiyonu",
+      "entity": "IfcElement",
+      "property": "Category | MahalFonksiyonu",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_BlokKodu",
+      "entity": "IfcElement",
+      "property": "BlokKodu",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_KatKodu",
+      "entity": "IfcElement",
+      "property": "KatKodu",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_ZonKodu",
+      "entity": "IfcElement",
+      "property": "ZonKodu",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_MetrajKurali",
+      "entity": "IfcElement",
+      "property": "MetrajKurali",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_MetrajBirim",
+      "entity": "IfcElement",
+      "property": "MetrajBirim",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_MetrajCarpan",
+      "entity": "IfcElement",
+      "property": "MetrajCarpan",
+      "data_type": "NUMBER",
+      "required": "true"
+    },
+    {
+      "name": "TR_MetrajDahil",
+      "entity": "IfcElement",
+      "property": "MetrajDahil",
+      "data_type": "YESNO",
+      "required": "true"
+    },
+    {
+      "name": "TR_QA_DosyaAdiKontrol",
+      "entity": "IfcElement",
+      "property": "DosyaAdiKontrol",
+      "data_type": "YESNO",
+      "required": "true"
+    },
+    {
+      "name": "TR_QA_YerelKonumKontrol",
+      "entity": "IfcElement",
+      "property": "YerelKonumKontrol",
+      "data_type": "YESNO",
+      "required": "true"
+    },
+    {
+      "name": "TR_QA_KatAdlandirmaKontrol",
+      "entity": "IfcElement",
+      "property": "KatAdlandirmaKontrol",
+      "data_type": "YESNO",
+      "required": "true"
+    },
+    {
+      "name": "TR_QA_DogruIfcTur",
+      "entity": "IfcElement",
+      "property": "DogruIfcTur",
+      "data_type": "YESNO",
+      "required": "true"
+    },
+    {
+      "name": "TR_QA_AdlandirmaKontrol",
+      "entity": "IfcElement",
+      "property": "AdlandirmaKontrol",
+      "data_type": "YESNO",
+      "required": "true"
+    },
+    {
+      "name": "TR_QA_SiniflandirmaKontrol",
+      "entity": "IfcElement",
+      "property": "SiniflandirmaKontrol",
+      "data_type": "YESNO",
+      "required": "true"
+    },
+    {
+      "name": "TR_QA_MalzemeAtamasi",
+      "entity": "IfcElement",
+      "property": "MalzemeAtamasi",
+      "data_type": "YESNO",
+      "required": "true"
+    },
+    {
+      "name": "TR_QA_CakismaKopyaKontrol",
+      "entity": "IfcElement",
+      "property": "CakismaKopyaKontrol",
+      "data_type": "YESNO",
+      "required": "true"
+    },
+    {
+      "name": "TR_QA_LoadBearing",
+      "entity": "IfcElement",
+      "property": "LoadBearingKontrol",
+      "data_type": "YESNO",
+      "required": "true"
+    },
+    {
+      "name": "TR_QA_IsExternal",
+      "entity": "IfcElement",
+      "property": "IsExternalKontrol",
+      "data_type": "YESNO",
+      "required": "true"
+    },
+    {
+      "name": "TR_QA_FireRating",
+      "entity": "IfcBeam | IfcColumn | IfcElement",
+      "property": "FireRating | FireRatingKontrol",
+      "data_type": "YESNO",
+      "required": "true"
+    },
+    {
+      "name": "TR_QA_TeslimDurumu",
+      "entity": "IfcElement",
+      "property": "TeslimDurumu",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_QA_KontrolEden",
+      "entity": "IfcElement",
+      "property": "KontrolEden",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_QA_KontrolTarihi",
+      "entity": "IfcElement",
+      "property": "KontrolTarihi",
+      "data_type": "TEXT",
+      "required": "true"
+    },
+    {
+      "name": "TR_QA_Not",
+      "entity": "IfcElement",
+      "property": "QANot",
+      "data_type": "MULTILINETEXT",
+      "required": "true"
+    }
+  ]
+}

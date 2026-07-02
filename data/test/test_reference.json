@@ -1,0 +1,23 @@
+{
+  "_comment": "EGBIMOTO_TestModel.rvt için referans değerler. Manifest doğrulamasında kullanılır.",
+  "model": "EGBIMOTO_TestModel.rvt",
+  "version": "1.0",
+  "expected": {
+    "duvar_sayisi": 12,
+    "duvar_alan_m2": 287.4,
+    "duvar_hacim_m3": 57.48,
+    "kolon_sayisi": 9,
+    "kolon_hacim_m3": 12.96,
+    "doseme_alan_m2": 360.0,
+    "doseme_hacim_m3": 72.0,
+    "oda_toplam": 6,
+    "oda_yerlestirilmemis": 1,
+    "donati_sayisi": 18,
+    "poz_esleme_basari_orani": 1.0
+  },
+  "tolerances": {
+    "hacim_yuzde": 0.5,
+    "alan_yuzde": 0.5,
+    "sayi": 0
+  }
+}

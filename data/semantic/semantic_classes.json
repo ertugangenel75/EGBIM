@@ -1,0 +1,213 @@
+{
+  "_comment": "categoryMap: OST BIC → TR canonical (CanonicalClassResolver için). canonicalV3Map: OST BIC → canonical_classes_v3 key (poz/WBS/IFC pipeline için). trToV3Map: TR canonical → v3 key köprüsü.",
+  "categoryMap": {
+    "OST_Walls": "duvar",
+    "OST_StructuralWalls": "betonarme_duvar",
+    "OST_Floors": "doseme",
+    "OST_Ceilings": "tavan",
+    "OST_Roofs": "cerceve_catisi",
+    "OST_Doors": "kapi",
+    "OST_Windows": "pencere",
+    "OST_Rooms": "oda",
+    "OST_Stairs": "merdiven",
+    "OST_Ramps": "rampa",
+    "OST_StructuralColumns": "betonarme_kolon",
+    "OST_StructuralFraming": "betonarme_kiri",
+    "OST_StructuralFoundation": "temel",
+    "OST_DuctCurves": "havalandirma_kanali",
+    "OST_FlexDuctCurves": "havalandirma_kanali",
+    "OST_PipeCurves": "boru",
+    "OST_FlexPipeCurves": "boru",
+    "OST_CableTray": "kablo_tavasi",
+    "OST_Conduit": "boru_iletkeni",
+    "OST_MechanicalEquipment": "mekanik_ekipman",
+    "OST_ElectricalEquipment": "elektrik_ekipman",
+    "OST_LightingFixtures": "aydinlatma",
+    "OST_PlumbingFixtures": "sihhi_tesisat",
+    "OST_Rebar": "donati",
+    "OST_AreaRein": "donati",
+    "OST_Topography": "topografya",
+    "OST_GenericModel": "genel_model",
+    "OST_Columns": "mimar_kolon",
+    "OST_Beams": "kiri"
+  },
+  "typeRules": [
+    {
+      "keyword": "Perde",
+      "class": "betonarme_duvar"
+    },
+    {
+      "keyword": "Shear",
+      "class": "betonarme_duvar"
+    },
+    {
+      "keyword": "Kagir",
+      "class": "kagir_duvar"
+    },
+    {
+      "keyword": "Gazbeton",
+      "class": "gazbeton_duvar"
+    },
+    {
+      "keyword": "Briket",
+      "class": "briket_duvar"
+    },
+    {
+      "keyword": "Tuğla",
+      "class": "tugla_duvar"
+    },
+    {
+      "keyword": "Bims",
+      "class": "bims_duvar"
+    },
+    {
+      "keyword": "Mantolama",
+      "class": "mantolama"
+    },
+    {
+      "keyword": "Yalıtım",
+      "class": "yalitim"
+    },
+    {
+      "keyword": "Döşeme",
+      "class": "doseme"
+    },
+    {
+      "keyword": "Plak",
+      "class": "doseme"
+    },
+    {
+      "keyword": "Nervürlü",
+      "class": "nervurlu_doseme"
+    },
+    {
+      "keyword": "Asmolen",
+      "class": "asmolen_doseme"
+    },
+    {
+      "keyword": "Çift Yönlü",
+      "class": "capraz_doseme"
+    },
+    {
+      "keyword": "Temel",
+      "class": "temel"
+    },
+    {
+      "keyword": "Radye",
+      "class": "radye_temel"
+    },
+    {
+      "keyword": "Kazık",
+      "class": "kazik_temel"
+    },
+    {
+      "keyword": "Sürekli",
+      "class": "surekli_temel"
+    },
+    {
+      "keyword": "Kolonlu",
+      "class": "betonarme_kolon"
+    },
+    {
+      "keyword": "Betonarme",
+      "class": "betonarme"
+    },
+    {
+      "keyword": "Kiriş",
+      "class": "betonarme_kiri"
+    },
+    {
+      "keyword": "Konsol",
+      "class": "konsol"
+    },
+    {
+      "keyword": "Merdiven",
+      "class": "merdiven"
+    }
+  ],
+  "disciplineMap": {
+    "OST_Walls": "Mimari",
+    "OST_Doors": "Mimari",
+    "OST_Windows": "Mimari",
+    "OST_Rooms": "Mimari",
+    "OST_Floors": "Mimari",
+    "OST_Ceilings": "Mimari",
+    "OST_Stairs": "Mimari",
+    "OST_Roofs": "Mimari",
+    "OST_StructuralColumns": "Yapısal",
+    "OST_StructuralWalls": "Yapısal",
+    "OST_StructuralFraming": "Yapısal",
+    "OST_StructuralFoundation": "Yapısal",
+    "OST_Rebar": "Yapısal",
+    "OST_AreaRein": "Yapısal",
+    "OST_DuctCurves": "MEP",
+    "OST_FlexDuctCurves": "MEP",
+    "OST_PipeCurves": "MEP",
+    "OST_FlexPipeCurves": "MEP",
+    "OST_CableTray": "MEP",
+    "OST_Conduit": "MEP",
+    "OST_MechanicalEquipment": "MEP",
+    "OST_ElectricalEquipment": "MEP",
+    "OST_LightingFixtures": "MEP",
+    "OST_PlumbingFixtures": "MEP"
+  },
+  "canonicalV3Map": {
+    "OST_Walls": "MIM_WALL",
+    "OST_StructuralWalls": "STA_RC_WALL",
+    "OST_Floors": "STA_RC_SLAB",
+    "OST_Ceilings": "MIM_CEILING",
+    "OST_Roofs": "MIM_ROOF",
+    "OST_Doors": "MIM_DOOR_WINDOW",
+    "OST_Windows": "MIM_DOOR_WINDOW",
+    "OST_Rooms": "MIM_MISC",
+    "OST_Stairs": "MIM_MISC",
+    "OST_Ramps": "MIM_MISC",
+    "OST_StructuralColumns": "STA_RC_COLUMN",
+    "OST_StructuralFraming": "STA_RC_BEAM",
+    "OST_StructuralFoundation": "STA_FOUNDATION_SLAB",
+    "OST_DuctCurves": "MEK_DUCT",
+    "OST_FlexDuctCurves": "MEK_DUCT",
+    "OST_PipeCurves": "MEK_PIPE",
+    "OST_FlexPipeCurves": "MEK_PIPE",
+    "OST_CableTray": "ELK_CABLE",
+    "OST_Conduit": "MEP_PIPE",
+    "OST_MechanicalEquipment": "MEK_EQUIPMENT",
+    "OST_ElectricalEquipment": "ELK_PANEL",
+    "OST_LightingFixtures": "ELK_LIGHTING",
+    "OST_PlumbingFixtures": "MEP_PIPE",
+    "OST_Rebar": "STA_REBAR",
+    "OST_AreaRein": "STA_REBAR",
+    "OST_Topography": "ALT_EARTHWORKS",
+    "OST_GenericModel": "MIM_GENERIC",
+    "OST_Columns": "MIM_MISC",
+    "OST_Beams": "STA_RC_BEAM"
+  },
+  "trToV3Map": {
+    "betonarme_kolon": "STA_RC_COLUMN",
+    "betonarme_kiri": "STA_RC_BEAM",
+    "kiri": "STA_RC_BEAM",
+    "betonarme_duvar": "STA_RC_WALL",
+    "doseme": "STA_RC_SLAB",
+    "temel": "STA_FOUNDATION_SLAB",
+    "donati": "STA_REBAR",
+    "duvar": "MIM_WALL",
+    "kapi": "MIM_DOOR_WINDOW",
+    "pencere": "MIM_DOOR_WINDOW",
+    "tavan": "MIM_CEILING",
+    "cerceve_catisi": "MIM_ROOF",
+    "merdiven": "MIM_MISC",
+    "rampa": "MIM_MISC",
+    "mimar_kolon": "MIM_MISC",
+    "oda": "MIM_MISC",
+    "genel_model": "MIM_GENERIC",
+    "topografya": "ALT_EARTHWORKS",
+    "havalandirma_kanali": "MEK_DUCT",
+    "boru": "MEK_PIPE",
+    "boru_iletkeni": "MEP_PIPE",
+    "kablo_tavasi": "ELK_CABLE",
+    "mekanik_ekipman": "MEK_EQUIPMENT",
+    "elektrik_ekipman": "ELK_PANEL",
+    "aydinlatma": "ELK_LIGHTING",
+    "sihhi_tesisat": "MEP_PIPE"
+  }
+}

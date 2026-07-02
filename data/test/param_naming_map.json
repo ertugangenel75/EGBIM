@@ -1,0 +1,2799 @@
+{
+  "_source": "EG_PARAM_MATRIX_V3 — 04_NAMING_MAP",
+  "_count": 399,
+  "mappings": [
+    {
+      "legacy_param": "TR_YangAcilIsikVarMi",
+      "v2_param": "TR_MIM_YangAcilIsikVarMi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangBinaYuksKat",
+      "v2_param": "TR_MIM_YangBinaYuksKat",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangDumKontrolSis",
+      "v2_param": "TR_MIM_YangDumKontrolSis",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangDumTasBarieri",
+      "v2_param": "TR_MIM_YangDumTasBarieri",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangDuvarDirenc",
+      "v2_param": "TR_MIM_YangDuvarDirenc",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangHidrantVarMi",
+      "v2_param": "TR_MIM_YangHidrantVarMi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangIhbarSistemi",
+      "v2_param": "TR_MIM_YangIhbarSistemi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangKacinmaYolu",
+      "v2_param": "TR_MIM_YangKacinmaYolu",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangKacisKorMesafe",
+      "v2_param": "TR_MIM_YangKacisKorMesafe",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangKapiSinifi",
+      "v2_param": "TR_MIM_YangKapiSinifi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangKullanimSinifi",
+      "v2_param": "TR_MIM_YangKullanimSinifi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangMerdiven",
+      "v2_param": "TR_MIM_YangMerdiven",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangMerdivenGenislik",
+      "v2_param": "TR_MIM_YangMerdivenGenislik",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangSiginmaAlani",
+      "v2_param": "TR_MIM_YangSiginmaAlani",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangSigortaZonNo",
+      "v2_param": "TR_MIM_YangSigortaZonNo",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangSprinklerTipi",
+      "v2_param": "TR_MIM_YangSprinklerTipi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangSprinklerVarMi",
+      "v2_param": "TR_MIM_YangSprinklerVarMi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangTehlikeSinifi",
+      "v2_param": "TR_MIM_YangTehlikeSinifi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangYapiMalSinifi",
+      "v2_param": "TR_MIM_YangYapiMalSinifi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YangYonlendirmeVarMi",
+      "v2_param": "TR_MIM_YangYonlendirmeVarMi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DepremBinaDPS",
+      "v2_param": "TR_STA_DepremBinaDPS",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DepremBolgesi",
+      "v2_param": "TR_STA_DepremBolgesi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DepremGuclenDurumu",
+      "v2_param": "TR_STA_DepremGuclenDurumu",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DepremIzolasyonVarMi",
+      "v2_param": "TR_STA_DepremIzolasyonVarMi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DepremKullanim",
+      "v2_param": "TR_STA_DepremKullanim",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DepremPGA",
+      "v2_param": "TR_STA_DepremPGA",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DepremPerdeSistem",
+      "v2_param": "TR_STA_DepremPerdeSistem",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DepremS1",
+      "v2_param": "TR_STA_DepremS1",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DepremSismikAnaliz",
+      "v2_param": "TR_STA_DepremSismikAnaliz",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DepremSs",
+      "v2_param": "TR_STA_DepremSs",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DepremTasiyiciSis",
+      "v2_param": "TR_STA_DepremTasiyiciSis",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DepremYerTipi",
+      "v2_param": "TR_STA_DepremYerTipi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_EngAsansorVarMi",
+      "v2_param": "TR_MIM_EngAsansorVarMi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_EngBrailleTabela",
+      "v2_param": "TR_MIM_EngBrailleTabela",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_EngGecisGenislikKoridor",
+      "v2_param": "TR_MIM_EngGecisGenislikKoridor",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_EngHissedilebilirYuzey",
+      "v2_param": "TR_MIM_EngHissedilebilirYuzey",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_EngKapiGenislik",
+      "v2_param": "TR_MIM_EngKapiGenislik",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_EngOtoparkVarMi",
+      "v2_param": "TR_MIM_EngOtoparkVarMi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_EngRampaEgimi",
+      "v2_param": "TR_MIM_EngRampaEgimi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_EngRampaVarMi",
+      "v2_param": "TR_MIM_EngRampaVarMi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_EngSertifikaDurumu",
+      "v2_param": "TR_MIM_EngSertifikaDurumu",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_EngWCVarMi",
+      "v2_param": "TR_MIM_EngWCVarMi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BepTrRaporNo",
+      "v2_param": "TR_MIM_BepTrRaporNo",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_CO2Emisyon",
+      "v2_param": "TR_MIM_CO2Emisyon",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_CatiUDegeri",
+      "v2_param": "TR_MIM_CatiUDegeri",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_CercevePencereUw",
+      "v2_param": "TR_MIM_CercevePencereUw",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DuvarUDegeri",
+      "v2_param": "TR_MIM_DuvarUDegeri",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_EnerjiSinifi",
+      "v2_param": "TR_MIM_EnerjiSinifi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_HavalandirmaSistemi",
+      "v2_param": "TR_MIM_HavalandirmaSistemi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_IklimBolgesi",
+      "v2_param": "TR_MIM_IklimBolgesi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_IsitmaSistemi",
+      "v2_param": "TR_MIM_IsitmaSistemi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_PrimaryEnerjiTuketim",
+      "v2_param": "TR_MIM_PrimaryEnerjiTuketim",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_SogutmaSistemi",
+      "v2_param": "TR_MIM_SogutmaSistemi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YenilenebilirEnerji",
+      "v2_param": "TR_MIM_YenilenebilirEnerji",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ZeminKatUDegeri",
+      "v2_param": "TR_MIM_ZeminKatUDegeri",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DuvarDisKaplama",
+      "v2_param": "TR_MIM_DuvarDisKaplama",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DuvarIcKaplama",
+      "v2_param": "TR_MIM_DuvarIcKaplama",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DuvarKalinligi",
+      "v2_param": "TR_MIM_DuvarKalinligi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DuvarPozNo",
+      "v2_param": "TR_MIM_DuvarPozNo",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DuvarREI",
+      "v2_param": "TR_MIM_DuvarREI",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DuvarSesYalitim",
+      "v2_param": "TR_MIM_DuvarSesYalitim",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DuvarTipi",
+      "v2_param": "TR_MIM_DuvarTipi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DuvarYalitimTipi",
+      "v2_param": "TR_MIM_DuvarYalitimTipi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DuvarYapimTuru",
+      "v2_param": "TR_MIM_DuvarYapimTuru",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_KapiAcilisYonu",
+      "v2_param": "TR_MIM_KapiAcilisYonu",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_KapiEngelli",
+      "v2_param": "TR_MIM_KapiEngelli",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_KapiGenislik",
+      "v2_param": "TR_MIM_KapiGenislik",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_KapiKilitTipi",
+      "v2_param": "TR_MIM_KapiKilitTipi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_KapiPanikBar",
+      "v2_param": "TR_MIM_KapiPanikBar",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_KapiPozNo",
+      "v2_param": "TR_MIM_KapiPozNo",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_KapiSesYalitim",
+      "v2_param": "TR_MIM_KapiSesYalitim",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_KapiTipi",
+      "v2_param": "TR_MIM_KapiTipi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_KapiUDegeri",
+      "v2_param": "TR_MIM_KapiUDegeri",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_KapiUretici",
+      "v2_param": "TR_MIM_KapiUretici",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_KapiYangınSinifi",
+      "v2_param": "TR_MIM_KapiYangınSinifi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_KapiYukseklik",
+      "v2_param": "TR_MIM_KapiYukseklik",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_PencereAcilmaTipi",
+      "v2_param": "TR_MIM_PencereAcilmaTipi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_PencereCamTipi",
+      "v2_param": "TR_MIM_PencereCamTipi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_PencereCerceveSistemi",
+      "v2_param": "TR_MIM_PencereCerceveSistemi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_PencereEmniyet",
+      "v2_param": "TR_MIM_PencereEmniyet",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_PencereGenislik",
+      "v2_param": "TR_MIM_PencereGenislik",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_PencerePozNo",
+      "v2_param": "TR_MIM_PencerePozNo",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_PencereSHGC",
+      "v2_param": "TR_MIM_PencereSHGC",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_PencereSesYalitim",
+      "v2_param": "TR_MIM_PencereSesYalitim",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_PencereTipi",
+      "v2_param": "TR_MIM_PencereTipi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_PencereUDegeri",
+      "v2_param": "TR_MIM_PencereUDegeri",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_PencereUretici",
+      "v2_param": "TR_MIM_PencereUretici",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_PencereYukseklik",
+      "v2_param": "TR_MIM_PencereYukseklik",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DosemeIsıYalitim",
+      "v2_param": "TR_MIM_DosemeIsıYalitim",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DosemeKalinligi",
+      "v2_param": "TR_MIM_DosemeKalinligi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DosemeKaplama",
+      "v2_param": "TR_MIM_DosemeKaplama",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DosemePozNo",
+      "v2_param": "TR_MIM_DosemePozNo",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DosemeREI",
+      "v2_param": "TR_MIM_DosemeREI",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DosemeSesYalitim",
+      "v2_param": "TR_MIM_DosemeSesYalitim",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DosemeSuYalitim",
+      "v2_param": "TR_MIM_DosemeSuYalitim",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DosemeTipi",
+      "v2_param": "TR_MIM_DosemeTipi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DosemeUDegeri",
+      "v2_param": "TR_MIM_DosemeUDegeri",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DosemeYukKapasitesi",
+      "v2_param": "TR_MIM_DosemeYukKapasitesi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_CatiEgimi",
+      "v2_param": "TR_MIM_CatiEgimi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_CatiIsıYalitim",
+      "v2_param": "TR_MIM_CatiIsıYalitim",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_CatiKaplama",
+      "v2_param": "TR_MIM_CatiKaplama",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_CatiPozNo",
+      "v2_param": "TR_MIM_CatiPozNo",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_CatiREI",
+      "v2_param": "TR_MIM_CatiREI",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_CatiSuYalitim",
+      "v2_param": "TR_MIM_CatiSuYalitim",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_CatiTipi",
+      "v2_param": "TR_MIM_CatiTipi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_AnalizYontemi",
+      "v2_param": "TR_STA_AnalizYontemi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BetonSinifi_Proje",
+      "v2_param": "TR_STA_BetonSinifi_Proje",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_CevreEtkiSinifi",
+      "v2_param": "TR_STA_CevreEtkiSinifi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_DonatiCeligiSinifi_Proje",
+      "v2_param": "TR_STA_DonatiCeligiSinifi_Proje",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_HesapRaporNo",
+      "v2_param": "TR_STA_HesapRaporNo",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_RevizyonStatik",
+      "v2_param": "TR_STA_RevizyonStatik",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_StatikModelVersiyonu",
+      "v2_param": "TR_STA_StatikModelVersiyonu",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_TS500_StandartSurum",
+      "v2_param": "TR_STA_TS500_StandartSurum",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YapiTasiyiciSistemSinifi",
+      "v2_param": "TR_STA_YapiTasiyiciSistemSinifi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_BetonSinifi",
+      "v2_param": "TR_STA_BetonSinifi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_DonatiSinifi",
+      "v2_param": "TR_STA_DonatiSinifi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_DosemeKalinligi",
+      "v2_param": "TR_STA_DosemeKalinligi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_ElemanKodu",
+      "v2_param": "TR_STA_ElemanKodu",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_ElemanTipi",
+      "v2_param": "TR_STA_ElemanTipi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_ImalatDurumu",
+      "v2_param": "TR_STA_ImalatDurumu",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_KesitGenislik",
+      "v2_param": "TR_STA_KesitGenislik",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_KesitYukseklik",
+      "v2_param": "TR_STA_KesitYukseklik",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_NominalBetonOrtusu",
+      "v2_param": "TR_STA_NominalBetonOrtusu",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_PerdeKalinligi",
+      "v2_param": "TR_STA_PerdeKalinligi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_PrecastMi",
+      "v2_param": "TR_STA_PrecastMi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_TasiyiciSistemAltTuru",
+      "v2_param": "TR_STA_TasiyiciSistemAltTuru",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_TemelTipi",
+      "v2_param": "TR_STA_TemelTipi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_AnaDonatiAlt",
+      "v2_param": "TR_STA_AnaDonatiAlt",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_AnaDonatiUst",
+      "v2_param": "TR_STA_AnaDonatiUst",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_AnkrajBoyu",
+      "v2_param": "TR_STA_AnkrajBoyu",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_DonatiNotu",
+      "v2_param": "TR_STA_DonatiNotu",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_EkBoyu",
+      "v2_param": "TR_STA_EkBoyu",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_EtriyeAraligi",
+      "v2_param": "TR_STA_EtriyeAraligi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_EtriyeCapi",
+      "v2_param": "TR_STA_EtriyeCapi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_FilletoVarMi",
+      "v2_param": "TR_STA_FilletoVarMi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_GovdeDonatisi",
+      "v2_param": "TR_STA_GovdeDonatisi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_PasPayiKontrol",
+      "v2_param": "TR_STA_PasPayiKontrol",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_PilyeVarMi",
+      "v2_param": "TR_STA_PilyeVarMi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_SiklastirmaAraligi",
+      "v2_param": "TR_STA_SiklastirmaAraligi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_SiklastirmaBolgesiVarMi",
+      "v2_param": "TR_STA_SiklastirmaBolgesiVarMi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_Aciklama",
+      "v2_param": "TR_STA_Aciklama",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_HesapModelID",
+      "v2_param": "TR_STA_HesapModelID",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_IFCExportSinifi",
+      "v2_param": "TR_STA_IFCExportSinifi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_KontrolEden",
+      "v2_param": "TR_STA_KontrolEden",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_KontrolTarihi",
+      "v2_param": "TR_STA_KontrolTarihi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_OnayTarihi",
+      "v2_param": "TR_STA_OnayTarihi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_Onaylayan",
+      "v2_param": "TR_STA_Onaylayan",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_RevizyonGerekiyorMu",
+      "v2_param": "TR_STA_RevizyonGerekiyorMu",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_TBDY_UyumDurumu",
+      "v2_param": "TR_STA_TBDY_UyumDurumu",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_BA_TS500_KontrolDurumu",
+      "v2_param": "TR_STA_TS500_KontrolDurumu",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_HVAC_KanalMalzeme",
+      "v2_param": "TR_MEK_HVAC_KanalMalzeme",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_ClashDurumu",
+      "v2_param": "TR_MEK_ClashDurumu",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_ClashTespitTarihi",
+      "v2_param": "TR_MEK_ClashTespitTarihi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_ElkMuhendis",
+      "v2_param": "TR_ELK_Muhendis",
+      "discipline": "Elektrik",
+      "naming_rule": "TR_ELK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_ElkOdaNo",
+      "v2_param": "TR_ELK_OdaNo",
+      "discipline": "Elektrik",
+      "naming_rule": "TR_ELK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_HesapRaporNo",
+      "v2_param": "TR_MEK_HesapRaporNo",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_IFCSurumu",
+      "v2_param": "TR_MEK_IFCSurumu",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_KoordinasyonDurumu",
+      "v2_param": "TR_MEK_KoordinasyonDurumu",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_MekMuhendis",
+      "v2_param": "TR_MEK_Muhendis",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_MekOdaNo",
+      "v2_param": "TR_MEK_OdaNo",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_ModelVersiyonu",
+      "v2_param": "TR_MEK_ModelVersiyonu",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_HVAC_BasıncKaybi",
+      "v2_param": "TR_MEK_HVAC_BasıncKaybi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_HVAC_DumDamperVarMi",
+      "v2_param": "TR_MEK_HVAC_DumDamperVarMi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_HVAC_GurultuSeviyesi",
+      "v2_param": "TR_MEK_HVAC_GurultuSeviyesi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_HVAC_HavaDebisi",
+      "v2_param": "TR_MEK_HVAC_HavaDebisi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_HVAC_HavaHizi",
+      "v2_param": "TR_MEK_HVAC_HavaHizi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_HVAC_KanalTipi",
+      "v2_param": "TR_MEK_HVAC_KanalTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_HVAC_KapalıDevreMi",
+      "v2_param": "TR_MEK_HVAC_KapalıDevreMi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_HVAC_SistemAdi",
+      "v2_param": "TR_MEK_HVAC_SistemAdi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_HVAC_SistemTipi",
+      "v2_param": "TR_MEK_HVAC_SistemTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_HVAC_YalitimTipi",
+      "v2_param": "TR_MEK_HVAC_YalitimTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_HVAC_YangınDamperVarMi",
+      "v2_param": "TR_MEK_HVAC_YangınDamperVarMi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ISI_BasincSinifi",
+      "v2_param": "TR_MEK_ISI_BasincSinifi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ISI_BorCap",
+      "v2_param": "TR_MEK_ISI_BorCap",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ISI_BorMalzeme",
+      "v2_param": "TR_MEK_ISI_BorMalzeme",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ISI_DonusScakligi",
+      "v2_param": "TR_MEK_ISI_DonusScakligi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ISI_GirisScakligi",
+      "v2_param": "TR_MEK_ISI_GirisScakligi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ISI_IsıtmaDebi",
+      "v2_param": "TR_MEK_ISI_IsıtmaDebi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ISI_KazanTipi",
+      "v2_param": "TR_MEK_ISI_KazanTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ISI_SistemAdi",
+      "v2_param": "TR_MEK_ISI_SistemAdi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ISI_SistemTipi",
+      "v2_param": "TR_MEK_ISI_SistemTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ISI_SogutmaDebi",
+      "v2_param": "TR_MEK_ISI_SogutmaDebi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ISI_YalitimTipi",
+      "v2_param": "TR_MEK_ISI_YalitimTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_SHT_BasincSinifi",
+      "v2_param": "TR_MEK_SHT_BasincSinifi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_SHT_BorCap",
+      "v2_param": "TR_MEK_SHT_BorCap",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_SHT_BorMalzeme",
+      "v2_param": "TR_MEK_SHT_BorMalzeme",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_SHT_DepoHacmi",
+      "v2_param": "TR_MEK_SHT_DepoHacmi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_SHT_EgimYuzde",
+      "v2_param": "TR_MEK_SHT_EgimYuzde",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_SHT_HidroforVarMi",
+      "v2_param": "TR_MEK_SHT_HidroforVarMi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_SHT_SicakSuSistemi",
+      "v2_param": "TR_MEK_SHT_SicakSuSistemi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_SHT_SistemAdi",
+      "v2_param": "TR_MEK_SHT_SistemAdi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_SHT_SistemTipi",
+      "v2_param": "TR_MEK_SHT_SistemTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_SHT_YalitimTipi",
+      "v2_param": "TR_MEK_SHT_YalitimTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YAN_BorCap",
+      "v2_param": "TR_MEK_YAN_BorCap",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YAN_BorMalzeme",
+      "v2_param": "TR_MEK_YAN_BorMalzeme",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YAN_HazardSinifi",
+      "v2_param": "TR_MEK_YAN_HazardSinifi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YAN_HidrantTipi",
+      "v2_param": "TR_MEK_YAN_HidrantTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YAN_ItfaiyeBaglantisi",
+      "v2_param": "TR_MEK_YAN_ItfaiyeBaglantisi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YAN_KosumaDebi",
+      "v2_param": "TR_MEK_YAN_KosumaDebi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YAN_SistemAdi",
+      "v2_param": "TR_MEK_YAN_SistemAdi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YAN_SprinklerBasinc",
+      "v2_param": "TR_MEK_YAN_SprinklerBasinc",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YAN_SprinklerDebi",
+      "v2_param": "TR_MEK_YAN_SprinklerDebi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_YAN_SprinklerTipi",
+      "v2_param": "TR_MEK_YAN_SprinklerTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ZA_CihazAdi",
+      "v2_param": "TR_ELK_ZA_CihazAdi",
+      "discipline": "Elektrik",
+      "naming_rule": "TR_ELK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ZA_GucTuketimi",
+      "v2_param": "TR_ELK_ZA_GucTuketimi",
+      "discipline": "Elektrik",
+      "naming_rule": "TR_ELK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ZA_IPAdresi",
+      "v2_param": "TR_ELK_ZA_IPAdresi",
+      "discipline": "Elektrik",
+      "naming_rule": "TR_ELK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ZA_KableTipi",
+      "v2_param": "TR_ELK_ZA_KableTipi",
+      "discipline": "Elektrik",
+      "naming_rule": "TR_ELK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ZA_POEVarMi",
+      "v2_param": "TR_ELK_ZA_POEVarMi",
+      "discipline": "Elektrik",
+      "naming_rule": "TR_ELK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ZA_SistemAdi",
+      "v2_param": "TR_ELK_ZA_SistemAdi",
+      "discipline": "Elektrik",
+      "naming_rule": "TR_ELK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ZA_SistemTipi",
+      "v2_param": "TR_ELK_ZA_SistemTipi",
+      "discipline": "Elektrik",
+      "naming_rule": "TR_ELK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ZA_ZonNo",
+      "v2_param": "TR_ELK_ZA_ZonNo",
+      "discipline": "Elektrik",
+      "naming_rule": "TR_ELK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_Aciklama",
+      "v2_param": "TR_MEK_Aciklama",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_ClashCozulduMu",
+      "v2_param": "TR_MEK_ClashCozulduMu",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_HesapModelID",
+      "v2_param": "TR_MEK_HesapModelID",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_IFCExportSinifi",
+      "v2_param": "TR_MEK_IFCExportSinifi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_KontrolDurumu",
+      "v2_param": "TR_MEK_KontrolDurumu",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_KontrolEden",
+      "v2_param": "TR_MEK_KontrolEden",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_KontrolTarihi",
+      "v2_param": "TR_MEK_KontrolTarihi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_OnayTarihi",
+      "v2_param": "TR_MEK_OnayTarihi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_Onaylayan",
+      "v2_param": "TR_MEK_Onaylayan",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_RevizyonGerekiyorMu",
+      "v2_param": "TR_MEK_RevizyonGerekiyorMu",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_Birim",
+      "v2_param": "TR_MEK_Birim",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_BirimFiyat",
+      "v2_param": "TR_MEK_BirimFiyat",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_Miktar",
+      "v2_param": "TR_MEK_Miktar",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_PozAdi",
+      "v2_param": "TR_MEK_PozAdi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_PozNo",
+      "v2_param": "TR_MEK_PozNo",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_MEP_ToplamTutar",
+      "v2_param": "TR_MEK_ToplamTutar",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_IFC_AktarimNotu",
+      "v2_param": "TR_MIM_IFC_AktarimNotu",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_IFC_ClassificationEdition",
+      "v2_param": "TR_MIM_IFC_ClassificationEdition",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_IFC_ClassificationName",
+      "v2_param": "TR_MIM_IFC_ClassificationName",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_IFC_ClassificationSource",
+      "v2_param": "TR_MIM_IFC_ClassificationSource",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_IFC_ClassificationURI",
+      "v2_param": "TR_MIM_IFC_ClassificationURI",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_IFC_DescriptionOverride",
+      "v2_param": "TR_MIM_IFC_DescriptionOverride",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_IFC_Dogrulandi",
+      "v2_param": "TR_MIM_IFC_Dogrulandi",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_IFC_EntityOverride",
+      "v2_param": "TR_MIM_IFC_EntityOverride",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_IFC_ExportEt",
+      "v2_param": "TR_MIM_IFC_ExportEt",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_IFC_NameOverride",
+      "v2_param": "TR_MIM_IFC_NameOverride",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_IFC_ObjectTypeOverride",
+      "v2_param": "TR_MIM_IFC_ObjectTypeOverride",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_IFC_PredefinedType",
+      "v2_param": "TR_MIM_IFC_PredefinedType",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_IFC_PsetSeti",
+      "v2_param": "TR_MIM_IFC_PsetSeti",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_IFC_TagOverride",
+      "v2_param": "TR_MIM_IFC_TagOverride",
+      "discipline": "Mimari",
+      "naming_rule": "TR_MIM_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Sys_SistemID",
+      "v2_param": "TR_MEK_Sys_SistemID",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Sys_SistemKodu",
+      "v2_param": "TR_MEK_Sys_SistemKodu",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Sys_Disiplin",
+      "v2_param": "TR_MEK_Sys_Disiplin",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Sys_SistemSinifi",
+      "v2_param": "TR_MEK_Sys_SistemSinifi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Sys_Ortam",
+      "v2_param": "TR_MEK_Sys_Ortam",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Sys_KontrolTipi",
+      "v2_param": "TR_MEK_Sys_KontrolTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Sys_BolgeBazliMi",
+      "v2_param": "TR_MEK_Sys_BolgeBazliMi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Sys_TasarimDebisi",
+      "v2_param": "TR_MEK_Sys_TasarimDebisi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Sys_TasarimBasinci",
+      "v2_param": "TR_MEK_Sys_TasarimBasinci",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Sys_TasarimDeltaT",
+      "v2_param": "TR_MEK_Sys_TasarimDeltaT",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Sys_HesapAilesi",
+      "v2_param": "TR_MEK_Sys_HesapAilesi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Sys_KaynakSayfa",
+      "v2_param": "TR_MEK_Sys_KaynakSayfa",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Zone_ZoneID",
+      "v2_param": "TR_MEK_Zone_ZoneID",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Zone_ZoneKodu",
+      "v2_param": "TR_MEK_Zone_ZoneKodu",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Zone_Bina",
+      "v2_param": "TR_MEK_Zone_Bina",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Zone_Blok",
+      "v2_param": "TR_MEK_Zone_Blok",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Zone_Kat",
+      "v2_param": "TR_MEK_Zone_Kat",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Zone_HVAC_Tipi",
+      "v2_param": "TR_MEK_Zone_HVAC_Tipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Zone_Yangin_Tipi",
+      "v2_param": "TR_MEK_Zone_Yangin_Tipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Zone_BasinclandirmaSinifi",
+      "v2_param": "TR_MEK_Zone_BasinclandirmaSinifi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Zone_KullanimTipi",
+      "v2_param": "TR_MEK_Zone_KullanimTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_HavaDebisi",
+      "v2_param": "TR_MEK_Hvac_HavaDebisi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_HavaHizi",
+      "v2_param": "TR_MEK_Hvac_HavaHizi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_BasincKaybi",
+      "v2_param": "TR_MEK_Hvac_BasincKaybi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_ESPToplam",
+      "v2_param": "TR_MEK_Hvac_ESPToplam",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_ESPFiltre",
+      "v2_param": "TR_MEK_Hvac_ESPFiltre",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_ESPCoil",
+      "v2_param": "TR_MEK_Hvac_ESPCoil",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_ESPKanal",
+      "v2_param": "TR_MEK_Hvac_ESPKanal",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_SogutmaKapasitesi",
+      "v2_param": "TR_MEK_Hvac_SogutmaKapasitesi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_SogutmaTR",
+      "v2_param": "TR_MEK_Hvac_SogutmaTR",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_IsitmaKapasitesi",
+      "v2_param": "TR_MEK_Hvac_IsitmaKapasitesi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_COP",
+      "v2_param": "TR_MEK_Hvac_COP",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_EER",
+      "v2_param": "TR_MEK_Hvac_EER",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_SHR",
+      "v2_param": "TR_MEK_Hvac_SHR",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_DeltaTAir",
+      "v2_param": "TR_MEK_Hvac_DeltaTAir",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_DeltaTWater",
+      "v2_param": "TR_MEK_Hvac_DeltaTWater",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_TazeHavaOrani",
+      "v2_param": "TR_MEK_Hvac_TazeHavaOrani",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_GeriDonusHavaOrani",
+      "v2_param": "TR_MEK_Hvac_GeriDonusHavaOrani",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_Diverjans",
+      "v2_param": "TR_MEK_Hvac_Diverjans",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_Simultane",
+      "v2_param": "TR_MEK_Hvac_Simultane",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_SistemTipi",
+      "v2_param": "TR_MEK_Hvac_SistemTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_KanalMalzeme",
+      "v2_param": "TR_MEK_Hvac_KanalMalzeme",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_KanalTipi",
+      "v2_param": "TR_MEK_Hvac_KanalTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_YalitimTipi",
+      "v2_param": "TR_MEK_Hvac_YalitimTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_YanginDamperVarMi",
+      "v2_param": "TR_MEK_Hvac_YanginDamperVarMi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_DumanDamperVarMi",
+      "v2_param": "TR_MEK_Hvac_DumanDamperVarMi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_GurultuSeviyesi",
+      "v2_param": "TR_MEK_Hvac_GurultuSeviyesi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Hvac_SistemAdi",
+      "v2_param": "TR_MEK_Hvac_SistemAdi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pipe_AkiskanTipi",
+      "v2_param": "TR_MEK_Pipe_AkiskanTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pipe_Debi",
+      "v2_param": "TR_MEK_Pipe_Debi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pipe_Cap",
+      "v2_param": "TR_MEK_Pipe_Cap",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pipe_Hiz",
+      "v2_param": "TR_MEK_Pipe_Hiz",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pipe_BasincKaybi",
+      "v2_param": "TR_MEK_Pipe_BasincKaybi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pipe_ToplamBasincKaybi",
+      "v2_param": "TR_MEK_Pipe_ToplamBasincKaybi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pipe_Eğim",
+      "v2_param": "TR_MEK_Pipe_Eğim",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pipe_Puruzluluk",
+      "v2_param": "TR_MEK_Pipe_Puruzluluk",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pipe_Malzeme",
+      "v2_param": "TR_MEK_Pipe_Malzeme",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pipe_BasinçSinifi",
+      "v2_param": "TR_MEK_Pipe_BasinçSinifi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pipe_YalitimTipi",
+      "v2_param": "TR_MEK_Pipe_YalitimTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pipe_ArmatüreBagliMi",
+      "v2_param": "TR_MEK_Pipe_ArmatüreBagliMi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Plumb_SistemDebisi",
+      "v2_param": "TR_MEK_Plumb_SistemDebisi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Plumb_PikDebi",
+      "v2_param": "TR_MEK_Plumb_PikDebi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Plumb_TasarimBasinci",
+      "v2_param": "TR_MEK_Plumb_TasarimBasinci",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Plumb_BakiyeBasinc",
+      "v2_param": "TR_MEK_Plumb_BakiyeBasinc",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Plumb_HizLimiti",
+      "v2_param": "TR_MEK_Plumb_HizLimiti",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Plumb_PipeSinifi",
+      "v2_param": "TR_MEK_Plumb_PipeSinifi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fix_FixturTipi",
+      "v2_param": "TR_MEK_Fix_FixturTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fix_DFU",
+      "v2_param": "TR_MEK_Fix_DFU",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fix_WSFU",
+      "v2_param": "TR_MEK_Fix_WSFU",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fix_Debi",
+      "v2_param": "TR_MEK_Fix_Debi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fix_TrapCap",
+      "v2_param": "TR_MEK_Fix_TrapCap",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fix_HavaBoruCap",
+      "v2_param": "TR_MEK_Fix_HavaBoruCap",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fix_GerekliBasinc",
+      "v2_param": "TR_MEK_Fix_GerekliBasinc",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fix_SicakBaglanti",
+      "v2_param": "TR_MEK_Fix_SicakBaglanti",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fix_SogukBaglanti",
+      "v2_param": "TR_MEK_Fix_SogukBaglanti",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fix_AtikBaglanti",
+      "v2_param": "TR_MEK_Fix_AtikBaglanti",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pump_PompaTipi",
+      "v2_param": "TR_MEK_Pump_PompaTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pump_PompaKategorisi",
+      "v2_param": "TR_MEK_Pump_PompaKategorisi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pump_Servis",
+      "v2_param": "TR_MEK_Pump_Servis",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pump_Debi",
+      "v2_param": "TR_MEK_Pump_Debi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pump_BasmaYuksekligi",
+      "v2_param": "TR_MEK_Pump_BasmaYuksekligi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pump_NPSH",
+      "v2_param": "TR_MEK_Pump_NPSH",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pump_GorevYedek",
+      "v2_param": "TR_MEK_Pump_GorevYedek",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pump_VFDVarMi",
+      "v2_param": "TR_MEK_Pump_VFDVarMi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pump_Verim",
+      "v2_param": "TR_MEK_Pump_Verim",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pump_Guc",
+      "v2_param": "TR_MEK_Pump_Guc",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pump_MotorGucu",
+      "v2_param": "TR_MEK_Pump_MotorGucu",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pump_KontrolModu",
+      "v2_param": "TR_MEK_Pump_KontrolModu",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pump_MinDebi",
+      "v2_param": "TR_MEK_Pump_MinDebi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pump_BypassVarMi",
+      "v2_param": "TR_MEK_Pump_BypassVarMi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Tank_TankTipi",
+      "v2_param": "TR_MEK_Tank_TankTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Tank_Hacim",
+      "v2_param": "TR_MEK_Tank_Hacim",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Tank_EtkiliHacim",
+      "v2_param": "TR_MEK_Tank_EtkiliHacim",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Tank_BasinçSinifi",
+      "v2_param": "TR_MEK_Tank_BasinçSinifi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Tank_BaglantiTipi",
+      "v2_param": "TR_MEK_Tank_BaglantiTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Tank_SistemIliskisi",
+      "v2_param": "TR_MEK_Tank_SistemIliskisi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fire_SistemTipi",
+      "v2_param": "TR_MEK_Fire_SistemTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fire_TehlikeSinifi",
+      "v2_param": "TR_MEK_Fire_TehlikeSinifi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fire_TasarimYogunlugu",
+      "v2_param": "TR_MEK_Fire_TasarimYogunlugu",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fire_TasarimAlani",
+      "v2_param": "TR_MEK_Fire_TasarimAlani",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fire_GerekliDebi",
+      "v2_param": "TR_MEK_Fire_GerekliDebi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fire_GerekliBasinc",
+      "v2_param": "TR_MEK_Fire_GerekliBasinc",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fire_Sure",
+      "v2_param": "TR_MEK_Fire_Sure",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fire_PompaGorevi",
+      "v2_param": "TR_MEK_Fire_PompaGorevi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Fire_DepoHacmi",
+      "v2_param": "TR_MEK_Fire_DepoHacmi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Spr_SprinkTipi",
+      "v2_param": "TR_MEK_Spr_SprinkTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Spr_KFactor",
+      "v2_param": "TR_MEK_Spr_KFactor",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Spr_SicaklikSinifi",
+      "v2_param": "TR_MEK_Spr_SicaklikSinifi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Spr_KapsamaAlani",
+      "v2_param": "TR_MEK_Spr_KapsamaAlani",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Spr_Aralik",
+      "v2_param": "TR_MEK_Spr_Aralik",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Spr_BranchID",
+      "v2_param": "TR_MEK_Spr_BranchID",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Drain_DrenajTipi",
+      "v2_param": "TR_MEK_Drain_DrenajTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Drain_GravityMi",
+      "v2_param": "TR_MEK_Drain_GravityMi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Drain_MinEğim",
+      "v2_param": "TR_MEK_Drain_MinEğim",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Drain_HavalikMetodu",
+      "v2_param": "TR_MEK_Drain_HavalikMetodu",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Storm_CatiAlani",
+      "v2_param": "TR_MEK_Storm_CatiAlani",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Storm_YagisSiddeti",
+      "v2_param": "TR_MEK_Storm_YagisSiddeti",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Storm_AkisKatsayisi",
+      "v2_param": "TR_MEK_Storm_AkisKatsayisi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Storm_SuzgecAdedi",
+      "v2_param": "TR_MEK_Storm_SuzgecAdedi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Storm_InişBoruCapi",
+      "v2_param": "TR_MEK_Storm_InişBoruCapi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_San_DFUToplam",
+      "v2_param": "TR_MEK_San_DFUToplam",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_San_HavalikGerekli",
+      "v2_param": "TR_MEK_San_HavalikGerekli",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_San_HavalikSaglandi",
+      "v2_param": "TR_MEK_San_HavalikSaglandi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Gas_Debi",
+      "v2_param": "TR_MEK_Gas_Debi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Gas_RegulatorTipi",
+      "v2_param": "TR_MEK_Gas_RegulatorTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Gas_SayacTipi",
+      "v2_param": "TR_MEK_Gas_SayacTipi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Gas_MenfezAlani",
+      "v2_param": "TR_MEK_Gas_MenfezAlani",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pool_Debi",
+      "v2_param": "TR_MEK_Pool_Debi",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Pool_EsanjörKapasite",
+      "v2_param": "TR_MEK_Pool_EsanjörKapasite",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_Mek_Solar_KollektorAlani",
+      "v2_param": "TR_MEK_Solar_KollektorAlani",
+      "discipline": "Mekanik",
+      "naming_rule": "TR_MEK_",
+      "notes": "V2 standardizasyonu"
+    },
+    {
+      "legacy_param": "TR_ELK_KableCap",
+      "v2_param": "TR_ELK_KabloKesiti",
+      "discipline": "Elektrik",
+      "naming_rule": "TR_ELK_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_ELK_KableTipi",
+      "v2_param": "TR_ELK_KabloTipi",
+      "discipline": "Elektrik",
+      "naming_rule": "TR_ELK_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_BKS",
+      "v2_param": "TR_STA_BinaKullanimSinifi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_ImportanceFactor_I",
+      "v2_param": "TR_STA_BinaOnemKatsayisi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_SiteClass",
+      "v2_param": "TR_STA_YerelZeminSinifi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_Ss",
+      "v2_param": "TR_STA_Ss",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_S1",
+      "v2_param": "TR_STA_S1",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_FS",
+      "v2_param": "TR_STA_FS",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_F1",
+      "v2_param": "TR_STA_F1",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_SDS",
+      "v2_param": "TR_STA_SDS",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_SD1",
+      "v2_param": "TR_STA_SD1",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_DTS",
+      "v2_param": "TR_STA_DTS",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_BYS",
+      "v2_param": "TR_STA_BYS",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_HN",
+      "v2_param": "TR_STA_BinaYuksekligi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_StoryCount",
+      "v2_param": "TR_STA_KatAdedi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_GroundStoryHeight",
+      "v2_param": "TR_STA_ZeminKatYuksekligi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_SystemCode",
+      "v2_param": "TR_STA_TasiyiciSistemKodu",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_SystemFamily",
+      "v2_param": "TR_STA_TasiyiciSistemAilesi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_DuctilityLevel",
+      "v2_param": "TR_STA_DayanimDuzeyi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_R",
+      "v2_param": "TR_STA_RKatsayisi",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_D",
+      "v2_param": "TR_STA_DFazlaDayanim",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_AllowedBYSOperator",
+      "v2_param": "TR_STA_IzinliBYSOperatoru",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_AllowedBYSValue",
+      "v2_param": "TR_STA_IzinliBYSDegeri",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_HeightMax",
+      "v2_param": "TR_STA_SistemYukseklikSiniri",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_MinWallRatio",
+      "v2_param": "TR_STA_MinPerdeOrani",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_MinTotalVerticalRatio",
+      "v2_param": "TR_STA_MinDuseyTasimaliAlanOrani",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_PrecheckStatus",
+      "v2_param": "TR_STA_OnKontrolDurumu",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    },
+    {
+      "legacy_param": "TR_PrecheckMessage",
+      "v2_param": "TR_STA_OnKontrolMesaji",
+      "discipline": "Statik",
+      "naming_rule": "TR_STA_* standardı",
+      "notes": "Legacy adlandırmadan V3 TR standardına dönüştürüldü"
+    }
+  ]
+}

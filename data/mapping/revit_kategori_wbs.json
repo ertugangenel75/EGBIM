@@ -1,0 +1,454 @@
+{
+  "_meta": {
+    "source": "revit_kategori_wbs v3 — yapılandırılmış format",
+    "version": "2026",
+    "format": "kategori veya 'kategori|aktivite' → wbs_kodu. assign_wbs_code ve classify_by_wbs op'ları bu dosyayı kullanır.",
+    "toplam_mapping": 71
+  },
+  "Structural Columns|Kalıp": {
+    "wbs_kodu": "STR.COL.KAL",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_COLUMN"
+  },
+  "Structural Columns|Donatı": {
+    "wbs_kodu": "STR.COL.DON",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_COLUMN"
+  },
+  "Structural Columns|Beton": {
+    "wbs_kodu": "STR.COL.BET",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_COLUMN"
+  },
+  "Structural Columns|Kalıp+Donatı+Beton": {
+    "wbs_kodu": "STR.COL.ALL",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_COLUMN"
+  },
+  "Structural Walls|Kalıp": {
+    "wbs_kodu": "STR.WLL.KAL",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_WALL"
+  },
+  "Structural Walls|Donatı": {
+    "wbs_kodu": "STR.WLL.DON",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_WALL"
+  },
+  "Structural Walls|Beton": {
+    "wbs_kodu": "STR.WLL.BET",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_WALL"
+  },
+  "Structural Walls|Kalıp+Donatı+Beton": {
+    "wbs_kodu": "STR.WLL.ALL",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_WALL"
+  },
+  "Structural Framing|Kalıp": {
+    "wbs_kodu": "STR.FRM.KAL",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_BEAM"
+  },
+  "Structural Framing|Donatı": {
+    "wbs_kodu": "STR.FRM.DON",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_BEAM"
+  },
+  "Structural Framing|Beton": {
+    "wbs_kodu": "STR.FRM.BET",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_BEAM"
+  },
+  "Structural Framing|Kalıp+Donatı+Beton": {
+    "wbs_kodu": "STR.FRM.ALL",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_BEAM"
+  },
+  "Floors|Döşeme Kalıp": {
+    "wbs_kodu": "STR.FLR.KAL",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_SLAB"
+  },
+  "Floors|Döşeme Donatı": {
+    "wbs_kodu": "STR.FLR.DON",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_SLAB"
+  },
+  "Floors|Döşeme Betonu": {
+    "wbs_kodu": "STR.FLR.BET",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_SLAB"
+  },
+  "Floors|Döşeme Betonu A": {
+    "wbs_kodu": "STR.FLR.BETA",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_SLAB"
+  },
+  "Floors|Döşeme Betonu B": {
+    "wbs_kodu": "STR.FLR.BETB",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_SLAB"
+  },
+  "Floors|Kür/Bekleme": {
+    "wbs_kodu": "STR.FLR.KUR",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_SLAB"
+  },
+  "Floors|Kalıp Söküm": {
+    "wbs_kodu": "STR.FLR.SKM",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_SLAB"
+  },
+  "Floors|Şap": {
+    "wbs_kodu": "MIM.FLR.SAP",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_FLOOR_FINISH"
+  },
+  "Floors|Seramik": {
+    "wbs_kodu": "MIM.FLR.SER",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_FLOOR_FINISH"
+  },
+  "Floors|Su yalıtımı": {
+    "wbs_kodu": "MIM.FLR.YAL",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_FLOOR_FINISH"
+  },
+  "Structural Foundations|Kazı": {
+    "wbs_kodu": "STR.FND.KAZ",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "02_TEMEL",
+    "canonical_v3": "STA_FOUNDATION_SLAB"
+  },
+  "Structural Foundations|Grobeton": {
+    "wbs_kodu": "STR.FND.GRO",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "02_TEMEL",
+    "canonical_v3": "STA_FOUNDATION_SLAB"
+  },
+  "Structural Foundations|Temel Kalıp": {
+    "wbs_kodu": "STR.FND.KAL",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "02_TEMEL",
+    "canonical_v3": "STA_FOUNDATION_SLAB"
+  },
+  "Structural Foundations|Temel Donatı": {
+    "wbs_kodu": "STR.FND.DON",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "02_TEMEL",
+    "canonical_v3": "STA_FOUNDATION_SLAB"
+  },
+  "Structural Foundations|Temel Betonu": {
+    "wbs_kodu": "STR.FND.BET",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "02_TEMEL",
+    "canonical_v3": "STA_FOUNDATION_SLAB"
+  },
+  "Structural Foundations|Jet grout": {
+    "wbs_kodu": "STR.FND.JET",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "02_TEMEL",
+    "canonical_v3": "STA_FOUNDATION_SLAB"
+  },
+  "Structural Foundations|Fore kazık": {
+    "wbs_kodu": "STR.FND.FOR",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "02_TEMEL",
+    "canonical_v3": "STA_FOUNDATION_SLAB"
+  },
+  "Topography|Saha temizliği": {
+    "wbs_kodu": "ALT.SAH.TEM",
+    "disiplin": "ALT",
+    "ebeveyn_wbs": "01_ALTYAPI",
+    "canonical_v3": "ALT_EARTHWORKS"
+  },
+  "Topography|Geri Dolgu": {
+    "wbs_kodu": "ALT.SAH.DOL",
+    "disiplin": "ALT",
+    "ebeveyn_wbs": "01_ALTYAPI",
+    "canonical_v3": "ALT_EARTHWORKS"
+  },
+  "Generic Models|İksa": {
+    "wbs_kodu": "ALT.IKS.001",
+    "disiplin": "ALT",
+    "ebeveyn_wbs": "01_ALTYAPI",
+    "canonical_v3": "ALT_GROUND_IMPROVEMENT"
+  },
+  "Rebar|Donatı": {
+    "wbs_kodu": "STR.RBR.DON",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_REBAR"
+  },
+  "Walls|Duvar İmalatı": {
+    "wbs_kodu": "MIM.WLL.IML",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_WALL"
+  },
+  "Walls|Sıva": {
+    "wbs_kodu": "MIM.WLL.SIV",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_WALL"
+  },
+  "Walls|Boya": {
+    "wbs_kodu": "MIM.WLL.BOY",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_WALL"
+  },
+  "Walls|Seramik": {
+    "wbs_kodu": "MIM.WLL.SER",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_WALL"
+  },
+  "Walls|Su yalıtımı": {
+    "wbs_kodu": "MIM.WLL.YAL",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_WALL"
+  },
+  "Ceilings|Asma Tavan": {
+    "wbs_kodu": "MIM.CLG.ASM",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_CEILING"
+  },
+  "Ceilings|Sıva": {
+    "wbs_kodu": "MIM.CLG.SIV",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_CEILING"
+  },
+  "Ceilings|Boya": {
+    "wbs_kodu": "MIM.CLG.BOY",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_CEILING"
+  },
+  "Roofs|Su yalıtımı": {
+    "wbs_kodu": "MIM.ROF.YAL",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_ROOF"
+  },
+  "Doors|Kapı Montajı": {
+    "wbs_kodu": "MIM.DOR.MON",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_DOOR_WINDOW"
+  },
+  "Windows|Pencere Montajı": {
+    "wbs_kodu": "MIM.WIN.MON",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_DOOR_WINDOW"
+  },
+  "Pipes|Kaba Tesisat": {
+    "wbs_kodu": "MEP.PIP.KAB",
+    "disiplin": "MEP",
+    "ebeveyn_wbs": "07_SIHHİ",
+    "canonical_v3": "MEP_PIPE"
+  },
+  "Ducts|Kaba Tesisat": {
+    "wbs_kodu": "MEP.DCT.KAB",
+    "disiplin": "MEP",
+    "ebeveyn_wbs": "06_MEKANİK",
+    "canonical_v3": "MEK_DUCT"
+  },
+  "Cable Trays|Kaba Tesisat": {
+    "wbs_kodu": "MEP.CBT.KAB",
+    "disiplin": "MEP",
+    "ebeveyn_wbs": "08_ELEKTRİK",
+    "canonical_v3": "ELK_CABLE"
+  },
+  "Conduits|Kaba Tesisat": {
+    "wbs_kodu": "MEP.CDT.KAB",
+    "disiplin": "MEP",
+    "ebeveyn_wbs": "08_ELEKTRİK",
+    "canonical_v3": "ELK_CABLE"
+  },
+  "Plumbing Fixtures|Sonlandırma": {
+    "wbs_kodu": "MEP.PLM.SON",
+    "disiplin": "MEP",
+    "ebeveyn_wbs": "07_SIHHİ",
+    "canonical_v3": "MEP_PIPE"
+  },
+  "Electrical Fixtures|Sonlandırma": {
+    "wbs_kodu": "MEP.ELK.SON",
+    "disiplin": "MEP",
+    "ebeveyn_wbs": "08_ELEKTRİK",
+    "canonical_v3": "ELK_PANEL"
+  },
+  "Mechanical Equipment|Sonlandırma": {
+    "wbs_kodu": "MEP.MCH.SON",
+    "disiplin": "MEP",
+    "ebeveyn_wbs": "06_MEKANİK",
+    "canonical_v3": "MEK_EQUIPMENT"
+  },
+  "Structural Columns": {
+    "wbs_kodu": "STR.COL.ALL",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_COLUMN",
+    "birincil": true
+  },
+  "Structural Walls": {
+    "wbs_kodu": "STR.WLL.ALL",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_WALL",
+    "birincil": true
+  },
+  "Structural Framing": {
+    "wbs_kodu": "STR.FRM.ALL",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_BEAM",
+    "birincil": true
+  },
+  "Floors": {
+    "wbs_kodu": "STR.FLR.BET",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_RC_SLAB",
+    "birincil": true
+  },
+  "Structural Foundations": {
+    "wbs_kodu": "STR.FND.BET",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "02_TEMEL",
+    "canonical_v3": "STA_FOUNDATION_SLAB",
+    "birincil": true
+  },
+  "Rebar": {
+    "wbs_kodu": "STR.RBR.DON",
+    "disiplin": "STA",
+    "ebeveyn_wbs": "03_BETONARME",
+    "canonical_v3": "STA_REBAR",
+    "birincil": true
+  },
+  "Walls": {
+    "wbs_kodu": "MIM.WLL.IML",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_WALL",
+    "birincil": true
+  },
+  "Ceilings": {
+    "wbs_kodu": "MIM.CLG.ASM",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_CEILING",
+    "birincil": true
+  },
+  "Roofs": {
+    "wbs_kodu": "MIM.ROF.YAL",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_ROOF",
+    "birincil": true
+  },
+  "Doors": {
+    "wbs_kodu": "MIM.DOR.MON",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_DOOR_WINDOW",
+    "birincil": true
+  },
+  "Windows": {
+    "wbs_kodu": "MIM.WIN.MON",
+    "disiplin": "MIM",
+    "ebeveyn_wbs": "04_MİMARİ",
+    "canonical_v3": "MIM_DOOR_WINDOW",
+    "birincil": true
+  },
+  "Topography": {
+    "wbs_kodu": "ALT.SAH.TEM",
+    "disiplin": "ALT",
+    "ebeveyn_wbs": "01_ALTYAPI",
+    "canonical_v3": "ALT_EARTHWORKS",
+    "birincil": true
+  },
+  "Generic Models": {
+    "wbs_kodu": "ALT.IKS.001",
+    "disiplin": "ALT",
+    "ebeveyn_wbs": "01_ALTYAPI",
+    "canonical_v3": "ALT_GROUND_IMPROVEMENT",
+    "birincil": true
+  },
+  "Pipes": {
+    "wbs_kodu": "MEP.PIP.KAB",
+    "disiplin": "MEP",
+    "ebeveyn_wbs": "07_SIHHİ",
+    "canonical_v3": "MEP_PIPE",
+    "birincil": true
+  },
+  "Ducts": {
+    "wbs_kodu": "MEP.DCT.KAB",
+    "disiplin": "MEP",
+    "ebeveyn_wbs": "06_MEKANİK",
+    "canonical_v3": "MEK_DUCT",
+    "birincil": true
+  },
+  "Cable Trays": {
+    "wbs_kodu": "MEP.CBT.KAB",
+    "disiplin": "MEP",
+    "ebeveyn_wbs": "08_ELEKTRİK",
+    "canonical_v3": "ELK_CABLE",
+    "birincil": true
+  },
+  "Conduits": {
+    "wbs_kodu": "MEP.CDT.KAB",
+    "disiplin": "MEP",
+    "ebeveyn_wbs": "08_ELEKTRİK",
+    "canonical_v3": "ELK_CABLE",
+    "birincil": true
+  },
+  "Plumbing Fixtures": {
+    "wbs_kodu": "MEP.PLM.SON",
+    "disiplin": "MEP",
+    "ebeveyn_wbs": "07_SIHHİ",
+    "canonical_v3": "MEP_PIPE",
+    "birincil": true
+  },
+  "Electrical Fixtures": {
+    "wbs_kodu": "MEP.ELK.SON",
+    "disiplin": "MEP",
+    "ebeveyn_wbs": "08_ELEKTRİK",
+    "canonical_v3": "ELK_PANEL",
+    "birincil": true
+  },
+  "Mechanical Equipment": {
+    "wbs_kodu": "MEP.MCH.SON",
+    "disiplin": "MEP",
+    "ebeveyn_wbs": "06_MEKANİK",
+    "canonical_v3": "MEK_EQUIPMENT",
+    "birincil": true
+  }
+}

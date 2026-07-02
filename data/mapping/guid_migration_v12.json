@@ -1,0 +1,1239 @@
+{
+  "_note": "v12.1 — ardışık placeholder GUID'ler deterministik UUIDv5 ile değiştirildi. Mevcut projelerde eski GUID ile bağlanmış shared parametreler varsa bu eşleme ile migrasyon yapın.",
+  "namespace": "uuid5(NAMESPACE_URL, 'egbim.com.tr/shared-params')",
+  "count": 308,
+  "map": {
+    "f1a00001-0001-0001-0001-000000000001": {
+      "param": "TR_ProjeNo",
+      "new_guid": "d7320f5d-a85c-5248-849d-31a6e68511ef"
+    },
+    "f1a00001-0001-0001-0001-000000000002": {
+      "param": "TR_ProjeAdi",
+      "new_guid": "26b7308f-3430-55d4-b9a8-d4c92d81814c"
+    },
+    "f1a00001-0001-0001-0001-000000000003": {
+      "param": "TR_ProjeSahibi",
+      "new_guid": "f5f6b88d-7e4a-5131-b3e6-2d941d350afa"
+    },
+    "f1a00001-0001-0001-0001-000000000004": {
+      "param": "TR_MimarAdSoyad",
+      "new_guid": "01b127f5-ae1e-5824-b25c-8e4567443fbb"
+    },
+    "f1a00001-0001-0001-0001-000000000005": {
+      "param": "TR_MimarOdaNo",
+      "new_guid": "f50927a1-24a9-5c2f-96fe-60f76f164f9b"
+    },
+    "f1a00001-0001-0001-0001-000000000006": {
+      "param": "TR_StatikMuhendis",
+      "new_guid": "49c1f630-3cdd-5987-8ce7-cf6b4bc85ba3"
+    },
+    "f1a00001-0001-0001-0001-000000000007": {
+      "param": "TR_StatikOdaNo",
+      "new_guid": "9584190d-c7e3-58e4-8948-c8f390996611"
+    },
+    "f1a00001-0001-0001-0001-000000000008": {
+      "param": "TR_MekanikMuhendis",
+      "new_guid": "25ccb4e2-124b-56cc-8f87-380abd384086"
+    },
+    "f1a00001-0001-0001-0001-000000000009": {
+      "param": "TR_MekanikOdaNo",
+      "new_guid": "2ea2d904-a2a3-5b3b-a6a2-a4e5da72c937"
+    },
+    "f1a00001-0001-0001-0001-000000000010": {
+      "param": "TR_ElektrikMuhendis",
+      "new_guid": "4cda079e-e7e5-5f9f-8b88-c25244366398"
+    },
+    "f1a00001-0001-0001-0001-000000000011": {
+      "param": "TR_ElektrikOdaNo",
+      "new_guid": "d6428c94-ea5d-55f5-b721-704437751a8d"
+    },
+    "f1a00001-0001-0001-0001-000000000012": {
+      "param": "TR_ProjeAsamasi",
+      "new_guid": "0d41c1d4-d75b-5617-8866-11cc59b41943"
+    },
+    "f1a00001-0001-0001-0001-000000000013": {
+      "param": "TR_ProjeRevizyon",
+      "new_guid": "1422f988-99fd-553a-b35e-dc6809166fed"
+    },
+    "f1a00001-0001-0001-0001-000000000014": {
+      "param": "TR_CizimNo",
+      "new_guid": "bcce9ec7-9498-5f67-aa92-3d78b6cbc88e"
+    },
+    "f1a00001-0001-0001-0001-000000000015": {
+      "param": "TR_Olcek",
+      "new_guid": "88de7cbf-0410-5ed8-899b-dda0bc7fff1a"
+    },
+    "f1a00002-0001-0001-0001-000000000001": {
+      "param": "TR_YapiSinifi",
+      "new_guid": "b3a7afa9-4230-52ab-ac19-05f5db822121"
+    },
+    "f1a00002-0001-0001-0001-000000000002": {
+      "param": "TR_YapiKullanimAmaci",
+      "new_guid": "ff51596f-6634-5aa1-b8db-d6a6e35fbbd3"
+    },
+    "f1a00002-0001-0001-0001-000000000003": {
+      "param": "TR_KatAdedi",
+      "new_guid": "2929b090-14b1-5b50-a74c-1a26508c256a"
+    },
+    "f1a00002-0001-0001-0001-000000000004": {
+      "param": "TR_ToplamInsaatAlani",
+      "new_guid": "bd33ceb4-0c67-588a-aafa-5a32aefdf317"
+    },
+    "f1a00002-0001-0001-0001-000000000005": {
+      "param": "TR_BrutAlan",
+      "new_guid": "39f50963-fb86-5bcf-8e12-01c0316ee873"
+    },
+    "f1a00002-0001-0001-0001-000000000006": {
+      "param": "TR_NetAlan",
+      "new_guid": "494d2771-e476-5c04-8cd2-f3d413b8d09b"
+    },
+    "f1a00002-0001-0001-0001-000000000007": {
+      "param": "TR_TabanAlani",
+      "new_guid": "e8c7e8ee-f790-55ac-b028-ac04bdcf3322"
+    },
+    "f1a00002-0001-0001-0001-000000000008": {
+      "param": "TR_YukseklikBinaH",
+      "new_guid": "17f2a2e3-67f4-528e-94ea-9b2c8ecab07f"
+    },
+    "f1a00002-0001-0001-0001-000000000009": {
+      "param": "TR_KatYuksekligi",
+      "new_guid": "7cd7b657-611c-5591-9d06-d578b1ace50f"
+    },
+    "f1a00002-0001-0001-0001-000000000010": {
+      "param": "TR_TasiyiciSistem",
+      "new_guid": "d01bd648-efc8-581f-8ce1-7ca773f254e5"
+    },
+    "f1a00002-0001-0001-0001-000000000011": {
+      "param": "TR_DuvarMalzemesi",
+      "new_guid": "fb6e163d-7b0d-524a-81de-3fa1d7460af9"
+    },
+    "f1a00002-0001-0001-0001-000000000012": {
+      "param": "TR_CatiSistemi",
+      "new_guid": "e060541c-670d-53c9-b1fd-66003f5f2ebc"
+    },
+    "f1a00002-0001-0001-0001-000000000013": {
+      "param": "TR_IsletimSertifikasi",
+      "new_guid": "662b94d6-a5a9-5393-bd3b-21e986c8908a"
+    },
+    "f1a00003-0001-0001-0001-000000000001": {
+      "param": "TR_YangBinaYuksKat",
+      "new_guid": "37bb0f90-3fcc-55ec-bee4-0f25a918ab0f"
+    },
+    "f1a00003-0001-0001-0001-000000000002": {
+      "param": "TR_YangKullanimSinifi",
+      "new_guid": "a9308145-9be9-5bef-8e13-467d65389536"
+    },
+    "f1a00003-0001-0001-0001-000000000003": {
+      "param": "TR_YangTehlikeSinifi",
+      "new_guid": "be1ec349-3843-57da-a70d-e13227e0d78b"
+    },
+    "f1a00003-0001-0001-0001-000000000004": {
+      "param": "TR_YangYapiMalSinifi",
+      "new_guid": "29fba40f-9b90-5fa8-af9f-060e9f7e006c"
+    },
+    "f1a00003-0001-0001-0001-000000000005": {
+      "param": "TR_YangKacinmaYolu",
+      "new_guid": "8cdc0ea8-c74f-56e4-8534-90d8717c620e"
+    },
+    "f1a00003-0001-0001-0001-000000000006": {
+      "param": "TR_YangKacisKorMesafe",
+      "new_guid": "e17ecc7e-e0f8-5c9a-bdcf-d5490c64f36e"
+    },
+    "f1a00003-0001-0001-0001-000000000007": {
+      "param": "TR_YangMerdiven",
+      "new_guid": "bd249aa9-df7a-51da-9b28-c9efe80242a0"
+    },
+    "f1a00003-0001-0001-0001-000000000008": {
+      "param": "TR_YangMerdivenGenislik",
+      "new_guid": "c9866e1a-b038-5a0f-9e3c-7922dc12dff0"
+    },
+    "f1a00003-0001-0001-0001-000000000009": {
+      "param": "TR_YangDuvarDirenc",
+      "new_guid": "f24e79d9-9912-5c46-a9e6-2eae526a551d"
+    },
+    "f1a00003-0001-0001-0001-000000000010": {
+      "param": "TR_YangKapiSinifi",
+      "new_guid": "078e1744-cd19-56ac-b9e7-d4db81b7b68c"
+    },
+    "f1a00003-0001-0001-0001-000000000011": {
+      "param": "TR_YangSprinklerVarMi",
+      "new_guid": "3456a158-eb8e-5f85-85e7-464d65570238"
+    },
+    "f1a00003-0001-0001-0001-000000000012": {
+      "param": "TR_YangSprinklerTipi",
+      "new_guid": "a87b05e3-7c34-5003-8b62-cd64e20a5a40"
+    },
+    "f1a00003-0001-0001-0001-000000000013": {
+      "param": "TR_YangDumTasBarieri",
+      "new_guid": "59be5db3-3c05-5c9d-8f34-09f912f10bab"
+    },
+    "f1a00003-0001-0001-0001-000000000014": {
+      "param": "TR_YangDumKontrolSis",
+      "new_guid": "0f63e04d-fc5a-57f3-b9f6-643c7515f016"
+    },
+    "f1a00003-0001-0001-0001-000000000015": {
+      "param": "TR_YangIhbarSistemi",
+      "new_guid": "c5d1f988-d1cb-5a86-8e54-721aee35a8e9"
+    },
+    "f1a00003-0001-0001-0001-000000000016": {
+      "param": "TR_YangHidrantVarMi",
+      "new_guid": "b45096cc-1e7a-5676-8f85-62085ed0c547"
+    },
+    "f1a00003-0001-0001-0001-000000000017": {
+      "param": "TR_YangSigortaZonNo",
+      "new_guid": "f51c9f15-94b4-538a-b44b-f18992632913"
+    },
+    "f1a00003-0001-0001-0001-000000000018": {
+      "param": "TR_YangAcilIsikVarMi",
+      "new_guid": "93ec1764-f63a-53b3-8f5d-d42903b77889"
+    },
+    "f1a00003-0001-0001-0001-000000000019": {
+      "param": "TR_YangYonlendirmeVarMi",
+      "new_guid": "087ca419-5ac0-5304-bd4d-6e994d0a2175"
+    },
+    "f1a00003-0001-0001-0001-000000000020": {
+      "param": "TR_YangSiginmaAlani",
+      "new_guid": "cc09c13c-245d-5108-ab7b-d35523443212"
+    },
+    "f1a00004-0001-0001-0001-000000000001": {
+      "param": "TR_DepremBolgesi",
+      "new_guid": "c65e94a3-a346-5a96-af64-99d39cf68416"
+    },
+    "f1a00004-0001-0001-0001-000000000002": {
+      "param": "TR_DepremYerTipi",
+      "new_guid": "6b0f8962-482b-5370-a665-e2e4d868db42"
+    },
+    "f1a00004-0001-0001-0001-000000000003": {
+      "param": "TR_DepremBinaDPS",
+      "new_guid": "ef07a956-ef8a-5422-94f7-fc10a19eb022"
+    },
+    "f1a00004-0001-0001-0001-000000000004": {
+      "param": "TR_DepremKullanim",
+      "new_guid": "5f3e761d-3b40-5fc7-bb6f-325688e1e854"
+    },
+    "f1a00004-0001-0001-0001-000000000005": {
+      "param": "TR_DepremTasiyiciSis",
+      "new_guid": "b28e9a9f-da51-5a70-a92f-9720b4949c32"
+    },
+    "f1a00004-0001-0001-0001-000000000006": {
+      "param": "TR_DepremPerdeSistem",
+      "new_guid": "e905874e-eaf4-5c8a-a1c9-337aba5e648a"
+    },
+    "f1a00004-0001-0001-0001-000000000007": {
+      "param": "TR_DepremSismikAnaliz",
+      "new_guid": "f56e630b-b480-5945-aa37-0b9468a31e52"
+    },
+    "f1a00004-0001-0001-0001-000000000008": {
+      "param": "TR_DepremSs",
+      "new_guid": "e3cec253-448b-5b2d-ba19-f6ae8218c9fc"
+    },
+    "f1a00004-0001-0001-0001-000000000009": {
+      "param": "TR_DepremS1",
+      "new_guid": "1eefa71b-29e9-51bd-b31f-6dbbb07f52be"
+    },
+    "f1a00004-0001-0001-0001-000000000010": {
+      "param": "TR_DepremPGA",
+      "new_guid": "aae012f2-ce05-5a08-897a-5e3893447d4d"
+    },
+    "f1a00004-0001-0001-0001-000000000011": {
+      "param": "TR_DepremGuclenDurumu",
+      "new_guid": "2792dd13-0339-509f-8ba1-db5363ae46d0"
+    },
+    "f1a00004-0001-0001-0001-000000000012": {
+      "param": "TR_DepremIzolasyonVarMi",
+      "new_guid": "d82467b3-de60-562d-891c-361384f20305"
+    },
+    "f1a00005-0001-0001-0001-000000000001": {
+      "param": "TR_EngRampaVarMi",
+      "new_guid": "00e5b894-2da0-5e8e-be7a-d447c8b77dbf"
+    },
+    "f1a00005-0001-0001-0001-000000000002": {
+      "param": "TR_EngRampaEgimi",
+      "new_guid": "0fcb1432-0577-5a27-a7a4-0b842f238537"
+    },
+    "f1a00005-0001-0001-0001-000000000003": {
+      "param": "TR_EngAsansorVarMi",
+      "new_guid": "3bc15de2-2835-5d85-8adb-a114b4507245"
+    },
+    "f1a00005-0001-0001-0001-000000000004": {
+      "param": "TR_EngWCVarMi",
+      "new_guid": "14416c87-36bd-57e8-8913-d3c1c01c56ae"
+    },
+    "f1a00005-0001-0001-0001-000000000005": {
+      "param": "TR_EngOtoparkVarMi",
+      "new_guid": "b30dcde2-27c5-5810-8349-cdc7b5ddf4e2"
+    },
+    "f1a00005-0001-0001-0001-000000000006": {
+      "param": "TR_EngKapiGenislik",
+      "new_guid": "0e0a48c2-d190-5057-addf-0ed08259c6fe"
+    },
+    "f1a00005-0001-0001-0001-000000000007": {
+      "param": "TR_EngHissedilebilirYuzey",
+      "new_guid": "bc9bc5b8-57eb-5605-9446-38f129d7c193"
+    },
+    "f1a00005-0001-0001-0001-000000000008": {
+      "param": "TR_EngBrailleTabela",
+      "new_guid": "a58856c1-3ffa-5199-a387-48588f002535"
+    },
+    "f1a00005-0001-0001-0001-000000000009": {
+      "param": "TR_EngSertifikaDurumu",
+      "new_guid": "7183b007-8133-5658-b728-629f03879c1f"
+    },
+    "f1a00005-0001-0001-0001-000000000010": {
+      "param": "TR_EngGecisGenislikKoridor",
+      "new_guid": "c2df2197-075e-5e6a-8bcf-13a382f2c926"
+    },
+    "f1a00006-0001-0001-0001-000000000001": {
+      "param": "TR_EnerjiSinifi",
+      "new_guid": "14fb7c66-99f4-5e07-9cdb-df58d2920a1a"
+    },
+    "f1a00006-0001-0001-0001-000000000002": {
+      "param": "TR_IklimBolgesi",
+      "new_guid": "79687006-190e-5c28-8b04-174938da9ea4"
+    },
+    "f1a00006-0001-0001-0001-000000000004": {
+      "param": "TR_CercevePencereUw",
+      "new_guid": "2335b7aa-2570-571b-b503-494871dab97a"
+    },
+    "f1a00006-0001-0001-0001-000000000006": {
+      "param": "TR_ZeminKatUDegeri",
+      "new_guid": "ccd3b8f1-286d-5688-8326-d4964b183ae8"
+    },
+    "f1a00006-0001-0001-0001-000000000007": {
+      "param": "TR_IsitmaSistemi",
+      "new_guid": "c8c22226-9363-57ae-b8e2-09e47aa2d904"
+    },
+    "f1a00006-0001-0001-0001-000000000008": {
+      "param": "TR_SogutmaSistemi",
+      "new_guid": "b991c12e-09d2-51e3-a187-e32590cab7be"
+    },
+    "f1a00006-0001-0001-0001-000000000009": {
+      "param": "TR_HavalandirmaSistemi",
+      "new_guid": "aac484f8-978b-52ae-8055-f4d82205959c"
+    },
+    "f1a00006-0001-0001-0001-000000000010": {
+      "param": "TR_YenilenebilirEnerji",
+      "new_guid": "a9321aa9-b2d8-5e51-99f0-bc474fbf7a1a"
+    },
+    "f1a00006-0001-0001-0001-000000000011": {
+      "param": "TR_PrimaryEnerjiTuketim",
+      "new_guid": "0ff68f16-f3bb-505f-8f77-518047ecc090"
+    },
+    "f1a00006-0001-0001-0001-000000000012": {
+      "param": "TR_CO2Emisyon",
+      "new_guid": "658dbe8e-783a-5352-8558-b70a2256aa5a"
+    },
+    "f1a00006-0001-0001-0001-000000000013": {
+      "param": "TR_BepTrRaporNo",
+      "new_guid": "aa0d19b0-3ec7-5eca-8bf1-7d5a1848649c"
+    },
+    "f1a00007-0001-0001-0001-000000000001": {
+      "param": "TR_PozNo",
+      "new_guid": "de840fac-fb71-5940-a812-6ca7e5e1c9d2"
+    },
+    "f1a00007-0001-0001-0001-000000000002": {
+      "param": "TR_PozAdi",
+      "new_guid": "fa038df6-7cbb-5605-994b-805fba24761b"
+    },
+    "f1a00007-0001-0001-0001-000000000003": {
+      "param": "TR_PozBirim",
+      "new_guid": "369fb846-a539-504c-a1b1-dcdf5756e43c"
+    },
+    "f1a00007-0001-0001-0001-000000000004": {
+      "param": "TR_PozMiktar",
+      "new_guid": "1f7962dc-b213-5214-809b-de961e8a07cf"
+    },
+    "f1a00007-0001-0001-0001-000000000005": {
+      "param": "TR_PozBirimFiyat",
+      "new_guid": "710611d0-ce41-57e9-8e79-6cd848baedb8"
+    },
+    "f1a00007-0001-0001-0001-000000000006": {
+      "param": "TR_PozToplamTutar",
+      "new_guid": "106dad72-e6eb-51c2-b31a-69b19f009489"
+    },
+    "f1a00007-0001-0001-0001-000000000007": {
+      "param": "TR_PozMahalNo",
+      "new_guid": "833cfd31-2e1d-5ede-a148-bc61b9f73e43"
+    },
+    "f1a00007-0001-0001-0001-000000000008": {
+      "param": "TR_PozImalatTuru",
+      "new_guid": "a910e7e2-daa0-5507-8a2f-77fd581f90a7"
+    },
+    "f1a00007-0001-0001-0001-000000000009": {
+      "param": "TR_PozDahilMi",
+      "new_guid": "85764f7d-4ef5-514f-8931-631c7ad53051"
+    },
+    "f1a00007-0001-0001-0001-000000000010": {
+      "param": "TR_PozNot",
+      "new_guid": "cee747c9-e496-5b85-8ef0-f94ecfbfa777"
+    },
+    "f1a00008-0001-0001-0001-000000000001": {
+      "param": "TR_YapDenetFirmasi",
+      "new_guid": "b2be6599-85ec-5ddf-accf-b516a0c92262"
+    },
+    "f1a00008-0001-0001-0001-000000000002": {
+      "param": "TR_YapDenetFirmaYetNo",
+      "new_guid": "34312ff2-0dab-5882-9e56-74ce79742d11"
+    },
+    "f1a00008-0001-0001-0001-000000000003": {
+      "param": "TR_RuhsatNo",
+      "new_guid": "fb749447-f69a-589f-b554-cacd7ddd9499"
+    },
+    "f1a00008-0001-0001-0001-000000000004": {
+      "param": "TR_RuhsatTarihi",
+      "new_guid": "b9af38b3-9b46-5dea-b299-21f02348866e"
+    },
+    "f1a00008-0001-0001-0001-000000000005": {
+      "param": "TR_MuteahhitUnvani",
+      "new_guid": "93c48a76-866e-5357-9de3-2a8815fc4f3b"
+    },
+    "f1a00008-0001-0001-0001-000000000006": {
+      "param": "TR_MuteahhitYKN",
+      "new_guid": "e7329b8a-a946-5a82-a514-13aedee25a5f"
+    },
+    "f1a00008-0001-0001-0001-000000000007": {
+      "param": "TR_IsverenVergiNo",
+      "new_guid": "62c2c2f5-95c5-56da-b811-ec70317ead8e"
+    },
+    "f1a00008-0001-0001-0001-000000000008": {
+      "param": "TR_YapiSeviyesi",
+      "new_guid": "0f9acff1-9962-5d66-ad52-a27142728ad3"
+    },
+    "f1a00009-0001-0001-0001-000000000001": {
+      "param": "TR_IlIlce",
+      "new_guid": "2b4373d5-4c51-586a-89e9-b94b7508cf53"
+    },
+    "f1a00009-0001-0001-0001-000000000002": {
+      "param": "TR_AdaNo",
+      "new_guid": "b2ac4595-9b5c-599c-8cb3-f1e9659acd97"
+    },
+    "f1a00009-0001-0001-0001-000000000003": {
+      "param": "TR_ParselNo",
+      "new_guid": "a5c1fa72-da69-556b-8a2d-4ddced36600c"
+    },
+    "f1a00009-0001-0001-0001-000000000004": {
+      "param": "TR_TAKS",
+      "new_guid": "f6419b77-61ad-5232-a378-346015787e73"
+    },
+    "f1a00009-0001-0001-0001-000000000005": {
+      "param": "TR_KAKS",
+      "new_guid": "8ae6e410-caf7-5d5b-a284-9114bbe3e8dc"
+    },
+    "f1a00009-0001-0001-0001-000000000006": {
+      "param": "TR_MaxYukseklik",
+      "new_guid": "19353fdf-dd0f-52c3-a5ae-13a3ff6ff8f3"
+    },
+    "f1a00009-0001-0001-0001-000000000007": {
+      "param": "TR_OnCekmeMesafesi",
+      "new_guid": "3683fd0e-58cc-5004-806b-f869734d5ace"
+    },
+    "f1a00009-0001-0001-0001-000000000008": {
+      "param": "TR_YanCekmeMesafesi",
+      "new_guid": "77972a45-f61b-54dd-980b-837994583419"
+    },
+    "f1a00009-0001-0001-0001-000000000009": {
+      "param": "TR_ArkaKcekmeMesafesi",
+      "new_guid": "268b6cf9-87d6-5e64-945a-3c981bd6be06"
+    },
+    "f1a00009-0001-0001-0001-000000000010": {
+      "param": "TR_ImarDurumu",
+      "new_guid": "fa4338de-a33f-5172-aaed-0f85cba7db37"
+    },
+    "f1a00010-0001-0001-0001-000000000001": {
+      "param": "TR_LODSeviyesi",
+      "new_guid": "902c4db0-52b2-579b-8707-0b88c0833273"
+    },
+    "f1a00010-0001-0001-0001-000000000002": {
+      "param": "TR_LOISeviyesi",
+      "new_guid": "47860f25-fdfe-5dac-8378-1331edcd8681"
+    },
+    "f1a00010-0001-0001-0001-000000000003": {
+      "param": "TR_Disiplin",
+      "new_guid": "2cce75d0-04ed-5e16-9aae-53057c3eb32c"
+    },
+    "f1a00010-0001-0001-0001-000000000004": {
+      "param": "TR_IFCSurumu",
+      "new_guid": "f99b2aa9-42dd-5860-8ea3-d3677686a06e"
+    },
+    "f1a00010-0001-0001-0001-000000000005": {
+      "param": "TR_KoordinatSistemi",
+      "new_guid": "33bd19cf-3b21-5f7e-bbd1-bc63f3f2310f"
+    },
+    "f1a00010-0001-0001-0001-000000000006": {
+      "param": "TR_ModelDurumu",
+      "new_guid": "7263d025-490f-5057-8e25-547daae2592c"
+    },
+    "f1a00010-0001-0001-0001-000000000007": {
+      "param": "TR_OlusturmaTarihi",
+      "new_guid": "e7396cff-481e-5695-bcc6-6ee42c51567d"
+    },
+    "f1a00010-0001-0001-0001-000000000008": {
+      "param": "TR_SonGuncellemeTarihi",
+      "new_guid": "6a0e7954-8270-5ee2-b804-4275ab9b7d02"
+    },
+    "f1a00010-0001-0001-0001-000000000009": {
+      "param": "TR_ModelSorumlusu",
+      "new_guid": "345697bb-a24a-587c-9703-7da9a1958821"
+    },
+    "f1a00010-0001-0001-0001-000000000010": {
+      "param": "TR_FazBilgisi",
+      "new_guid": "3053dcab-298a-5832-aff6-2d0d855d9d20"
+    },
+    "f1a00011-0001-0001-0001-000000000001": {
+      "param": "TR_DuvarTipi",
+      "new_guid": "7c83ea1b-1050-5c9d-9ba5-61fbe025ca53"
+    },
+    "f1a00011-0001-0001-0001-000000000002": {
+      "param": "TR_DuvarKalinligi",
+      "new_guid": "e1e43d47-6dd0-5662-9c6d-98c62a4f8157"
+    },
+    "f1a00011-0001-0001-0001-000000000003": {
+      "param": "TR_DuvarYapimTuru",
+      "new_guid": "0354d922-5397-5615-adf7-f48b5f805a6d"
+    },
+    "f1a00011-0001-0001-0001-000000000004": {
+      "param": "TR_DuvarYalitimTipi",
+      "new_guid": "605a5949-2650-5bfc-a58e-9b9ba2a66190"
+    },
+    "f1a00011-0001-0001-0001-000000000005": {
+      "param": "TR_DuvarREI",
+      "new_guid": "e93ec384-1c79-5f8b-a075-d4f53ceb1fc5"
+    },
+    "f1a00011-0001-0001-0001-000000000006": {
+      "param": "TR_DuvarSesYalitim",
+      "new_guid": "fcb6903f-681b-584e-9c40-548d0dd8aa7a"
+    },
+    "f1a00006-0001-0001-0001-000000000003": {
+      "param": "TR_DuvarUDegeri",
+      "new_guid": "7014cc86-03f3-517a-9150-705d7624d8fe"
+    },
+    "f1a00011-0001-0001-0001-000000000008": {
+      "param": "TR_DuvarDisKaplama",
+      "new_guid": "dca7abe8-73b7-5a18-bc1b-f88016ecb711"
+    },
+    "f1a00011-0001-0001-0001-000000000009": {
+      "param": "TR_DuvarIcKaplama",
+      "new_guid": "95981fcd-c1c2-54e9-8397-2d16033735d6"
+    },
+    "f1a00011-0001-0001-0001-000000000010": {
+      "param": "TR_DuvarPozNo",
+      "new_guid": "f3bac078-5d0c-5337-848e-8d94c6db30a0"
+    },
+    "f1a00012-0001-0001-0001-000000000001": {
+      "param": "TR_KapiTipi",
+      "new_guid": "36ae7ceb-d399-5ebb-bf54-ca3077b3aacc"
+    },
+    "f1a00012-0001-0001-0001-000000000002": {
+      "param": "TR_KapiGenislik",
+      "new_guid": "d7b42b90-99bd-574a-aa7e-050fe62016b4"
+    },
+    "f1a00012-0001-0001-0001-000000000003": {
+      "param": "TR_KapiYukseklik",
+      "new_guid": "bac26722-c168-5342-96e1-09f161ba7bf8"
+    },
+    "f1a00012-0001-0001-0001-000000000004": {
+      "param": "TR_KapiYangınSinifi",
+      "new_guid": "28da2818-7527-5ab2-8d85-6e6cc7ae71d0"
+    },
+    "f1a00012-0001-0001-0001-000000000005": {
+      "param": "TR_KapiEngelli",
+      "new_guid": "4cbcf391-29be-5ad1-b0b1-332241784451"
+    },
+    "f1a00012-0001-0001-0001-000000000006": {
+      "param": "TR_KapiPanikBar",
+      "new_guid": "5bf0b572-0bf8-5f6d-8991-412938c1c7b0"
+    },
+    "f1a00012-0001-0001-0001-000000000007": {
+      "param": "TR_KapiAcilisYonu",
+      "new_guid": "889458d6-e41a-5b68-a46e-70ff933559d2"
+    },
+    "f1a00012-0001-0001-0001-000000000008": {
+      "param": "TR_KapiKilitTipi",
+      "new_guid": "67b936e7-6882-5edb-9bae-7982ce2951f9"
+    },
+    "f1a00012-0001-0001-0001-000000000009": {
+      "param": "TR_KapiUretici",
+      "new_guid": "9adf3c6b-721d-5475-ba5c-19c0a0e0fe75"
+    },
+    "f1a00012-0001-0001-0001-000000000010": {
+      "param": "TR_KapiPozNo",
+      "new_guid": "d71e1ee9-edf4-5ef9-b94a-aa9c3644836a"
+    },
+    "f1a00012-0001-0001-0001-000000000011": {
+      "param": "TR_KapiUDegeri",
+      "new_guid": "4c8e6cd5-bfb0-51dc-87f7-db31468c1fee"
+    },
+    "f1a00012-0001-0001-0001-000000000012": {
+      "param": "TR_KapiSesYalitim",
+      "new_guid": "27317cb8-8039-539d-904e-24b209d70616"
+    },
+    "f1a00013-0001-0001-0001-000000000001": {
+      "param": "TR_PencereTipi",
+      "new_guid": "04cb499c-0e05-5efb-b0ff-5e8abb804c2d"
+    },
+    "f1a00013-0001-0001-0001-000000000002": {
+      "param": "TR_PencereGenislik",
+      "new_guid": "c40bf886-088a-5e6e-8878-ddf6eed54104"
+    },
+    "f1a00013-0001-0001-0001-000000000003": {
+      "param": "TR_PencereYukseklik",
+      "new_guid": "aab11311-7992-5d47-baee-f3de8c037316"
+    },
+    "f1a00013-0001-0001-0001-000000000004": {
+      "param": "TR_PencereCamTipi",
+      "new_guid": "96868d87-b32e-5091-a63b-eee065000b88"
+    },
+    "f1a00013-0001-0001-0001-000000000005": {
+      "param": "TR_PencereUDegeri",
+      "new_guid": "e5f2e7b3-63f5-5550-9da2-3c3095251afc"
+    },
+    "f1a00013-0001-0001-0001-000000000006": {
+      "param": "TR_PencereSHGC",
+      "new_guid": "5b19cf6e-5799-5b5e-82bf-760910f6cea8"
+    },
+    "f1a00013-0001-0001-0001-000000000007": {
+      "param": "TR_PencereAcilmaTipi",
+      "new_guid": "20ef2d09-3dcb-557d-a252-c8f24ffcc68d"
+    },
+    "f1a00013-0001-0001-0001-000000000008": {
+      "param": "TR_PencereCerceveSistemi",
+      "new_guid": "c6c98527-e581-5428-a64f-acd95d41c274"
+    },
+    "f1a00013-0001-0001-0001-000000000009": {
+      "param": "TR_PencereSesYalitim",
+      "new_guid": "10652d64-e1ec-5b2a-886e-caf2a98ded46"
+    },
+    "f1a00013-0001-0001-0001-000000000010": {
+      "param": "TR_PencerePozNo",
+      "new_guid": "d3e23008-c52e-5f0f-9686-0728d5197f72"
+    },
+    "f1a00013-0001-0001-0001-000000000011": {
+      "param": "TR_PencereUretici",
+      "new_guid": "8592e66e-9536-590c-8ecc-f70d7f0d4591"
+    },
+    "f1a00013-0001-0001-0001-000000000012": {
+      "param": "TR_PencereEmniyet",
+      "new_guid": "a699fd40-0299-53ad-83fb-e9743561f81d"
+    },
+    "f1a00014-0001-0001-0001-000000000001": {
+      "param": "TR_DosemeTipi",
+      "new_guid": "a068fd7e-581a-5372-a4aa-eb6f03ffa0e6"
+    },
+    "f1a00014-0001-0001-0001-000000000002": {
+      "param": "TR_DosemeKalinligi",
+      "new_guid": "b328537a-5eb6-5f9c-b8d6-f37d12f47f56"
+    },
+    "f1a00014-0001-0001-0001-000000000003": {
+      "param": "TR_DosemeKaplama",
+      "new_guid": "c7f79b6d-569c-5322-b097-06d5aa8be4b8"
+    },
+    "f1a00014-0001-0001-0001-000000000004": {
+      "param": "TR_DosemeREI",
+      "new_guid": "f36539de-43e4-52f1-97c7-7fba981612a9"
+    },
+    "f1a00014-0001-0001-0001-000000000005": {
+      "param": "TR_DosemeSuYalitim",
+      "new_guid": "0ba52820-8783-544e-a071-d3170902a6ee"
+    },
+    "f1a00014-0001-0001-0001-000000000006": {
+      "param": "TR_DosemeIsıYalitim",
+      "new_guid": "0c53b2ff-3ad1-5982-baab-5c03286e4cc4"
+    },
+    "f1a00014-0001-0001-0001-000000000007": {
+      "param": "TR_DosemeUDegeri",
+      "new_guid": "d852cedf-25d8-5ecd-a1a7-7ab12d4aa1eb"
+    },
+    "f1a00014-0001-0001-0001-000000000008": {
+      "param": "TR_DosemeSesYalitim",
+      "new_guid": "02aac4ee-c93a-5772-8f2e-3d9a8208931c"
+    },
+    "f1a00014-0001-0001-0001-000000000009": {
+      "param": "TR_DosemePozNo",
+      "new_guid": "ce4fc49b-ca65-5d16-8018-9f8a616818d0"
+    },
+    "f1a00014-0001-0001-0001-000000000010": {
+      "param": "TR_DosemeYukKapasitesi",
+      "new_guid": "2b5201e9-7a29-59ce-b287-dd57b081e828"
+    },
+    "f1a00015-0001-0001-0001-000000000001": {
+      "param": "TR_CatiTipi",
+      "new_guid": "21a153ac-5658-5624-8d18-6ddbb81a3039"
+    },
+    "f1a00015-0001-0001-0001-000000000002": {
+      "param": "TR_CatiEgimi",
+      "new_guid": "2290c6a4-9dcc-5ce4-ac78-675809900bad"
+    },
+    "f1a00015-0001-0001-0001-000000000003": {
+      "param": "TR_CatiKaplama",
+      "new_guid": "59ac8b63-15f4-5b29-b0e5-be8e52181c95"
+    },
+    "f1a00015-0001-0001-0001-000000000004": {
+      "param": "TR_CatiSuYalitim",
+      "new_guid": "4bee66d2-28c6-5211-81e4-6d4d11007a82"
+    },
+    "f1a00015-0001-0001-0001-000000000005": {
+      "param": "TR_CatiIsıYalitim",
+      "new_guid": "83c5841b-e189-575d-bb35-fac8b95077db"
+    },
+    "f1a00006-0001-0001-0001-000000000005": {
+      "param": "TR_CatiUDegeri",
+      "new_guid": "1a734947-72b3-5154-99d6-53b0a0a37a8a"
+    },
+    "f1a00015-0001-0001-0001-000000000007": {
+      "param": "TR_CatiREI",
+      "new_guid": "e1529f10-b688-56f1-9efb-950318f50f40"
+    },
+    "f1a00015-0001-0001-0001-000000000008": {
+      "param": "TR_CatiPozNo",
+      "new_guid": "aa823500-aaa0-5ba4-821c-ee4c038c2395"
+    },
+    "f1a00016-0001-0001-0001-000000000001": {
+      "param": "TR_TS500_StandartSurum",
+      "new_guid": "59a4c775-346f-52d8-823a-80cd0701132e"
+    },
+    "f1a00016-0001-0001-0001-000000000002": {
+      "param": "TR_BetonSinifi_Proje",
+      "new_guid": "f716c388-1959-5332-b499-5ad90476dfff"
+    },
+    "f1a00016-0001-0001-0001-000000000003": {
+      "param": "TR_DonatiCeligiSinifi_Proje",
+      "new_guid": "9497646d-3775-528a-8b53-a1a87700bc86"
+    },
+    "f1a00016-0001-0001-0001-000000000004": {
+      "param": "TR_CevreEtkiSinifi",
+      "new_guid": "3f82ab6a-4dcf-5989-b0d4-53b4090cf1a8"
+    },
+    "f1a00016-0001-0001-0001-000000000005": {
+      "param": "TR_YapiTasiyiciSistemSinifi",
+      "new_guid": "42adb20a-571c-52a4-92dd-e32b4d26855e"
+    },
+    "f1a00016-0001-0001-0001-000000000006": {
+      "param": "TR_AnalizYontemi",
+      "new_guid": "ec0aa280-c621-5236-a631-0494f1ea3b09"
+    },
+    "f1a00016-0001-0001-0001-000000000007": {
+      "param": "TR_StatikModelVersiyonu",
+      "new_guid": "81d51432-e77f-54ba-92b9-ee63bfadb62d"
+    },
+    "f1a00016-0001-0001-0001-000000000008": {
+      "param": "TR_HesapRaporNo",
+      "new_guid": "598da05e-5ba6-5971-9f6c-f977252eadd9"
+    },
+    "f1a00016-0001-0001-0001-000000000009": {
+      "param": "TR_RevizyonStatik",
+      "new_guid": "450a2a8d-3ec8-5ea9-830e-580722259307"
+    },
+    "f1a00017-0001-0001-0001-000000000001": {
+      "param": "TR_BA_ElemanKodu",
+      "new_guid": "f630dff0-a04a-56da-9264-a2a474dadf01"
+    },
+    "f1a00017-0001-0001-0001-000000000002": {
+      "param": "TR_BA_ElemanTipi",
+      "new_guid": "c67219ec-2483-5444-879c-faa9f75fa673"
+    },
+    "f1a00017-0001-0001-0001-000000000003": {
+      "param": "TR_BA_TasiyiciSistemAltTuru",
+      "new_guid": "0b47b2c1-90bb-5de3-a1a3-f9206aaba832"
+    },
+    "f1a00017-0001-0001-0001-000000000004": {
+      "param": "TR_BA_BetonSinifi",
+      "new_guid": "ef9651f5-9f0f-5011-9a29-26d4855b45b5"
+    },
+    "f1a00017-0001-0001-0001-000000000005": {
+      "param": "TR_BA_DonatiSinifi",
+      "new_guid": "4472e918-943a-5b53-9693-291ad80ccb9b"
+    },
+    "f1a00017-0001-0001-0001-000000000006": {
+      "param": "TR_BA_NominalBetonOrtusu",
+      "new_guid": "f08e6a17-4da6-5d99-9ef3-cc62725a2eba"
+    },
+    "f1a00017-0001-0001-0001-000000000007": {
+      "param": "TR_BA_KesitGenislik",
+      "new_guid": "6af42aa4-bc77-576f-9d93-f5ac3036c4ff"
+    },
+    "f1a00017-0001-0001-0001-000000000008": {
+      "param": "TR_BA_KesitYukseklik",
+      "new_guid": "e5f0b135-08fc-59f2-badb-775a2ba969bf"
+    },
+    "f1a00017-0001-0001-0001-000000000009": {
+      "param": "TR_BA_DosemeKalinligi",
+      "new_guid": "4961d29f-e307-53b5-a192-8df3887dd5a0"
+    },
+    "f1a00017-0001-0001-0001-000000000010": {
+      "param": "TR_BA_PerdeKalinligi",
+      "new_guid": "04c5f22c-4762-5573-b5df-480fd3e6f73b"
+    },
+    "f1a00017-0001-0001-0001-000000000011": {
+      "param": "TR_BA_TemelTipi",
+      "new_guid": "2f36f54b-2036-56a9-b15c-15eba60d1da7"
+    },
+    "f1a00017-0001-0001-0001-000000000012": {
+      "param": "TR_BA_PrecastMi",
+      "new_guid": "702d7d24-d627-5cb5-86d5-ebe21e51de77"
+    },
+    "f1a00017-0001-0001-0001-000000000013": {
+      "param": "TR_BA_ImalatDurumu",
+      "new_guid": "9a4f1abb-d7e8-55ee-8826-bb3fbfe9ca84"
+    },
+    "f1a00018-0001-0001-0001-000000000001": {
+      "param": "TR_BA_AnaDonatiUst",
+      "new_guid": "b12f6e09-3a57-5773-ad72-ea0005cfa6b9"
+    },
+    "f1a00018-0001-0001-0001-000000000002": {
+      "param": "TR_BA_AnaDonatiAlt",
+      "new_guid": "ef1d8e22-baca-5520-9097-1919de371931"
+    },
+    "f1a00018-0001-0001-0001-000000000003": {
+      "param": "TR_BA_GovdeDonatisi",
+      "new_guid": "fb6b7a7d-5f0b-5b63-9604-59067d8476b2"
+    },
+    "f1a00018-0001-0001-0001-000000000004": {
+      "param": "TR_BA_EtriyeCapi",
+      "new_guid": "afd32d83-5d63-56d6-87de-84cce3c222de"
+    },
+    "f1a00018-0001-0001-0001-000000000005": {
+      "param": "TR_BA_EtriyeAraligi",
+      "new_guid": "dac7fc2f-b595-52fc-a82c-b541843e93c0"
+    },
+    "f1a00018-0001-0001-0001-000000000006": {
+      "param": "TR_BA_SiklastirmaBolgesiVarMi",
+      "new_guid": "1b91bb70-23b8-5d17-9c99-e550967106c4"
+    },
+    "f1a00018-0001-0001-0001-000000000007": {
+      "param": "TR_BA_SiklastirmaAraligi",
+      "new_guid": "957231e3-3a4f-5d43-b83c-e6d5a50e8bfc"
+    },
+    "f1a00018-0001-0001-0001-000000000008": {
+      "param": "TR_BA_PilyeVarMi",
+      "new_guid": "48dff661-1b64-53f9-b815-823b547fbe8b"
+    },
+    "f1a00018-0001-0001-0001-000000000009": {
+      "param": "TR_BA_FilletoVarMi",
+      "new_guid": "8699a9fe-6d2c-52be-abe7-1de1de2795ec"
+    },
+    "f1a00018-0001-0001-0001-000000000010": {
+      "param": "TR_BA_PasPayiKontrol",
+      "new_guid": "1cfdc08e-e195-5040-bfd8-9fb89680f04f"
+    },
+    "f1a00018-0001-0001-0001-000000000011": {
+      "param": "TR_BA_AnkrajBoyu",
+      "new_guid": "eeac48d8-33cb-5920-8aed-13bf44030ccf"
+    },
+    "f1a00018-0001-0001-0001-000000000012": {
+      "param": "TR_BA_EkBoyu",
+      "new_guid": "ee115beb-3e12-5e8a-806d-e74689423f9c"
+    },
+    "f1a00018-0001-0001-0001-000000000013": {
+      "param": "TR_BA_DonatiNotu",
+      "new_guid": "e04269f3-ffdd-53e1-8dbf-00acae09d0dd"
+    },
+    "f1a00019-0001-0001-0001-000000000001": {
+      "param": "TR_BA_TS500_KontrolDurumu",
+      "new_guid": "722f6bb6-7733-53d6-bcd9-6ba25c1c7b22"
+    },
+    "f1a00019-0001-0001-0001-000000000002": {
+      "param": "TR_BA_TBDY_UyumDurumu",
+      "new_guid": "5d08de09-7aaf-562e-9f1a-028035465967"
+    },
+    "f1a00019-0001-0001-0001-000000000003": {
+      "param": "TR_BA_RevizyonGerekiyorMu",
+      "new_guid": "b9947f0b-0dc0-56bf-b063-587883bb1708"
+    },
+    "f1a00019-0001-0001-0001-000000000004": {
+      "param": "TR_BA_KontrolEden",
+      "new_guid": "997982c1-2f77-5a14-80d1-363ad3b38fe5"
+    },
+    "f1a00019-0001-0001-0001-000000000005": {
+      "param": "TR_BA_KontrolTarihi",
+      "new_guid": "a58ea2b4-6718-5c3d-b41a-ab48cde583cd"
+    },
+    "f1a00019-0001-0001-0001-000000000006": {
+      "param": "TR_BA_Onaylayan",
+      "new_guid": "695397f5-273f-529b-af67-5525585a317f"
+    },
+    "f1a00019-0001-0001-0001-000000000007": {
+      "param": "TR_BA_OnayTarihi",
+      "new_guid": "3a2a5a54-fb4c-55dc-a76d-ca2ea4324c38"
+    },
+    "f1a00019-0001-0001-0001-000000000008": {
+      "param": "TR_BA_Aciklama",
+      "new_guid": "6de56d7b-d352-5940-a832-3deb4fd2c0ac"
+    },
+    "f1a00019-0001-0001-0001-000000000009": {
+      "param": "TR_BA_HesapModelID",
+      "new_guid": "8fc69cdb-e00e-55b1-9d3f-4ea60bd17ab3"
+    },
+    "f1a00019-0001-0001-0001-000000000010": {
+      "param": "TR_BA_IFCExportSinifi",
+      "new_guid": "0e761024-d5d8-5630-966d-585973dc91c2"
+    },
+    "f1a00020-0001-0001-0001-000000000001": {
+      "param": "TR_MEP_MekMuhendis",
+      "new_guid": "e0262889-01ce-5dca-b037-acc3e0cddab7"
+    },
+    "f1a00020-0001-0001-0001-000000000002": {
+      "param": "TR_MEP_MekOdaNo",
+      "new_guid": "df4ae240-9a68-5db7-a3e8-f559d28aa491"
+    },
+    "f1a00020-0001-0001-0001-000000000003": {
+      "param": "TR_MEP_ElkMuhendis",
+      "new_guid": "3850bae0-418a-52bd-9018-c515ef5ecd4e"
+    },
+    "f1a00020-0001-0001-0001-000000000004": {
+      "param": "TR_MEP_ElkOdaNo",
+      "new_guid": "ff944047-b338-51c4-836d-a7fd7f4c1d57"
+    },
+    "f1a00020-0001-0001-0001-000000000005": {
+      "param": "TR_MEP_ModelVersiyonu",
+      "new_guid": "0cfe70b0-6bfe-5f0c-99e9-584e7849a68c"
+    },
+    "f1a00020-0001-0001-0001-000000000006": {
+      "param": "TR_MEP_KoordinasyonDurumu",
+      "new_guid": "49b9d71f-06fc-512d-b9b5-505e3dc15df9"
+    },
+    "f1a00020-0001-0001-0001-000000000007": {
+      "param": "TR_MEP_ClashTespitTarihi",
+      "new_guid": "fa6a5373-d2ce-5061-b8c4-fa05dd057068"
+    },
+    "f1a00020-0001-0001-0001-000000000008": {
+      "param": "TR_MEP_ClashDurumu",
+      "new_guid": "45c1e54f-4677-5444-932d-75d30f1244fa"
+    },
+    "f1a00020-0001-0001-0001-000000000009": {
+      "param": "TR_MEP_IFCSurumu",
+      "new_guid": "a3ea88d3-43d0-5ac6-892b-358232e9d6fd"
+    },
+    "f1a00020-0001-0001-0001-000000000010": {
+      "param": "TR_MEP_HesapRaporNo",
+      "new_guid": "c35a1782-a58b-5962-a587-199834bd6742"
+    },
+    "f1a00021-0001-0001-0001-000000000004": {
+      "param": "TR_HVAC_KanalMalzeme",
+      "new_guid": "d5bed9fe-b0b5-5a91-b986-41e5a27dc06b"
+    },
+    "f1a00021-0001-0001-0001-000000000001": {
+      "param": "TR_HVAC_SistemTipi",
+      "new_guid": "76a3ac68-c4c2-54cc-8314-5d1a5f226454"
+    },
+    "f1a00021-0001-0001-0001-000000000002": {
+      "param": "TR_HVAC_KapalıDevreMi",
+      "new_guid": "0ca7a4f8-049a-5d6c-8245-a17817935a0d"
+    },
+    "f1a00021-0001-0001-0001-000000000003": {
+      "param": "TR_HVAC_KanalTipi",
+      "new_guid": "2b10ce88-93e6-5da2-bd75-fbdc4c9c3d26"
+    },
+    "f1a00021-0001-0001-0001-000000000005": {
+      "param": "TR_HVAC_HavaHizi",
+      "new_guid": "8d3dfba9-6636-5474-a63e-7928d6f063f3"
+    },
+    "f1a00021-0001-0001-0001-000000000006": {
+      "param": "TR_HVAC_HavaDebisi",
+      "new_guid": "ed36bbea-3d5a-5bdc-a6ee-22ed00ceff63"
+    },
+    "f1a00021-0001-0001-0001-000000000007": {
+      "param": "TR_HVAC_BasıncKaybi",
+      "new_guid": "a9fa5a7c-9417-5eb7-a0e7-a2e168622219"
+    },
+    "f1a00021-0001-0001-0001-000000000008": {
+      "param": "TR_HVAC_YalitimTipi",
+      "new_guid": "9d997e14-b7c5-52b6-a3b7-8fabe10b5e96"
+    },
+    "f1a00021-0001-0001-0001-000000000009": {
+      "param": "TR_HVAC_YangınDamperVarMi",
+      "new_guid": "af1f5307-8371-57bf-b7c4-6fde713d9ee9"
+    },
+    "f1a00021-0001-0001-0001-000000000010": {
+      "param": "TR_HVAC_DumDamperVarMi",
+      "new_guid": "dbf15e7b-0ffd-5ebd-b834-1699a96d92c1"
+    },
+    "f1a00021-0001-0001-0001-000000000011": {
+      "param": "TR_HVAC_SistemAdi",
+      "new_guid": "a63dd54a-f49a-5351-a819-0f3fd431950c"
+    },
+    "f1a00021-0001-0001-0001-000000000012": {
+      "param": "TR_HVAC_GurultuSeviyesi",
+      "new_guid": "78c54f24-4e80-5476-b8bc-da0b365ea063"
+    },
+    "f1a00022-0001-0001-0001-000000000001": {
+      "param": "TR_ISI_SistemTipi",
+      "new_guid": "76342549-aec1-5bc6-a676-1705cdb4a618"
+    },
+    "f1a00022-0001-0001-0001-000000000002": {
+      "param": "TR_ISI_KazanTipi",
+      "new_guid": "fc94a7c7-4a2e-554b-a4c2-382cced4e46e"
+    },
+    "f1a00022-0001-0001-0001-000000000003": {
+      "param": "TR_ISI_BorMalzeme",
+      "new_guid": "cd51dec3-4c85-5b4b-8724-0355242edcc2"
+    },
+    "f1a00022-0001-0001-0001-000000000004": {
+      "param": "TR_ISI_BorCap",
+      "new_guid": "826123dc-deb3-551e-9e53-e815446c1f06"
+    },
+    "f1a00022-0001-0001-0001-000000000005": {
+      "param": "TR_ISI_IsıtmaDebi",
+      "new_guid": "47294b2e-5375-5d25-8f58-1441a9b4d98f"
+    },
+    "f1a00022-0001-0001-0001-000000000006": {
+      "param": "TR_ISI_SogutmaDebi",
+      "new_guid": "ec8a305c-84fb-5ac5-ad2e-e34e7afd2a6b"
+    },
+    "f1a00022-0001-0001-0001-000000000007": {
+      "param": "TR_ISI_GirisScakligi",
+      "new_guid": "006a66f0-231c-5a93-91f1-a0c0582604bb"
+    },
+    "f1a00022-0001-0001-0001-000000000008": {
+      "param": "TR_ISI_DonusScakligi",
+      "new_guid": "c03b0b08-5e4f-5bd9-a041-416430186a1e"
+    },
+    "f1a00022-0001-0001-0001-000000000009": {
+      "param": "TR_ISI_YalitimTipi",
+      "new_guid": "588f5dd9-f4d1-50c2-b39c-c1718cc3f14a"
+    },
+    "f1a00022-0001-0001-0001-000000000010": {
+      "param": "TR_ISI_BasincSinifi",
+      "new_guid": "372be506-b67a-56aa-aafb-db25c93a7aa0"
+    },
+    "f1a00022-0001-0001-0001-000000000011": {
+      "param": "TR_ISI_SistemAdi",
+      "new_guid": "fbc89b12-b929-5ae6-92b7-b090a0b2ee18"
+    },
+    "f1a00023-0001-0001-0001-000000000001": {
+      "param": "TR_SHT_SistemTipi",
+      "new_guid": "9ff99f16-bd2d-53d2-9253-66cab097fc88"
+    },
+    "f1a00023-0001-0001-0001-000000000002": {
+      "param": "TR_SHT_BorMalzeme",
+      "new_guid": "b2dd94b3-0e3a-50a6-b738-a3ee6f8d03ac"
+    },
+    "f1a00023-0001-0001-0001-000000000003": {
+      "param": "TR_SHT_BorCap",
+      "new_guid": "f53ef3bf-9bee-5750-84be-9cfccc6b6220"
+    },
+    "f1a00023-0001-0001-0001-000000000004": {
+      "param": "TR_SHT_BasincSinifi",
+      "new_guid": "83439ec7-377a-5aa4-835a-b00d6a2197b3"
+    },
+    "f1a00023-0001-0001-0001-000000000005": {
+      "param": "TR_SHT_EgimYuzde",
+      "new_guid": "3e933115-4523-5996-b443-07535400ebd6"
+    },
+    "f1a00023-0001-0001-0001-000000000006": {
+      "param": "TR_SHT_HidroforVarMi",
+      "new_guid": "1f0b3f02-bb5a-5623-970a-ceb5fc0d74b0"
+    },
+    "f1a00023-0001-0001-0001-000000000007": {
+      "param": "TR_SHT_DepoHacmi",
+      "new_guid": "e0c79210-ede1-5ff9-a20c-d214e407e5c4"
+    },
+    "f1a00023-0001-0001-0001-000000000008": {
+      "param": "TR_SHT_SicakSuSistemi",
+      "new_guid": "92d96b18-c790-5564-9c69-e486b7a1efda"
+    },
+    "f1a00023-0001-0001-0001-000000000009": {
+      "param": "TR_SHT_YalitimTipi",
+      "new_guid": "b5da38da-97a9-515b-9b76-33561e1ddf58"
+    },
+    "f1a00023-0001-0001-0001-000000000010": {
+      "param": "TR_SHT_SistemAdi",
+      "new_guid": "145abc4a-b970-51b0-be87-bfee749c2858"
+    },
+    "f1a00024-0001-0001-0001-000000000001": {
+      "param": "TR_YAN_SprinklerTipi",
+      "new_guid": "5501edae-317a-5459-b336-7b5f69810d25"
+    },
+    "f1a00024-0001-0001-0001-000000000002": {
+      "param": "TR_YAN_SprinklerBasinc",
+      "new_guid": "1bb2a95c-0e38-55d0-a726-98135d2d10ef"
+    },
+    "f1a00024-0001-0001-0001-000000000003": {
+      "param": "TR_YAN_SprinklerDebi",
+      "new_guid": "ca4ec92f-9e42-5fdc-b9c1-1c902ea9af8c"
+    },
+    "f1a00024-0001-0001-0001-000000000004": {
+      "param": "TR_YAN_HazardSinifi",
+      "new_guid": "49e66a45-1f16-5fb3-a70d-89b676324e24"
+    },
+    "f1a00024-0001-0001-0001-000000000005": {
+      "param": "TR_YAN_BorMalzeme",
+      "new_guid": "159958f1-1c85-5af5-9de7-69ae666f03f6"
+    },
+    "f1a00024-0001-0001-0001-000000000006": {
+      "param": "TR_YAN_BorCap",
+      "new_guid": "872efd87-806e-51c8-b213-89b4421d302a"
+    },
+    "f1a00024-0001-0001-0001-000000000007": {
+      "param": "TR_YAN_ItfaiyeBaglantisi",
+      "new_guid": "db467de0-216a-5b99-8a2b-ba8f96bd7056"
+    },
+    "f1a00024-0001-0001-0001-000000000008": {
+      "param": "TR_YAN_HidrantTipi",
+      "new_guid": "158fc0b3-9bb9-5f4d-9674-fc3c310b2ce9"
+    },
+    "f1a00024-0001-0001-0001-000000000009": {
+      "param": "TR_YAN_KosumaDebi",
+      "new_guid": "1a313c0f-632a-52ad-9f2c-4c8e51989223"
+    },
+    "f1a00024-0001-0001-0001-000000000010": {
+      "param": "TR_YAN_SistemAdi",
+      "new_guid": "fc0e7b70-a76c-5426-89bb-d8dcee4e3ea6"
+    },
+    "f1a00025-0001-0001-0001-000000000001": {
+      "param": "TR_ELK_SistemGerilimiV",
+      "new_guid": "27d7a0af-cf18-5286-9270-05f3354fb1a3"
+    },
+    "f1a00025-0001-0001-0001-000000000002": {
+      "param": "TR_ELK_KableTipi",
+      "new_guid": "1385f871-3a5c-5f75-8d73-5e2993ccb957"
+    },
+    "f1a00025-0001-0001-0001-000000000003": {
+      "param": "TR_ELK_KableCap",
+      "new_guid": "10a8389d-0b1e-521b-8fbd-04ae2a4a71a4"
+    },
+    "f1a00025-0001-0001-0001-000000000004": {
+      "param": "TR_ELK_DevreTipi",
+      "new_guid": "3354e81a-deb3-5d0f-8afc-19957346c278"
+    },
+    "f1a00025-0001-0001-0001-000000000005": {
+      "param": "TR_ELK_PanoAdi",
+      "new_guid": "0898deae-d43d-50e1-b4b6-4e5854450342"
+    },
+    "f1a00025-0001-0001-0001-000000000006": {
+      "param": "TR_ELK_DevreNo",
+      "new_guid": "747b13dc-b25f-562a-89b4-d6bf868bdbd6"
+    },
+    "f1a00025-0001-0001-0001-000000000007": {
+      "param": "TR_ELK_GuvenlikSinifi",
+      "new_guid": "875f7846-6521-5bfd-9d17-c2bfee396d09"
+    },
+    "f1a00025-0001-0001-0001-000000000008": {
+      "param": "TR_ELK_YangindaCalismaSuresi",
+      "new_guid": "7a784696-a8f9-53d0-948f-5e16ac5cf9e5"
+    },
+    "f1a00025-0001-0001-0001-000000000009": {
+      "param": "TR_ELK_KorumaTipi",
+      "new_guid": "3e50bece-9885-50d6-b09b-3472168061f1"
+    },
+    "f1a00025-0001-0001-0001-000000000010": {
+      "param": "TR_ELK_SistemAdi",
+      "new_guid": "4793b360-40c4-59b2-b0ad-d0754ce0c4d5"
+    },
+    "f1a00026-0001-0001-0001-000000000001": {
+      "param": "TR_ZA_SistemTipi",
+      "new_guid": "dfd8a4e6-0279-5e04-9dc4-544619d0e3d4"
+    },
+    "f1a00026-0001-0001-0001-000000000002": {
+      "param": "TR_ZA_KableTipi",
+      "new_guid": "357b7299-58f4-5b90-8f81-1f88c3588215"
+    },
+    "f1a00026-0001-0001-0001-000000000003": {
+      "param": "TR_ZA_CihazAdi",
+      "new_guid": "dc5d8cb9-57cf-56d0-a6d8-c240597d43bb"
+    },
+    "f1a00026-0001-0001-0001-000000000004": {
+      "param": "TR_ZA_ZonNo",
+      "new_guid": "4b4ed5c1-4e83-5244-a485-e7562fe234e6"
+    },
+    "f1a00026-0001-0001-0001-000000000005": {
+      "param": "TR_ZA_IPAdresi",
+      "new_guid": "ecdfb4c6-5f38-5cc2-8137-cbc1d423baf5"
+    },
+    "f1a00026-0001-0001-0001-000000000006": {
+      "param": "TR_ZA_GucTuketimi",
+      "new_guid": "080129a3-99a1-53d7-aaba-a18cab9faf8b"
+    },
+    "f1a00026-0001-0001-0001-000000000007": {
+      "param": "TR_ZA_POEVarMi",
+      "new_guid": "682c526c-2933-5462-9ce4-f1442fc22a14"
+    },
+    "f1a00026-0001-0001-0001-000000000008": {
+      "param": "TR_ZA_SistemAdi",
+      "new_guid": "6f925154-af5a-52b8-8c89-b7f8c6539535"
+    },
+    "f1a00027-0001-0001-0001-000000000001": {
+      "param": "TR_MEP_KontrolDurumu",
+      "new_guid": "5c33284e-256f-5931-83f1-ccf4c01ec12a"
+    },
+    "f1a00027-0001-0001-0001-000000000002": {
+      "param": "TR_MEP_RevizyonGerekiyorMu",
+      "new_guid": "3a6ed821-ce69-5eb3-ba42-21be6f81453e"
+    },
+    "f1a00027-0001-0001-0001-000000000003": {
+      "param": "TR_MEP_KontrolEden",
+      "new_guid": "4e11769d-2a62-57fc-856f-03fdd5bc6979"
+    },
+    "f1a00027-0001-0001-0001-000000000004": {
+      "param": "TR_MEP_KontrolTarihi",
+      "new_guid": "188110a2-11d3-57b3-89fa-d5820d97e17e"
+    },
+    "f1a00027-0001-0001-0001-000000000005": {
+      "param": "TR_MEP_Onaylayan",
+      "new_guid": "c2927037-071f-5dc7-9092-8c8a8ad547bb"
+    },
+    "f1a00027-0001-0001-0001-000000000006": {
+      "param": "TR_MEP_OnayTarihi",
+      "new_guid": "3ac36a1c-9b93-5c04-935a-13609566defb"
+    },
+    "f1a00027-0001-0001-0001-000000000007": {
+      "param": "TR_MEP_ClashCozulduMu",
+      "new_guid": "5bd12f4b-18ca-50d7-884a-704b5e519e8d"
+    },
+    "f1a00027-0001-0001-0001-000000000008": {
+      "param": "TR_MEP_Aciklama",
+      "new_guid": "8ec91e69-2dce-5012-971b-1cfd737e0617"
+    },
+    "f1a00027-0001-0001-0001-000000000009": {
+      "param": "TR_MEP_HesapModelID",
+      "new_guid": "d6f36436-a901-5bb6-a925-3fae3ad3b77d"
+    },
+    "f1a00027-0001-0001-0001-000000000010": {
+      "param": "TR_MEP_IFCExportSinifi",
+      "new_guid": "702d6a1a-07a6-569c-897b-447dbd3e848e"
+    },
+    "f1a00028-0001-0001-0001-000000000001": {
+      "param": "TR_MEP_PozNo",
+      "new_guid": "80bdfbbf-ef08-5b04-94e6-4ed39f9055a3"
+    },
+    "f1a00028-0001-0001-0001-000000000002": {
+      "param": "TR_MEP_PozAdi",
+      "new_guid": "7a880d0e-71fc-57b3-9923-ad90f19ae838"
+    },
+    "f1a00028-0001-0001-0001-000000000003": {
+      "param": "TR_MEP_Birim",
+      "new_guid": "83b1a815-1dd9-54eb-983c-d3b80c4d78ca"
+    },
+    "f1a00028-0001-0001-0001-000000000004": {
+      "param": "TR_MEP_Miktar",
+      "new_guid": "59620a7a-5385-5215-9cee-c3df07f3b1e1"
+    },
+    "f1a00028-0001-0001-0001-000000000005": {
+      "param": "TR_MEP_BirimFiyat",
+      "new_guid": "01de2561-f90d-5405-aaf4-6c0f9e88d42d"
+    },
+    "f1a00028-0001-0001-0001-000000000006": {
+      "param": "TR_MEP_ToplamTutar",
+      "new_guid": "4067172f-fe1b-54d0-9e8d-41ab83b35eb0"
+    },
+    "a1b2c3d4-e5f6-4a7b-8c9d-000000000001": {
+      "param": "TR_KalipPozNo",
+      "new_guid": "e2fbe95c-1deb-50bc-b2fd-ad4a1f3494ef"
+    },
+    "a1b2c3d4-e5f6-4a7b-8c9d-000000000002": {
+      "param": "TR_KalipPozAdi",
+      "new_guid": "fbcbece2-cdfe-5c34-af96-6a66bdcae94b"
+    },
+    "a1b2c3d4-e5f6-4a7b-8c9d-000000000003": {
+      "param": "TR_KalipBirimFiyat",
+      "new_guid": "5d908bbf-1b05-5b13-a0f4-f6f769050a7c"
+    },
+    "a1b2c3d4-e5f6-4a7b-8c9d-000000000004": {
+      "param": "TR_KalipAlani",
+      "new_guid": "4fc39fce-6355-5557-9c88-3461503096a6"
+    },
+    "a1b2c3d4-e5f6-4a7b-8c9d-000000000005": {
+      "param": "TR_KalipToplamTutar",
+      "new_guid": "e224e020-d281-5239-8bfd-58f1d5ccf4a7"
+    }
+  }
+}

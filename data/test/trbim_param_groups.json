@@ -1,0 +1,331 @@
+{
+  "_source": "TR_BIM_Revit_Binding_Matrisi — Grup_Ozet",
+  "_count": 36,
+  "_aciklama": "36 parametre grubu — disiplin, tip/instance önerisi, Revit kategori seti",
+  "groups": [
+    {
+      "grup_id": 1,
+      "grup_adi": "TR-GENEL PROJE BİLGİLERİ",
+      "disiplin": "Ortak / BIM",
+      "toplam_param": 15,
+      "type_onerisi": 0,
+      "instance_onerisi": 15,
+      "revit_kategori_seti": "Project Information"
+    },
+    {
+      "grup_id": 2,
+      "grup_adi": "TR-YAPI BİLGİLERİ",
+      "disiplin": "Ortak / BIM",
+      "toplam_param": 13,
+      "type_onerisi": 0,
+      "instance_onerisi": 13,
+      "revit_kategori_seti": "Project Information"
+    },
+    {
+      "grup_id": 3,
+      "grup_adi": "TR-YANGIN GÜVENLİĞİ (BYKHY 2019)",
+      "disiplin": "Mimari",
+      "toplam_param": 20,
+      "type_onerisi": 4,
+      "instance_onerisi": 16,
+      "revit_kategori_seti": "Project Information"
+    },
+    {
+      "grup_id": 4,
+      "grup_adi": "TR-DEPREM (TBDY 2018)",
+      "disiplin": "Statik",
+      "toplam_param": 12,
+      "type_onerisi": 0,
+      "instance_onerisi": 12,
+      "revit_kategori_seti": "Project Information"
+    },
+    {
+      "grup_id": 5,
+      "grup_adi": "TR-ERİŞİLEBİLİRLİK (TS 9111)",
+      "disiplin": "Mimari",
+      "toplam_param": 10,
+      "type_onerisi": 1,
+      "instance_onerisi": 9,
+      "revit_kategori_seti": "Architecture - Accessibility"
+    },
+    {
+      "grup_id": 6,
+      "grup_adi": "TR-ENERJİ VERİMLİLİĞİ (BEP-TR)",
+      "disiplin": "Mimari",
+      "toplam_param": 13,
+      "type_onerisi": 5,
+      "instance_onerisi": 8,
+      "revit_kategori_seti": "Project Information"
+    },
+    {
+      "grup_id": 7,
+      "grup_adi": "TR-ÇŞB POZ NO VE METRAJ",
+      "disiplin": "Ortak / BIM",
+      "toplam_param": 10,
+      "type_onerisi": 0,
+      "instance_onerisi": 10,
+      "revit_kategori_seti": "All Model Categories"
+    },
+    {
+      "grup_id": 8,
+      "grup_adi": "TR-YAPI DENETİM",
+      "disiplin": "Ortak / BIM",
+      "toplam_param": 8,
+      "type_onerisi": 0,
+      "instance_onerisi": 8,
+      "revit_kategori_seti": "Project Information"
+    },
+    {
+      "grup_id": 9,
+      "grup_adi": "TR-İMAR BİLGİLERİ",
+      "disiplin": "Ortak / BIM",
+      "toplam_param": 10,
+      "type_onerisi": 0,
+      "instance_onerisi": 10,
+      "revit_kategori_seti": "Project Information"
+    },
+    {
+      "grup_id": 10,
+      "grup_adi": "TR-BIM YÖNETİM",
+      "disiplin": "Ortak / BIM",
+      "toplam_param": 15,
+      "type_onerisi": 5,
+      "instance_onerisi": 10,
+      "revit_kategori_seti": "Project Information"
+    },
+    {
+      "grup_id": 11,
+      "grup_adi": "TR-DUVAR ÖZELLİKLERİ",
+      "disiplin": "Mimari",
+      "toplam_param": 10,
+      "type_onerisi": 10,
+      "instance_onerisi": 0,
+      "revit_kategori_seti": "Architecture - Walls"
+    },
+    {
+      "grup_id": 12,
+      "grup_adi": "TR-KAPI ÖZELLİKLERİ",
+      "disiplin": "Mimari",
+      "toplam_param": 12,
+      "type_onerisi": 12,
+      "instance_onerisi": 0,
+      "revit_kategori_seti": "Architecture - Doors"
+    },
+    {
+      "grup_id": 13,
+      "grup_adi": "TR-PENCERE ÖZELLİKLERİ",
+      "disiplin": "Mimari",
+      "toplam_param": 12,
+      "type_onerisi": 12,
+      "instance_onerisi": 0,
+      "revit_kategori_seti": "Architecture - Windows"
+    },
+    {
+      "grup_id": 14,
+      "grup_adi": "TR-DÖŞEME ÖZELLİKLERİ",
+      "disiplin": "Mimari",
+      "toplam_param": 10,
+      "type_onerisi": 10,
+      "instance_onerisi": 0,
+      "revit_kategori_seti": "Architecture - Floors"
+    },
+    {
+      "grup_id": 15,
+      "grup_adi": "TR-ÇATI ÖZELLİKLERİ",
+      "disiplin": "Mimari",
+      "toplam_param": 8,
+      "type_onerisi": 8,
+      "instance_onerisi": 0,
+      "revit_kategori_seti": "Architecture - Roofs"
+    },
+    {
+      "grup_id": 16,
+      "grup_adi": "TR-TS500 GENEL BETONARME",
+      "disiplin": "Statik",
+      "toplam_param": 9,
+      "type_onerisi": 0,
+      "instance_onerisi": 9,
+      "revit_kategori_seti": "Project Information"
+    },
+    {
+      "grup_id": 17,
+      "grup_adi": "TR-TS500 BA ELEMAN ÖZELLİKLERİ",
+      "disiplin": "Statik",
+      "toplam_param": 13,
+      "type_onerisi": 13,
+      "instance_onerisi": 0,
+      "revit_kategori_seti": "Structure - Core"
+    },
+    {
+      "grup_id": 18,
+      "grup_adi": "TR-TS500 BA DONATILAMA",
+      "disiplin": "Statik",
+      "toplam_param": 13,
+      "type_onerisi": 13,
+      "instance_onerisi": 0,
+      "revit_kategori_seti": "Structure - Rebar / Concrete"
+    },
+    {
+      "grup_id": 19,
+      "grup_adi": "TR-TS500 BA KONTROL VE UYGUNLUK",
+      "disiplin": "Statik",
+      "toplam_param": 10,
+      "type_onerisi": 0,
+      "instance_onerisi": 10,
+      "revit_kategori_seti": "Structure - Core"
+    },
+    {
+      "grup_id": 20,
+      "grup_adi": "TR-MEP GENEL (Tesisat Proje Üst Verisi)",
+      "disiplin": "MEP",
+      "toplam_param": 11,
+      "type_onerisi": 0,
+      "instance_onerisi": 11,
+      "revit_kategori_seti": "Project Information"
+    },
+    {
+      "grup_id": 21,
+      "grup_adi": "TR-HVAC HAVALANDIRMA VE KLİMA",
+      "disiplin": "MEP",
+      "toplam_param": 11,
+      "type_onerisi": 10,
+      "instance_onerisi": 1,
+      "revit_kategori_seti": "MEP - HVAC"
+    },
+    {
+      "grup_id": 22,
+      "grup_adi": "TR-ISITMA VE SOĞUTMA SİSTEMİ",
+      "disiplin": "MEP",
+      "toplam_param": 11,
+      "type_onerisi": 10,
+      "instance_onerisi": 1,
+      "revit_kategori_seti": "MEP - HVAC"
+    },
+    {
+      "grup_id": 23,
+      "grup_adi": "TR-SIHHI TESİSAT (TS EN 806)",
+      "disiplin": "MEP",
+      "toplam_param": 10,
+      "type_onerisi": 9,
+      "instance_onerisi": 1,
+      "revit_kategori_seti": "MEP - Plumbing / Fire"
+    },
+    {
+      "grup_id": 24,
+      "grup_adi": "TR-YANGIN TESİSATI (BYKHY 2019)",
+      "disiplin": "MEP",
+      "toplam_param": 10,
+      "type_onerisi": 9,
+      "instance_onerisi": 1,
+      "revit_kategori_seti": "MEP - Plumbing / Fire"
+    },
+    {
+      "grup_id": 25,
+      "grup_adi": "TR-ELEKTRİK GÜÇ SİSTEMLERİ",
+      "disiplin": "MEP",
+      "toplam_param": 10,
+      "type_onerisi": 7,
+      "instance_onerisi": 3,
+      "revit_kategori_seti": "MEP - Electrical / Weak Current"
+    },
+    {
+      "grup_id": 26,
+      "grup_adi": "TR-ZAYIF AKIM SİSTEMLERİ",
+      "disiplin": "MEP",
+      "toplam_param": 8,
+      "type_onerisi": 4,
+      "instance_onerisi": 4,
+      "revit_kategori_seti": "MEP - Electrical / Weak Current"
+    },
+    {
+      "grup_id": 27,
+      "grup_adi": "TR-MEP QA/QC KONTROL",
+      "disiplin": "MEP",
+      "toplam_param": 10,
+      "type_onerisi": 0,
+      "instance_onerisi": 10,
+      "revit_kategori_seti": "All Model Categories"
+    },
+    {
+      "grup_id": 28,
+      "grup_adi": "TR-MEP METRAJ VE POZ",
+      "disiplin": "MEP",
+      "toplam_param": 6,
+      "type_onerisi": 0,
+      "instance_onerisi": 6,
+      "revit_kategori_seti": "All Model Categories"
+    },
+    {
+      "grup_id": 29,
+      "grup_adi": "TR-SINIFLANDIRMA VE KOD SİSTEMLERİ",
+      "disiplin": "Ortak / BIM",
+      "toplam_param": 12,
+      "type_onerisi": 12,
+      "instance_onerisi": 0,
+      "revit_kategori_seti": "All Model Categories"
+    },
+    {
+      "grup_id": 30,
+      "grup_adi": "TR-BİNA ELEMAN SINIFLANDIRMASI",
+      "disiplin": "Ortak / BIM",
+      "toplam_param": 12,
+      "type_onerisi": 12,
+      "instance_onerisi": 0,
+      "revit_kategori_seti": "All Model Categories"
+    },
+    {
+      "grup_id": 31,
+      "grup_adi": "TR-ÇŞB 2026 YAPI SINIFI VE POZ KIRILIMI",
+      "disiplin": "Ortak / BIM",
+      "toplam_param": 21,
+      "type_onerisi": 0,
+      "instance_onerisi": 21,
+      "revit_kategori_seti": "All Model Categories"
+    },
+    {
+      "grup_id": 32,
+      "grup_adi": "TR-MAHAL VE KONUMSAL AYRIŞIM",
+      "disiplin": "Ortak / BIM",
+      "toplam_param": 12,
+      "type_onerisi": 0,
+      "instance_onerisi": 12,
+      "revit_kategori_seti": "Rooms & Spaces"
+    },
+    {
+      "grup_id": 33,
+      "grup_adi": "TR-IFC İHRAC VE VERİ EŞLEME",
+      "disiplin": "IFC / Veri",
+      "toplam_param": 14,
+      "type_onerisi": 0,
+      "instance_onerisi": 14,
+      "revit_kategori_seti": "All Model Categories"
+    },
+    {
+      "grup_id": 34,
+      "grup_adi": "TR-KEŞİF / METRAJ / MALİYET KIRILIMI",
+      "disiplin": "Ortak / BIM",
+      "toplam_param": 14,
+      "type_onerisi": 0,
+      "instance_onerisi": 14,
+      "revit_kategori_seti": "All Model Categories"
+    },
+    {
+      "grup_id": 35,
+      "grup_adi": "TR-QA VE TESLİM KONTROLÜ",
+      "disiplin": "BIM QA / ILS",
+      "toplam_param": 15,
+      "type_onerisi": 0,
+      "instance_onerisi": 15,
+      "revit_kategori_seti": "All Model Categories"
+    },
+    {
+      "grup_id": 36,
+      "grup_adi": "TR-ILS / BİLGİ GEREKSİNİMİ",
+      "disiplin": "BIM QA / ILS",
+      "toplam_param": 7,
+      "type_onerisi": 0,
+      "instance_onerisi": 7,
+      "revit_kategori_seti": "All Model Categories"
+    }
+  ]
+}

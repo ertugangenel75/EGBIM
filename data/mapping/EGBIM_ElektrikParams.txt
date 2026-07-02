@@ -1,0 +1,37 @@
+# EGBIM Elektrik Hesap Shared Parameters — TS HD / IEC 60364
+# Sürüm: 1.0 | Tarih: 2026-06 | IEC 60364-5-52 / IEC 61386 (conduit fill)
+# Kapsam: Conduit (kablo borusu) tabanlı kablo seçimi, gerilim düşümü, conduit fill.
+# GUID'ler SABİTTİR — bu dosya bir kez üretildi, değiştirilmemelidir.
+# Mevcut EGBIM conduit fill parametreleri (EG_IletkenSayisi, EG_IletkenKesit_mm2)
+# ile uyumludur; onlar ConduitFillCheck op'u tarafından kullanilir.
+# Do not edit manually.
+*META	VERSION	MINVERSION
+META	2	1
+*GROUP	ID	NAME
+GROUP	1	EG-ELEKTRİK GİRDİ (Kullanıcı)
+GROUP	2	EG-ELEKTRİK ÇIKTI (Hesap Motoru)
+*PARAM	GUID	NAME	DATATYPE	DATACATEGORY	GROUP	VISIBLE	DESCRIPTION	USERMODIFIABLE	HIDEWHENNOVALUE
+PARAM	e6b10001-0001-0001-0001-000000000001	EG_DevreNo	TEXT		1	1	Conduit'in ait olduğu devre no (ElectricalSystem CircuitNumber ile eşleşir)	1	0
+PARAM	e6b10001-0001-0001-0001-000000000002	EG_Kaynak	TEXT		1	1	Başlangıç ekipmanı / pano (From) — tek hat şeması için	1	0
+PARAM	e6b10001-0001-0001-0001-000000000003	EG_Hedef	TEXT		1	1	Bitiş ekipmanı / cihaz (To) — tek hat şeması için	1	0
+PARAM	e6b10001-0001-0001-0001-000000000004	EG_KurulumMetodu	TEXT		1	1	IEC kurulum metodu: A1/A2/B1/B2/C/D/E/F (boşsa C varsayılır)	1	0
+PARAM	e6b10001-0001-0001-0001-000000000005	EG_OrtamSicaklik	NUMBER		1	1	Ortam sıcaklığı °C (boşsa 30 varsayılır) — IEC Ca düzeltme faktörü	1	0
+PARAM	e6b10001-0001-0001-0001-000000000006	EG_GruplamaAdet	INTEGER		1	1	Aynı güzergahtaki devre/kablo adedi (boşsa 1) — IEC Cg gruplama faktörü	1	0
+PARAM	e6b10001-0001-0001-0001-000000000007	EG_ParalelAdet	INTEGER		1	1	Paralel conduit/iletken adedi (boşsa 1)	1	0
+PARAM	e6b10001-0001-0001-0001-000000000008	EG_YapmaPayi	NUMBER		1	1	Bağlantı/yapma payı (metre) — kablo uzunluğuna eklenir	1	0
+PARAM	e6b10001-0001-0001-0001-000000000009	EG_Yalitim	TEXT		1	1	Yalıtım tipi: PVC veya XLPE (boşsa PVC)	1	0
+PARAM	e6b10001-0001-0001-0001-00000000000a	EG_Iletken	TEXT		1	1	İletken malzeme: Cu veya Al (boşsa Cu)	1	0
+PARAM	e6b10001-0001-0001-0001-00000000000b	EG_KabloTipi	TEXT		1	1	TR kablo tipi: NYY/NYA/NHXMH/NVV vb. (bilgi amaçlı)	1	0
+PARAM	e6b10001-0001-0001-0001-00000000000c	EG_GucFaktoru	NUMBER		1	1	Güç faktörü cosφ (boşsa 0.8) — gerilim düşümü hesabı	1	0
+PARAM	e6b10001-0001-0001-0001-00000000000d	EG_ModelUzunluk	NUMBER		2	1	ConduitRun.Length'ten okunan gerçek conduit uzunluğu (metre)	0	0
+PARAM	e6b10001-0001-0001-0001-00000000000e	EG_KabloUzunluk	NUMBER		2	1	Toplam kablo uzunluğu = model uzunluk + yapma payı (metre)	0	0
+PARAM	e6b10001-0001-0001-0001-00000000000f	EG_HesapAkim	NUMBER		2	1	Devre tasarım akımı IB (Amper)	0	0
+PARAM	e6b10001-0001-0001-0001-000000000010	EG_KabloKesiti	TEXT		2	1	Seçilen kablo kesiti (örn 4x16+10 veya 16 mm²)	0	0
+PARAM	e6b10001-0001-0001-0001-000000000011	EG_FazKesit_mm2	NUMBER		2	1	Faz iletkeni kesiti (mm²)	0	0
+PARAM	e6b10001-0001-0001-0001-000000000012	EG_GerilimDusumu	NUMBER		2	1	Gerilim düşümü yüzdesi (%)	0	0
+PARAM	e6b10001-0001-0001-0001-000000000013	EG_GerilimDusumuV	NUMBER		2	1	Gerilim düşümü (Volt)	0	0
+PARAM	e6b10001-0001-0001-0001-000000000014	EG_SigortaOneri	NUMBER		2	1	Önerilen koruma cihazı anma akımı In (Amper)	0	0
+PARAM	e6b10001-0001-0001-0001-000000000015	EG_DolulukYuzde	NUMBER		2	1	Conduit doluluk oranı (%) — IEC 522.8 sınırı %40	0	0
+PARAM	e6b10001-0001-0001-0001-000000000016	EG_KisaDevreKesiti	NUMBER		2	1	Kısa devre dayanımı min kesit (mm²) — IEC 60364-4-43	0	0
+PARAM	e6b10001-0001-0001-0001-000000000017	EG_HesapDurumu	TEXT		2	1	Hesap durumu: UYGUN / GERILIM_ASILDI / DOLULUK_ASILDI / DEVRE_YOK vb.	0	0
+PARAM	e6b10001-0001-0001-0001-000000000018	EG_HesapTarihi	TEXT		2	1	Hesabın yapıldığı tarih/saat	0	0

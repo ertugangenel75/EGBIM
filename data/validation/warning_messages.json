@@ -1,0 +1,76 @@
+{
+  "_source": "EG_PARAM_MATRIX_V3 — 07_WARNING_MESSAGES",
+  "_count": 10,
+  "messages": [
+    {
+      "MessageCode": "SDS_SPECIAL",
+      "Severity": "INFO",
+      "Title_TR": "ZF sahaya özel analiz",
+      "Message_TR": "ZF yerel zemin sınıfında Tablo 2.1 / 2.2 yerine 16.5'e göre sahaya özel zemin davranış analizi gerekir.",
+      "Scope": "TBDY çekirdek kuralı"
+    },
+    {
+      "MessageCode": "DTS_4A",
+      "Severity": "INFO",
+      "Title_TR": "DTS 4a / 3a / 2a / 1a",
+      "Message_TR": "BKS1 binalarında aynı SDS aralıkları 'a' ekli DTS sınıfına gider.",
+      "Scope": "TBDY çekirdek kuralı"
+    },
+    {
+      "MessageCode": "BYS_OUT_OF_TABLE",
+      "Severity": "HIGH",
+      "Title_TR": "BYS tablo dışında",
+      "Message_TR": "DTS 4 / 4a için Tablo 3.3'te verilmeyen HN aralığı oluştu; özel kontrol gerekir.",
+      "Scope": "TBDY çekirdek kuralı"
+    },
+    {
+      "MessageCode": "SYSTEM_NOT_ALLOWED",
+      "Severity": "HIGH",
+      "Title_TR": "Sistem/BYS uyumsuz",
+      "Message_TR": "Seçilen taşıyıcı sistem için Tablo 4.1'de verilen izinli BYS koşulu sağlanmıyor.",
+      "Scope": "TBDY çekirdek kuralı"
+    },
+    {
+      "MessageCode": "HEIGHT_SPECIAL",
+      "Severity": "MEDIUM",
+      "Title_TR": "Özel yükseklik sınırı",
+      "Message_TR": "Seçilen sistem, genel BYS kuralına ek olarak ayrı bir yükseklik sınırı içeriyor.",
+      "Scope": "TBDY çekirdek kuralı"
+    },
+    {
+      "MessageCode": "LOW_WALL_RATIO",
+      "Severity": "MEDIUM",
+      "Title_TR": "Perde oranı düşük",
+      "Message_TR": "Ofis ön kontrol limitine göre toplam perde alanı oranı düşük.",
+      "Scope": "EG Office rule"
+    },
+    {
+      "MessageCode": "LOW_VERTICAL_DENSITY",
+      "Severity": "MEDIUM",
+      "Title_TR": "Düşey taşıyıcı yoğunluğu düşük",
+      "Message_TR": "Ofis ön kontrol limitine göre toplam düşey taşıyıcı alan oranı düşük.",
+      "Scope": "EG Office rule"
+    },
+    {
+      "MessageCode": "SOFT_STORY_ALERT",
+      "Severity": "MEDIUM",
+      "Title_TR": "Yumuşak kat uyarısı",
+      "Message_TR": "Kat rijitlik düşüş oranı alert limitinin altında.",
+      "Scope": "EG Office rule"
+    },
+    {
+      "MessageCode": "SOFT_STORY_CRITICAL",
+      "Severity": "HIGH",
+      "Title_TR": "Yumuşak kat kritik",
+      "Message_TR": "Kat rijitlik düşüş oranı critical limitinin altında.",
+      "Scope": "EG Office rule"
+    },
+    {
+      "MessageCode": "GROUND_STORY_HEIGHT",
+      "Severity": "MEDIUM",
+      "Title_TR": "Zemin kat yüksekliği",
+      "Message_TR": "Ofis ön kontrol limitine göre zemin kat yüksekliği fazla.",
+      "Scope": "EG Office rule"
+    }
+  ]
+}

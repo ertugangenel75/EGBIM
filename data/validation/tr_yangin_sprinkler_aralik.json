@@ -1,0 +1,75 @@
+{
+  "_source": "TR Binaların Yangından Korunması Hakkında Yönetmelik — Ek-8/B referans değerleri (EG ofis tarama varsayılanları)",
+  "_note": "Bu tablo bir karar destek/tarama referansıdır; resmi yönetmelik metni değildir. Proje şartnamesi ve yetkili onayı esastır. Aralık ve kapsama değerleri ıslak boru tipi sprinkler ve standart tavan yüksekliği varsayımıyla verilmiştir.",
+  "_count": 6,
+  "_schema": {
+    "hazard_class": "tehlike sınıfı kodu (calc_sprinkler_design_density ile aynı)",
+    "design_density_mm_per_min": "tasarım yoğunluğu (mm/dak) — Ek-8/B",
+    "max_coverage_area_m2": "sprinkler başı başına maksimum koruma alanı (m²)",
+    "max_spacing_m": "iki sprinkler başı arası maksimum yatay mesafe (m)",
+    "min_spacing_m": "iki sprinkler başı arası minimum mesafe (m) — ıslanmayı önlemek için",
+    "max_wall_distance_m": "sprinkler başı ile duvar arası maksimum mesafe (≈ max_spacing/2)"
+  },
+  "rules": [
+    {
+      "hazard_class": "dusuk",
+      "hazard_label_tr": "Düşük Tehlike",
+      "design_density_mm_per_min": 2.25,
+      "max_coverage_area_m2": 21.0,
+      "max_spacing_m": 4.6,
+      "min_spacing_m": 2.0,
+      "max_wall_distance_m": 2.3,
+      "note": "Konut, ofis, okul gibi düşük yangın yükü mahalleri."
+    },
+    {
+      "hazard_class": "orta_1",
+      "hazard_label_tr": "Orta Tehlike Grup 1",
+      "design_density_mm_per_min": 5.0,
+      "max_coverage_area_m2": 12.0,
+      "max_spacing_m": 4.0,
+      "min_spacing_m": 2.0,
+      "max_wall_distance_m": 2.0,
+      "note": "Otopark, lokanta gibi orta yangın yükü mahalleri."
+    },
+    {
+      "hazard_class": "orta_2",
+      "hazard_label_tr": "Orta Tehlike Grup 2",
+      "design_density_mm_per_min": 5.0,
+      "max_coverage_area_m2": 12.0,
+      "max_spacing_m": 4.0,
+      "min_spacing_m": 2.0,
+      "max_wall_distance_m": 2.0,
+      "note": "Mağaza, imalathane gibi mahaller."
+    },
+    {
+      "hazard_class": "orta_3",
+      "hazard_label_tr": "Orta Tehlike Grup 3",
+      "design_density_mm_per_min": 5.0,
+      "max_coverage_area_m2": 12.0,
+      "max_spacing_m": 4.0,
+      "min_spacing_m": 2.0,
+      "max_wall_distance_m": 2.0,
+      "note": "Depo, sanayi gibi yüksek yoğunluklu orta tehlike."
+    },
+    {
+      "hazard_class": "yuksek_1",
+      "hazard_label_tr": "Yüksek Tehlike Grup 1 (İşlem)",
+      "design_density_mm_per_min": 7.7,
+      "max_coverage_area_m2": 9.0,
+      "max_spacing_m": 3.7,
+      "min_spacing_m": 2.0,
+      "max_wall_distance_m": 1.85,
+      "note": "Yüksek yangın yükü, parlayıcı/yanıcı işlem mahalleri."
+    },
+    {
+      "hazard_class": "yuksek_2",
+      "hazard_label_tr": "Yüksek Tehlike Grup 2 (Depolama)",
+      "design_density_mm_per_min": 10.0,
+      "max_coverage_area_m2": 9.0,
+      "max_spacing_m": 3.7,
+      "min_spacing_m": 2.0,
+      "max_wall_distance_m": 1.85,
+      "note": "Yüksek raflı depolama, yüksek yangın yükü."
+    }
+  ]
+}

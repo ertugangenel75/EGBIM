@@ -1,0 +1,26 @@
+{
+  "_source": "EGBIMOTO Param Schema",
+  "_aciklama": "Parametre şema doğrulama — zorunlu alanlar ve tipler",
+  "required_params": [
+    {
+      "name": "Malzeme",
+      "data_type": "TEXT",
+      "severity": "Error"
+    },
+    {
+      "name": "EGBIM_PozNo",
+      "data_type": "TEXT",
+      "severity": "Warning"
+    },
+    {
+      "name": "TR_KatKodu",
+      "data_type": "TEXT",
+      "severity": "Warning"
+    },
+    {
+      "name": "TR_BlokKodu",
+      "data_type": "TEXT",
+      "severity": "Info"
+    }
+  ]
+}

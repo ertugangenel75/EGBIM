@@ -1,0 +1,38 @@
+{
+  "_source": "EG_PARAM_MATRIX_V3 — 08_ZORUNLULUK_MANTIGI",
+  "_count": 4,
+  "classes": [
+    {
+      "RequirementClass_V2": "MANDATORY_CORE",
+      "Ne zaman": "Her IFC tesliminde",
+      "Mantık": "Kimlik + konum + sınıflandırma + temel teslim omurgası",
+      "IDS Cardinality": "required",
+      "ISO 19650 bağı": "EIR / teslimin her iterasyonu",
+      "Örnek": "TR_ProjeNo, TR_ProjeAdi, TR_KatKodu"
+    },
+    {
+      "RequirementClass_V2": "CONDITIONAL_DISCIPLINE",
+      "Ne zaman": "İlgili eleman / sistem mevcutsa",
+      "Mantık": "Disipline ve entity bazlı gereklilik",
+      "IDS Cardinality": "required",
+      "ISO 19650 bağı": "Use-case / LoIN / disiplin teslimi",
+      "Örnek": "TR_MIM_DuvarUDegeri, TR_STA_IsTasiyici, TR_MEK_Sys_SistemID, TR_ELK_DevreNo"
+    },
+    {
+      "RequirementClass_V2": "OPTIONAL",
+      "Ne zaman": "Bilgi isteniyor ama tüm teslimlerde zorunlu değilse",
+      "Mantık": "Açıklama, zenginleştirme, gelecekteki kullanım",
+      "IDS Cardinality": "optional",
+      "ISO 19650 bağı": "PIR/AIR referansı",
+      "Örnek": "Açıklama / revizyon notu / ilave metadata"
+    },
+    {
+      "RequirementClass_V2": "QA",
+      "Ne zaman": "Doğruluk veya tutarlılık kontrolü gerektiğinde",
+      "Mantık": "IDS dışı kural; karşılaştırma, limit, çapraz alan kontrolü",
+      "IDS Cardinality": "Companion QA rule",
+      "ISO 19650 bağı": "Validation / assurance",
+      "Örnek": "PozNo varsa metraj birimi de olmalı; hız limit üstü olmamalı"
+    }
+  ]
+}

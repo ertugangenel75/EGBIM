@@ -1,0 +1,2539 @@
+{
+  "_source": "EG_PARAM_MATRIX_V3_ENGINE_READY.ids",
+  "_count": 24,
+  "_aciklama": "IDS gereksinim spesifikasyonları — validate_ids op ile kullanılır",
+  "specifications": [
+    {
+      "specification": "IfcDistributionControlElement",
+      "ifc_version": "IFC4",
+      "entity": "IfcDistributionControlElement",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ELK_DevreNo",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ELK_DevreTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ELK_GuvenlikSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ELK_KorumaTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ELK_PanoAdi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ELK_YangindaCalismaSuresi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcCableSegment",
+      "ifc_version": "IFC4",
+      "entity": "IfcCableSegment",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ELK_KabloKesiti",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ELK_KabloTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ELK_ZA_KableTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcDistributionSystem",
+      "ifc_version": "IFC4",
+      "entity": "IfcDistributionSystem",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ELK_SistemAdi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ELK_SistemGerilimiV",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ELK_ZA_SistemAdi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ELK_ZA_SistemTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fire_SistemTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_HVAC_SistemAdi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_HVAC_SistemTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_SistemAdi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_SistemTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_ISI_SistemAdi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_ISI_SistemTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Plumb_SistemDebisi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_SHT_SicakSuSistemi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_SHT_SistemAdi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_SHT_SistemTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Sys_SistemID",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Sys_SistemKodu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Sys_SistemSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_YAN_SistemAdi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcCommunicationsAppliance",
+      "ifc_version": "IFC4",
+      "entity": "IfcCommunicationsAppliance",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ELK_ZA_CihazAdi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ELK_ZA_GucTuketimi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ELK_ZA_IPAdresi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ELK_ZA_POEVarMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ELK_ZA_ZonNo",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcDistributionElement",
+      "ifc_version": "IFC4",
+      "entity": "IfcDistributionElement",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Aciklama",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Birim",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_BirimFiyat",
+          "data_type": "CURRENCY",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_ClashCozulduMu",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Drain_DrenajTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Drain_GravityMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Drain_HavalikMetodu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Drain_MinEğim",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fire_GerekliBasinc",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fire_GerekliDebi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fire_Sure",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fire_TasarimAlani",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fire_TasarimYogunlugu",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fire_TehlikeSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fix_AtikBaglanti",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fix_DFU",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fix_Debi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fix_FixturTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fix_GerekliBasinc",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fix_HavaBoruCap",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fix_SicakBaglanti",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fix_SogukBaglanti",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fix_TrapCap",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fix_WSFU",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Gas_Debi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Gas_MenfezAlani",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Gas_RegulatorTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Gas_SayacTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_HesapModelID",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_BasincKaybi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_COP",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_DeltaTAir",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_DeltaTWater",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_Diverjans",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_DumanDamperVarMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_EER",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_ESPCoil",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_ESPFiltre",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_ESPKanal",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_ESPToplam",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_GeriDonusHavaOrani",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_GurultuSeviyesi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_HavaDebisi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_HavaHizi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_IsitmaKapasitesi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_KanalMalzeme",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_KanalTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_SHR",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_Simultane",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_SogutmaKapasitesi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_SogutmaTR",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_TazeHavaOrani",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_YalitimTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Hvac_YanginDamperVarMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_IFCExportSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_IFCSurumu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Miktar",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_OnayTarihi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Onaylayan",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Plumb_BakiyeBasinc",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Plumb_HizLimiti",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Plumb_PikDebi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Plumb_TasarimBasinci",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pool_Debi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pool_EsanjörKapasite",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_PozAdi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_PozNo",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_San_DFUToplam",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_San_HavalikGerekli",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_San_HavalikSaglandi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Solar_KollektorAlani",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Spr_Aralik",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Spr_BranchID",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Spr_KFactor",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Spr_KapsamaAlani",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Spr_SicaklikSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Spr_SprinkTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Storm_AkisKatsayisi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Storm_CatiAlani",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Storm_InişBoruCapi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Storm_SuzgecAdedi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Storm_YagisSiddeti",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Sys_BolgeBazliMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Sys_Disiplin",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Sys_HesapAilesi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Sys_KaynakSayfa",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Sys_Ortam",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Sys_TasarimBasinci",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Sys_TasarimDebisi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Sys_TasarimDeltaT",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_ToplamTutar",
+          "data_type": "CURRENCY",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Zone_BasinclandirmaSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Zone_Bina",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Zone_Blok",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Zone_Kat",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Zone_KullanimTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Zone_Yangin_Tipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Zone_ZoneID",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Zone_ZoneKodu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcTank",
+      "ifc_version": "IFC4",
+      "entity": "IfcTank",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fire_DepoHacmi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_SHT_DepoHacmi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Tank_BaglantiTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Tank_BasinçSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Tank_EtkiliHacim",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Tank_Hacim",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Tank_SistemIliskisi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Tank_TankTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcPump",
+      "ifc_version": "IFC4",
+      "entity": "IfcPump",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Fire_PompaGorevi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pump_BasmaYuksekligi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pump_BypassVarMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pump_Debi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pump_GorevYedek",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pump_Guc",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pump_MinDebi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pump_MotorGucu",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pump_NPSH",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pump_PompaKategorisi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pump_PompaTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pump_Servis",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pump_VFDVarMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pump_Verim",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcFlowSegment",
+      "ifc_version": "IFC4",
+      "entity": "IfcFlowSegment",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_HVAC_BasıncKaybi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_HVAC_DumDamperVarMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_HVAC_GurultuSeviyesi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_HVAC_HavaDebisi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_HVAC_HavaHizi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_HVAC_KanalTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_HVAC_KapalıDevreMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_HVAC_YalitimTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_HVAC_YangınDamperVarMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_ISI_BasincSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_ISI_BorCap",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_ISI_BorMalzeme",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_ISI_DonusScakligi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_ISI_GirisScakligi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_ISI_IsıtmaDebi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_ISI_KazanTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_ISI_SogutmaDebi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_ISI_YalitimTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pipe_AkiskanTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pipe_ArmatüreBagliMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pipe_BasincKaybi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pipe_BasinçSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pipe_Cap",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pipe_Debi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pipe_Eğim",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pipe_Hiz",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pipe_Malzeme",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pipe_Puruzluluk",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pipe_ToplamBasincKaybi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Pipe_YalitimTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Plumb_PipeSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_SHT_BasincSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_SHT_BorCap",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_SHT_BorMalzeme",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_SHT_EgimYuzde",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_SHT_HidroforVarMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_SHT_YalitimTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_YAN_BorCap",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_YAN_BorMalzeme",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_YAN_HazardSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_YAN_HidrantTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_YAN_ItfaiyeBaglantisi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_YAN_KosumaDebi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_YAN_SprinklerBasinc",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_YAN_SprinklerDebi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_YAN_SprinklerTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MEK_Zone_HVAC_Tipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcBuildingElement",
+      "ifc_version": "IFC4",
+      "entity": "IfcBuildingElement",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_CO2Emisyon",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_EngAsansorVarMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_EngGecisGenislikKoridor",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_EngOtoparkVarMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_EngRampaEgimi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_EngRampaVarMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_HavalandirmaSistemi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_IFC_AktarimNotu",
+          "data_type": "MULTILINETEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_IFC_ClassificationEdition",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_IFC_ClassificationName",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_IFC_ClassificationSource",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_IFC_ClassificationURI",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_IFC_DescriptionOverride",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_IFC_EntityOverride",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_IFC_ExportEt",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_IFC_NameOverride",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_IFC_ObjectTypeOverride",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_IFC_PredefinedType",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_IFC_PsetSeti",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_IFC_TagOverride",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_IsitmaSistemi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_PrimaryEnerjiTuketim",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_SogutmaSistemi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_YangKacisKorMesafe",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_YangSiginmaAlani",
+          "data_type": "AREA",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_Aciklama",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_BetonSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_DepremPGA",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_DepremS1",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_DepremSs",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_ElemanKodu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_HesapModelID",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_IFCExportSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_ImalatDurumu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_KesitGenislik",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_KesitYukseklik",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_NominalBetonOrtusu",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_OnayTarihi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_Onaylayan",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_PrecastMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_TBDY_UyumDurumu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_TasiyiciSistemAltTuru",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcRoof",
+      "ifc_version": "IFC4",
+      "entity": "IfcRoof",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_CatiEgimi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_CatiIsıYalitim",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_CatiKaplama",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_CatiPozNo",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_CatiREI",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_CatiSuYalitim",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_CatiTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_CatiUDegeri",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcWindow",
+      "ifc_version": "IFC4",
+      "entity": "IfcWindow",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_CercevePencereUw",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_PencereAcilmaTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_PencereCamTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_PencereCerceveSistemi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_PencereEmniyet",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_PencereGenislik",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_PencerePozNo",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_PencereSHGC",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_PencereSesYalitim",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_PencereTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_PencereUDegeri",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_PencereUretici",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_PencereYukseklik",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcSlab",
+      "ifc_version": "IFC4",
+      "entity": "IfcSlab",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DosemeIsıYalitim",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DosemeKalinligi",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DosemeKaplama",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DosemePozNo",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DosemeREI",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DosemeSesYalitim",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DosemeSuYalitim",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DosemeTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DosemeUDegeri",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DosemeYukKapasitesi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_ZeminKatUDegeri",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_DosemeKalinligi",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcWall",
+      "ifc_version": "IFC4",
+      "entity": "IfcWall",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DuvarDisKaplama",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DuvarIcKaplama",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DuvarKalinligi",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DuvarPozNo",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DuvarREI",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DuvarSesYalitim",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DuvarTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DuvarUDegeri",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DuvarYalitimTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_DuvarYapimTuru",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_YangDuvarDirenc",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_IsDisEleman",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_PerdeKalinligi",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcDoor",
+      "ifc_version": "IFC4",
+      "entity": "IfcDoor",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_EngKapiGenislik",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_KapiAcilisYonu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_KapiEngelli",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_KapiGenislik",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_KapiKilitTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_KapiPanikBar",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_KapiPozNo",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_KapiSesYalitim",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_KapiTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_KapiUDegeri",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_KapiUretici",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_KapiYangınSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_KapiYukseklik",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_YangKapiSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcSpace",
+      "ifc_version": "IFC4",
+      "entity": "IfcSpace",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_EngWCVarMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcStair",
+      "ifc_version": "IFC4",
+      "entity": "IfcStair",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_YangMerdiven",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MIM_YangMerdivenGenislik",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcElement",
+      "ifc_version": "IFC4",
+      "entity": "IfcElement",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_BES_AltGrup",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_BES_AltKod",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_BES_AnaGrup",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_BES_AnaKod",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_BES_BakimGrubu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_BES_ElemanAdi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_BES_ElemanKodu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_BES_ImalatSirasi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_BES_Islev",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_BES_MalzemeAilesi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_BES_TeknikSistem",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_BES_UretimDisiplini",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_BlokKodu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_CSB_2026_BirimMaliyet",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_CSB_2026_SinifGrupAdi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_CSB_2026_SinifGrupKodu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_CSB_PozAltGrup",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_CSB_PozAnaGrup",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_CSB_PozBirim",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_CSB_PozNo",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_CSB_PozTanimi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_CSB_RayicKod",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_Disiplin",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_IFCSurumu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_KatKodu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MahalAdi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MahalFonksiyonu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MahalKodu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MalzemeSinifKodu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MetrajBirim",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MetrajCarpan",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MetrajDahil",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_MetrajKurali",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ModelDurumu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_PozAdi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_PozBirim",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_PozBirimFiyat",
+          "data_type": "CURRENCY",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_PozDahilMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_PozImalatTuru",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_PozMahalNo",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_PozMiktar",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_PozNo",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_PozNot",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_PozToplamTutar",
+          "data_type": "CURRENCY",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ProjeAdi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ProjeAsamasi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ProjeNo",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_SinifAdi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_SinifKod1",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_SinifKod2",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_SinifKod3",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_SinifSistemi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_ZonKodu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcBeam | IfcColumn | IfcSlab | IfcWall",
+      "ifc_version": "IFC4",
+      "entity": "IfcBeam | IfcColumn | IfcSlab | IfcWall",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_IsTasiyici",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcReinforcingBar",
+      "ifc_version": "IFC4",
+      "entity": "IfcReinforcingBar",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_AnaDonatiAlt",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_AnaDonatiUst",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_AnkrajBoyu",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_DonatiNotu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_DonatiSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_EkBoyu",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_EtriyeAraligi",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_EtriyeCapi",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_FilletoVarMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_GovdeDonatisi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_PilyeVarMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_SiklastirmaAraligi",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_SiklastirmaBolgesiVarMi",
+          "data_type": "YESNO",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcBuilding",
+      "ifc_version": "IFC4",
+      "entity": "IfcBuilding",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_BYS",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_BinaKullanimSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_BinaOnemKatsayisi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_BinaYuksekligi",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_DTS",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_KatAdedi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_SD1",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_SDS",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcStructuralAnalysisModel",
+      "ifc_version": "IFC4",
+      "entity": "IfcStructuralAnalysisModel",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_DFazlaDayanim",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_DayanimDuzeyi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_RKatsayisi",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_TasiyiciSistemAilesi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_TasiyiciSistemKodu",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcBeam",
+      "ifc_version": "IFC4",
+      "entity": "IfcBeam",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_ElemanTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_TemelTipi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcSite",
+      "ifc_version": "IFC4",
+      "entity": "IfcSite",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_F1",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_FS",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_S1",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_Ss",
+          "data_type": "NUMBER",
+          "cardinality": "required"
+        },
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_YerelZeminSinifi",
+          "data_type": "TEXT",
+          "cardinality": "required"
+        }
+      ]
+    },
+    {
+      "specification": "IfcBuildingStorey",
+      "ifc_version": "IFC4",
+      "entity": "IfcBuildingStorey",
+      "requirements": [
+        {
+          "pset": "Pset_EGBIM",
+          "property": "TR_STA_ZeminKatYuksekligi",
+          "data_type": "LENGTH",
+          "cardinality": "required"
+        }
+      ]
+    }
+  ]
+}

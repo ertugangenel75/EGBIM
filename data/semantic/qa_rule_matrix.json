@@ -1,0 +1,147 @@
+{
+  "_source": "EGBIMOTO canonical_classes_v3 + semantic kurallar — v2",
+  "_count": 20,
+  "_aciklama": "Tüm canonical class'lar için temel QA kuralları. validate_qa op ile kullanılır.",
+  "rules": [
+    {
+      "QA_RULE_CODE": "STR_COLUMN_CONCRETE_CLASS",
+      "CANONICAL_CLASS": "STA_RC_COLUMN",
+      "CHECK": "TR_BetonSinifi",
+      "SEVERITY": "ERROR",
+      "MESSAGE": "Kolon beton sınıfı tanımlı olmalı (C25, C30 vb.)"
+    },
+    {
+      "QA_RULE_CODE": "STR_COLUMN_LEVEL_ASSIGNED",
+      "CANONICAL_CLASS": "STA_RC_COLUMN",
+      "CHECK": "LevelAssigned",
+      "SEVERITY": "ERROR",
+      "MESSAGE": "Kolon seviyeye bağlı olmalı"
+    },
+    {
+      "QA_RULE_CODE": "STR_BEAM_CONCRETE_CLASS",
+      "CANONICAL_CLASS": "STA_RC_BEAM",
+      "CHECK": "TR_BetonSinifi",
+      "SEVERITY": "ERROR",
+      "MESSAGE": "Kiriş beton sınıfı tanımlı olmalı"
+    },
+    {
+      "QA_RULE_CODE": "STR_SLAB_THICKNESS",
+      "CANONICAL_CLASS": "STA_RC_SLAB",
+      "CHECK": "TR_DosemeKalinlik",
+      "SEVERITY": "WARNING",
+      "MESSAGE": "Döşeme kalınlığı parametresi boş"
+    },
+    {
+      "QA_RULE_CODE": "STR_WALL_STRUCTURAL_FLAG",
+      "CANONICAL_CLASS": "STA_RC_WALL",
+      "CHECK": "TR_IsTasiyici",
+      "SEVERITY": "WARNING",
+      "MESSAGE": "Perde duvar taşıyıcı bayrağı işaretli olmalı"
+    },
+    {
+      "QA_RULE_CODE": "STR_REBAR_DIAMETER",
+      "CANONICAL_CLASS": "STA_REBAR",
+      "CHECK": "TR_DonatıCap",
+      "SEVERITY": "ERROR",
+      "MESSAGE": "Donatı çapı parametresi boş"
+    },
+    {
+      "QA_RULE_CODE": "ARCH_WALL_FIRE_RATING",
+      "CANONICAL_CLASS": "MIM_WALL",
+      "CHECK": "FireRating",
+      "SEVERITY": "ERROR",
+      "MESSAGE": "Duvar yangın dayanımı tanımlı olmalı"
+    },
+    {
+      "QA_RULE_CODE": "ARCH_WALL_MATERIAL",
+      "CANONICAL_CLASS": "MIM_WALL",
+      "CHECK": "Malzeme",
+      "SEVERITY": "WARNING",
+      "MESSAGE": "Duvar malzeme bilgisi eksik"
+    },
+    {
+      "QA_RULE_CODE": "ARCH_WALL_TYPE_MARK",
+      "CANONICAL_CLASS": "MIM_WALL",
+      "CHECK": "Type Mark",
+      "SEVERITY": "WARNING",
+      "MESSAGE": "Duvar tip işareti boş"
+    },
+    {
+      "QA_RULE_CODE": "ARCH_DOOR_MARK",
+      "CANONICAL_CLASS": "MIM_DOOR_WINDOW",
+      "CHECK": "Mark",
+      "SEVERITY": "ERROR",
+      "MESSAGE": "Kapı numarası (Mark) boş"
+    },
+    {
+      "QA_RULE_CODE": "ARCH_ROOM_NAME",
+      "CANONICAL_CLASS": "MIM_MISC",
+      "CHECK": "Name",
+      "SEVERITY": "ERROR",
+      "MESSAGE": "Oda adı boş"
+    },
+    {
+      "QA_RULE_CODE": "ARCH_ROOM_NUMBER",
+      "CANONICAL_CLASS": "MIM_MISC",
+      "CHECK": "Number",
+      "SEVERITY": "ERROR",
+      "MESSAGE": "Oda numarası boş"
+    },
+    {
+      "QA_RULE_CODE": "MEP_DUCT_SYSTEM",
+      "CANONICAL_CLASS": "MEK_DUCT",
+      "CHECK": "SystemType",
+      "SEVERITY": "ERROR",
+      "MESSAGE": "Kanal sistem tipi atanmamış"
+    },
+    {
+      "QA_RULE_CODE": "MEP_PIPE_SYSTEM",
+      "CANONICAL_CLASS": "MEK_PIPE",
+      "CHECK": "SystemType",
+      "SEVERITY": "ERROR",
+      "MESSAGE": "Boru sistem tipi atanmamış"
+    },
+    {
+      "QA_RULE_CODE": "MEP_PIPE_DIAMETER",
+      "CANONICAL_CLASS": "MEK_PIPE",
+      "CHECK": "Diameter",
+      "SEVERITY": "WARNING",
+      "MESSAGE": "Boru çapı boş"
+    },
+    {
+      "QA_RULE_CODE": "MEP_CABLE_TRAY_SYSTEM",
+      "CANONICAL_CLASS": "ELK_CABLE",
+      "CHECK": "SystemType",
+      "SEVERITY": "WARNING",
+      "MESSAGE": "Kablo tavası sistem tipi atanmamış"
+    },
+    {
+      "QA_RULE_CODE": "GEN_WBS_CODE",
+      "CANONICAL_CLASS": "ALL",
+      "CHECK": "EG_WbsKodu",
+      "SEVERITY": "INFO",
+      "MESSAGE": "WBS kodu atanmamış"
+    },
+    {
+      "QA_RULE_CODE": "GEN_POZ_NO",
+      "CANONICAL_CLASS": "ALL",
+      "CHECK": "TR_CSB_PozNo",
+      "SEVERITY": "INFO",
+      "MESSAGE": "Poz no atanmamış"
+    },
+    {
+      "QA_RULE_CODE": "GEN_LEVEL_ASSIGNED",
+      "CANONICAL_CLASS": "ALL",
+      "CHECK": "LevelAssigned",
+      "SEVERITY": "WARNING",
+      "MESSAGE": "Eleman seviyeye bağlı değil"
+    },
+    {
+      "QA_RULE_CODE": "GEN_PHASE_ASSIGNED",
+      "CANONICAL_CLASS": "ALL",
+      "CHECK": "PhaseCreated",
+      "SEVERITY": "WARNING",
+      "MESSAGE": "Eleman faz bilgisi eksik"
+    }
+  ]
+}

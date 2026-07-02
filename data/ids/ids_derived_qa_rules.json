@@ -1,0 +1,271 @@
+{
+  "_source": "EG_PARAM_MATRIX_V3_ENGINE_READY.ids — otomatik türetildi",
+  "_count": 24,
+  "_aciklama": "IDS spesifikasyonlarından türetilen QA kuralları",
+  "rules": [
+    {
+      "rule_code": "IDS-IFCDISTR",
+      "discipline": "IFC",
+      "ifc_entity": "IfcDistributionControlElement",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_ELK_DevreNo, TR_ELK_DevreTipi, TR_ELK_GuvenlikSinifi, TR_ELK_KorumaTipi, TR_ELK_PanoAdi",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcDistributionControlElement için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCCABLE",
+      "discipline": "IFC",
+      "ifc_entity": "IfcCableSegment",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_ELK_KabloKesiti, TR_ELK_KabloTipi, TR_ELK_ZA_KableTipi",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcCableSegment için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCDISTR",
+      "discipline": "IFC",
+      "ifc_entity": "IfcDistributionSystem",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_ELK_SistemAdi, TR_ELK_SistemGerilimiV, TR_ELK_ZA_SistemAdi, TR_ELK_ZA_SistemTipi, TR_MEK_Fire_SistemTipi",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcDistributionSystem için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCCOMMU",
+      "discipline": "IFC",
+      "ifc_entity": "IfcCommunicationsAppliance",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_ELK_ZA_CihazAdi, TR_ELK_ZA_GucTuketimi, TR_ELK_ZA_IPAdresi, TR_ELK_ZA_POEVarMi, TR_ELK_ZA_ZonNo",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcCommunicationsAppliance için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCDISTR",
+      "discipline": "IFC",
+      "ifc_entity": "IfcDistributionElement",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_MEK_Aciklama, TR_MEK_Birim, TR_MEK_BirimFiyat, TR_MEK_ClashCozulduMu, TR_MEK_Drain_DrenajTipi",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcDistributionElement için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCTANK",
+      "discipline": "IFC",
+      "ifc_entity": "IfcTank",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_MEK_Fire_DepoHacmi, TR_MEK_SHT_DepoHacmi, TR_MEK_Tank_BaglantiTipi, TR_MEK_Tank_BasinçSinifi, TR_MEK_Tank_EtkiliHacim",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcTank için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCPUMP",
+      "discipline": "IFC",
+      "ifc_entity": "IfcPump",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_MEK_Fire_PompaGorevi, TR_MEK_Pump_BasmaYuksekligi, TR_MEK_Pump_BypassVarMi, TR_MEK_Pump_Debi, TR_MEK_Pump_GorevYedek",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcPump için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCFLOWS",
+      "discipline": "IFC",
+      "ifc_entity": "IfcFlowSegment",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_MEK_HVAC_BasıncKaybi, TR_MEK_HVAC_DumDamperVarMi, TR_MEK_HVAC_GurultuSeviyesi, TR_MEK_HVAC_HavaDebisi, TR_MEK_HVAC_HavaHizi",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcFlowSegment için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCBUILD",
+      "discipline": "IFC",
+      "ifc_entity": "IfcBuildingElement",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_MIM_CO2Emisyon, TR_MIM_EngAsansorVarMi, TR_MIM_EngGecisGenislikKoridor, TR_MIM_EngOtoparkVarMi, TR_MIM_EngRampaEgimi",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcBuildingElement için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCROOF",
+      "discipline": "IFC",
+      "ifc_entity": "IfcRoof",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_MIM_CatiEgimi, TR_MIM_CatiIsıYalitim, TR_MIM_CatiKaplama, TR_MIM_CatiPozNo, TR_MIM_CatiREI",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcRoof için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCWINDO",
+      "discipline": "IFC",
+      "ifc_entity": "IfcWindow",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_MIM_CercevePencereUw, TR_MIM_PencereAcilmaTipi, TR_MIM_PencereCamTipi, TR_MIM_PencereCerceveSistemi, TR_MIM_PencereEmniyet",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcWindow için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCSLAB",
+      "discipline": "IFC",
+      "ifc_entity": "IfcSlab",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_MIM_DosemeIsıYalitim, TR_MIM_DosemeKalinligi, TR_MIM_DosemeKaplama, TR_MIM_DosemePozNo, TR_MIM_DosemeREI",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcSlab için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCWALL",
+      "discipline": "IFC",
+      "ifc_entity": "IfcWall",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_MIM_DuvarDisKaplama, TR_MIM_DuvarIcKaplama, TR_MIM_DuvarKalinligi, TR_MIM_DuvarPozNo, TR_MIM_DuvarREI",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcWall için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCDOOR",
+      "discipline": "IFC",
+      "ifc_entity": "IfcDoor",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_MIM_EngKapiGenislik, TR_MIM_KapiAcilisYonu, TR_MIM_KapiEngelli, TR_MIM_KapiGenislik, TR_MIM_KapiKilitTipi",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcDoor için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCSPACE",
+      "discipline": "IFC",
+      "ifc_entity": "IfcSpace",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_MIM_EngWCVarMi",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcSpace için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCSTAIR",
+      "discipline": "IFC",
+      "ifc_entity": "IfcStair",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_MIM_YangMerdiven, TR_MIM_YangMerdivenGenislik",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcStair için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCELEME",
+      "discipline": "IFC",
+      "ifc_entity": "IfcElement",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_BES_AltGrup, TR_BES_AltKod, TR_BES_AnaGrup, TR_BES_AnaKod, TR_BES_BakimGrubu",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcElement için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCBEAM ",
+      "discipline": "IFC",
+      "ifc_entity": "IfcBeam | IfcColumn | IfcSlab | IfcWall",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_IsTasiyici",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcBeam | IfcColumn | IfcSlab | IfcWall için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCREINF",
+      "discipline": "IFC",
+      "ifc_entity": "IfcReinforcingBar",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_STA_AnaDonatiAlt, TR_STA_AnaDonatiUst, TR_STA_AnkrajBoyu, TR_STA_DonatiNotu, TR_STA_DonatiSinifi",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcReinforcingBar için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCBUILD",
+      "discipline": "IFC",
+      "ifc_entity": "IfcBuilding",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_STA_BYS, TR_STA_BinaKullanimSinifi, TR_STA_BinaOnemKatsayisi, TR_STA_BinaYuksekligi, TR_STA_DTS",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcBuilding için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCSTRUC",
+      "discipline": "IFC",
+      "ifc_entity": "IfcStructuralAnalysisModel",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_STA_DFazlaDayanim, TR_STA_DayanimDuzeyi, TR_STA_RKatsayisi, TR_STA_TasiyiciSistemAilesi, TR_STA_TasiyiciSistemKodu",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcStructuralAnalysisModel için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCBEAM",
+      "discipline": "IFC",
+      "ifc_entity": "IfcBeam",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_STA_ElemanTipi, TR_STA_TemelTipi",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcBeam için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCSITE",
+      "discipline": "IFC",
+      "ifc_entity": "IfcSite",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_STA_F1, TR_STA_FS, TR_STA_S1, TR_STA_Ss, TR_STA_YerelZeminSinifi",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcSite için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    },
+    {
+      "rule_code": "IDS-IFCBUILD",
+      "discipline": "IFC",
+      "ifc_entity": "IfcBuildingStorey",
+      "rule_focus": "IDS zorunlu alanlar",
+      "rule_expression": "TR_STA_ZeminKatYuksekligi",
+      "rule_type": "not_empty",
+      "severity": "FAIL",
+      "message_tr": "IfcBuildingStorey için IDS zorunlu parametreler eksik",
+      "rule_source": "EG_PARAM_MATRIX_V3.ids"
+    }
+  ]
+}
