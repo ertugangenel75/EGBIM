@@ -1,0 +1,76 @@
+{
+  "title": "ETL: Model → Excel Export",
+  "category": "etl",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "kirisler",
+      "op": "collect_beams"
+    },
+    {
+      "id": "hepsi",
+      "op": "merge_lists",
+      "from_many": [
+        "duvarlar",
+        "kolonlar",
+        "kirisler"
+      ]
+    },
+    {
+      "id": "satırlar",
+      "op": "elements_to_rows_with_params",
+      "from": "hepsi",
+      "params": {
+        "param_names": [
+          "Category",
+          "Family",
+          "Type",
+          "Level",
+          "Mark",
+          "Volume"
+        ]
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "satırlar",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Model Data"
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "hepsi",
+      "params": {
+        "title": "ETL: Model → Excel Export"
+      }
+    }
+  ],
+  "id": "d01_model_excel",
+  "description": "ETL: Model → Excel Export — 7 adımlı otomasyon iş akışı.",
+  "tags": [
+    "etl",
+    "veri",
+    "excel",
+    "pipeline"
+  ]
+}

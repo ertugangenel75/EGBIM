@@ -1,0 +1,93 @@
+{
+  "title": "EGBIMOTO Donatı Ağırlık Hesabı — Fabrika Bindirme Dahil",
+  "description": "Donatı topla → çap+bindirme+fabrika boyu ile kg hesabı → TS500 doğrulama → Excel export",
+  "category": "DONATI",
+  "version": "1.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rebar"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Rebar elemanı bulunamadı"
+    }
+  ],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_topla",
+      "op": "collect_rebar"
+    },
+    {
+      "id": "s02_agirlik",
+      "op": "rebar_weight_calc",
+      "from": "s01_topla",
+      "inputs": {
+        "factory_length_mm": 12000,
+        "fck": 25,
+        "fyk": 420,
+        "cover_mm": 30,
+        "apply_overlap": true
+      }
+    },
+    {
+      "id": "s03_cap_ozet",
+      "op": "group_by",
+      "from": "s02_agirlik",
+      "inputs": {
+        "field": "cap_mm",
+        "sum_fields": [
+          "agirlik_kg",
+          "net_uzunluk_m"
+        ]
+      }
+    },
+    {
+      "id": "s04_kat_ozet",
+      "op": "group_by",
+      "from": "s02_agirlik",
+      "inputs": {
+        "field": "kat",
+        "sum_fields": [
+          "agirlik_kg"
+        ]
+      }
+    },
+    {
+      "id": "s05_ts500",
+      "op": "validate_rebar_ts500",
+      "from": "s01_topla",
+      "inputs": {
+        "fck": 25,
+        "fyk": 420,
+        "cover_mm": 30
+      },
+      "required": false
+    },
+    {
+      "id": "s06_excel",
+      "op": "export_xlsx",
+      "from": "s02_agirlik",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/donati_agirlik.xlsx",
+        "sheet_name": "Donatı Metraj"
+      },
+      "required": false
+    },
+    {
+      "id": "s07_ozet_goster",
+      "op": "show_result",
+      "from": "s03_cap_ozet",
+      "inputs": {
+        "message": "Çap bazlı donatı ağırlık özeti"
+      }
+    }
+  ],
+  "tags": [
+    "donati",
+    "rebar",
+    "ts500"
+  ]
+}

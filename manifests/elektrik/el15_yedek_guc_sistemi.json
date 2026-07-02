@@ -1,0 +1,44 @@
+{
+  "id": "el15_yedek_guc_sistemi",
+  "title": "Elektrik: Yedek Güç Sistemi (Jeneratör + UPS)",
+  "description": "Jeneratör kVA boyutlandırması ve UPS özerklik süresi/batarya kapasitesi hesabı (IEC 62040-3).",
+  "category": "ELEKTRIK",
+  "version": "1.0",
+  "tags": ["elektrik","jenerator","ups","yedek_guc","ozerklik","batarya","iec62040"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_jenerator",
+      "op": "elec_generator_load_calc",
+      "description": "Jeneratör yük ve kVA hesabı",
+      "inputs": {
+        "acil_yuk_kw":      "$INPUT:acil_yuk_kw:50",
+        "standby_yuk_kw":   "$INPUT:standby_yuk_kw:30",
+        "motor_baslama_kw": "$INPUT:motor_baslama_kw:15",
+        "guc_faktoru":      0.8,
+        "guvenlik_pct":     25.0
+      }
+    },
+    {
+      "id": "s02_ups",
+      "op": "elec_ups_autonomy_check",
+      "description": "UPS özerklik süresi ve batarya kapasitesi",
+      "inputs": {
+        "yuk_kw":           "$INPUT:ups_yuk_kw:20",
+        "hedef_sure_dak":   "$INPUT:hedef_sure_dak:30",
+        "batarya_voltaj":   240,
+        "ups_verim":        0.94,
+        "batarya_verim":    0.85,
+        "ups_sinifi":       "$INPUT:ups_sinifi:VFI"
+      }
+    },
+    {
+      "id": "s03_rapor",
+      "op": "export_html_report",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/yedek_guc_sistemi.html",
+        "title": "Yedek Güç Sistemi (Jeneratör + UPS) Raporu"
+      }
+    }
+  ]
+}

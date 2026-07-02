@@ -1,0 +1,74 @@
+{
+  "title": "ETL: IFC Export Hazırlık",
+  "category": "etl",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "harita",
+      "op": "load_ifc_mapping",
+      "params": {
+        "mapping_path": "mapping/ifc_mapping.json"
+      }
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "ifc",
+      "op": "map_to_ifc",
+      "from": "duvarlar"
+    },
+    {
+      "id": "kontrol",
+      "op": "validate_required_params",
+      "from": "duvarlar",
+      "params": {
+        "required_params": [
+          "IfcType",
+          "PredefinedType"
+        ]
+      }
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "satırlar",
+      "params": {
+        "title": "IFC Hazırlık",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "kontrol"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    }
+  ],
+  "id": "d04_ifc_hazirlik",
+  "description": "ETL: IFC Export Hazırlık — 8 adımlı otomasyon iş akışı.",
+  "tags": [
+    "etl",
+    "veri",
+    "excel",
+    "pipeline"
+  ]
+}

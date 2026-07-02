@@ -1,0 +1,40 @@
+{
+  "id": "el13_tesisat_guvenligi_qa",
+  "title": "Elektrik: Tesisat Güvenliği QA (Topraklama + Acil Aydınlatma)",
+  "description": "Topraklama sistemi tipi doğrulama (IEC 60364-4-41) ve acil aydınlatma devre QA (TS EN 1838).",
+  "category": "ELEKTRIK",
+  "version": "1.0",
+  "tags": ["elektrik","topraklama","acil_aydinlatma","ts_en1838","iec60364","guvenlik"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_topraklama",
+      "op": "elec_earthing_validation",
+      "description": "Topraklama sistemi tipi QA",
+      "inputs": {
+        "beklenen_tip": "$INPUT:topraklama_tipi:TN-S",
+        "alan_tipi":    "$INPUT:alan_tipi:ticari"
+      }
+    },
+    {
+      "id": "s02_acil",
+      "op": "elec_emergency_circuit_qa",
+      "description": "Acil aydınlatma devre QA",
+      "inputs": {
+        "alan_tipi":          "$INPUT:acil_alan_tipi:cikis_yolu",
+        "armatur_aralik_m":   "$INPUT:armatur_aralik_m:15",
+        "ozerklik_sure_saat": "$INPUT:ozerklik_sure_saat:1",
+        "devreye_girme_sn":   "$INPUT:devreye_girme_sn:5",
+        "bagimsiz_devre":     "$INPUT:bagimsiz_devre:true"
+      }
+    },
+    {
+      "id": "s03_rapor",
+      "op": "export_html_report",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/tesisat_guvenlik_qa.html",
+        "title": "Elektrik Tesisat Güvenliği QA Raporu"
+      }
+    }
+  ]
+}

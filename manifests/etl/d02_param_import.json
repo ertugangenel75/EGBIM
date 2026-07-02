@@ -1,0 +1,62 @@
+{
+  "title": "ETL: Excel → Parametre Import",
+  "category": "etl",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "veri",
+      "op": "data_load",
+      "params": {
+        "path": "param_import.json"
+      }
+    },
+    {
+      "id": "yaz",
+      "op": "write_param_from_rows",
+      "from": "veri",
+      "params": {
+        "id_column": "element_id",
+        "param_column": "deger",
+        "param_name": "EGBIM_POZ_KODU"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "yaz",
+      "params": {
+        "title": "Parametre Import",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "yaz",
+      "params": {
+        "title": "ETL: Excel → Parametre Import"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "yaz"
+    }
+  ],
+  "id": "d02_param_import",
+  "description": "ETL: Excel → Parametre Import — 5 adımlı otomasyon iş akışı.",
+  "tags": [
+    "etl",
+    "veri",
+    "excel",
+    "pipeline"
+  ]
+}

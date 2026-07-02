@@ -1,0 +1,64 @@
+{
+  "title": "Elektrik: Panel Yük Kapasitesi",
+  "category": "elektrik",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_ElectricalEquipment",
+        "OST_LightingDevices",
+        "OST_CableTray"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde elektrik elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "paneller",
+      "op": "collect_electrical_equipment"
+    },
+    {
+      "id": "kontrol",
+      "op": "elec_validate_panel_load",
+      "from": "paneller",
+      "params": {
+        "max_load_kva": 80
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "kontrol",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Panel Yük"
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "kontrol"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "kat_ozet"
+    }
+  ],
+  "id": "el03_panel_kapasite",
+  "description": "Elektrik: Panel Yük Kapasitesi — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "elektrik",
+    "electrical",
+    "pano",
+    "kablo"
+  ]
+}

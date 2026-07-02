@@ -1,0 +1,63 @@
+{
+  "title": "EGBIMOTO Duvar Kütüphanesi — CSV'den Oluştur",
+  "description": "TR BIM duvar tipi kütüphanesini CSV'den projeye aktar (preview → onay → oluştur)",
+  "category": "DUVAR",
+  "version": "1.0",
+  "transaction_policy": "preview",
+  "steps": [
+    {
+      "id": "s01_dogrula",
+      "op": "wall_type_from_csv",
+      "inputs": {
+        "csv_path": "C:/EGBIM_Data/TR_BIM_DuvarKutuphanesi.csv",
+        "mode": "create",
+        "dry_run": true
+      }
+    },
+    {
+      "id": "s02_hatalar",
+      "op": "filter_rows",
+      "from": "s01_dogrula",
+      "inputs": {
+        "field": "action",
+        "value": "ERROR"
+      },
+      "required": false
+    },
+    {
+      "id": "s03_preview",
+      "op": "preview_gate",
+      "from": "s01_dogrula",
+      "inputs": {
+        "title": "Duvar Kütüphanesi — Oluşturulsun mu?"
+      }
+    },
+    {
+      "id": "s04_olustur",
+      "op": "wall_type_from_csv",
+      "condition": "$s03_preview == confirmed",
+      "inputs": {
+        "csv_path": "C:/EGBIM_Data/TR_BIM_DuvarKutuphanesi.csv",
+        "mode": "create",
+        "rename_suffix": " - TR BIM Import",
+        "dry_run": false
+      }
+    },
+    {
+      "id": "s05_rapor",
+      "op": "export_html_report",
+      "from": "s04_olustur",
+      "condition": "$s03_preview == confirmed",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/duvar_kutuphanesi_rapor.html",
+        "title": "TR BIM Duvar Kütüphanesi Aktarım Raporu"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "duvar",
+    "wall",
+    "csv"
+  ]
+}

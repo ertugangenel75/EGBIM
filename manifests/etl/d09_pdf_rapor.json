@@ -1,0 +1,55 @@
+{
+  "title": "ETL: Model PDF Raporu",
+  "category": "etl",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "analiz",
+      "op": "qa_model_size_analysis"
+    },
+    {
+      "id": "proje",
+      "op": "pm_get_project_info"
+    },
+    {
+      "id": "rapor",
+      "op": "export_pdf",
+      "from": "analiz",
+      "params": {
+        "output_path": "",
+        "title": "EGBIMOTO Model Raporu"
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "analiz"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "kat_ozet"
+    }
+  ],
+  "id": "d09_pdf_rapor",
+  "description": "ETL: Model PDF Raporu — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "etl",
+    "veri",
+    "excel",
+    "pipeline"
+  ]
+}

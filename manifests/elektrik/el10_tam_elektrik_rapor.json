@@ -1,0 +1,92 @@
+{
+  "title": "Elektrik: Tam Elektrik Raporu",
+  "category": "elektrik",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_ElectricalEquipment",
+        "OST_LightingDevices",
+        "OST_CableTray"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde elektrik elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "paneller",
+      "op": "collect_electrical_equipment"
+    },
+    {
+      "id": "armatürler",
+      "op": "collect_lighting_fixtures"
+    },
+    {
+      "id": "cihazlar",
+      "op": "collect_lighting_devices"
+    },
+    {
+      "id": "prizler",
+      "op": "collect_electrical_fixtures"
+    },
+    {
+      "id": "panel_s",
+      "op": "elec_generate_panel_schedule",
+      "from": "paneller"
+    },
+    {
+      "id": "lux",
+      "op": "elec_validate_lux_level",
+      "from": "armatürler",
+      "params": {
+        "min_lux": 300
+      }
+    },
+    {
+      "id": "devre",
+      "op": "elec_check_circuit_assigned",
+      "from": "cihazlar"
+    },
+    {
+      "id": "lux_satirlar",
+      "op": "validation_to_rows",
+      "from": "lux"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "lux_satirlar",
+      "params": {
+        "title": "Tam Elektrik Raporu",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "lux",
+        "devre"
+      ],
+      "params": {
+        "title": "Elektrik: Tam Elektrik Raporu"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "birlesik"
+    }
+  ],
+  "id": "el10_tam_elektrik_rapor",
+  "description": "Elektrik: Tam Elektrik Raporu — 11 adımlı otomasyon iş akışı.",
+  "tags": [
+    "elektrik",
+    "electrical",
+    "pano",
+    "kablo"
+  ]
+}

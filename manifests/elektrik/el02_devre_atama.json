@@ -1,0 +1,68 @@
+{
+  "title": "Elektrik: Devre Ataması Kontrolü",
+  "category": "elektrik",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_ElectricalEquipment",
+        "OST_LightingDevices",
+        "OST_CableTray"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde elektrik elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "armatürler",
+      "op": "collect_lighting_fixtures"
+    },
+    {
+      "id": "cihazlar",
+      "op": "collect_lighting_devices"
+    },
+    {
+      "id": "hepsi",
+      "op": "merge_lists",
+      "from_many": [
+        "armatürler",
+        "cihazlar"
+      ]
+    },
+    {
+      "id": "kontrol",
+      "op": "elec_check_circuit_assigned",
+      "from": "hepsi"
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "satırlar",
+      "params": {
+        "title": "Devre Ataması",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kontrol"
+    }
+  ],
+  "id": "el02_devre_atama",
+  "description": "Elektrik: Devre Ataması Kontrolü — 7 adımlı otomasyon iş akışı.",
+  "tags": [
+    "elektrik",
+    "electrical",
+    "pano",
+    "kablo"
+  ]
+}

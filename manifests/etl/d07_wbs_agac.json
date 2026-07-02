@@ -1,0 +1,71 @@
+{
+  "title": "ETL: WBS Ağaç Üretimi",
+  "category": "etl",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "hepsi",
+      "op": "collect_multi",
+      "params": {
+        "categories": [
+          "OST_Walls",
+          "OST_Floors",
+          "OST_Columns",
+          "OST_StructuralFraming"
+        ]
+      }
+    },
+    {
+      "id": "wbs",
+      "op": "assign_wbs_code",
+      "from": "hepsi"
+    },
+    {
+      "id": "sinifla",
+      "op": "classify_by_wbs",
+      "from": "wbs"
+    },
+    {
+      "id": "rapor",
+      "op": "export_wbs_report",
+      "from": "sinifla",
+      "params": {
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "hepsi"
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "kat_bazli",
+      "params": {
+        "title": "ETL: WBS Ağaç Üretimi"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "kat_bazli"
+    }
+  ],
+  "id": "d07_wbs_agac",
+  "description": "ETL: WBS Ağaç Üretimi — 7 adımlı otomasyon iş akışı.",
+  "tags": [
+    "etl",
+    "veri",
+    "excel",
+    "pipeline"
+  ]
+}

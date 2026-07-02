@@ -1,0 +1,89 @@
+{
+  "title": "ETL: Power BI CSV Export",
+  "category": "etl",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "kirisler",
+      "op": "collect_beams"
+    },
+    {
+      "id": "odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "d_satir",
+      "op": "elements_to_rows_with_params",
+      "from": "duvarlar",
+      "params": {
+        "param_names": [
+          "Category",
+          "Level",
+          "Volume",
+          "Mark"
+        ]
+      }
+    },
+    {
+      "id": "k_satir",
+      "op": "elements_to_rows_with_params",
+      "from": "kolonlar",
+      "params": {
+        "param_names": [
+          "Category",
+          "Level",
+          "Volume",
+          "Mark"
+        ]
+      }
+    },
+    {
+      "id": "hepsi",
+      "op": "merge_lists",
+      "from_many": [
+        "d_satir",
+        "k_satir"
+      ]
+    },
+    {
+      "id": "csv",
+      "op": "export_csv",
+      "from": "hepsi",
+      "params": {
+        "output_path": ""
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "hepsi",
+      "params": {
+        "title": "ETL: Power BI CSV Export"
+      }
+    }
+  ],
+  "id": "d05_powerbi_export",
+  "description": "ETL: Power BI CSV Export — 9 adımlı otomasyon iş akışı.",
+  "tags": [
+    "etl",
+    "veri",
+    "excel",
+    "pipeline"
+  ]
+}

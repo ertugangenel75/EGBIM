@@ -1,0 +1,30 @@
+{
+  "title": "EGBIMOTO Elektrik Conduit IEC Hesap (Kurulum + Hesap + Cetvel)",
+  "description": "TS/IEC 60364 conduit tabanli kablo secimi tam akisi: 1) shared parametreleri yukle, 2) conduit uzunlugundan IEC kablo secimi + gerilim dusumu + conduit fill hesabi, 3) From-To kablo cetveli (HTML). Kullanici once conduit'lere EG_DevreNo yazmalidir.",
+  "category": "ELEKTRIK",
+  "version": "1.0",
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_kurulum",
+      "op": "elec_setup_conduit_params"
+    },
+    {
+      "id": "s02_hesap",
+      "op": "elec_conduit_calc_iec",
+      "inputs": {
+        "voltage": 400,
+        "vdrop_limit_pct": 5,
+        "max_fill_pct": 40
+      }
+    },
+    {
+      "id": "s03_cetvel",
+      "op": "elec_conduit_schedule",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/kablo_cetveli_iec.html"
+      }
+    }
+  ],
+  "tags": ["elektrik", "conduit", "kablo", "iec", "60364", "gerilim_dusumu", "fill", "metraj"]
+}

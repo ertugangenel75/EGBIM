@@ -1,0 +1,72 @@
+{
+  "title": "Elektrik: Aydınlatma Armatür Listesi",
+  "category": "elektrik",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_ElectricalEquipment",
+        "OST_LightingDevices",
+        "OST_CableTray"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde elektrik elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "armatürler",
+      "op": "collect_lighting_fixtures"
+    },
+    {
+      "id": "satırlar",
+      "op": "elements_to_rows_with_params",
+      "from": "armatürler",
+      "params": {
+        "param_names": [
+          "Mark",
+          "Family",
+          "Type",
+          "Wattage",
+          "Level",
+          "Circuit Number"
+        ]
+      }
+    },
+    {
+      "id": "grup",
+      "op": "group_by",
+      "from": "satırlar",
+      "params": {
+        "group_by": "Type"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "satırlar",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Armatür Listesi"
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "grup",
+      "params": {
+        "title": "Elektrik: Aydınlatma Armatür Listesi"
+      }
+    }
+  ],
+  "id": "el08_aydinlatma_listesi",
+  "description": "Elektrik: Aydınlatma Armatür Listesi — 5 adımlı otomasyon iş akışı.",
+  "tags": [
+    "elektrik",
+    "electrical",
+    "pano",
+    "kablo"
+  ]
+}

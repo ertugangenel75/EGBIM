@@ -1,0 +1,74 @@
+{
+  "title": "Elektrik: Acil Aydınlatma Varlığı",
+  "category": "elektrik",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_ElectricalEquipment",
+        "OST_LightingDevices",
+        "OST_CableTray"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde elektrik elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "odalar",
+      "op": "collect_rooms"
+    },
+    {
+      "id": "armatürler",
+      "op": "collect_lighting_fixtures"
+    },
+    {
+      "id": "kontrol",
+      "op": "elec_check_emergency_lighting",
+      "from": "odalar",
+      "params": {
+        "fixtures": "$armatürler",
+        "emergency_keywords": [
+          "acil",
+          "emergency",
+          "exit",
+          "çıkış"
+        ]
+      }
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "satırlar",
+      "params": {
+        "title": "Acil Aydınlatma",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "kontrol"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    }
+  ],
+  "id": "el05_acil_aydinlatma",
+  "description": "Elektrik: Acil Aydınlatma Varlığı — 7 adımlı otomasyon iş akışı.",
+  "tags": [
+    "elektrik",
+    "electrical",
+    "pano",
+    "kablo"
+  ]
+}

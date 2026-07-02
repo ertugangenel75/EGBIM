@@ -1,0 +1,55 @@
+{
+  "id": "el14_kablo_tava_qa",
+  "title": "Elektrik: Kablo Tava QA (Askı Aralığı + ELV Ayrımı)",
+  "description": "Kablo tava askı aralığı kontrolü (IEC 61537) ve güç/ELV tava ayrım kontrolü (≥300mm). ELV cihaz montaj yükseklikleri dahil.",
+  "category": "ELEKTRIK",
+  "version": "1.0",
+  "tags": ["elektrik","kablo_tava","aski","elv","ayrim","iec61537","koordinasyon"],
+  "transaction_policy": "none",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": ["OST_CableTray"],
+      "min_count": 1,
+      "on_fail": "WARN",
+      "message": "Modelde kablo tavası bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "s01_aski",
+      "op": "elec_tray_hanger_spacing",
+      "description": "Kablo tava askı aralığı kontrolü",
+      "inputs": {
+        "tav_tipi": "$INPUT:tav_tipi:ladder"
+      }
+    },
+    {
+      "id": "s02_ayrim",
+      "op": "elec_tray_separation_check",
+      "description": "Güç/ELV tava ayrım kontrolü (min 300mm)",
+      "inputs": {
+        "min_ayrim_mm": 300,
+        "tolerans_mm":  50
+      }
+    },
+    {
+      "id": "s03_elv",
+      "op": "elec_elv_device_qa",
+      "description": "ELV cihaz montaj yükseklikleri QA",
+      "inputs": {
+        "tolerance_mm": 100,
+        "write_back":   false
+      }
+    },
+    {
+      "id": "s04_rapor",
+      "op": "export_html_report",
+      "from": "s02_ayrim",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/kablo_tava_qa.html",
+        "title": "Kablo Tava QA Raporu"
+      }
+    }
+  ]
+}

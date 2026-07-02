@@ -1,0 +1,103 @@
+{
+  "id": "el16_tam_elektrik_hesap",
+  "title": "Elektrik: Tam Sistem Hesap Pipeline (12 Op)",
+  "description": "Elektrik tesisat tam ön hesap akışı: gerilim düşümü → kısa devre → çeşitlilik faktörü → topraklama → busbar → güç faktörü → ELV QA → kablo tava askı → tava ayrımı → jeneratör → UPS → acil aydınlatma. Tek manifest ile projenin tüm elektrik ön hesapları.",
+  "category": "ELEKTRIK",
+  "version": "1.0",
+  "tags": [
+    "elektrik","gerilim_dusumu","kisa_devre","cesitlilik","busbar","guc_faktoru",
+    "elv","kablo_tava","jenerator","ups","acil_aydinlatma","iec60364","pipeline"
+  ],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_vd",
+      "op": "elec_voltage_drop_calc",
+      "description": "1) Gerilim düşümü + otomatik kesit",
+      "inputs": {
+        "akim_a": "$INPUT:akim_a:100", "uzunluk_m": "$INPUT:uzunluk_m:50",
+        "kesit_mm2": 0, "gerilim_v": 415, "faz_sayisi": 3,
+        "malzeme": "cu", "cos_phi": 0.85, "max_dusumu_pct": 3.0, "yuk_tipi": "genel"
+      }
+    },
+    {
+      "id": "s02_kd",
+      "op": "elec_short_circuit_check",
+      "description": "2) Kısa devre koordinasyon",
+      "from": "s01_vd", "input_map": {"kesit_mm2":"kesit_mm2"},
+      "inputs": {"uzunluk_m":"$INPUT:uzunluk_m:50","sigorta_a":"$INPUT:sigorta_a:125","kaynak_empedans":35}
+    },
+    {
+      "id": "s03_div",
+      "op": "elec_diversity_factor",
+      "description": "3) Çeşitlilik faktörü talep gücü",
+      "inputs": {
+        "yukler": "$INPUT:yukler:[{\"isim\":\"Aydinlatma\",\"kurulu_kw\":50,\"kullanim_faktoru\":0.9}]",
+        "cesitlilik_faktoru": 0.75, "gerilim_v": 415, "cos_phi": 0.80
+      }
+    },
+    {
+      "id": "s04_topraklama",
+      "op": "elec_earthing_validation",
+      "description": "4) Topraklama sistemi QA",
+      "inputs": {"beklenen_tip":"$INPUT:topraklama_tipi:TN-S","alan_tipi":"$INPUT:alan_tipi:ticari"}
+    },
+    {
+      "id": "s05_busbar",
+      "op": "elec_busbar_sizing",
+      "description": "5) Busbar kesit seçimi",
+      "inputs": {"akim_a":"$INPUT:busbar_akim_a:400","malzeme":"cu","montaj":"yatay","guvenlik_pct":20}
+    },
+    {
+      "id": "s06_pf",
+      "op": "elec_power_factor_check",
+      "description": "6) Güç faktörü + kompanzasyon",
+      "inputs": {"aktif_guc_kw":"$INPUT:aktif_guc_kw:200","cos_phi_mevcut":"$INPUT:cos_phi_mevcut:0.80","cos_phi_hedef":0.95}
+    },
+    {
+      "id": "s07_elv",
+      "op": "elec_elv_device_qa",
+      "description": "7) ELV cihaz montaj yükseklikleri QA",
+      "inputs": {"tolerance_mm":100,"write_back":false}
+    },
+    {
+      "id": "s08_tray_hanger",
+      "op": "elec_tray_hanger_spacing",
+      "description": "8) Kablo tava askı aralığı",
+      "inputs": {"tav_tipi":"$INPUT:tav_tipi:ladder"}
+    },
+    {
+      "id": "s09_tray_sep",
+      "op": "elec_tray_separation_check",
+      "description": "9) Güç/ELV tava ayrımı (≥300mm)",
+      "inputs": {"min_ayrim_mm":300,"tolerans_mm":50}
+    },
+    {
+      "id": "s10_gen",
+      "op": "elec_generator_load_calc",
+      "description": "10) Jeneratör kVA hesabı",
+      "inputs": {"acil_yuk_kw":"$INPUT:acil_yuk_kw:50","standby_yuk_kw":30,"motor_baslama_kw":15,"guc_faktoru":0.8,"guvenlik_pct":25}
+    },
+    {
+      "id": "s11_ups",
+      "op": "elec_ups_autonomy_check",
+      "description": "11) UPS özerklik + batarya",
+      "inputs": {"yuk_kw":"$INPUT:ups_yuk_kw:20","hedef_sure_dak":30,"batarya_voltaj":240,"ups_verim":0.94,"batarya_verim":0.85,"ups_sinifi":"VFI"}
+    },
+    {
+      "id": "s12_acil",
+      "op": "elec_emergency_circuit_qa",
+      "description": "12) Acil aydınlatma devre QA",
+      "inputs": {"alan_tipi":"cikis_yolu","armatur_aralik_m":15,"ozerklik_sure_saat":1,"devreye_girme_sn":5,"bagimsiz_devre":true}
+    },
+    {
+      "id": "s13_rapor",
+      "op": "export_html_report",
+      "description": "13) Tam rapor",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/tam_elektrik_hesap.html",
+        "title": "Elektrik Tesisat Tam Sistem Hesap Raporu (12 Op)"
+      }
+    }
+  ]
+}

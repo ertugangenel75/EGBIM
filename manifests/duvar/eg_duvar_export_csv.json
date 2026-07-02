@@ -1,0 +1,30 @@
+{
+  "title": "EGBIMOTO Duvar Kütüphanesi — CSV'ye Aktar",
+  "description": "Projedeki tüm Basic Wall tiplerini wall_type_from_csv uyumlu CSV'ye aktarır",
+  "category": "DUVAR",
+  "version": "1.0",
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_export",
+      "op": "wall_type_export_csv",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/mevcut_duvar_kutuphanesi.csv",
+        "include_params": true
+      }
+    },
+    {
+      "id": "s02_ozet",
+      "op": "show_result",
+      "from": "s01_export",
+      "inputs": {
+        "message": "Duvar kütüphanesi CSV'ye aktarıldı"
+      }
+    }
+  ],
+  "tags": [
+    "duvar",
+    "wall",
+    "csv"
+  ]
+}

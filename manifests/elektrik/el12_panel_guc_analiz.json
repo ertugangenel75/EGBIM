@@ -1,0 +1,53 @@
+{
+  "id": "el12_panel_guc_analiz",
+  "title": "Elektrik: Panel Güç Analizi (Çeşitlilik + Güç Faktörü + Busbar)",
+  "description": "Panel talep gücü hesabı: çeşitlilik faktörü → güç faktörü analizi → busbar kesit seçimi zinciri.",
+  "category": "ELEKTRIK",
+  "version": "1.0",
+  "tags": ["elektrik","panel","guc","cesitlilik","busbar","kompanzasyon"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_cesitlilik",
+      "op": "elec_diversity_factor",
+      "description": "Çeşitlilik faktörü ile talep gücü",
+      "inputs": {
+        "yukler": "$INPUT:yukler:[{\"isim\":\"Aydinlatma\",\"kurulu_kw\":50,\"kullanim_faktoru\":0.9},{\"isim\":\"Priz\",\"kurulu_kw\":80,\"kullanim_faktoru\":0.5},{\"isim\":\"HVAC\",\"kurulu_kw\":100,\"kullanim_faktoru\":0.8}]",
+        "cesitlilik_faktoru": "$INPUT:cesitlilik_faktoru:0.75",
+        "gerilim_v": 415,
+        "cos_phi": "$INPUT:cos_phi:0.80"
+      }
+    },
+    {
+      "id": "s02_guc_faktoru",
+      "op": "elec_power_factor_check",
+      "from": "s01_cesitlilik",
+      "input_map": { "aktif_guc_kw": "toplam_talep_kw" },
+      "inputs": {
+        "cos_phi_mevcut": "$INPUT:cos_phi:0.80",
+        "cos_phi_hedef":  0.95,
+        "gerilim_v":      415
+      }
+    },
+    {
+      "id": "s03_busbar",
+      "op": "elec_busbar_sizing",
+      "from": "s02_guc_faktoru",
+      "input_map": { "akim_a": "akim_hedef_a" },
+      "inputs": {
+        "malzeme":     "cu",
+        "montaj":      "yatay",
+        "guvenlik_pct": 20.0
+      }
+    },
+    {
+      "id": "s04_rapor",
+      "op": "export_html_report",
+      "from": "s03_busbar",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/panel_guc_analiz.html",
+        "title": "Panel Güç Analizi Raporu"
+      }
+    }
+  ]
+}

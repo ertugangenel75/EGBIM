@@ -1,0 +1,24 @@
+{
+  "title": "EGBIMOTO Elektrik Devre Snapshot Al (Revizyon Oncesi)",
+  "description": "Modeldeki tum elektrik devrelerinin mevcut durumunu JSON snapshot'a kaydeder. Tasarim onaylandiginda veya revizyon oncesi calistirilir; sonra elec_circuit_diff ile karsilastirma yapilir.",
+  "category": "ELEKTRIK",
+  "version": "1.0",
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_snapshot",
+      "op": "elec_circuit_snapshot",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/devre_baseline.json"
+      }
+    }
+  ],
+  "tags": [
+    "elektrik",
+    "devre",
+    "circuit",
+    "snapshot",
+    "baseline",
+    "revizyon"
+  ]
+}

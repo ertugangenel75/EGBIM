@@ -1,0 +1,48 @@
+{
+  "id": "el11_gerilim_dusumu_hesap",
+  "title": "Elektrik: Gerilim Düşümü ve Kesit Seçimi",
+  "description": "IEC 60364-5-52 gerilim düşümü hesabı. Otomatik kesit seçimi, kısa devre koordinasyon kontrolü ve güç faktörü analizi pipeline'ı.",
+  "category": "ELEKTRIK",
+  "version": "1.0",
+  "tags": ["elektrik","gerilim_dusumu","kesit","iec60364","kablo"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_gerilim_dusumu",
+      "op": "elec_voltage_drop_calc",
+      "description": "Gerilim düşümü hesabı ve otomatik kesit seçimi",
+      "inputs": {
+        "akim_a":         "$INPUT:akim_a:100",
+        "uzunluk_m":      "$INPUT:uzunluk_m:50",
+        "kesit_mm2":      "$INPUT:kesit_mm2:0",
+        "gerilim_v":      "$INPUT:gerilim_v:415",
+        "faz_sayisi":     "$INPUT:faz_sayisi:3",
+        "malzeme":        "$INPUT:malzeme:cu",
+        "cos_phi":        "$INPUT:cos_phi:0.85",
+        "max_dusumu_pct": "$INPUT:max_dusumu_pct:3.0",
+        "yuk_tipi":       "$INPUT:yuk_tipi:genel"
+      }
+    },
+    {
+      "id": "s02_kisa_devre",
+      "op": "elec_short_circuit_check",
+      "from": "s01_gerilim_dusumu",
+      "input_map": { "kesit_mm2": "kesit_mm2" },
+      "inputs": {
+        "uzunluk_m":       "$INPUT:uzunluk_m:50",
+        "sigorta_a":       "$INPUT:sigorta_a:125",
+        "kaynak_empedans": 35.0,
+        "sigorta_tip":     "mcb"
+      }
+    },
+    {
+      "id": "s03_rapor",
+      "op": "export_html_report",
+      "from": "s02_kisa_devre",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/gerilim_dusumu.html",
+        "title": "Gerilim Düşümü ve Kısa Devre Koordinasyon Raporu"
+      }
+    }
+  ]
+}

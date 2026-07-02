@@ -1,0 +1,27 @@
+{
+  "title": "EGBIMOTO Elektrik Devre Degisiklik Raporu (Saha Icin)",
+  "description": "Mevcut modeli onceki devre baseline'i ile karsilastirir; hangi devrelerin eklendigini, silindigini, yukunun/panelinin/kutbunun degistigini saha ekibi icin HTML rapor olarak uretir. Elektrikciye 'neyi degistir' listesi verir.",
+  "category": "ELEKTRIK",
+  "version": "1.0",
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_diff",
+      "op": "elec_circuit_diff",
+      "inputs": {
+        "baseline_path": "C:/EGBIM_Output/devre_baseline.json",
+        "output_path": "C:/EGBIM_Output/devre_degisiklik_raporu.html",
+        "load_tolerance_va": 1
+      }
+    }
+  ],
+  "tags": [
+    "elektrik",
+    "devre",
+    "circuit",
+    "diff",
+    "degisiklik",
+    "saha",
+    "rapor"
+  ]
+}

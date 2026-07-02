@@ -1,0 +1,71 @@
+{
+  "title": "Elektrik: Kablo Tava/Boru Doluluk",
+  "category": "elektrik",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_ElectricalEquipment",
+        "OST_LightingDevices",
+        "OST_CableTray"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde elektrik elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kanallar",
+      "op": "collect_conduits"
+    },
+    {
+      "id": "tavalar",
+      "op": "collect_cable_trays"
+    },
+    {
+      "id": "satırlar",
+      "op": "elements_to_rows_with_params",
+      "from": "kanallar",
+      "params": {
+        "param_names": [
+          "Mark",
+          "Fill Ratio",
+          "System Name",
+          "Level"
+        ]
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "satırlar",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Doluluk"
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_type",
+      "from": "tavalar"
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "kat_bazli",
+      "params": {
+        "title": "Elektrik: Kablo Tava/Boru Doluluk"
+      }
+    }
+  ],
+  "id": "el01_kablo_doluluk",
+  "description": "Elektrik: Kablo Tava/Boru Doluluk — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "elektrik",
+    "electrical",
+    "pano",
+    "kablo"
+  ]
+}

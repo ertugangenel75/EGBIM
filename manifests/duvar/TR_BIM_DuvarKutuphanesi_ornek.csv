@@ -1,0 +1,16 @@
+TypeName,LayerOrder,Function,MaterialName,Thickness_mm,IsCore,TypeComments,Description,FireRating,AssemblyCode
+DU-01 Betonarme Duvar,1,Finish1,Sıva Hareci,20,,Betonarme Taşıyıcı Duvar,Taşıyıcı sistem duvarı,REI 120,B2010
+DU-01 Betonarme Duvar,2,Structure,Beton,200,Yes,Betonarme Taşıyıcı Duvar,Taşıyıcı sistem duvarı,REI 120,B2010
+DU-01 Betonarme Duvar,3,Finish2,Sıva Hareci,20,,Betonarme Taşıyıcı Duvar,Taşıyıcı sistem duvarı,REI 120,B2010
+DU-02 Gazbeton Bölme,1,Finish1,Alçı Sıva,10,,Gazbeton Bölme Duvarı,İç mekan bölme duvarı,EI 60,B2020
+DU-02 Gazbeton Bölme,2,Structure,Gazbeton,150,Yes,Gazbeton Bölme Duvarı,İç mekan bölme duvarı,EI 60,B2020
+DU-02 Gazbeton Bölme,3,Finish2,Alçı Sıva,10,,Gazbeton Bölme Duvarı,İç mekan bölme duvarı,EI 60,B2020
+DU-03 Tuğla Dış Duvar,1,Finish1,Dış Cephe Sıvası,20,,Yığma Tuğla Dış Duvar,Cephe duvarı,EI 90,B2010
+DU-03 Tuğla Dış Duvar,2,Insulation,Taş Yünü,80,,Yığma Tuğla Dış Duvar,Cephe duvarı,EI 90,B2010
+DU-03 Tuğla Dış Duvar,3,Structure,Tuğla,190,Yes,Yığma Tuğla Dış Duvar,Cephe duvarı,EI 90,B2010
+DU-03 Tuğla Dış Duvar,4,Finish2,İç Sıva,15,,Yığma Tuğla Dış Duvar,Cephe duvarı,EI 90,B2010
+DU-04 Çift Cidarlı Alçıpan,1,Finish1,Alçıpan,12.5,,Çift Cidarlı Alçıpan,Ses yalıtımlı bölme,EI 60,B2020
+DU-04 Çift Cidarlı Alçıpan,2,Substrate,Çelik Profil,75,,Çift Cidarlı Alçıpan,Ses yalıtımlı bölme,EI 60,B2020
+DU-04 Çift Cidarlı Alçıpan,3,Insulation,Cam Yünü,50,Yes,Çift Cidarlı Alçıpan,Ses yalıtımlı bölme,EI 60,B2020
+DU-04 Çift Cidarlı Alçıpan,4,Substrate,Çelik Profil,75,,Çift Cidarlı Alçıpan,Ses yalıtımlı bölme,EI 60,B2020
+DU-04 Çift Cidarlı Alçıpan,5,Finish2,Alçıpan,12.5,,Çift Cidarlı Alçıpan,Ses yalıtımlı bölme,EI 60,B2020

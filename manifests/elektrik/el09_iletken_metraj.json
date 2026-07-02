@@ -1,0 +1,76 @@
+{
+  "title": "Elektrik: İletken/Boru Metraj",
+  "category": "elektrik",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_ElectricalEquipment",
+        "OST_LightingDevices",
+        "OST_CableTray"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde elektrik elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "iletkenler",
+      "op": "collect_conduits"
+    },
+    {
+      "id": "tavalar",
+      "op": "collect_cable_trays"
+    },
+    {
+      "id": "iletken_uzun",
+      "op": "mep_total_length",
+      "from": "iletkenler"
+    },
+    {
+      "id": "tava_uzun",
+      "op": "mep_total_length",
+      "from": "tavalar"
+    },
+    {
+      "id": "i_satir",
+      "op": "elements_to_rows_with_params",
+      "from": "iletkenler",
+      "params": {
+        "param_names": [
+          "Level",
+          "System Name",
+          "Diameter",
+          "Length"
+        ]
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "i_satir",
+      "params": {
+        "output_path": "",
+        "sheet_name": "İletken Metraj"
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "tava_uzun",
+      "params": {
+        "title": "Elektrik: İletken/Boru Metraj"
+      }
+    }
+  ],
+  "id": "el09_iletken_metraj",
+  "description": "Elektrik: İletken/Boru Metraj — 7 adımlı otomasyon iş akışı.",
+  "tags": [
+    "elektrik",
+    "electrical",
+    "pano",
+    "kablo"
+  ]
+}

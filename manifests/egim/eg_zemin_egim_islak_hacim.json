@@ -1,0 +1,97 @@
+{
+  "title": "EGBIMOTO Islak Hacim Zemin Eğim Kontrolü",
+  "description": "Banyo/WC/ıslak hacim döşemelerinin eğimini TS 825 limitine göre kontrol eder",
+  "category": "EGIM",
+  "version": "1.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Floors elemanı bulunamadı"
+    }
+  ],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "s02_islak_filtre",
+      "op": "filter_rows",
+      "from": "s01_dosemeler",
+      "inputs": {
+        "field": "type_name",
+        "contains": "ıslak"
+      },
+      "required": false
+    },
+    {
+      "id": "s03_egim",
+      "op": "slope_analysis",
+      "from": "s01_dosemeler",
+      "inputs": {
+        "categories": [
+          "Floors"
+        ],
+        "unit": "Percentage",
+        "apply_color": true,
+        "color_ranges": [
+          {
+            "threshold": 0,
+            "r": 220,
+            "g": 50,
+            "b": 50
+          },
+          {
+            "threshold": 1.5,
+            "r": 50,
+            "g": 200,
+            "b": 50
+          },
+          {
+            "threshold": 5.0,
+            "r": 255,
+            "g": 165,
+            "b": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "s04_kontrol",
+      "op": "slope_validate",
+      "from": "s03_egim",
+      "inputs": {
+        "limit_profile": "zemin_islak"
+      }
+    },
+    {
+      "id": "s05_rapor",
+      "op": "export_html_report",
+      "from": "s04_kontrol",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/islak_hacim_egim.html",
+        "title": "Islak Hacim Zemin Eğim Raporu — TS 825"
+      },
+      "required": false
+    },
+    {
+      "id": "s06_ozet",
+      "op": "show_count",
+      "from": "s04_kontrol",
+      "inputs": {
+        "message": "TS 825 eğim ihlali"
+      }
+    }
+  ],
+  "tags": [
+    "egim",
+    "slope",
+    "drenaj"
+  ]
+}

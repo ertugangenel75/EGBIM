@@ -1,0 +1,33 @@
+{
+  "title": "EGBIMOTO Duvar Kütüphanesi — Güncelle",
+  "description": "CSV'deki değişikliklerle mevcut duvar tiplerini günceller",
+  "category": "DUVAR",
+  "version": "1.0",
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_guncelle",
+      "op": "wall_type_from_csv",
+      "inputs": {
+        "csv_path": "C:/EGBIM_Data/TR_BIM_DuvarKutuphanesi.csv",
+        "mode": "update",
+        "dry_run": false
+      }
+    },
+    {
+      "id": "s02_rapor",
+      "op": "export_html_report",
+      "from": "s01_guncelle",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/duvar_guncelleme_raporu.html",
+        "title": "Duvar Tipi Güncelleme Raporu"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "duvar",
+    "wall",
+    "csv"
+  ]
+}

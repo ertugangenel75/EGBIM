@@ -1,0 +1,61 @@
+{
+  "title": "Elektrik: Panel Schedule Export",
+  "category": "elektrik",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_ElectricalEquipment",
+        "OST_LightingDevices",
+        "OST_CableTray"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde elektrik elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "paneller",
+      "op": "collect_electrical_equipment"
+    },
+    {
+      "id": "schedule",
+      "op": "elec_generate_panel_schedule",
+      "from": "paneller"
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "schedule",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Panel Schedule"
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_type",
+      "from": "paneller"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_bazli"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "kat_bazli"
+    }
+  ],
+  "id": "el06_panel_schedule",
+  "description": "Elektrik: Panel Schedule Export — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "elektrik",
+    "electrical",
+    "pano",
+    "kablo"
+  ]
+}

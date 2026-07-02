@@ -1,0 +1,66 @@
+{
+  "title": "ETL: Model Snapshot / Checksum",
+  "category": "etl",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "hepsi",
+      "op": "merge_lists",
+      "from_many": [
+        "duvarlar",
+        "kolonlar"
+      ]
+    },
+    {
+      "id": "checksum",
+      "op": "model_checksum",
+      "from": "hepsi"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "checksum",
+      "params": {
+        "title": "Model Snapshot",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "checksum",
+      "params": {
+        "title": "ETL: Model Snapshot / Checksum"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "kolonlar"
+    }
+  ],
+  "id": "d10_model_snapshot",
+  "description": "ETL: Model Snapshot / Checksum — 7 adımlı otomasyon iş akışı.",
+  "tags": [
+    "etl",
+    "veri",
+    "excel",
+    "pipeline"
+  ]
+}

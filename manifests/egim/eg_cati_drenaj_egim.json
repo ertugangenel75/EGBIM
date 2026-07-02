@@ -1,0 +1,69 @@
+{
+  "title": "EGBIMOTO Çatı Drenaj Eğim Analizi",
+  "description": "Çatı yüzeylerinin drenaj eğimini TS 7263 limitine göre kontrol eder",
+  "category": "EGIM",
+  "version": "1.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Roofs"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde Roofs elemanı bulunamadı"
+    }
+  ],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_catilar",
+      "op": "collect_roofs"
+    },
+    {
+      "id": "s02_egim",
+      "op": "slope_analysis",
+      "from": "s01_catilar",
+      "inputs": {
+        "categories": [
+          "Roofs"
+        ],
+        "unit": "Percentage",
+        "apply_color": true
+      }
+    },
+    {
+      "id": "s03_kontrol",
+      "op": "slope_validate",
+      "from": "s02_egim",
+      "inputs": {
+        "limit_profile": "cati_drenaj"
+      }
+    },
+    {
+      "id": "s04_tam_tablo",
+      "op": "export_xlsx",
+      "from": "s02_egim",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/cati_egim_tam.xlsx",
+        "sheet_name": "Çatı Eğim Analizi"
+      },
+      "required": false
+    },
+    {
+      "id": "s05_ihlal_rapor",
+      "op": "export_html_report",
+      "from": "s03_kontrol",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/cati_egim_ihlaller.html",
+        "title": "Çatı Drenaj Eğim Raporu — TS 7263"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "egim",
+    "slope",
+    "drenaj"
+  ]
+}
