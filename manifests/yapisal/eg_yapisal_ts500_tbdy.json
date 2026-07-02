@@ -1,0 +1,98 @@
+{
+  "title": "EGBIMOTO Yapısal TS500 + TBDY 2018 Kontrolü",
+  "description": "Yapısal elementleri topla → TS500 kesit kontrolü → TBDY parametreleri ata → süreklilik kontrol → rapor",
+  "category": "YAPISAL",
+  "version": "1.0",
+  "transaction_policy": "preview",
+  "steps": [
+    {
+      "id": "s01_yapisal",
+      "op": "structural_collect_all"
+    },
+    {
+      "id": "s02_ts500",
+      "op": "structural_ts500_section",
+      "from": "s01_yapisal",
+      "inputs": {
+        "override_min_kolon_b": 250,
+        "override_min_kolon_h": 250
+      },
+      "required": false
+    },
+    {
+      "id": "s03_malzeme",
+      "op": "structural_material_check",
+      "from": "s01_yapisal",
+      "inputs": {
+        "beton_required": true,
+        "celik_required": false
+      },
+      "required": false
+    },
+    {
+      "id": "s04_kolonlar",
+      "op": "collect_structural_columns"
+    },
+    {
+      "id": "s05_sureklilik",
+      "op": "structural_continuity_check",
+      "from": "s04_kolonlar",
+      "inputs": {
+        "tolerans_mm": 50
+      },
+      "required": false
+    },
+    {
+      "id": "s06_kat_ozeti",
+      "op": "structural_level_summary",
+      "from": "s01_yapisal"
+    },
+    {
+      "id": "s07_preview",
+      "op": "preview_gate",
+      "from": "s06_kat_ozeti",
+      "inputs": {
+        "title": "Yapısal Özet — TS500/TBDY Onay"
+      }
+    },
+    {
+      "id": "s08_tbdy_yaz",
+      "op": "structural_tbdy_params",
+      "from": "s01_yapisal",
+      "condition": "$s07_preview == confirmed",
+      "inputs": {
+        "deprem_bolgesi": "DD-2",
+        "duktilite_sinifi": "YSBD",
+        "beton_sinif": "C25/30",
+        "celik_sinif": "B420C"
+      }
+    },
+    {
+      "id": "s09_ts500_rapor",
+      "op": "export_validation_report",
+      "from": "s02_ts500",
+      "condition": "$s07_preview == confirmed",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/ts500_ihlaллер.html",
+        "title": "TS500 Kesit İhlal Raporu"
+      },
+      "required": false
+    },
+    {
+      "id": "s10_kat_rapor",
+      "op": "export_html_report",
+      "from": "s06_kat_ozeti",
+      "condition": "$s07_preview == confirmed",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/yapisal_kat_ozeti.html",
+        "title": "Kat Bazlı Yapısal Özet"
+      }
+    }
+  ],
+  "tags": [
+    "yapisal",
+    "structural",
+    "ts500",
+    "tbdy"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "title": "Yapısal: Kolon Boyut Kontrolü (TS500)",
+  "category": "yapisal",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "kontrol",
+      "op": "validate_qa",
+      "from": "kolonlar",
+      "params": {
+        "rules_path": "validation/tbdy_structural_systems.json"
+      }
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "satırlar",
+      "params": {
+        "title": "TS500 Kolon Boyut",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "kontrol"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    }
+  ],
+  "id": "s01_kolon_boyut",
+  "standard": "TS500",
+  "description": "Yapısal: Kolon Boyut Kontrolü (TS500) — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "yapisal",
+    "structural",
+    "ts500",
+    "tbdy"
+  ]
+}

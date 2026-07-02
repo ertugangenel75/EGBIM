@@ -1,0 +1,43 @@
+{
+  "id": "s14_celik_bulon_kalip",
+  "title": "Yapısal: Çelik Bulon QA ve Kalıp Sistemi Seçimi",
+  "description": "Çelik yapı bulon tipi QA (N/X/T/SC — AISC/ASTM/RCSC) ve kalıp sistemi 9-tip karşılaştırma.",
+  "category": "YAPISAL",
+  "version": "1.0",
+  "tags": ["yapisal","celik","bulon","kalip","aisc","astm","csb2026"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_bulon",
+      "op": "struct_steel_bolt_type_check",
+      "description": "Çelik bulon tipi QA",
+      "inputs": {
+        "bulon_tipi":    "$INPUT:bulon_tipi:N",
+        "baglanti_turu": "$INPUT:baglanti_turu:kesme_kritik",
+        "titresim_var":  "$INPUT:titresim_var:false",
+        "dinamik_yuk":   "$INPUT:dinamik_yuk:false"
+      }
+    },
+    {
+      "id": "s02_kalip",
+      "op": "struct_formwork_type_select",
+      "description": "Kalıp sistemi seçimi ve karşılaştırma",
+      "inputs": {
+        "bina_tipi":      "$INPUT:bina_tipi:konut",
+        "kat_sayisi":     "$INPUT:kat_sayisi:10",
+        "tekrar_oncelik": "$INPUT:tekrar_oncelik:false",
+        "hiz_oncelik":    "$INPUT:hiz_oncelik:false",
+        "mevcut_tip":     "$INPUT:mevcut_tip:ahsap"
+      }
+    },
+    {
+      "id": "s03_rapor",
+      "op": "export_html_report",
+      "from": "s02_kalip",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/celik_bulon_kalip.html",
+        "title": "Çelik Bulon QA ve Kalıp Sistemi Seçim Raporu"
+      }
+    }
+  ]
+}

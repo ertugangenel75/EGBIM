@@ -1,0 +1,55 @@
+{
+  "id": "s11_donati_bindirme_ankraj",
+  "title": "Yapısal: Donatı Bindirme ve Ankraj Boyu",
+  "description": "Kolon + perde filiz/bindirme boyu ve ankraj boyu pipeline'ı (TS 500 §8.4-8.5 / TBDY §7.3-7.7).",
+  "category": "YAPISAL",
+  "version": "1.0",
+  "tags": ["yapisal","donati","bindirme","ankraj","filiz","ts500","tbdy","deprem"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_kolon_lap",
+      "op": "struct_rebar_lap_kolon",
+      "description": "Kolon filiz/bindirme boyu (dar kesit L/D<4)",
+      "inputs": {
+        "cap_mm":         "$INPUT:cap_mm:16",
+        "beton_sinifi":   "$INPUT:beton_sinifi:C25",
+        "celik_sinifi":   "$INPUT:celik_sinifi:B420C",
+        "kolon_l_d_orani":"$INPUT:ld_orani:3.0",
+        "deprem_bolgesi": true,
+        "basinc_mi":      true
+      }
+    },
+    {
+      "id": "s02_perde_lap",
+      "op": "struct_rebar_lap_perde",
+      "description": "Perde duvar filiz boyu (L/D>4 = normal)",
+      "inputs": {
+        "cap_mm":              "$INPUT:cap_mm:12",
+        "beton_sinifi":        "$INPUT:beton_sinifi:C25",
+        "donati_yonu":         "$INPUT:donati_yonu:dusey",
+        "perde_kalinlik_mm":   "$INPUT:perde_kalinlik_mm:200",
+        "perde_yukseklik_mm":  "$INPUT:perde_yukseklik_mm:3000"
+      }
+    },
+    {
+      "id": "s03_ankraj",
+      "op": "struct_rebar_anchorage",
+      "description": "Ankraj boyu hesabı (düz/kancalı/çengelli)",
+      "inputs": {
+        "cap_mm":        "$INPUT:cap_mm:16",
+        "beton_sinifi":  "$INPUT:beton_sinifi:C25",
+        "ankraj_tipi":   "$INPUT:ankraj_tipi:duz",
+        "basinc_mi":     false
+      }
+    },
+    {
+      "id": "s04_rapor",
+      "op": "export_html_report",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/donati_bindirme_ankraj.html",
+        "title": "Donatı Bindirme ve Ankraj Boyu Raporu"
+      }
+    }
+  ]
+}

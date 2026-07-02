@@ -1,0 +1,166 @@
+{
+  "title": "TS500 Bindirme & Ankraj Hesabı",
+  "description": "Farklı çap/beton sınıfı kombinasyonları için TS500 bindirme boyu ve ankraj boyu hesaplar.",
+  "version": "1.0.0",
+  "category": "Yapısal",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming",
+        "OST_StructuralFoundation"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "Ø8_C25",
+      "op": "calc_lap_length",
+      "params": {
+        "diameter_mm": 8,
+        "fck": 25,
+        "fyk": 420,
+        "cover_mm": 25
+      }
+    },
+    {
+      "id": "Ø10_C25",
+      "op": "calc_lap_length",
+      "params": {
+        "diameter_mm": 10,
+        "fck": 25,
+        "fyk": 420,
+        "cover_mm": 25
+      }
+    },
+    {
+      "id": "Ø12_C25",
+      "op": "calc_lap_length",
+      "params": {
+        "diameter_mm": 12,
+        "fck": 25,
+        "fyk": 420,
+        "cover_mm": 30
+      }
+    },
+    {
+      "id": "Ø14_C30",
+      "op": "calc_lap_length",
+      "params": {
+        "diameter_mm": 14,
+        "fck": 30,
+        "fyk": 420,
+        "cover_mm": 30
+      }
+    },
+    {
+      "id": "Ø16_C30",
+      "op": "calc_lap_length",
+      "params": {
+        "diameter_mm": 16,
+        "fck": 30,
+        "fyk": 420,
+        "cover_mm": 30
+      }
+    },
+    {
+      "id": "Ø20_C30",
+      "op": "calc_lap_length",
+      "params": {
+        "diameter_mm": 20,
+        "fck": 30,
+        "fyk": 420,
+        "cover_mm": 35
+      }
+    },
+    {
+      "id": "ank_12",
+      "op": "calc_anchorage_length",
+      "params": {
+        "diameter_mm": 12,
+        "fck": 25,
+        "fyk": 420,
+        "cover_mm": 30,
+        "hook": false
+      }
+    },
+    {
+      "id": "ank_12h",
+      "op": "calc_anchorage_length",
+      "params": {
+        "diameter_mm": 12,
+        "fck": 25,
+        "fyk": 420,
+        "cover_mm": 30,
+        "hook": true
+      }
+    },
+    {
+      "id": "ank_16",
+      "op": "calc_anchorage_length",
+      "params": {
+        "diameter_mm": 16,
+        "fck": 30,
+        "fyk": 420,
+        "cover_mm": 30,
+        "hook": false
+      }
+    },
+    {
+      "id": "aralik_12",
+      "op": "calc_min_spacing",
+      "params": {
+        "diameter_mm": 12,
+        "aggregate_size_mm": 20
+      }
+    },
+    {
+      "id": "aralik_16",
+      "op": "calc_min_spacing",
+      "params": {
+        "diameter_mm": 16,
+        "aggregate_size_mm": 20
+      }
+    },
+    {
+      "id": "r_bindi",
+      "op": "show_result",
+      "from": "Ø16_C30",
+      "params": {
+        "title": "TS500 Ø16/C30 Bindirme"
+      }
+    },
+    {
+      "id": "r_ank",
+      "op": "show_result",
+      "from": "ank_16",
+      "params": {
+        "title": "TS500 Ø16/C30 Ankraj"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "aralik_16"
+    },
+    {
+      "id": "xlsx_rapor",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "TS500 Bindirme & Ankraj Hesa"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "yapisal",
+    "structural",
+    "ts500",
+    "tbdy"
+  ]
+}

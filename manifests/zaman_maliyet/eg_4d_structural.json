@@ -1,0 +1,99 @@
+{
+  "title": "Yapısal 4D Yapım Simülasyonu",
+  "description": "Yapısal elemanları zaman ekseninde canlandırır. Kat bazlı inşaat sırasını 3D sahne üzerinde gösterir.",
+  "category": "4D/5D",
+  "version": "1.0.0",
+  "transaction_policy": "preview",
+  "pre_checks": [
+    {
+      "type": "ACTIVE_DOCUMENT_EXISTS",
+      "on_fail": "ABORT",
+      "message": "Aktif Revit dökümanı gereklidir."
+    }
+  ],
+  "steps": [
+    {
+      "id": "s01_topla",
+      "op": "collect_multi",
+      "inputs": {
+        "categories": [
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Walls",
+          "OST_Floors",
+          "OST_StructuralFoundation"
+        ]
+      },
+      "cache": true
+    },
+    {
+      "id": "s02_4d",
+      "op": "schedule_collect_4d",
+      "from": "s01_topla",
+      "inputs": {
+        "operation_name": "Yapısal 4D Yapım Simülasyonu",
+        "project_start": "2025-03-01",
+        "project_end": "2025-09-30",
+        "kat_sure_hafta": 3,
+        "schedule_map": {
+          "Temel": {
+            "start": "2025-03-01",
+            "end": "2025-03-25",
+            "phase": "Temel"
+          },
+          "Kolon": {
+            "start": "2025-03-20",
+            "end": "2025-04-20",
+            "phase": "Betonarme"
+          },
+          "Kiriş": {
+            "start": "2025-04-10",
+            "end": "2025-05-10",
+            "phase": "Betonarme"
+          },
+          "Döşeme": {
+            "start": "2025-05-01",
+            "end": "2025-06-01",
+            "phase": "Betonarme"
+          },
+          "Duvar": {
+            "start": "2025-05-20",
+            "end": "2025-07-15",
+            "phase": "Duvar"
+          },
+          "Çatı": {
+            "start": "2025-07-10",
+            "end": "2025-08-10",
+            "phase": "Çatı"
+          }
+        }
+      }
+    },
+    {
+      "id": "s03_gate",
+      "op": "schedule_gate",
+      "from": "s02_4d",
+      "inputs": {
+        "title": "Yapısal 4D Önizleme"
+      }
+    },
+    {
+      "id": "s04_yaz_tarih",
+      "op": "set_param_from_schedule",
+      "from": "s01_topla",
+      "condition": "$s03_gate == confirmed",
+      "inputs": {
+        "start_param": "EG_BaslangicTarihi",
+        "end_param": "EG_BitisTarihi",
+        "phase_param": "EG_FazAdi",
+        "schedule_step": "s02_4d"
+      }
+    }
+  ],
+  "tags": [
+    "4d",
+    "5d",
+    "schedule",
+    "simulasyon"
+  ]
+}

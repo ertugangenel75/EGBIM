@@ -1,0 +1,51 @@
+{
+  "id": "s12_beton_sinifi_kesit_qa",
+  "title": "Yapısal: Beton Sınıfı QA + Kiriş h/L + Perde Narinlik",
+  "description": "Beton sınıfı TBDY kontrolü, kiriş derinlik/açıklık oranı ve perde narinlik pipeline'ı.",
+  "category": "YAPISAL",
+  "version": "1.0",
+  "tags": ["yapisal","beton","kiriş","perde","narinlik","ts500","tbdy","qa"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_beton",
+      "op": "struct_concrete_class_qa",
+      "description": "Beton sınıfı QA (TBDY min C25)",
+      "inputs": {
+        "beton_sinifi":   "$INPUT:beton_sinifi:C25",
+        "kullanim_yeri":  "$INPUT:kullanim_yeri:deprem_yuksek",
+        "deprem_bolgesi": true,
+        "eleman_tipi":    "$INPUT:eleman_tipi:kolon"
+      }
+    },
+    {
+      "id": "s02_kiris",
+      "op": "struct_beam_depth_ratio",
+      "description": "Kiriş h/L oranı kontrolü (TS 500 §9.1)",
+      "inputs": {
+        "kiriş_tipi":    "$INPUT:kiris_tipi:surekli",
+        "min_genislik_mm": 250,
+        "write_back":    false
+      }
+    },
+    {
+      "id": "s03_perde",
+      "op": "struct_wall_slenderness",
+      "description": "Perde narinlik h/t ≤ 25 (TBDY §7.6.2)",
+      "inputs": {
+        "max_narinlik":    25.0,
+        "min_kalinlik_mm": 200,
+        "write_back":      false
+      }
+    },
+    {
+      "id": "s04_rapor",
+      "op": "export_html_report",
+      "from": "s03_perde",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/beton_kesit_qa.html",
+        "title": "Beton Sınıfı, Kiriş h/L ve Perde Narinlik QA Raporu"
+      }
+    }
+  ]
+}

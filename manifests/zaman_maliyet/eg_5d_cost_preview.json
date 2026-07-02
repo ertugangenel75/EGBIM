@@ -1,0 +1,144 @@
+{
+  "title": "4D/5D Maliyet Önizleme Pipeline",
+  "description": "Yapısal elemanları hem zaman hem maliyet ekseninde görselleştirir. S-eğrisi + Gantt çizimi ile canlı 4D/5D simülasyon.",
+  "category": "4D/5D",
+  "version": "1.0.0",
+  "transaction_policy": "preview",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "poz_data",
+      "on_fail": "WARN",
+      "message": "Poz verisi yüklü değil — load_poz_data adımı çalıştırılacak"
+    }
+  ],
+  "steps": [
+    {
+      "id": "s01_poz_yukle",
+      "op": "load_poz_data"
+    },
+    {
+      "id": "s02_canonical",
+      "op": "load_poz_canonical_map"
+    },
+    {
+      "id": "s03_rules",
+      "op": "load_poz_section_rules"
+    },
+    {
+      "id": "s04_topla",
+      "op": "collect_multi",
+      "inputs": {
+        "categories": [
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Walls",
+          "OST_Floors",
+          "OST_StructuralFoundation"
+        ]
+      },
+      "cache": true
+    },
+    {
+      "id": "s05_kalip",
+      "op": "kalip_all",
+      "from": "s04_topla",
+      "inputs": {
+        "include_edges": "false"
+      }
+    },
+    {
+      "id": "s06_poz",
+      "op": "poz_match_keynote_aware",
+      "from": "s05_kalip"
+    },
+    {
+      "id": "s07_maliyet",
+      "op": "calc_cost",
+      "from": "s06_poz",
+      "inputs": {
+        "quantity_field": "kalip_m2"
+      }
+    },
+    {
+      "id": "s08_5d",
+      "op": "schedule_collect_5d",
+      "from": "s04_topla",
+      "inputs": {
+        "cost_step": "s07_maliyet",
+        "operation_name": "4D/5D Maliyet Simülasyonu",
+        "project_start": "2025-03-01",
+        "project_end": "2025-09-30",
+        "kat_sure_hafta": 3,
+        "schedule_map": {
+          "Temel": {
+            "start": "2025-03-01",
+            "end": "2025-03-25",
+            "phase": "Temel"
+          },
+          "Kolon": {
+            "start": "2025-03-20",
+            "end": "2025-04-20",
+            "phase": "Betonarme"
+          },
+          "Kiriş": {
+            "start": "2025-04-10",
+            "end": "2025-05-10",
+            "phase": "Betonarme"
+          },
+          "Döşeme": {
+            "start": "2025-05-01",
+            "end": "2025-06-01",
+            "phase": "Betonarme"
+          },
+          "Duvar": {
+            "start": "2025-05-20",
+            "end": "2025-07-15",
+            "phase": "Duvar"
+          },
+          "Çatı": {
+            "start": "2025-07-10",
+            "end": "2025-08-10",
+            "phase": "Çatı"
+          }
+        }
+      }
+    },
+    {
+      "id": "s09_gate",
+      "op": "schedule_gate",
+      "from": "s08_5d",
+      "params": {
+        "title": "4D/5D Maliyet Önizleme"
+      }
+    },
+    {
+      "id": "s10_yaz_tarih",
+      "op": "set_param_from_schedule",
+      "from": "s04_topla",
+      "condition": "$s09_gate == confirmed",
+      "params": {
+        "start_param": "EG_BaslangicTarihi",
+        "end_param": "EG_BitisTarihi",
+        "phase_param": "EG_FazAdi",
+        "schedule_step": "s08_5d"
+      }
+    },
+    {
+      "id": "s11_excel",
+      "op": "export_xlsx",
+      "from": "s07_maliyet",
+      "condition": "$s09_gate == confirmed",
+      "inputs": {
+        "filename": "EG_4D5D_Maliyet",
+        "sheet_name": "BOQ_5D"
+      }
+    }
+  ],
+  "tags": [
+    "4d",
+    "5d",
+    "schedule",
+    "simulasyon"
+  ]
+}

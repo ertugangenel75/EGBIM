@@ -1,0 +1,75 @@
+{
+  "title": "Donatı Çap Özeti",
+  "description": "Donatıları çap bazında gruplar, toplam uzunluk ve ağırlık hesaplar. Demir listesi üretir.",
+  "version": "1.0.0",
+  "category": "Yapısal",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming",
+        "OST_StructuralFoundation"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "donatı",
+      "op": "collect_rebar"
+    },
+    {
+      "id": "cap_ozet",
+      "op": "rebar_summary_by_diameter",
+      "from": "donatı"
+    },
+    {
+      "id": "toplam",
+      "op": "sum_field",
+      "from": "cap_ozet",
+      "params": {
+        "field": "toplam_kg"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "cap_ozet",
+      "params": {
+        "title": "Çap Bazlı Donatı Özeti"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "cap_ozet",
+      "params": {
+        "sheet_name": "Demir Listesi"
+      },
+      "required": false
+    },
+    {
+      "id": "html",
+      "op": "export_html_report",
+      "from": "cap_ozet",
+      "params": {
+        "title": "Donatı Çap Özeti"
+      },
+      "required": false
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "donatı"
+    }
+  ],
+  "tags": [
+    "yapisal",
+    "structural",
+    "ts500",
+    "tbdy"
+  ]
+}

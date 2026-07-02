@@ -1,0 +1,42 @@
+{
+  "id": "s13_doseme_temel_hesap",
+  "title": "Yapısal: Döşeme Kalınlık ve Temel Taban Basıncı",
+  "description": "Döşeme minimum kalınlık (TS 500 §12.2) ve temel taban basıncı / zemin emniyet kontrolü pipeline'ı.",
+  "category": "YAPISAL",
+  "version": "1.0",
+  "tags": ["yapisal","doseme","temel","taban_basinci","zemin","ts500"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_doseme",
+      "op": "struct_slab_thickness",
+      "description": "Döşeme min kalınlık kontrolü",
+      "inputs": {
+        "aciklik_mm":         "$INPUT:aciklik_mm:4000",
+        "doseme_tipi":        "$INPUT:doseme_tipi:cift_yonlu",
+        "mevcut_kalinlik_mm": "$INPUT:mevcut_kalinlik_mm:120"
+      }
+    },
+    {
+      "id": "s02_temel",
+      "op": "struct_foundation_bearing",
+      "description": "Temel taban basıncı kontrolü",
+      "inputs": {
+        "eksenel_yuk_kn":   "$INPUT:eksenel_yuk_kn:500",
+        "temel_genislik_m": "$INPUT:temel_genislik_m:2.0",
+        "temel_uzunluk_m":  "$INPUT:temel_uzunluk_m:2.0",
+        "zemin_emniyet_kpa":"$INPUT:zemin_emniyet_kpa:150",
+        "moment_knm":       "$INPUT:moment_knm:0",
+        "temel_tipi":       "$INPUT:temel_tipi:tekil"
+      }
+    },
+    {
+      "id": "s03_rapor",
+      "op": "export_html_report",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/doseme_temel_hesap.html",
+        "title": "Döşeme Kalınlık ve Temel Taban Basıncı Raporu"
+      }
+    }
+  ]
+}

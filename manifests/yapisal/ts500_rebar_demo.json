@@ -1,0 +1,90 @@
+{
+  "title": "TS500 Donatı Kontrol Demo",
+  "description": "TS500 birim ağırlık tablosu ve TBDY2018 donatı kontrol demosu. FIX#5: params diameter_mm/fck/fyk/cover_mm ile eşleştirildi.",
+  "version": "1.0.0",
+  "category": "Yapısal",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming",
+        "OST_StructuralFoundation"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "agirlik",
+      "op": "rebar_weight_table"
+    },
+    {
+      "id": "filiz_16",
+      "op": "calc_lap_length",
+      "params": {
+        "diameter_mm": 16,
+        "fck": 25,
+        "fyk": 420,
+        "cover_mm": 30
+      }
+    },
+    {
+      "id": "filiz_12",
+      "op": "calc_lap_length",
+      "params": {
+        "diameter_mm": 12,
+        "fck": 25,
+        "fyk": 420,
+        "cover_mm": 30
+      }
+    },
+    {
+      "id": "kontrol",
+      "op": "validate_rebar_ts500",
+      "params": {
+        "fck": 30,
+        "fyk": 420,
+        "cover_mm": 30
+      }
+    },
+    {
+      "id": "g_agirlik",
+      "op": "show_table",
+      "from": "agirlik",
+      "params": {
+        "title": "TS500 Birim Ağırlık"
+      }
+    },
+    {
+      "id": "g_kontrol",
+      "op": "show_table",
+      "from": "kontrol",
+      "params": {
+        "title": "TS500+TBDY2018 Kontrol"
+      }
+    },
+    {
+      "id": "html",
+      "op": "export_html_report",
+      "from": "kontrol",
+      "params": {
+        "title": "TS500 Donatı Raporu"
+      },
+      "required": false
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "kontrol"
+    }
+  ],
+  "tags": [
+    "yapisal",
+    "structural",
+    "ts500",
+    "tbdy"
+  ]
+}

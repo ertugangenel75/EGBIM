@@ -1,0 +1,101 @@
+{
+  "title": "Yapısal: Beton Hacim Hesabı",
+  "category": "yapisal",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "kirisler",
+      "op": "collect_beams"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "temeller",
+      "op": "collect_foundations"
+    },
+    {
+      "id": "kol_vol",
+      "op": "column_volume",
+      "from": "kolonlar"
+    },
+    {
+      "id": "kir_vol",
+      "op": "beam_volume",
+      "from": "kirisler"
+    },
+    {
+      "id": "dos_vol",
+      "op": "floor_volume",
+      "from": "dosemeler"
+    },
+    {
+      "id": "tem_vol",
+      "op": "foundation_volume",
+      "from": "temeller"
+    },
+    {
+      "id": "hepsi",
+      "op": "merge_lists",
+      "from_many": [
+        "kol_vol",
+        "kir_vol",
+        "dos_vol",
+        "tem_vol"
+      ]
+    },
+    {
+      "id": "wbs",
+      "op": "assign_wbs_code",
+      "from": "hepsi"
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "wbs",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Beton Metraj"
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "wbs",
+      "params": {
+        "title": "Yapısal: Beton Hacim Hesabı"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "temeller"
+    }
+  ],
+  "id": "s08_beton_hacim",
+  "description": "Yapısal: Beton Hacim Hesabı — 13 adımlı otomasyon iş akışı.",
+  "tags": [
+    "yapisal",
+    "structural",
+    "ts500",
+    "tbdy"
+  ]
+}

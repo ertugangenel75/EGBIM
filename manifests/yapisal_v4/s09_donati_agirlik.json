@@ -1,0 +1,69 @@
+{
+  "title": "Yapısal: Donatı Ağırlık Raporu",
+  "category": "yapisal",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "donatı",
+      "op": "collect_rebar"
+    },
+    {
+      "id": "agirlik",
+      "op": "rebar_total_weight",
+      "from": "donatı"
+    },
+    {
+      "id": "cap_ozeti",
+      "op": "rebar_summary_by_diameter",
+      "from": "donatı"
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "cap_ozeti",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Donatı Özeti"
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "donatı"
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "kat_bazli",
+      "params": {
+        "title": "Yapısal: Donatı Ağırlık Raporu"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "kat_bazli"
+    }
+  ],
+  "id": "s09_donati_agirlik",
+  "description": "Yapısal: Donatı Ağırlık Raporu — 7 adımlı otomasyon iş akışı.",
+  "tags": [
+    "yapisal",
+    "structural",
+    "ts500",
+    "tbdy"
+  ]
+}

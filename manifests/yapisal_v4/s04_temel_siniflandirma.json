@@ -1,0 +1,71 @@
+{
+  "title": "Yapısal: Temel Türü Sınıflandırma",
+  "category": "yapisal",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "temeller",
+      "op": "collect_foundations"
+    },
+    {
+      "id": "metraj",
+      "op": "elements_to_rows_with_params",
+      "from": "temeller",
+      "params": {
+        "param_names": [
+          "Family",
+          "Type",
+          "Width",
+          "Length",
+          "Thickness"
+        ]
+      }
+    },
+    {
+      "id": "sinifla",
+      "op": "group_by",
+      "from": "metraj",
+      "params": {
+        "group_by": "Family"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "sinifla",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Temel Türleri"
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "sinifla",
+      "params": {
+        "title": "Yapısal: Temel Türü Sınıflandırma"
+      }
+    }
+  ],
+  "id": "s04_temel_siniflandirma",
+  "description": "Yapısal: Temel Türü Sınıflandırma — 5 adımlı otomasyon iş akışı.",
+  "tags": [
+    "yapisal",
+    "structural",
+    "ts500",
+    "tbdy"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "title": "Yapısal: Kiriş Aks Hizalama",
+  "category": "yapisal",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kirisler",
+      "op": "collect_beams"
+    },
+    {
+      "id": "akslar",
+      "op": "collect_grids"
+    },
+    {
+      "id": "metraj",
+      "op": "elements_to_rows_with_params",
+      "from": "kirisler",
+      "params": {
+        "param_names": [
+          "Mark",
+          "b",
+          "h",
+          "Seviye"
+        ]
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "metraj",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Kiriş Listesi"
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "akslar"
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "kat_bazli",
+      "params": {
+        "title": "Yapısal: Kiriş Aks Hizalama"
+      }
+    }
+  ],
+  "id": "s02_kiris_hizalama",
+  "description": "Yapısal: Kiriş Aks Hizalama — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "yapisal",
+    "structural",
+    "ts500",
+    "tbdy"
+  ]
+}

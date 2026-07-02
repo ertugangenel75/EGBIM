@@ -1,0 +1,74 @@
+{
+  "title": "Yapısal: Kalıp Metraj (EGKalıp Pipeline)",
+  "category": "yapisal",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "poz_yukle",
+      "op": "load_poz_data",
+      "required": false
+    },
+    {
+      "id": "kalip_hesap",
+      "op": "kalip_all",
+      "params": {
+        "include_edges": true
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "kalip_summary",
+      "from": "kalip_hesap",
+      "params": {
+        "group_by": "kategori"
+      }
+    },
+    {
+      "id": "poz",
+      "op": "poz_match",
+      "from": "kalip_hesap",
+      "params": {
+        "data_path": "poz/csb_poz_2026.json"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "poz",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Kalıp Metraj"
+      }
+    },
+    {
+      "id": "html_rapor",
+      "op": "kalip_report",
+      "from": "kalip_hesap",
+      "required": false,
+      "params": {
+        "open_browser": false
+      }
+    }
+  ],
+  "id": "s07_kalip_hesabi",
+  "description": "Yapısal: Kalıp Metraj (EGKalıp Pipeline) — kalip_all (gerçek geometri prefilter, ElementIntersectsElementFilter) ile tek geçişte kolon/kiriş/döşeme/duvar/temel kalıp alanı hesabı.",
+  "tags": [
+    "yapisal",
+    "structural",
+    "ts500",
+    "tbdy"
+  ]
+}

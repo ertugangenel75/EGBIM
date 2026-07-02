@@ -1,0 +1,74 @@
+{
+  "title": "Yapısal: Döşeme Kalınlık Denetimi",
+  "category": "yapisal",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "metraj",
+      "op": "elements_to_rows_with_params",
+      "from": "dosemeler",
+      "params": {
+        "param_names": [
+          "Thickness",
+          "Structural Material",
+          "Level"
+        ]
+      }
+    },
+    {
+      "id": "kontrol",
+      "op": "param_range_check",
+      "from": "metraj",
+      "params": {
+        "param": "Thickness",
+        "min_mm": 120,
+        "max_mm": 400,
+        "unit": "mm"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "kontrol",
+      "params": {
+        "title": "Döşeme Kalınlık",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "kontrol"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    }
+  ],
+  "id": "s03_doseme_kalinlik",
+  "description": "Yapısal: Döşeme Kalınlık Denetimi — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "yapisal",
+    "structural",
+    "ts500",
+    "tbdy"
+  ]
+}

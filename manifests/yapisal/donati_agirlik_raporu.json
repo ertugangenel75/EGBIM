@@ -1,0 +1,117 @@
+{
+  "title": "Donatı Ağırlık Raporu (TS500)",
+  "description": "Tüm donatıları toplar, kat ve çap bazında ağırlık hesaplar. Ton/kg dönüşüm, birim fiyat, ÇŞB 2026 poz eşleme.",
+  "version": "1.0.0",
+  "category": "Yapısal",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming",
+        "OST_StructuralFoundation"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "poz_yukle",
+      "op": "load_poz_data",
+      "required": false
+    },
+    {
+      "id": "donatı",
+      "op": "collect_rebar"
+    },
+    {
+      "id": "agirlik",
+      "op": "rebar_weight_table",
+      "from": "donatı"
+    },
+    {
+      "id": "kat_ozet",
+      "op": "rebar_summary_by_level",
+      "from": "donatı"
+    },
+    {
+      "id": "cap_ozet",
+      "op": "rebar_summary_by_diameter",
+      "from": "donatı"
+    },
+    {
+      "id": "toplam_kg",
+      "op": "rebar_total_weight",
+      "from": "donatı"
+    },
+    {
+      "id": "poz",
+      "op": "poz_match",
+      "from": "cap_ozet"
+    },
+    {
+      "id": "maliyet",
+      "op": "calc_cost",
+      "from": "poz",
+      "params": {
+        "quantity_field": "toplam_kg"
+      }
+    },
+    {
+      "id": "r_kat",
+      "op": "show_table",
+      "from": "kat_ozet",
+      "params": {
+        "title": "Donatı — Kat Bazlı (kg)"
+      }
+    },
+    {
+      "id": "r_cap",
+      "op": "show_table",
+      "from": "cap_ozet",
+      "params": {
+        "title": "Donatı — Çap Bazlı (kg)"
+      }
+    },
+    {
+      "id": "xlsx_kat",
+      "op": "export_xlsx",
+      "from": "kat_ozet",
+      "params": {
+        "sheet_name": "Donatı-Kat"
+      },
+      "required": false
+    },
+    {
+      "id": "xlsx_cap",
+      "op": "export_xlsx",
+      "from": "cap_ozet",
+      "params": {
+        "sheet_name": "Donatı-Çap"
+      },
+      "required": false
+    },
+    {
+      "id": "html",
+      "op": "export_html_report",
+      "from": "agirlik",
+      "params": {
+        "title": "Donatı Ağırlık Raporu"
+      },
+      "required": false
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "donatı"
+    }
+  ],
+  "tags": [
+    "yapisal",
+    "structural",
+    "ts500",
+    "tbdy"
+  ]
+}

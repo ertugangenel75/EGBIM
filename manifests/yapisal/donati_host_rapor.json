@@ -1,0 +1,96 @@
+{
+  "title": "Eleman Bazlı Donatı Raporu",
+  "description": "Seçili bir yapısal elemanın (kolon/kiriş) içindeki donatıları toplar, çap ve ağırlık detayını verir.",
+  "version": "1.0.0",
+  "category": "Yapısal",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming",
+        "OST_StructuralFoundation"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "secili",
+      "op": "collect_selected"
+    },
+    {
+      "id": "donatı",
+      "op": "collect_rebar"
+    },
+    {
+      "id": "agirlik",
+      "op": "rebar_weight_table",
+      "from": "donatı"
+    },
+    {
+      "id": "cap_ozet",
+      "op": "rebar_summary_by_diameter",
+      "from": "donatı"
+    },
+    {
+      "id": "toplam_kg",
+      "op": "rebar_total_weight",
+      "from": "donatı"
+    },
+    {
+      "id": "ts500",
+      "op": "validate_rebar_ts500",
+      "from": "donatı",
+      "params": {
+        "fck": 30,
+        "fyk": 420,
+        "cover_mm": 30
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "agirlik",
+      "params": {
+        "title": "Donatı Detayı"
+      }
+    },
+    {
+      "id": "ts_ozet",
+      "op": "validation_summary",
+      "from": "ts500"
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "agirlik",
+      "params": {
+        "sheet_name": "Donatı Detay"
+      },
+      "required": false
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "ts500"
+    },
+    {
+      "id": "html_rapor",
+      "op": "export_validation_report",
+      "from": "kat_ozet",
+      "required": false,
+      "params": {
+        "title": "Eleman Bazlı Donatı Raporu"
+      }
+    }
+  ],
+  "tags": [
+    "yapisal",
+    "structural",
+    "ts500",
+    "tbdy"
+  ]
+}

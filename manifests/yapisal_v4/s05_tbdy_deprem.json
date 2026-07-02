@@ -1,0 +1,56 @@
+{
+  "title": "Yapısal: TBDY 2018 Deprem Bölgesi",
+  "category": "yapisal",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "proje",
+      "op": "pm_get_project_info"
+    },
+    {
+      "id": "bilgi",
+      "op": "export_html_report",
+      "from": "proje",
+      "params": {
+        "title": "Proje Deprem Bölgesi (TBDY 2018)",
+        "output_path": "",
+        "note": "Deprem bölgesi ve zemin sınıfı manuel olarak TBDY EK-2B haritasından doğrulanmalıdır"
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "proje",
+      "params": {
+        "title": "Yapısal: TBDY 2018 Deprem Bölgesi"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "proje"
+    }
+  ],
+  "id": "s05_tbdy_deprem",
+  "standard": "TBDY2018",
+  "description": "Yapısal: TBDY 2018 Deprem Bölgesi — 4 adımlı otomasyon iş akışı.",
+  "tags": [
+    "yapisal",
+    "structural",
+    "ts500",
+    "tbdy"
+  ]
+}

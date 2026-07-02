@@ -1,0 +1,21 @@
+{
+  "title": "EGBIMOTO Kolon On Boyutlandirma (TBDY 2018 / TS 500)",
+  "description": "Betonarme kolonlari TBDY 2018 ve TS 500 kesit kosullarina gore kontrol eder ve gereken min kesiti onerir. Once kolonlara EG_Ndm (analiz sonucu) veya EG_YukAlani+EG_KatSayisi (tahmin) ve EG_BetonSinif girilmelidir.",
+  "category": "YAPISAL",
+  "version": "1.0",
+  "transaction_policy": "atomic",
+  "steps": [
+    { "id": "s01_kurulum", "op": "column_setup_params" },
+    {
+      "id": "s02_boyutlandirma",
+      "op": "structural_column_presizing",
+      "inputs": {
+        "default_fck": 30,
+        "default_birim_yuk": 12,
+        "duktilite": "yuksek",
+        "round_to_mm": 50
+      }
+    }
+  ],
+  "tags": ["yapisal", "kolon", "on_boyutlandirma", "tbdy", "ts500", "betonarme", "kesit", "eksenel"]
+}
