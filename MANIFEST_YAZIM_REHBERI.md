@@ -155,3 +155,23 @@ Geometri oluşturan/değiştiren iş akışlarında (boşluk açma, donatı yerl
 ```
 
 Manifest'i `manifests/kalip/` klasörüne kaydedin; Browser otomatik bulur.
+
+## Param Presence Semantiği (v13)
+
+Her op parametresi `op_contracts.json`'da üç seviyeden birindedir:
+
+- **`required`** — manifest'te verilmesi ZORUNLU. Kodda `ctx.RequireX("key")` ile
+  okunur; eksikse çalışma zamanında step id'li net hata fırlatılır, ManifestValidator
+  da statik olarak `PARAM_REQUIRED_MISSING` üretir.
+- **`optional`** — verilmezse kontrattaki `default` kullanılır.
+- **`recommended`** — kod yokluğu tolere eder (değer genellikle pipeline `from`
+  zincirinden veya registry'den gelir), ancak açık vermek okunabilirliği artırır.
+
+Yeni op yazarken kural: parametre gerçekten vazgeçilmezse `Require*` kullanın;
+kontrat üretici (`deploy/generate_op_contracts.py`) presence'ı DOĞRUDAN koddan türetir.
+Kontratı elle düzenlemeyin — kod değişince şu komutla yeniden üretin:
+
+```bash
+python3 deploy/generate_op_contracts.py
+python3 deploy/generate_op_referansi.py
+```

@@ -5,9 +5,9 @@ Revit için manifest-tabanlı BIM otomasyon platformu. Türk AEC standartlarına
 
 ## Özellikler
 
-- **400 operasyon**, 48 kategori — metraj, maliyet, kalıp, yapısal, MEP (HVAC/sıhhi/elektrik/mekanik),
+- **478 operasyon**, 48 kategori — metraj, maliyet, kalıp, yapısal, MEP (HVAC/sıhhi/elektrik/mekanik),
   yangın, koordinasyon, IFC/IDS, çakışma tespiti, donatı, cephe ve daha fazlası
-- **322 hazır manifest** — JSON ile tanımlı, DAG motoruyla çalışan iş akışları
+- **356 hazır manifest** — JSON ile tanımlı, DAG motoruyla çalışan iş akışları
 - **MCP Server** — Claude Desktop (veya MCP uyumlu ajan) Revit modeline bağlanır,
   op katalogunu okuyup manifest üretir ve çalıştırır (localhost:5577)
 - **AI + Pattern manifest üretimi** — doğal dilden iş akışı (Claude API veya

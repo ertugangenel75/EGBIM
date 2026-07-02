@@ -1,0 +1,26 @@
+EGBIMOTO v7 - Revit 2026 Build/Deploy
+
+Use one of these from the package root:
+
+  deploy_2026.bat
+  deploy2026.bat
+
+It builds:
+
+  src\EGBIMOTO.Addin\EGBIMOTO.Addin.csproj
+
+with:
+
+  -c Release -p:RevitVersion=2026 -p:Platform=x64
+
+Then it copies the compiled output to:
+
+  %APPDATA%\Autodesk\Revit\Addins\2026\EGBIMOTO
+
+and creates:
+
+  %APPDATA%\Autodesk\Revit\Addins\2026\EGBIMOTO.addin
+
+If you only want compile test, run:
+
+  build_2026.bat
