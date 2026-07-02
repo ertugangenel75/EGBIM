@@ -1,0 +1,112 @@
+{
+  "title": "WBS Hiyerarşi Maliyet Raporu",
+  "description": "Elemanları WBS kodlarına göre sınıflandırır, maliyet hiyerarşisi oluşturur ve WBS ağacı bazında toplam maliyet döker.",
+  "version": "1.0.0",
+  "category": "Maliyet",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "poz_yukle",
+      "op": "load_poz_data",
+      "required": false
+    },
+    {
+      "id": "tum_elem",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "kirisler",
+      "op": "collect_beams"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_lists",
+      "from_many": [
+        "tum_elem",
+        "kolonlar",
+        "kirisler",
+        "dosemeler"
+      ]
+    },
+    {
+      "id": "wbs_sin",
+      "op": "classify_by_wbs",
+      "from": "birlesik"
+    },
+    {
+      "id": "hacimler",
+      "op": "element_volume",
+      "from": "birlesik"
+    },
+    {
+      "id": "poz",
+      "op": "poz_match",
+      "from": "hacimler"
+    },
+    {
+      "id": "maliyet",
+      "op": "calc_cost",
+      "from": "poz",
+      "params": {
+        "quantity_field": "hacim_m3"
+      }
+    },
+    {
+      "id": "wbs_mal",
+      "op": "cost_summary",
+      "from": "maliyet",
+      "params": {
+        "group_by": "kategori"
+      }
+    },
+    {
+      "id": "wbs_rap",
+      "op": "export_wbs_report",
+      "from": "wbs_mal",
+      "required": false
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "wbs_mal",
+      "params": {
+        "title": "WBS Maliyet Özeti"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "wbs_mal",
+      "params": {
+        "sheet_name": "WBS Maliyet"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "maliyet",
+    "cost",
+    "poz",
+    "fiyat"
+  ]
+}

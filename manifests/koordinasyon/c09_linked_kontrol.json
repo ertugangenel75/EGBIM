@@ -1,0 +1,70 @@
+{
+  "title": "Koordinasyon: Link Model Parametre Kontrolü",
+  "category": "koordinasyon",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_DuctCurves",
+        "OST_PipeCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "linked",
+      "op": "collect_linked_elements",
+      "params": {
+        "category": "OST_Walls"
+      }
+    },
+    {
+      "id": "kontrol",
+      "op": "validate_required_params",
+      "from": "linked",
+      "params": {
+        "required_params": [
+          "Mark",
+          "Level"
+        ]
+      }
+    },
+    {
+      "id": "satırlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "satırlar",
+      "params": {
+        "title": "Link Model Kontrolü",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "kontrol"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kat_ozet"
+    }
+  ],
+  "id": "c09_linked_kontrol",
+  "description": "Koordinasyon: Link Model Parametre Kontrolü — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "koordinasyon",
+    "clash",
+    "cakisma",
+    "bim"
+  ]
+}

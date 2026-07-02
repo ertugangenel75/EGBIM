@@ -1,0 +1,212 @@
+{
+  "title": "Tam Proje Maliyet Özeti",
+  "description": "Mimari + Yapısal + MEP tüm kategorilerin maliyetini hesaplar. Proje toplam bütçesi ve WBS bazlı dağılım.",
+  "version": "1.0.0",
+  "category": "Maliyet",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "poz_yukle",
+      "op": "load_poz_data",
+      "required": false
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "kirisler",
+      "op": "collect_beams"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "temeller",
+      "op": "collect_foundations"
+    },
+    {
+      "id": "catiler",
+      "op": "collect_roofs"
+    },
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "kanallar",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "v_k",
+      "op": "column_volume",
+      "from": "kolonlar"
+    },
+    {
+      "id": "v_ki",
+      "op": "beam_volume",
+      "from": "kirisler"
+    },
+    {
+      "id": "v_d",
+      "op": "floor_volume",
+      "from": "dosemeler"
+    },
+    {
+      "id": "v_du",
+      "op": "wall_volume",
+      "from": "duvarlar"
+    },
+    {
+      "id": "v_t",
+      "op": "foundation_volume",
+      "from": "temeller"
+    },
+    {
+      "id": "p_k",
+      "op": "poz_match",
+      "from": "v_k"
+    },
+    {
+      "id": "p_ki",
+      "op": "poz_match",
+      "from": "v_ki"
+    },
+    {
+      "id": "p_d",
+      "op": "poz_match",
+      "from": "v_d"
+    },
+    {
+      "id": "p_du",
+      "op": "poz_match",
+      "from": "v_du"
+    },
+    {
+      "id": "p_t",
+      "op": "poz_match",
+      "from": "v_t"
+    },
+    {
+      "id": "c_k",
+      "op": "calc_cost",
+      "from": "p_k",
+      "params": {
+        "quantity_field": "hacim_m3"
+      }
+    },
+    {
+      "id": "c_ki",
+      "op": "calc_cost",
+      "from": "p_ki",
+      "params": {
+        "quantity_field": "hacim_m3"
+      }
+    },
+    {
+      "id": "c_d",
+      "op": "calc_cost",
+      "from": "p_d",
+      "params": {
+        "quantity_field": "hacim_m3"
+      }
+    },
+    {
+      "id": "c_du",
+      "op": "calc_cost",
+      "from": "p_du",
+      "params": {
+        "quantity_field": "hacim_m3"
+      }
+    },
+    {
+      "id": "c_t",
+      "op": "calc_cost",
+      "from": "p_t",
+      "params": {
+        "quantity_field": "hacim_m3"
+      }
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_lists",
+      "from_many": [
+        "c_k",
+        "c_ki",
+        "c_d",
+        "c_du",
+        "c_t"
+      ]
+    },
+    {
+      "id": "cat_ozet",
+      "op": "cost_summary",
+      "from": "birlesik",
+      "params": {
+        "group_by": "kategori"
+      }
+    },
+    {
+      "id": "kat_ozet",
+      "op": "cost_by_level",
+      "from": "birlesik"
+    },
+    {
+      "id": "r_cat",
+      "op": "show_table",
+      "from": "cat_ozet",
+      "params": {
+        "title": "Kategori Bazlı Maliyet"
+      }
+    },
+    {
+      "id": "r_kat",
+      "op": "show_table",
+      "from": "kat_ozet",
+      "params": {
+        "title": "Kat Bazlı Maliyet"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "birlesik",
+      "params": {
+        "sheet_name": "Proje Maliyeti"
+      },
+      "required": false
+    },
+    {
+      "id": "html",
+      "op": "export_html_report",
+      "from": "cat_ozet",
+      "params": {
+        "title": "Tam Proje Maliyet"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "maliyet",
+    "cost",
+    "poz",
+    "fiyat"
+  ]
+}

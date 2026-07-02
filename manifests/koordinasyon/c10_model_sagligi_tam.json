@@ -1,0 +1,71 @@
+{
+  "title": "Koordinasyon: Tam Model Sağlık Kontrolü",
+  "category": "koordinasyon",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_DuctCurves",
+        "OST_PipeCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "uyarilar",
+      "op": "qa_get_model_warnings"
+    },
+    {
+      "id": "analiz",
+      "op": "qa_model_size_analysis"
+    },
+    {
+      "id": "koordinat",
+      "op": "qa_validate_coordinates"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "uyarilar",
+      "params": {
+        "title": "Model Sağlık",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "uyarilar",
+        "analiz",
+        "koordinat"
+      ],
+      "params": {
+        "title": "Koordinasyon: Tam Model Sağlık Kontrolü"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "birlesik"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "birlesik"
+    }
+  ],
+  "id": "c10_model_sagligi_tam",
+  "description": "Koordinasyon: Tam Model Sağlık Kontrolü — 7 adımlı otomasyon iş akışı.",
+  "tags": [
+    "koordinasyon",
+    "clash",
+    "cakisma",
+    "bim"
+  ]
+}

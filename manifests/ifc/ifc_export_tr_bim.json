@@ -1,0 +1,131 @@
+{
+  "title": "IFC TR-BIM Export Paketi",
+  "description": "IFC öncesi parametre kontrolü, IFC mapping, TR-BIM pset doğrulaması ve IFC4 export. ÇŞB 2026 uyumlu.",
+  "category": "IFC",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    },
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "ifc_mapping",
+      "on_fail": "WARN",
+      "message": "IFC mapping yüklü değil — load_ifc_mapping adımı çalışacak"
+    }
+  ],
+  "steps": [
+    {
+      "id": "ifc_map_yukle",
+      "op": "load_ifc_mapping"
+    },
+    {
+      "id": "param_map_yukle",
+      "op": "load_shared_param_map"
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "qa_duvar",
+      "op": "validate_required_params",
+      "from": "duvarlar",
+      "params": {
+        "required_params": "EGBIM_PozNo"
+      }
+    },
+    {
+      "id": "qa_kolon",
+      "op": "validate_required_params",
+      "from": "kolonlar",
+      "params": {
+        "required_params": "EGBIM_PozNo"
+      }
+    },
+    {
+      "id": "qa_doseme",
+      "op": "validate_required_params",
+      "from": "dosemeler",
+      "params": {
+        "required_params": "EGBIM_PozNo"
+      }
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "qa_duvar",
+        "qa_kolon",
+        "qa_doseme"
+      ],
+      "params": {
+        "title": "IFC Öncesi Parametre QA"
+      }
+    },
+    {
+      "id": "ifc_map",
+      "op": "map_to_ifc",
+      "from": "birlesik"
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "birlesik"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "birlesik"
+    },
+    {
+      "id": "export",
+      "op": "ifc_export",
+      "from": "ifc_map",
+      "params": {
+        "version": "IFC4",
+        "schema": "TR-BIM"
+      }
+    },
+    {
+      "id": "qa_rapor",
+      "op": "export_validation_report",
+      "from": "birlesik",
+      "params": {
+        "title": "IFC TR-BIM QA Raporu"
+      },
+      "required": false
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "IFC QA"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "ifc",
+    "openbim",
+    "export",
+    "tr_bim"
+  ]
+}

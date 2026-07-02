@@ -1,0 +1,32 @@
+{
+  "id": "me16_chiller_cop",
+  "title": "Mekanik: Chiller COP Kontrolü ve Enerji Analizi",
+  "description": "Chiller enerji verimliliği (ASHRAE 90.1-2022 COP limitleri) ve yıllık maliyet/tasarruf analizi.",
+  "category": "MEKANIK",
+  "version": "1.0",
+  "tags": ["mekanik","chiller","cop","enerji","ashrae90","verimlilik"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_cop",
+      "op": "mep_chiller_cop_check",
+      "description": "Chiller COP kontrolü",
+      "inputs": {
+        "chiller_tipi":            "$INPUT:chiller_tipi:su_sogutmali_vida",
+        "mevcut_cop":              "$INPUT:mevcut_cop:4.5",
+        "sogutma_kapasitesi_kw":   "$INPUT:sogutma_kw:500",
+        "calisma_saati":           2000.0,
+        "elektrik_birim_fiyat":    3.5
+      }
+    },
+    {
+      "id": "s02_rapor",
+      "op": "export_html_report",
+      "from": "s01_cop",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/chiller_cop.html",
+        "title": "Chiller COP ve Enerji Verimliliği Raporu"
+      }
+    }
+  ]
+}

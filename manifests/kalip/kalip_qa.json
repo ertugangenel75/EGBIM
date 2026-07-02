@@ -1,0 +1,103 @@
+{
+  "title": "Kalıp QA — Sıfır Alan Kontrolü",
+  "description": "Kalıp hesaplarında sıfır alan çıkan elemanları tespit eder, hatalı geometri veya eksik element işaretler.",
+  "version": "1.0.0",
+  "category": "Kalıp",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming",
+        "OST_Walls",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "kalip_d",
+      "op": "kalip_wall",
+      "from": "duvarlar"
+    },
+    {
+      "id": "kalip_k",
+      "op": "kalip_column",
+      "from": "kolonlar"
+    },
+    {
+      "id": "kalip_f",
+      "op": "kalip_floor",
+      "from": "dosemeler"
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_lists",
+      "from_many": [
+        "kalip_d",
+        "kalip_k",
+        "kalip_f"
+      ]
+    },
+    {
+      "id": "qa_d",
+      "op": "check_zero_volume",
+      "from": "duvarlar"
+    },
+    {
+      "id": "qa_k",
+      "op": "check_zero_volume",
+      "from": "kolonlar"
+    },
+    {
+      "id": "birlestir",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "qa_d",
+        "qa_k"
+      ],
+      "params": {
+        "title": "Kalıp QA"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "birlestir"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "birlestir"
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "Kalıp QA"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "kalip",
+    "formwork",
+    "metraj"
+  ]
+}

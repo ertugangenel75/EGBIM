@@ -1,0 +1,65 @@
+{
+  "title": "EGBIMOTO MEP Boşluk Yerleştir — Gerçek Çalıştırma",
+  "description": "Tespit edilen tüm boşluksuz geçişlere boşluk aile örneği yerleştirir",
+  "category": "KOORDINASYON",
+  "version": "1.0",
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_tarama",
+      "op": "smart_check_mep_no_opening",
+      "inputs": {
+        "host_categories": [
+          "Walls",
+          "Floors",
+          "StructuralFraming"
+        ],
+        "mep_categories": [
+          "Pipes",
+          "Ducts",
+          "CableTray",
+          "Conduit"
+        ],
+        "tolerance_mm": 15,
+        "check_opening": true
+      }
+    },
+    {
+      "id": "s02_yerlestir",
+      "op": "place_opening",
+      "from": "s01_tarama",
+      "inputs": {
+        "family_name": "EG_Rezervasyon_Dikdortgen",
+        "type_name": "Standard",
+        "offset_mm": 50,
+        "param_b": "Width",
+        "param_h": "Height",
+        "param_sistem": "EG_Sistem",
+        "skip_existing": true,
+        "dry_run": false
+      }
+    },
+    {
+      "id": "s03_firestop",
+      "op": "coord_validate_penetration_firestop",
+      "from": "s01_tarama",
+      "required": false
+    },
+    {
+      "id": "s04_rapor",
+      "op": "export_html_report",
+      "from": "s02_yerlestir",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/mep_aciklik_yerlestirme.html",
+        "title": "MEP Boşluk Yerleştirme Sonuçları"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "koordinasyon",
+    "clash",
+    "cakisma",
+    "bim"
+  ]
+}

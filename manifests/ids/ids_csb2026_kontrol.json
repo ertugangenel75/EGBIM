@@ -1,0 +1,88 @@
+{
+  "title": "ÇŞB 2026 IDS Kontrol",
+  "description": "ÇŞB 2026 standartına göre hazırlanmış IDS dosyasını modele karşı çalıştırır, hata ve uyarıları raporlar.",
+  "version": "1.0.0",
+  "category": "IDS",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_lists",
+      "from_many": [
+        "duvarlar",
+        "kolonlar",
+        "dosemeler"
+      ]
+    },
+    {
+      "id": "ids_kont",
+      "op": "validate_ids",
+      "from": "birlesik",
+      "params": {
+        "ids_path": "data/validation/ids_csb2026.ids"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "ids_kont"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "ids_kont"
+    },
+    {
+      "id": "hatalar",
+      "op": "where",
+      "from": "satirlar",
+      "params": {
+        "field": "gecti",
+        "op": "eq",
+        "value": "Hayır"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "ÇŞB 2026 IDS"
+      },
+      "required": false
+    },
+    {
+      "id": "html",
+      "op": "export_validation_report",
+      "from": "ids_kont",
+      "params": {
+        "title": "ÇŞB 2026 IDS Kontrol"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "ids",
+    "dogrulama",
+    "validation"
+  ]
+}

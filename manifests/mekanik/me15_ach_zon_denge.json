@@ -1,0 +1,54 @@
+{
+  "id": "me15_ach_zon_denge",
+  "title": "Mekanik: ACH Oda Referansı ve HVAC Zon Denge Kontrolü",
+  "description": "Oda tipine göre ACH referans tablosu, kanal ESP hesabı ve HVAC zon debi denge kontrolü (ASHRAE 111).",
+  "category": "MEKANIK",
+  "version": "1.0",
+  "tags": ["mekanik","ach","zon","denge","esp","kanal","ashrae111"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_ach",
+      "op": "mep_ach_by_room_type",
+      "description": "Oda tipi ACH referansı",
+      "inputs": {
+        "oda_tipi":        "$INPUT:oda_tipi:ofis",
+        "mevcut_ach":      "$INPUT:mevcut_ach:0",
+        "oda_alani_m2":    "$INPUT:oda_alani_m2:50",
+        "oda_yuksekligi_m": 3.0
+      }
+    },
+    {
+      "id": "s02_esp",
+      "op": "mep_static_pressure_calc",
+      "description": "Kanal statik basınç ve fan ESP",
+      "inputs": {
+        "ana_hat_uzunlugu_m": "$INPUT:hat_uzunlugu_m:60",
+        "debi_m3h":            "$INPUT:debi_m3h:5000",
+        "boyut_mm":            500,
+        "dp_filtre_pa":        150.0,
+        "dp_serpantin_pa":     200.0,
+        "dp_terminal_pa":      50.0,
+        "boru_katsayi_pa_m":   1.0
+      }
+    },
+    {
+      "id": "s03_zon",
+      "op": "mep_hvac_zone_balance",
+      "description": "HVAC zon debi denge kontrolü",
+      "inputs": {
+        "tolerans_pct": 10.0,
+        "debi_param":   "EG_Debi_m3h"
+      }
+    },
+    {
+      "id": "s04_rapor",
+      "op": "export_html_report",
+      "from": "s03_zon",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/ach_zon_denge.html",
+        "title": "ACH Referans, ESP ve Zon Denge Raporu"
+      }
+    }
+  ]
+}

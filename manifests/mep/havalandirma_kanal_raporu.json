@@ -1,0 +1,83 @@
+{
+  "title": "Havalandırma Kanal Metrajı",
+  "description": "Havalandırma kanallarını ve fitting elemanlarını toplar, sistem bazında uzunluk ve hava terminali sayısı raporlar.",
+  "version": "1.0.0",
+  "category": "MEP",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_DuctCurves",
+        "OST_PipeCurves",
+        "OST_CableTray"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde MEP elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kanallar",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "fitler",
+      "op": "collect_duct_fittings"
+    },
+    {
+      "id": "terminaller",
+      "op": "collect_air_terminals"
+    },
+    {
+      "id": "k_ozet",
+      "op": "mep_by_system",
+      "from": "kanallar"
+    },
+    {
+      "id": "k_toplam",
+      "op": "mep_total_length",
+      "from": "kanallar"
+    },
+    {
+      "id": "t_sayi",
+      "op": "element_count",
+      "from": "terminaller"
+    },
+    {
+      "id": "t_tipler",
+      "op": "group_elements_by_type",
+      "from": "terminaller"
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "k_ozet",
+      "params": {
+        "title": "Havalandırma Kanal Sistem Özeti"
+      }
+    },
+    {
+      "id": "r_term",
+      "op": "show_table",
+      "from": "t_tipler",
+      "params": {
+        "title": "Hava Terminali Tip Sayımı"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "k_ozet",
+      "params": {
+        "sheet_name": "HVAC Kanallar"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "mep",
+    "tesisat",
+    "mekanik"
+  ]
+}

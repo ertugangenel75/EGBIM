@@ -1,0 +1,101 @@
+{
+  "title": "EG Kalıp Hesapla v26",
+  "description": "Tüm yapısal kategorilerin kalıp metrajını hesaplar ve parametrelere yazar. ÇŞB 2026 poz ataması keynote öncelikli.",
+  "category": "Kalıp",
+  "version": "2.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    },
+    {
+      "type": "PARAM_EXISTS",
+      "param": "TR_KalipAlani",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming",
+        "OST_Walls",
+        "OST_Floors"
+      ],
+      "on_fail": "ABORT",
+      "remediation": "EG_KALIP_ENSURE_PARAMS manifestini önce çalıştırın"
+    }
+  ],
+  "steps": [
+    {
+      "id": "s01_load_poz",
+      "op": "load_poz_data",
+      "inputs": {
+        "path": ""
+      }
+    },
+    {
+      "id": "s02_load_canonical",
+      "op": "load_poz_canonical_map"
+    },
+    {
+      "id": "s03_load_section_rules",
+      "op": "load_poz_section_rules"
+    },
+    {
+      "id": "s04_kalip_hesapla",
+      "op": "kalip_all",
+      "from": "s01_load_poz",
+      "inputs": {
+        "include_edges": "true"
+      }
+    },
+    {
+      "id": "s05_poz_esle",
+      "op": "poz_match_keynote_aware",
+      "from": "s04_kalip_hesapla"
+    },
+    {
+      "id": "s06_maliyet_hesapla",
+      "op": "calc_cost",
+      "from": "s05_poz_esle",
+      "inputs": {
+        "quantity_field": "kalip_m2"
+      }
+    },
+    {
+      "id": "s07_yaz",
+      "op": "kalip_write_back",
+      "from": "s06_maliyet_hesapla"
+    },
+    {
+      "id": "s08_ozet",
+      "op": "kalip_summary",
+      "from": "s06_maliyet_hesapla",
+      "inputs": {
+        "group_by": "kat"
+      }
+    },
+    {
+      "id": "s09_rapor",
+      "op": "export_xlsx",
+      "from": "s06_maliyet_hesapla",
+      "inputs": {
+        "filename": "EG_Kalip_Metraj",
+        "sheet_name": "Kalıp Metrajı"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s08_ozet"
+    }
+  ],
+  "transaction_policy": "atomic",
+  "tags": [
+    "kalip",
+    "formwork",
+    "metraj"
+  ]
+}

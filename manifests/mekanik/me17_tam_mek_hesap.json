@@ -1,0 +1,141 @@
+{
+  "id": "me17_tam_mek_hesap",
+  "title": "Mekanik: Tam HVAC Sistem Hesap Pipeline (10 Op)",
+  "description": "MEP Mekanik tam ön hesap akışı: ısı yükü → AHU seçimi → oda soğutma → kanal ESP → taze hava → basınçlandırma → zon denge → HEPA QA → ACH referans → Chiller COP. Tek manifest ile projenin tüm mekanik ön hesapları.",
+  "category": "MEKANIK",
+  "version": "1.0",
+  "tags": [
+    "mekanik","hvac","isi_yuku","ahu","sogutma","esp","taze_hava",
+    "basinclama","hepa","ach","zon_denge","chiller","cop","ts825",
+    "ashrae62","ashrae90","ashrae170","en16798","pipeline"
+  ],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_yuk",
+      "op": "mep_hvac_heat_load_calc",
+      "description": "1) Isı yükü hesabı (TS 825/ASHRAE)",
+      "inputs": {
+        "alan_m2": "$INPUT:alan_m2:500",
+        "tavan_yuksekligi_m": "$INPUT:tavan_yuksekligi_m:3.0",
+        "dis_sicaklik_c": "$INPUT:dis_sicaklik_c:36",
+        "ic_sicaklik_c": 24.0,
+        "u_deger_ortalama": 0.5,
+        "ic_yuk_w_m2": 30.0,
+        "kisi_sayisi": "$INPUT:kisi_sayisi:50",
+        "taze_hava_m3h": "$INPUT:taze_hava_m3h:1000"
+      }
+    },
+    {
+      "id": "s02_ahu",
+      "op": "mep_ahu_selection",
+      "description": "2) AHU seçim kriterleri",
+      "inputs": {
+        "toplam_debi_m3h": "$INPUT:toplam_debi_m3h:5000",
+        "sogutma_kw": "$INPUT:sogutma_kw:50",
+        "esp_pa": 300.0,
+        "filtre_sinifi": "$INPUT:filtre_sinifi:F7",
+        "alan_tipi": "$INPUT:alan_tipi:ofis"
+      }
+    },
+    {
+      "id": "s03_oda_sogutma",
+      "op": "mep_cooling_load_room",
+      "description": "3) Oda soğutma yükü",
+      "inputs": {
+        "alan_m2": "$INPUT:oda_alan_m2:50",
+        "cam_alani_m2": "$INPUT:cam_alani_m2:10",
+        "yon": "$INPUT:yon:guney",
+        "kisi_sayisi": "$INPUT:oda_kisi:5",
+        "ekipman_w": "$INPUT:ekipman_w:500",
+        "aydinlatma_w_m2": 12.0
+      }
+    },
+    {
+      "id": "s04_esp",
+      "op": "mep_static_pressure_calc",
+      "description": "4) Kanal statik basınç / ESP",
+      "inputs": {
+        "ana_hat_uzunlugu_m": "$INPUT:hat_uzunlugu_m:60",
+        "debi_m3h": "$INPUT:toplam_debi_m3h:5000",
+        "boyut_mm": 500,
+        "dp_filtre_pa": 150.0,
+        "dp_serpantin_pa": 200.0,
+        "dp_terminal_pa": 50.0
+      }
+    },
+    {
+      "id": "s05_taze_hava",
+      "op": "mep_fresh_air_rate_check",
+      "description": "5) Taze hava oranı (ASHRAE 62.1)",
+      "inputs": {
+        "alan_m2": "$INPUT:alan_m2:500",
+        "kisi_sayisi": "$INPUT:kisi_sayisi:50",
+        "alan_tipi": "$INPUT:alan_tipi:ofis",
+        "mevcut_m3h": "$INPUT:taze_hava_m3h:1000"
+      }
+    },
+    {
+      "id": "s06_basinc",
+      "op": "mep_pressurization_check",
+      "description": "6) Oda basınçlandırma kontrolü",
+      "inputs": {
+        "oda_tipi": "$INPUT:oda_tipi:ameliyathane",
+        "mevcut_basinc_pa": "$INPUT:mevcut_basinc_pa:15",
+        "tolerans_pa": 2.0
+      }
+    },
+    {
+      "id": "s07_zon",
+      "op": "mep_hvac_zone_balance",
+      "description": "7) HVAC zon debi denge",
+      "inputs": {
+        "tolerans_pct": 10.0,
+        "debi_param": "EG_Debi_m3h"
+      }
+    },
+    {
+      "id": "s08_hepa",
+      "op": "mep_hepa_filter_qa",
+      "description": "8) HEPA H14 filtre QA",
+      "inputs": {
+        "filtre_sinifi": "$INPUT:filtre_sinifi:H14",
+        "alan_tipi": "$INPUT:hepa_alan_tipi:ameliyathane",
+        "mevcut_dp_pa": "$INPUT:hepa_dp_pa:180",
+        "montaj_tipi": "gel_seal"
+      }
+    },
+    {
+      "id": "s09_ach",
+      "op": "mep_ach_by_room_type",
+      "description": "9) ACH oda tipi referans",
+      "inputs": {
+        "oda_tipi": "$INPUT:oda_tipi:ameliyathane",
+        "mevcut_ach": "$INPUT:mevcut_ach:0",
+        "oda_alani_m2": "$INPUT:oda_alan_m2:50",
+        "oda_yuksekligi_m": 3.0
+      }
+    },
+    {
+      "id": "s10_cop",
+      "op": "mep_chiller_cop_check",
+      "description": "10) Chiller COP kontrolü",
+      "inputs": {
+        "chiller_tipi": "$INPUT:chiller_tipi:su_sogutmali_vida",
+        "mevcut_cop": "$INPUT:mevcut_cop:4.5",
+        "sogutma_kapasitesi_kw": "$INPUT:sogutma_kw:50",
+        "calisma_saati": 2000.0,
+        "elektrik_birim_fiyat": 3.5
+      }
+    },
+    {
+      "id": "s11_rapor",
+      "op": "export_html_report",
+      "description": "11) Tam rapor",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/tam_mek_hesap.html",
+        "title": "Mekanik HVAC Tam Sistem Hesap Raporu (10 Op)"
+      }
+    }
+  ]
+}

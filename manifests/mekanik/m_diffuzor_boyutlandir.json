@@ -1,0 +1,34 @@
+{
+  "title": "EGBIMOTO Diffuzor Debiye Gore Boyutlandirma",
+  "description": "Once terminallere debi atar, sonra her terminalin debisine gore uygun diffuzor tipini esik tablosundan secip uygular. family_name ve thresholds projeye gore duzenlenmelidir.",
+  "category": "MEKANIK",
+  "version": "1.0",
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_debi_ata",
+      "op": "assign_flow_to_terminals",
+      "inputs": {
+        "round_cfm_to": 5,
+        "system_type_filter": "Supply Air"
+      }
+    },
+    {
+      "id": "s02_boyutlandir",
+      "op": "resize_diffuser_by_flow",
+      "inputs": {
+        "family_name": "Supply Diffuser",
+        "flow_param_name": "Flow",
+        "thresholds": "100:150x150,200:200x200,400:300x300,800:450x450"
+      }
+    }
+  ],
+  "tags": [
+    "mep",
+    "hvac",
+    "diffuzor",
+    "boyutlandirma",
+    "flow",
+    "type"
+  ]
+}

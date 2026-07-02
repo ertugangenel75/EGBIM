@@ -1,0 +1,76 @@
+{
+  "title": "Koordinasyon: Tavan Koordinasyonu",
+  "category": "koordinasyon",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_DuctCurves",
+        "OST_PipeCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kanallar",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "tavanlar",
+      "op": "collect_ceilings"
+    },
+    {
+      "id": "mep",
+      "op": "merge_lists",
+      "from_many": [
+        "kanallar",
+        "borular"
+      ]
+    },
+    {
+      "id": "kontrol",
+      "op": "coord_check_clearance",
+      "from": "mep",
+      "params": {
+        "secondary_elements": "$tavanlar",
+        "min_clearance_mm": 100
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "kontrol",
+      "params": {
+        "title": "Tavan Koordinasyon",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kontrol"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    }
+  ],
+  "id": "c05_tavan_koordinasyon",
+  "description": "Koordinasyon: Tavan Koordinasyonu — 8 adımlı otomasyon iş akışı.",
+  "tags": [
+    "koordinasyon",
+    "clash",
+    "cakisma",
+    "bim"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "title": "Koordinasyon: Ekipman Servis Mesafesi",
+  "category": "koordinasyon",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_DuctCurves",
+        "OST_PipeCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "ekipman",
+      "op": "collect_mechanical_equipment"
+    },
+    {
+      "id": "elektrik",
+      "op": "collect_electrical_equipment"
+    },
+    {
+      "id": "hepsi",
+      "op": "merge_lists",
+      "from_many": [
+        "ekipman",
+        "elektrik"
+      ]
+    },
+    {
+      "id": "kontrol",
+      "op": "coord_check_clearance",
+      "from": "hepsi",
+      "params": {
+        "secondary_elements": "$hepsi",
+        "min_clearance_mm": 600
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "kontrol",
+      "params": {
+        "title": "Servis Mesafesi",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kontrol"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    }
+  ],
+  "id": "c06_ekipman_servis",
+  "description": "Koordinasyon: Ekipman Servis Mesafesi — 7 adımlı otomasyon iş akışı.",
+  "tags": [
+    "koordinasyon",
+    "clash",
+    "cakisma",
+    "bim"
+  ]
+}

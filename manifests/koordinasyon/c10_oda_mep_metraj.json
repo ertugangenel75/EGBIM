@@ -1,0 +1,49 @@
+{
+  "title": "Oda Bazlı MEP Metraj — Mahal İçi Tesisat Sayımı",
+  "description": "Her oda/mahal (Room) içindeki MEP elemanlarını (boru, kanal, kablo taşıyıcı) sayar, toplam uzunluk hesaplar ve oda-bazlı metraj tablosu üretir. Hakediş ve mahal listesi raporları için kullanılır. İsteğe bağlı olarak elemanlara oda bilgisi parametre olarak yazılabilir.",
+  "version": "1.0",
+  "category": "koordinasyon",
+  "tags": ["mep", "metraj", "oda", "mahal", "room", "hakedis", "sayim"],
+  "transaction_policy": "none",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Rooms"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yerleştirilmiş oda (Room) bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "say",
+      "op": "mep_region_count",
+      "params": {
+        "region_category": "OST_Rooms",
+        "mep_categories": "OST_PipeCurves,OST_DuctCurves,OST_CableTray",
+        "z_tolerance_mm": 1500
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "say",
+      "params": {
+        "title": "Oda Bazlı MEP Metraj",
+        "max_rows": 300
+      }
+    },
+    {
+      "id": "excel",
+      "op": "export_xlsx",
+      "from": "say",
+      "required": false,
+      "params": {
+        "sheet_name": "Oda_MEP_Metraj",
+        "title": "Oda Bazlı MEP Metraj Raporu"
+      }
+    }
+  ]
+}

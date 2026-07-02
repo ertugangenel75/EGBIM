@@ -1,0 +1,68 @@
+{
+  "title": "Koordinasyon: Kat Tutarlılığı",
+  "category": "koordinasyon",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_DuctCurves",
+        "OST_PipeCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kanallar",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "hepsi",
+      "op": "merge_lists",
+      "from_many": [
+        "kanallar",
+        "borular"
+      ]
+    },
+    {
+      "id": "kontrol",
+      "op": "coord_validate_level_consistency",
+      "from": "hepsi"
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "kontrol",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Kat Tutarlılığı"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kontrol"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    }
+  ],
+  "id": "c04_kat_tutarlilik",
+  "description": "Koordinasyon: Kat Tutarlılığı — 7 adımlı otomasyon iş akışı.",
+  "tags": [
+    "koordinasyon",
+    "clash",
+    "cakisma",
+    "bim"
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "title": "MEP Uzunluk Özeti",
+  "description": "Boru, kanal ve kablo tavalarının toplam uzunluklarını raporlar.",
+  "version": "1.0.0",
+  "category": "MEP",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_DuctCurves",
+        "OST_PipeCurves",
+        "OST_CableTray"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde MEP elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "kanallar",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "tavalar",
+      "op": "collect_cable_trays"
+    },
+    {
+      "id": "uzun_b",
+      "op": "curve_from_element",
+      "from": "borular"
+    },
+    {
+      "id": "uzun_k",
+      "op": "curve_from_element",
+      "from": "kanallar"
+    },
+    {
+      "id": "uzun_t",
+      "op": "curve_from_element",
+      "from": "tavalar"
+    },
+    {
+      "id": "birlestir",
+      "op": "merge_rows",
+      "from_many": [
+        "uzun_b",
+        "uzun_k",
+        "uzun_t"
+      ]
+    },
+    {
+      "id": "ozet",
+      "op": "mep_summary",
+      "from": "birlestir"
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "ozet",
+      "params": {
+        "title": "MEP Uzunluk Özeti"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "birlestir",
+      "params": {
+        "sheet_name": "MEP Uzunluk"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "mep",
+    "tesisat",
+    "mekanik"
+  ]
+}

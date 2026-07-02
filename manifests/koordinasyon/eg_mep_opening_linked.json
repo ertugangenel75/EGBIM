@@ -1,0 +1,95 @@
+{
+  "title": "EGBIMOTO MEP Boşluk — Linked Model Tarama",
+  "description": "Linked modeldeki MEP elemanlarını da kapsayan tam koordinasyon pipeline'ı",
+  "category": "KOORDINASYON",
+  "version": "1.0",
+  "transaction_policy": "preview",
+  "steps": [
+    {
+      "id": "s01_tarama",
+      "op": "smart_check_mep_no_opening",
+      "inputs": {
+        "host_categories": [
+          "Walls",
+          "Floors",
+          "StructuralFraming"
+        ],
+        "mep_categories": [
+          "Pipes",
+          "Ducts",
+          "CableTray",
+          "Conduit"
+        ],
+        "tolerance_mm": 15,
+        "check_opening": true,
+        "use_solid_intersection": false,
+        "scan_linked_models": true
+      }
+    },
+    {
+      "id": "s02_hata_filtre",
+      "op": "filter_rows",
+      "from": "s01_tarama",
+      "inputs": {
+        "field": "seviye",
+        "value": "HATA"
+      }
+    },
+    {
+      "id": "s03_linked_filtre",
+      "op": "filter_rows",
+      "from": "s02_hata_filtre",
+      "inputs": {
+        "field": "kaynak",
+        "value": "LINKED"
+      },
+      "required": false
+    },
+    {
+      "id": "s04_ozet",
+      "op": "show_count",
+      "from": "s02_hata_filtre",
+      "inputs": {
+        "message": "Toplam boşluksuz geçiş (linked dahil)"
+      }
+    },
+    {
+      "id": "s05_preview",
+      "op": "preview_gate",
+      "from": "s01_tarama",
+      "inputs": {
+        "title": "Linked Model Dahil Koordinasyon — Onayla"
+      }
+    },
+    {
+      "id": "s06_yerlestir",
+      "op": "place_opening",
+      "from": "s01_tarama",
+      "condition": "$s05_preview == confirmed",
+      "inputs": {
+        "family_name": "EG_Rezervasyon_Dikdortgen",
+        "type_name": "Standard",
+        "use_diameter_table": true,
+        "skip_existing": true,
+        "dry_run": false
+      }
+    },
+    {
+      "id": "s07_rapor",
+      "op": "export_validation_report",
+      "from": "s01_tarama",
+      "condition": "$s05_preview == confirmed",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/mep_linked_koordinasyon.html",
+        "title": "MEP Koordinasyon — Linked Model Dahil"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "koordinasyon",
+    "clash",
+    "cakisma",
+    "bim"
+  ]
+}

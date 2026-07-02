@@ -1,0 +1,87 @@
+{
+  "title": "Çakışma: Çözüm — Ofset / Yükseltme",
+  "description": "LinkedIn'deki 'Clash Resolution' aracının ÇÖZÜM kısmının basit ve güvenli karşılığı (Ofset +/- ve Yüksel). Çakışmaları tespit eder, çakışan MEP elemanlarını (A grubu — boru/kanal) collect_by_ids köprüsüyle Element listesine çıkarır ve hepsini belirtilen yönde (örn. dz=+150mm yukarı) toplu kaydırır. Bu, paylaşımdaki 'Yüksel' / 'Ofset Ayarı' özelliğine karşılık gelir. DİKKAT: Toplu kaydırma yapar — önce c12 (tespit) ile listeyi inceleyin, sonra hangi elemanların kaydırılacağını group_a daraltarak kontrol edin. Karmaşık 'Rise & Drop' (boru kırma) bilinçli olarak KAPSAM DIŞIDIR; o, modeli bozma riski taşıyan ayrı bir geliştirmedir.",
+  "version": "1.0",
+  "category": "koordinasyon",
+  "id": "cakisma_cozum_ofset",
+  "tags": ["clash", "cakisma", "cozum", "ofset", "yukselt", "move", "koordinasyon"],
+  "transaction_policy": "atomic",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_PipeCurves",
+        "OST_DuctCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde çözülecek MEP hattı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "cakismalar",
+      "op": "clash_detect_matrix",
+      "params": {
+        "group_a": "OST_PipeCurves,OST_DuctCurves",
+        "group_b": "OST_StructuralFraming,OST_StructuralColumns",
+        "tolerance_mm": 10,
+        "max_results": 500
+      }
+    },
+    {
+      "id": "oncelikli",
+      "op": "clash_severity_sort",
+      "from": "cakismalar"
+    },
+    {
+      "id": "tablo_once",
+      "op": "show_table",
+      "from": "oncelikli",
+      "params": {
+        "title": "Çözülecek Çakışmalar (kaydırma öncesi)",
+        "max_rows": 200
+      }
+    },
+    {
+      "id": "cakisan_mep",
+      "op": "collect_by_ids",
+      "from": "oncelikli",
+      "params": {
+        "id_fields": "a_id",
+        "distinct": "true"
+      }
+    },
+    {
+      "id": "kaydir",
+      "op": "move_element",
+      "from": "cakisan_mep",
+      "params": {
+        "dx_mm": 0,
+        "dy_mm": 0,
+        "dz_mm": 150
+      }
+    },
+    {
+      "id": "cakismalar_sonra",
+      "op": "clash_detect_matrix",
+      "required": false,
+      "params": {
+        "group_a": "OST_PipeCurves,OST_DuctCurves",
+        "group_b": "OST_StructuralFraming,OST_StructuralColumns",
+        "tolerance_mm": 10,
+        "max_results": 500
+      }
+    },
+    {
+      "id": "tablo_sonra",
+      "op": "show_table",
+      "from": "cakismalar_sonra",
+      "required": false,
+      "params": {
+        "title": "Kaydırma Sonrası Kalan Çakışmalar",
+        "max_rows": 200
+      }
+    }
+  ]
+}

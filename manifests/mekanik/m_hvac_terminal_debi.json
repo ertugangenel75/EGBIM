@@ -1,0 +1,45 @@
+{
+  "title": "EGBIMOTO HVAC Terminal Debi + CFM/SF Atama",
+  "description": "Mahallerin hesaplanan supply air flow degerini terminallere esit dagitir, ardindan her mahale CFM/SF degerini yazar. HVAC tasarim dogrulama akisi.",
+  "category": "MEKANIK",
+  "version": "1.0",
+  "transaction_policy": "atomic",
+  "steps": [
+    {
+      "id": "s01_terminal_debi",
+      "op": "assign_flow_to_terminals",
+      "inputs": {
+        "round_cfm_to": 5,
+        "flow_param_name": "Flow",
+        "system_type_filter": "Supply Air"
+      }
+    },
+    {
+      "id": "s02_cfm_per_sf",
+      "op": "populate_space_param",
+      "inputs": {
+        "target_param": "CFM per SF",
+        "source": "cfm_per_sf"
+      }
+    },
+    {
+      "id": "s03_rapor",
+      "op": "export_html_report",
+      "from": "s01_terminal_debi",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/hvac_terminal_debi.html",
+        "title": "HVAC Terminal Debi Atama Raporu"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "mep",
+    "hvac",
+    "terminal",
+    "debi",
+    "flow",
+    "cfm",
+    "supply_air"
+  ]
+}

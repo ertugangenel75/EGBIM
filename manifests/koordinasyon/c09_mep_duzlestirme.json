@@ -1,0 +1,61 @@
+{
+  "title": "MEP Hat Düzleştirme — S-bend Tespit ve Temizleme",
+  "description": "MEP hatlarındaki gereksiz çift-dirsek sapmalarını (S-bend / 翻弯) tespit eder, kullanıcıya rapor sunar ve onaylanırsa düzleştirir. Önce tarama (yazma yok), sonra preview-confirm ile uygulama yapılır. Kanal, boru ve kablo taşıyıcı destekler.",
+  "version": "1.0",
+  "category": "koordinasyon",
+  "tags": ["mep", "straighten", "duzlestirme", "s-bend", "translatif", "koordinasyon"],
+  "transaction_policy": "atomic",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_DuctCurves",
+        "OST_PipeCurves",
+        "OST_CableTray"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde taranacak MEP hattı (kanal/boru/kablo taşıyıcı) bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "tara",
+      "op": "mep_straighten_scan",
+      "params": {
+        "categories": "OST_DuctCurves,OST_PipeCurves,OST_CableTray",
+        "min_offset_mm": 5,
+        "max_offset_mm": 600,
+        "max_results": 2000
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "tara",
+      "params": {
+        "title": "Tespit Edilen S-bend'ler",
+        "max_rows": 200
+      }
+    },
+    {
+      "id": "duzelt",
+      "op": "mep_straighten_apply",
+      "from": "tara",
+      "required": false,
+      "params": {
+        "max_apply": 0
+      }
+    },
+    {
+      "id": "sonuc_tablo",
+      "op": "show_table",
+      "from": "duzelt",
+      "required": false,
+      "params": {
+        "title": "Düzleştirme Sonuçları",
+        "max_rows": 200
+      }
+    }
+  ]
+}

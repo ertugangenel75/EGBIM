@@ -1,0 +1,76 @@
+{
+  "title": "Koordinasyon: MEP-Yapısal Çakışma",
+  "category": "koordinasyon",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_DuctCurves",
+        "OST_PipeCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kanallar",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "mep",
+      "op": "merge_lists",
+      "from_many": [
+        "kanallar",
+        "borular"
+      ]
+    },
+    {
+      "id": "kirisler",
+      "op": "collect_beams"
+    },
+    {
+      "id": "kontrol",
+      "op": "coord_check_clearance",
+      "from": "mep",
+      "params": {
+        "secondary_elements": "$kirisler",
+        "min_clearance_mm": 50
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from": "kontrol",
+      "params": {
+        "title": "MEP-Yapısal Çakışma",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "kontrol"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "kontrol"
+    }
+  ],
+  "id": "c01_mep_yapisal_cakisma",
+  "description": "Koordinasyon: MEP-Yapısal Çakışma — 8 adımlı otomasyon iş akışı.",
+  "tags": [
+    "koordinasyon",
+    "clash",
+    "cakisma",
+    "bim"
+  ]
+}

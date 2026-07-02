@@ -1,0 +1,89 @@
+{
+  "title": "MEP-Mek: Tam MEP Metraj Raporu",
+  "category": "mekanik",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_DuctCurves",
+        "OST_MechanicalEquipment"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde mekanik eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kanallar",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "kablo",
+      "op": "collect_cable_trays"
+    },
+    {
+      "id": "iletken",
+      "op": "collect_conduits"
+    },
+    {
+      "id": "kanal_uzun",
+      "op": "mep_total_length",
+      "from": "kanallar"
+    },
+    {
+      "id": "boru_uzun",
+      "op": "mep_total_length",
+      "from": "borular"
+    },
+    {
+      "id": "kablo_uzun",
+      "op": "mep_total_length",
+      "from": "kablo"
+    },
+    {
+      "id": "iletken_uzun",
+      "op": "mep_total_length",
+      "from": "iletken"
+    },
+    {
+      "id": "rapor",
+      "op": "export_html_report",
+      "from_many": [
+        "kanal_uzun",
+        "boru_uzun",
+        "kablo_uzun",
+        "iletken_uzun"
+      ],
+      "params": {
+        "title": "Tam MEP Metraj",
+        "output_path": ""
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "iletken_uzun",
+      "params": {
+        "title": "MEP-Mek: Tam MEP Metraj Raporu"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "iletken"
+    }
+  ],
+  "id": "me10_tam_mep_rapor",
+  "description": "MEP-Mek: Tam MEP Metraj Raporu — 11 adımlı otomasyon iş akışı.",
+  "tags": [
+    "mekanik",
+    "hvac",
+    "mep"
+  ]
+}

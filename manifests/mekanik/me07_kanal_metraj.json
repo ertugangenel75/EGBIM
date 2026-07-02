@@ -1,0 +1,62 @@
+{
+  "title": "MEP-Mek: Kanal Uzunluk Metrajı",
+  "category": "mekanik",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_DuctCurves",
+        "OST_MechanicalEquipment"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde mekanik eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kanallar",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "uzunluk",
+      "op": "mep_total_length",
+      "from": "kanallar"
+    },
+    {
+      "id": "sistem",
+      "op": "mep_by_system",
+      "from": "kanallar"
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "sistem",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Kanal Metraj"
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "sistem",
+      "params": {
+        "title": "MEP-Mek: Kanal Uzunluk Metrajı"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "kanallar"
+    }
+  ],
+  "id": "me07_kanal_metraj",
+  "description": "MEP-Mek: Kanal Uzunluk Metrajı — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "mekanik",
+    "hvac",
+    "mep"
+  ]
+}

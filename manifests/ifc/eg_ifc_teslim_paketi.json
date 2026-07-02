@@ -1,0 +1,65 @@
+{
+  "title": "IFC Teslim Paketi — Doğrula, Aktar, Raporla",
+  "description": "İşveren teslimi için tam paket: önce IDS doğrulaması, ardından TR BIM uyumlu IFC4 dışa aktarımı ve eleman listesinin Excel raporu. ÇŞB 2026 openBIM teslim süreçleri için tasarlanmıştır.",
+  "version": "1.0",
+  "category": "ifc",
+  "tags": ["ifc", "teslim", "openbim", "tr_bim", "ids", "csb2026"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "elemanlar",
+      "op": "collect_multi",
+      "params": {
+        "categories": "OST_Walls,OST_Floors,OST_StructuralColumns,OST_StructuralFraming,OST_Doors,OST_Windows"
+      }
+    },
+    {
+      "id": "ids_dogrula",
+      "op": "validate_ids",
+      "from": "elemanlar",
+      "required": false,
+      "params": {
+        "ids_path": ""
+      }
+    },
+    {
+      "id": "ids_rapor",
+      "op": "export_validation_report",
+      "from": "ids_dogrula",
+      "required": false,
+      "params": {
+        "title": "IDS Doğrulama — Teslim Öncesi"
+      }
+    },
+    {
+      "id": "ifc_aktar",
+      "op": "ifc_export",
+      "from": "elemanlar",
+      "required": false,
+      "params": {
+        "output_dir": "",
+        "file_name": "EGBIM_Teslim",
+        "ifc_version": "IFC4",
+        "export_linked_files": false
+      }
+    },
+    {
+      "id": "boq_satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "elemanlar",
+      "params": {
+        "param_names": "EGBIM_PozNo,EGBIM_Aciklama,Area,Volume"
+      }
+    },
+    {
+      "id": "boq_excel",
+      "op": "export_xlsx",
+      "from": "boq_satirlar",
+      "required": false,
+      "params": {
+        "sheet_name": "Teslim_BOQ",
+        "title": "IFC Teslim — Eleman Listesi"
+      }
+    }
+  ]
+}

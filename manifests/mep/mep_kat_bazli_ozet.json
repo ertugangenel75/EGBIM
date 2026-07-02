@@ -1,0 +1,95 @@
+{
+  "title": "MEP Kat Bazlı Özet",
+  "description": "MEP elemanlarını kat bazında gruplar, kat başına eleman sayısı ve toplam uzunluk raporu üretir.",
+  "version": "1.0.0",
+  "category": "MEP",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_DuctCurves",
+        "OST_PipeCurves",
+        "OST_CableTray"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde MEP elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kanallar",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "armatur",
+      "op": "collect_lighting_fixtures"
+    },
+    {
+      "id": "mek_ekip",
+      "op": "collect_mechanical_equipment"
+    },
+    {
+      "id": "k_kat",
+      "op": "group_elements_by_level",
+      "from": "kanallar"
+    },
+    {
+      "id": "b_kat",
+      "op": "group_elements_by_level",
+      "from": "borular"
+    },
+    {
+      "id": "a_kat",
+      "op": "group_elements_by_level",
+      "from": "armatur"
+    },
+    {
+      "id": "m_kat",
+      "op": "group_elements_by_level",
+      "from": "mek_ekip"
+    },
+    {
+      "id": "r_k",
+      "op": "show_table",
+      "from": "k_kat",
+      "params": {
+        "title": "HVAC - Kat Bazlı"
+      }
+    },
+    {
+      "id": "r_b",
+      "op": "show_table",
+      "from": "b_kat",
+      "params": {
+        "title": "Boru - Kat Bazlı"
+      }
+    },
+    {
+      "id": "r_a",
+      "op": "show_table",
+      "from": "a_kat",
+      "params": {
+        "title": "Armatür - Kat Bazlı"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "k_kat",
+      "params": {
+        "sheet_name": "MEP Kat Özeti"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "mep",
+    "tesisat",
+    "mekanik"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "title": "MEP-Mek: Filtre/Damper Varlık Kontrolü",
+  "category": "mekanik",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_DuctCurves",
+        "OST_MechanicalEquipment"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde mekanik eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "aksesuar",
+      "op": "collect_duct_fittings"
+    },
+    {
+      "id": "satırlar",
+      "op": "elements_to_rows_with_params",
+      "from": "aksesuar",
+      "params": {
+        "param_names": [
+          "Family",
+          "Type",
+          "System Name",
+          "Level"
+        ]
+      }
+    },
+    {
+      "id": "filtreler",
+      "op": "filter_by_type",
+      "from": "satırlar",
+      "params": {
+        "type_contains": "Damper"
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "filtreler",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Damper Listesi"
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_type",
+      "from": "aksesuar"
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "kat_bazli",
+      "params": {
+        "title": "MEP-Mek: Filtre/Damper Varlık Kontrolü"
+      }
+    }
+  ],
+  "id": "me09_filter_kontrol",
+  "description": "MEP-Mek: Filtre/Damper Varlık Kontrolü — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "mekanik",
+    "hvac",
+    "mep"
+  ]
+}

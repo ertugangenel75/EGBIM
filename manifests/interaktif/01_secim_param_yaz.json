@@ -1,0 +1,49 @@
+{
+  "title": "İnteraktif Seçim — Parametre Yaz",
+  "description": "Kullanıcının modelde elle seçtiği elemanlara TR_Durum parametresi yazar ve sonucu WPF tablo penceresinde gösterir. selection_gate/selection_to_elements/show_table v13.5 interaktif katmanının referans örneğidir.",
+  "category": "interaktif",
+  "version": "1.0.0",
+  "tags": ["interaktif", "seçim", "demo", "v13.5"],
+  "steps": [
+    {
+      "id": "s01_sec",
+      "op": "selection_gate",
+      "inputs": {
+        "prompt": "TR_Durum parametresi yazılacak elemanları seçin (Bitti için Enter, İptal için Esc)",
+        "mode": "multiple",
+        "min_count": 1
+      }
+    },
+    {
+      "id": "s02_elemanlar",
+      "op": "selection_to_elements",
+      "from": "s01_sec",
+      "condition": "$s01_sec == confirmed"
+    },
+    {
+      "id": "s03_yaz",
+      "op": "write_param",
+      "from": "s02_elemanlar",
+      "condition": "$s01_sec == confirmed",
+      "inputs": {
+        "param_name": "TR_Durum",
+        "value": "Kontrol Edildi"
+      }
+    },
+    {
+      "id": "s04_ozet",
+      "op": "classify_elements",
+      "from": "s02_elemanlar",
+      "condition": "$s01_sec == confirmed"
+    },
+    {
+      "id": "s05_goster",
+      "op": "show_table",
+      "from": "s04_ozet",
+      "condition": "$s01_sec == confirmed",
+      "inputs": {
+        "title": "TR_Durum Yazılan Elemanlar"
+      }
+    }
+  ]
+}

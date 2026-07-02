@@ -1,0 +1,53 @@
+{
+  "title": "Çakışma Matrisi — MEP × Yapısal Hard Clash Raporu",
+  "description": "MEP elemanları (kanal, boru) ile yapısal elemanlar (kiriş, kolon) arasındaki katı çakışmaları tespit eder, kesişim hacmine göre önceliklendirir ve rapor üretir. Disiplinler arası koordinasyon toplantıları için hazırlanmıştır.",
+  "version": "1.0",
+  "category": "koordinasyon",
+  "tags": ["clash", "cakisma", "koordinasyon", "mep", "yapisal", "navisworks"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "cakismalar",
+      "op": "clash_detect_matrix",
+      "params": {
+        "group_a": "OST_DuctCurves,OST_PipeCurves,OST_CableTray",
+        "group_b": "OST_StructuralFraming,OST_StructuralColumns",
+        "tolerance_mm": 10,
+        "max_results": 1000
+      }
+    },
+    {
+      "id": "oncelikli",
+      "op": "clash_severity_sort",
+      "from": "cakismalar"
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "oncelikli",
+      "params": {
+        "title": "Çakışma Matrisi (Önceliğe Göre)",
+        "max_rows": 100
+      }
+    },
+    {
+      "id": "html_rapor",
+      "op": "export_html_report",
+      "from": "oncelikli",
+      "required": false,
+      "params": {
+        "title": "MEP × Yapısal Çakışma Raporu"
+      }
+    },
+    {
+      "id": "excel",
+      "op": "export_xlsx",
+      "from": "oncelikli",
+      "required": false,
+      "params": {
+        "sheet_name": "Cakisma_Matrisi",
+        "title": "Çakışma Matrisi"
+      }
+    }
+  ]
+}

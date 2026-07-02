@@ -1,0 +1,66 @@
+{
+  "title": "MEP-Mek: Mekanik Ekipman Listesi",
+  "category": "mekanik",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_DuctCurves",
+        "OST_MechanicalEquipment"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde mekanik eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "ekipman",
+      "op": "collect_mechanical_equipment"
+    },
+    {
+      "id": "satırlar",
+      "op": "elements_to_rows_with_params",
+      "from": "ekipman",
+      "params": {
+        "param_names": [
+          "Mark",
+          "Family",
+          "Type",
+          "Level",
+          "System Name"
+        ]
+      }
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "satırlar",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Mek Ekipman"
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_type",
+      "from": "ekipman"
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "kat_bazli",
+      "params": {
+        "title": "MEP-Mek: Mekanik Ekipman Listesi"
+      }
+    }
+  ],
+  "id": "me06_mek_ekipman",
+  "description": "MEP-Mek: Mekanik Ekipman Listesi — 5 adımlı otomasyon iş akışı.",
+  "tags": [
+    "mekanik",
+    "hvac",
+    "mep"
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "title": "Tam MEP Metraj Paketi",
+  "description": "Tek tıkla tüm MEP disiplinleri: HVAC kanallar, borular, kablo tavaları, ekipmanlar. Birleşik sistem ve uzunluk raporu. ÇŞB 2026 poz eşleme dahil.",
+  "version": "1.0.0",
+  "category": "MEP",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_DuctCurves",
+        "OST_PipeCurves",
+        "OST_CableTray"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde MEP elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "poz_yukle",
+      "op": "load_poz_data",
+      "required": false
+    },
+    {
+      "id": "kanallar",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "kablo",
+      "op": "collect_cable_trays"
+    },
+    {
+      "id": "iletken",
+      "op": "collect_conduits"
+    },
+    {
+      "id": "terminaller",
+      "op": "collect_air_terminals"
+    },
+    {
+      "id": "mek_ekip",
+      "op": "collect_mechanical_equipment"
+    },
+    {
+      "id": "armatur",
+      "op": "collect_lighting_fixtures"
+    },
+    {
+      "id": "sys_k",
+      "op": "mep_by_system",
+      "from": "kanallar"
+    },
+    {
+      "id": "sys_b",
+      "op": "mep_by_system",
+      "from": "borular"
+    },
+    {
+      "id": "sys_kt",
+      "op": "mep_by_system",
+      "from": "kablo"
+    },
+    {
+      "id": "top_k",
+      "op": "mep_total_length",
+      "from": "kanallar"
+    },
+    {
+      "id": "top_b",
+      "op": "mep_total_length",
+      "from": "borular"
+    },
+    {
+      "id": "top_kt",
+      "op": "mep_total_length",
+      "from": "kablo"
+    },
+    {
+      "id": "mek_tipler",
+      "op": "group_elements_by_type",
+      "from": "mek_ekip"
+    },
+    {
+      "id": "arm_tipler",
+      "op": "group_elements_by_type",
+      "from": "armatur"
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_lists",
+      "from_many": [
+        "sys_k",
+        "sys_b",
+        "sys_kt"
+      ]
+    },
+    {
+      "id": "poz",
+      "op": "poz_match",
+      "from": "birlesik"
+    },
+    {
+      "id": "r_hvac",
+      "op": "show_table",
+      "from": "sys_k",
+      "params": {
+        "title": "HVAC Kanallar"
+      }
+    },
+    {
+      "id": "r_boru",
+      "op": "show_table",
+      "from": "sys_b",
+      "params": {
+        "title": "Boru Sistemleri"
+      }
+    },
+    {
+      "id": "r_elek",
+      "op": "show_table",
+      "from": "arm_tipler",
+      "params": {
+        "title": "Aydınlatma Sayımı"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "birlesik",
+      "params": {
+        "sheet_name": "MEP Tam Metraj"
+      },
+      "required": false
+    },
+    {
+      "id": "html",
+      "op": "export_html_report",
+      "from": "birlesik",
+      "params": {
+        "title": "MEP Tam Metraj"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "mep",
+    "tesisat",
+    "mekanik"
+  ]
+}

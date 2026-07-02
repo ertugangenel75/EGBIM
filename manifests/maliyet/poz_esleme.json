@@ -1,0 +1,80 @@
+{
+  "title": "Poz Eşleme — Tüm Model",
+  "description": "Duvar ve kolonları ÇŞB 2026 poz koduyla eşler.",
+  "version": "1.0.0",
+  "category": "Maliyet",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "poz_yukle",
+      "op": "load_poz_data",
+      "required": false
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "poz_duvar",
+      "op": "poz_match",
+      "from": "duvarlar"
+    },
+    {
+      "id": "poz_kolon",
+      "op": "poz_match",
+      "from": "kolonlar"
+    },
+    {
+      "id": "goster_d",
+      "op": "show_table",
+      "from": "poz_duvar",
+      "params": {
+        "title": "Duvar Poz Eşleme"
+      }
+    },
+    {
+      "id": "goster_k",
+      "op": "show_table",
+      "from": "poz_kolon",
+      "params": {
+        "title": "Kolon Poz Eşleme"
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_level",
+      "from": "kolonlar"
+    },
+    {
+      "id": "xlsx_rapor",
+      "op": "export_xlsx",
+      "from": "kat_bazli",
+      "params": {
+        "sheet_name": "Poz Eşleme — Tüm Model"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "maliyet",
+    "cost",
+    "poz",
+    "fiyat"
+  ]
+}

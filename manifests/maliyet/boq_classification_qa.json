@@ -1,0 +1,288 @@
+{
+  "title": "BOQ Classification QA — Sınıflandırma Eşleşme Denetimi",
+  "description": "5 sınıflandırma sisteminin model genelindeki kapsama ve doluluk analizi: Omniclass, Uniclass, Masterformat (canonical_class üzerinden), ÇŞB poz eşleşmesi, WBS ataması. Canonical class tüm uluslararası sistemlerin ortak zeminini sağlar.",
+  "category": "maliyet",
+  "version": "1.0",
+  "author": "EGBIM",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "category": "OST_Walls",
+      "message": "Modelde yapı elementi yok"
+    },
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "classify_elements",
+      "message": "classify_elements kayıtlı değil"
+    },
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "poz_match",
+      "message": "poz_match kayıtlı değil"
+    },
+    {
+      "type": "FILE_EXISTS",
+      "path": "poz/csb_poz_2026.json",
+      "message": "ÇŞB poz verisi bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "s01_walls",
+      "op": "collect_walls",
+      "required": true
+    },
+    {
+      "id": "s02_columns",
+      "op": "collect_columns",
+      "required": true
+    },
+    {
+      "id": "s03_floors",
+      "op": "collect_floors",
+      "required": true
+    },
+    {
+      "id": "s04_beams",
+      "op": "collect_beams",
+      "required": true
+    },
+    {
+      "id": "s05_doors",
+      "op": "collect_doors",
+      "required": true
+    },
+    {
+      "id": "s06_windows",
+      "op": "collect_windows",
+      "required": true
+    },
+    {
+      "id": "s07_all",
+      "op": "merge_lists",
+      "from_many": [
+        "s01_walls",
+        "s02_columns",
+        "s03_floors",
+        "s04_beams",
+        "s05_doors",
+        "s06_windows"
+      ],
+      "description": "Tüm disiplinleri birleştir",
+      "required": true
+    },
+    {
+      "id": "s08_canonical",
+      "op": "classify_elements",
+      "from": "s07_all",
+      "description": "Omniclass / Uniclass / Masterformat ortak zemini — her elemana canonical_class ve disiplin ata. canonical_classes_v3.json üzerinden 3 uluslararası sistemin hepsine karşılık gelir.",
+      "required": true
+    },
+    {
+      "id": "s09_unmapped_international",
+      "op": "filter_rows",
+      "from": "s08_canonical",
+      "description": "Uluslararası sistemlerde eşleşmeyenler — canonical_class boş olan elemanlar Omniclass / Uniclass / Masterformat karşılığı olmayan elemanlardır.",
+      "params": {
+        "field": "canonical_class",
+        "operator": "eq",
+        "value": ""
+      },
+      "required": true
+    },
+    {
+      "id": "s10_canonical_distribution",
+      "op": "group_by",
+      "from": "s08_canonical",
+      "description": "Canonical class dağılımı — hangi sınıftan kaç eleman. Boş grup = 3 uluslararası sistemde karşılıksız.",
+      "params": {
+        "field": "canonical_class"
+      },
+      "required": true
+    },
+    {
+      "id": "s11_discipline_distribution",
+      "op": "group_by",
+      "from": "s08_canonical",
+      "description": "Disiplin dağılımı — Yapısal / Mimari / MEP bazında eleman sayısı.",
+      "params": {
+        "field": "disiplin"
+      },
+      "required": true
+    },
+    {
+      "id": "s12_wbs",
+      "op": "classify_by_wbs",
+      "from": "s07_all",
+      "description": "WBS eşleşmesi — her elemanı WBS koduna ata (revit_kategori_wbs.json). wbs_kodu='—' olanlar WBS dışı.",
+      "required": true
+    },
+    {
+      "id": "s13_wbs_unmapped",
+      "op": "filter_rows",
+      "from": "s12_wbs",
+      "description": "WBS eşleşmeyenler — wbs_kodu='—' olan elemanlar.",
+      "params": {
+        "field": "wbs_kodu",
+        "operator": "eq",
+        "value": "—"
+      },
+      "required": true
+    },
+    {
+      "id": "s14_wbs_distribution",
+      "op": "group_by",
+      "from": "s12_wbs",
+      "description": "WBS dağılımı — WBS kodu bazında eleman sayısı.",
+      "params": {
+        "field": "wbs_kodu"
+      },
+      "required": true
+    },
+    {
+      "id": "s15_load_poz",
+      "op": "load_poz_data",
+      "description": "ÇŞB poz verisi yükle (csb_poz_2026.json)",
+      "required": true
+    },
+    {
+      "id": "s16_element_rows",
+      "op": "elements_to_rows_with_params",
+      "from": "s07_all",
+      "description": "Elemanları satır listesine çevir — poz_match için kategori+tip alanları gerekli. İsteğe bağlı sınıflandırma parametreleri de okunur.",
+      "params": {
+        "param_names": "EG_Omniclass,EG_Uniclass,EG_Masterformat,TR_BES_AnaKod,EG_WBS_Kodu"
+      },
+      "required": true
+    },
+    {
+      "id": "s17_csb_match",
+      "op": "poz_match",
+      "from": "s16_element_rows",
+      "description": "ÇŞB eşleşmesi — kategori ve tip alanlarına göre csb_poz_2026.json'dan poz kodu eşle.",
+      "params": {
+        "category_field": "kategori",
+        "type_field": "tip"
+      },
+      "required": true
+    },
+    {
+      "id": "s18_csb_distribution",
+      "op": "group_by",
+      "from": "s17_csb_match",
+      "description": "ÇŞB poz dağılımı — hangi poz kodundan kaç eleman. Boş poz = eşleşme yok.",
+      "params": {
+        "field": "poz_no"
+      },
+      "required": true
+    },
+    {
+      "id": "s19_csb_unmapped",
+      "op": "filter_rows",
+      "from": "s17_csb_match",
+      "description": "ÇŞB eşleşmeyenler — poz_no boş olan elemanlar.",
+      "params": {
+        "field": "poz_no",
+        "operator": "eq",
+        "value": ""
+      },
+      "required": true
+    },
+    {
+      "id": "s20_param_doluluk",
+      "op": "qa_find_empty_params",
+      "from": "s07_all",
+      "description": "5 sistem param doluluk — EG_Omniclass, EG_Uniclass, EG_Masterformat, TR_BES_AnaKod, EG_WBS_Kodu parametrelerinin doluluk taraması. Parametreler modele yüklü değilse tüm elemanlar boş görünür.",
+      "params": {
+        "param_names": [
+          "EG_Omniclass",
+          "EG_Uniclass",
+          "EG_Masterformat",
+          "TR_BES_AnaKod",
+          "EG_WBS_Kodu"
+        ]
+      },
+      "required": true
+    },
+    {
+      "id": "s21_omniclass_dist",
+      "op": "group_by",
+      "from": "s16_element_rows",
+      "description": "Omniclass dağılımı — EG_Omniclass param değerine göre.",
+      "params": {
+        "field": "EG_Omniclass"
+      },
+      "required": true
+    },
+    {
+      "id": "s22_uniclass_dist",
+      "op": "group_by",
+      "from": "s16_element_rows",
+      "description": "Uniclass dağılımı — EG_Uniclass param değerine göre.",
+      "params": {
+        "field": "EG_Uniclass"
+      },
+      "required": true
+    },
+    {
+      "id": "s23_masterformat_dist",
+      "op": "group_by",
+      "from": "s16_element_rows",
+      "description": "Masterformat dağılımı — EG_Masterformat param değerine göre.",
+      "params": {
+        "field": "EG_Masterformat"
+      },
+      "required": true
+    },
+    {
+      "id": "s24_excel_canonical",
+      "op": "export_xlsx",
+      "from": "s08_canonical",
+      "description": "Excel — canonical class raporu (Omniclass/Uniclass/Masterformat ortak zemin).",
+      "params": {
+        "sheet_name": "Canonical_Class",
+        "title": "Canonical Class — Uluslararası Eşleşme"
+      },
+      "required": false
+    },
+    {
+      "id": "s25_excel_csb",
+      "op": "export_xlsx",
+      "from": "s17_csb_match",
+      "description": "Excel — ÇŞB poz eşleşme raporu.",
+      "params": {
+        "sheet_name": "CSB_Poz",
+        "title": "ÇŞB Poz Eşleşmesi"
+      },
+      "required": false
+    },
+    {
+      "id": "s26_excel_wbs",
+      "op": "export_xlsx",
+      "from": "s12_wbs",
+      "description": "Excel — WBS atama raporu.",
+      "params": {
+        "sheet_name": "WBS",
+        "title": "WBS Eşleşmesi"
+      },
+      "required": false
+    },
+    {
+      "id": "s27_excel_unmapped",
+      "op": "export_xlsx",
+      "from": "s09_unmapped_international",
+      "description": "Excel — hiçbir sistemde eşleşmeyen elemanlar (canonical_class boş).",
+      "params": {
+        "sheet_name": "Eslesmeyen",
+        "title": "Eşleşmeyen Elemanlar"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "maliyet",
+    "cost",
+    "poz",
+    "fiyat"
+  ]
+}

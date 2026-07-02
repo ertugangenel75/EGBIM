@@ -1,0 +1,87 @@
+{
+  "title": "Kalıp Metraj Kontrolü",
+  "description": "Duvar, kolon ve döşeme kalıp alanlarını hesaplar, raporlar.",
+  "version": "1.0.0",
+  "category": "Kalıp",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming",
+        "OST_Walls",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "kalip_d",
+      "op": "kalip_wall",
+      "from": "duvarlar"
+    },
+    {
+      "id": "kalip_k",
+      "op": "kalip_column",
+      "from": "kolonlar"
+    },
+    {
+      "id": "kalip_f",
+      "op": "kalip_floor",
+      "from": "dosemeler"
+    },
+    {
+      "id": "ozet_d",
+      "op": "kalip_summary",
+      "from": "kalip_d"
+    },
+    {
+      "id": "ozet_k",
+      "op": "kalip_summary",
+      "from": "kalip_k"
+    },
+    {
+      "id": "ozet_f",
+      "op": "kalip_summary",
+      "from": "kalip_f"
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "kalip_d",
+      "params": {
+        "title": "Kalıp Metraj Raporu"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "kalip_d",
+      "params": {
+        "sheet_name": "Kalıp",
+        "title": "Kalıp Metraj"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "kalip",
+    "formwork",
+    "metraj"
+  ]
+}

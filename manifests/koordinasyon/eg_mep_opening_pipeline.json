@@ -1,0 +1,107 @@
+{
+  "title": "EGBIMOTO MEP Boşluk Koordinasyon Pipeline",
+  "description": "MEP-yapısal geçiş tespiti → önizleme → boşluk aile yerleştirme → rapor",
+  "category": "KOORDINASYON",
+  "version": "1.0",
+  "transaction_policy": "preview",
+  "pre_checks": [
+    {
+      "type": "element_exists",
+      "categories": [
+        "PipeCurves",
+        "DuctCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "WARN",
+      "message": "Projede boru/kanal bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "s01_tarama",
+      "op": "smart_check_mep_no_opening",
+      "inputs": {
+        "host_categories": [
+          "Walls",
+          "Floors",
+          "StructuralFraming"
+        ],
+        "mep_categories": [
+          "Pipes",
+          "Ducts",
+          "CableTray",
+          "Conduit"
+        ],
+        "tolerance_mm": 15,
+        "check_opening": true
+      }
+    },
+    {
+      "id": "s02_hata_filtre",
+      "op": "filter_rows",
+      "from": "s01_tarama",
+      "inputs": {
+        "field": "seviye",
+        "value": "HATA"
+      }
+    },
+    {
+      "id": "s03_ozet",
+      "op": "show_count",
+      "from": "s02_hata_filtre",
+      "inputs": {
+        "message": "Boşluksuz geçiş sayısı"
+      }
+    },
+    {
+      "id": "s04_preview",
+      "op": "preview_gate",
+      "from": "s01_tarama",
+      "inputs": {
+        "title": "MEP Geçiş Koordinasyon Raporu — Boşluk Yerleştirilsin mi?"
+      }
+    },
+    {
+      "id": "s05_dry_run",
+      "op": "place_opening",
+      "from": "s01_tarama",
+      "condition": "$s04_preview == confirmed",
+      "inputs": {
+        "family_name": "EG_Rezervasyon_Dikdortgen",
+        "type_name": "Standard",
+        "offset_mm": 50,
+        "param_b": "Width",
+        "param_h": "Height",
+        "param_sistem": "EG_Sistem",
+        "skip_existing": true,
+        "dry_run": true
+      }
+    },
+    {
+      "id": "s06_yer_sec",
+      "op": "show_result",
+      "from": "s05_dry_run",
+      "condition": "$s04_preview == confirmed",
+      "inputs": {
+        "message": "Dry-run tamamlandı. Gerçek yerleştirme için dry_run:false yapın."
+      }
+    },
+    {
+      "id": "s07_rapor",
+      "op": "export_validation_report",
+      "from": "s01_tarama",
+      "condition": "$s04_preview == confirmed",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/mep_aciklik_raporu.html",
+        "title": "MEP Geçiş Boşluk Koordinasyon Raporu"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "koordinasyon",
+    "clash",
+    "cakisma",
+    "bim"
+  ]
+}

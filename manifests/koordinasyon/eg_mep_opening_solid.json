@@ -1,0 +1,80 @@
+{
+  "title": "EGBIMOTO MEP Boşluk — Solid Kesişim + Çap Tablosu",
+  "description": "Solid intersection (kesin) + DiameterRange tablosu ile gelişmiş pipeline",
+  "category": "KOORDINASYON",
+  "version": "1.0",
+  "transaction_policy": "preview",
+  "steps": [
+    {
+      "id": "s01_tarama",
+      "op": "smart_check_mep_no_opening",
+      "inputs": {
+        "host_categories": [
+          "Walls",
+          "Floors",
+          "StructuralFraming"
+        ],
+        "mep_categories": [
+          "Pipes",
+          "Ducts",
+          "CableTray",
+          "Conduit"
+        ],
+        "tolerance_mm": 15,
+        "check_opening": true,
+        "use_solid_intersection": true
+      }
+    },
+    {
+      "id": "s02_filtre",
+      "op": "filter_rows",
+      "from": "s01_tarama",
+      "inputs": {
+        "field": "seviye",
+        "value": "HATA"
+      }
+    },
+    {
+      "id": "s03_preview",
+      "op": "preview_gate",
+      "from": "s01_tarama",
+      "inputs": {
+        "title": "Solid Kesişim Sonuçları — Boşluk Yerleştirilsin mi?"
+      }
+    },
+    {
+      "id": "s04_yerlestir",
+      "op": "place_opening",
+      "from": "s01_tarama",
+      "condition": "$s03_preview == confirmed",
+      "inputs": {
+        "family_name": "EG_Rezervasyon_Dikdortgen",
+        "type_name": "Standard",
+        "use_diameter_table": true,
+        "offset_mm": 0,
+        "param_b": "Width",
+        "param_h": "Height",
+        "param_sistem": "EG_Sistem",
+        "skip_existing": true,
+        "dry_run": false
+      }
+    },
+    {
+      "id": "s05_rapor",
+      "op": "export_validation_report",
+      "from": "s01_tarama",
+      "condition": "$s03_preview == confirmed",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/mep_solid_rapor.html",
+        "title": "MEP Boşluk Koordinasyon — Solid Kesişim"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "koordinasyon",
+    "clash",
+    "cakisma",
+    "bim"
+  ]
+}

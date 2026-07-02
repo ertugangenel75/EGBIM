@@ -1,0 +1,95 @@
+{
+  "title": "Kalıp + Maliyet Entegre Rapor",
+  "description": "Kalıp metrajına birim fiyat uygular, toplam maliyet hesaplar.",
+  "version": "1.0.0",
+  "category": "Kalıp",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming",
+        "OST_Walls",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "poz_yukle",
+      "op": "load_poz_data",
+      "required": false
+    },
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "dosemeler",
+      "op": "collect_floors"
+    },
+    {
+      "id": "kalip_d",
+      "op": "kalip_wall",
+      "from": "duvarlar"
+    },
+    {
+      "id": "kalip_k",
+      "op": "kalip_column",
+      "from": "kolonlar"
+    },
+    {
+      "id": "kalip_f",
+      "op": "kalip_floor",
+      "from": "dosemeler"
+    },
+    {
+      "id": "birlestir",
+      "op": "merge_rows",
+      "from_many": [
+        "kalip_d",
+        "kalip_k",
+        "kalip_f"
+      ]
+    },
+    {
+      "id": "maliyet",
+      "op": "calc_cost",
+      "from": "birlestir"
+    },
+    {
+      "id": "ozet",
+      "op": "cost_summary",
+      "from": "maliyet"
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "ozet",
+      "params": {
+        "title": "Kalıp Maliyet Özeti"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "maliyet",
+      "params": {
+        "sheet_name": "Kalıp Maliyet"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "kalip",
+    "formwork",
+    "metraj"
+  ]
+}

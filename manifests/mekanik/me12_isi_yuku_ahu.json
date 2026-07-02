@@ -1,0 +1,46 @@
+{
+  "id": "me12_isi_yuku_ahu",
+  "title": "Mekanik: Isı Yükü Hesabı ve AHU Seçimi",
+  "description": "Bina/zon ısı yükü hesabı (TS 825/ASHRAE) ve AHU fan gücü + filtre sınıfı seçimi pipeline'ı.",
+  "category": "MEKANIK",
+  "version": "1.0",
+  "tags": ["mekanik","hvac","isi_yuku","ahu","fan","filtre","ts825","ashrae"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_yuk",
+      "op": "mep_hvac_heat_load_calc",
+      "description": "Isı yükü hesabı",
+      "inputs": {
+        "alan_m2":            "$INPUT:alan_m2:500",
+        "tavan_yuksekligi_m": "$INPUT:tavan_yuksekligi_m:3.0",
+        "dis_sicaklik_c":     "$INPUT:dis_sicaklik_c:36",
+        "ic_sicaklik_c":      24.0,
+        "u_deger_ortalama":   0.5,
+        "ic_yuk_w_m2":        30.0,
+        "kisi_sayisi":        "$INPUT:kisi_sayisi:50",
+        "taze_hava_m3h":      "$INPUT:taze_hava_m3h:1000"
+      }
+    },
+    {
+      "id": "s02_ahu",
+      "op": "mep_ahu_selection",
+      "description": "AHU seçim kriterleri",
+      "inputs": {
+        "toplam_debi_m3h": "$INPUT:toplam_debi_m3h:5000",
+        "sogutma_kw":      "$INPUT:sogutma_kw:50",
+        "esp_pa":          300.0,
+        "filtre_sinifi":   "$INPUT:filtre_sinifi:F7",
+        "alan_tipi":       "$INPUT:alan_tipi:ofis"
+      }
+    },
+    {
+      "id": "s03_rapor",
+      "op": "export_html_report",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/isi_yuku_ahu.html",
+        "title": "Isı Yükü ve AHU Seçim Raporu"
+      }
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "title": "MEP Sistem Bazlı Rapor",
+  "description": "Tüm mekanik ve elektrik MEP elemanlarını sistem adına göre gruplar, toplam uzunluk ve eleman sayısı raporu üretir.",
+  "version": "1.0.0",
+  "category": "MEP",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_DuctCurves",
+        "OST_PipeCurves",
+        "OST_CableTray"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde MEP elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kanallar",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "kablo",
+      "op": "collect_cable_trays"
+    },
+    {
+      "id": "iletken",
+      "op": "collect_conduits"
+    },
+    {
+      "id": "sys_k",
+      "op": "mep_by_system",
+      "from": "kanallar"
+    },
+    {
+      "id": "sys_b",
+      "op": "mep_by_system",
+      "from": "borular"
+    },
+    {
+      "id": "sys_kt",
+      "op": "mep_by_system",
+      "from": "kablo"
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_lists",
+      "from_many": [
+        "sys_k",
+        "sys_b",
+        "sys_kt"
+      ]
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "birlesik",
+      "params": {
+        "title": "MEP Sistem Özeti"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "birlesik",
+      "params": {
+        "sheet_name": "MEP Sistemler"
+      },
+      "required": false
+    },
+    {
+      "id": "html",
+      "op": "export_html_report",
+      "from": "birlesik",
+      "params": {
+        "title": "MEP Sistem Bazlı Rapor"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "mep",
+    "tesisat",
+    "mekanik"
+  ]
+}

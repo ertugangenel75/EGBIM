@@ -1,0 +1,113 @@
+{
+  "title": "EGBIMOTO Cephe Tam Pipeline",
+  "description": "Curtain panel toplama → parametre atama → metraj → IFC export",
+  "category": "CEPHE",
+  "version": "1.0",
+  "transaction_policy": "preview",
+  "pre_checks": [
+    {
+      "type": "element_exists",
+      "categories": [
+        "CurtainWallPanels"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Projede curtain panel bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "s01_topla",
+      "op": "collect_curtain_panels",
+      "inputs": {
+        "level": ""
+      }
+    },
+    {
+      "id": "s02_param_yaz",
+      "op": "facade_system_params",
+      "from": "s01_topla",
+      "inputs": {
+        "panel_tip": "Cam Cephe",
+        "derz_genislik_mm": 20,
+        "derz_tip": "Silikon",
+        "u_degeri": "1.6",
+        "kaplama_malzeme": "Temperli Cam"
+      }
+    },
+    {
+      "id": "s03_matrix",
+      "op": "facade_panel_matrix",
+      "from": "s01_topla"
+    },
+    {
+      "id": "s04_derz_kontrol",
+      "op": "facade_joint_validate",
+      "from": "s01_topla",
+      "inputs": {
+        "min_derz_mm": 10,
+        "max_derz_mm": 40
+      },
+      "required": false
+    },
+    {
+      "id": "s05_u_kontrol",
+      "op": "facade_u_value_check",
+      "from": "s01_topla",
+      "inputs": {
+        "max_u_value": 1.8
+      },
+      "required": false
+    },
+    {
+      "id": "s06_alan_tip",
+      "op": "facade_area_by_type",
+      "from": "s03_matrix"
+    },
+    {
+      "id": "s07_saydam_oran",
+      "op": "facade_opening_ratio",
+      "from": "s01_topla"
+    },
+    {
+      "id": "s08_preview",
+      "op": "preview_gate",
+      "from": "s06_alan_tip",
+      "inputs": {
+        "title": "Cephe Metraj Önizleme"
+      }
+    },
+    {
+      "id": "s09_export",
+      "op": "facade_export_schedule",
+      "from": "s06_alan_tip",
+      "condition": "$s08_preview == confirmed",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/cephe_metraj.html",
+        "title": "Cephe Panel Metraj Raporu"
+      }
+    },
+    {
+      "id": "s10_ifc",
+      "op": "ifc_export",
+      "condition": "$s08_preview == confirmed",
+      "inputs": {
+        "output_path": "C:/EGBIM_Output/cephe_ifc_export.ifc",
+        "view_name": ""
+      }
+    },
+    {
+      "id": "s11_ozet",
+      "op": "show_result",
+      "from": "s09_export",
+      "inputs": {
+        "message": "✅ Cephe pipeline tamamlandı"
+      }
+    }
+  ],
+  "tags": [
+    "cephe",
+    "facade",
+    "curtain"
+  ]
+}

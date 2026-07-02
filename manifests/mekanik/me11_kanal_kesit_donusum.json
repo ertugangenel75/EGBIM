@@ -1,0 +1,64 @@
+{
+  "title": "MEP-Mek: Kanal Kesit Dönüşümü (Eş-Kesit)",
+  "description": "Dikdörtgen havalandırma kanallarını, bir boyutu sabitleyerek (örn. tavan yüksekliği veya kiriş altı geçiş kısıtı) aynı ASHRAE eşdeğer çapını koruyacak biçimde yeniden boyutlandırır. Önce hesap (yazma yok), tablo ile incelenir, onaylanırsa modele uygulanır. Aerodinamik karakteristik (debi + basınç kaybı) korunur.",
+  "category": "mekanik",
+  "version": "1.0",
+  "tags": ["kanal", "duct", "kesit", "donusum", "esdeger-cap", "ashrae", "mekanik", "tavan-kisiti"],
+  "transaction_policy": "atomic",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_DuctCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde havalandırma kanalı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "kanallar",
+      "op": "collect_ducts"
+    },
+    {
+      "id": "hesap",
+      "op": "duct_section_convert_preview",
+      "from": "kanallar",
+      "params": {
+        "fix_dimension": "height",
+        "fixed_value_mm": 300,
+        "round_to_mm": 50,
+        "max_aspect_ratio": 4.0
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "hesap",
+      "params": {
+        "title": "Kanal Kesit Dönüşümü Önizleme",
+        "max_rows": 300
+      }
+    },
+    {
+      "id": "uygula",
+      "op": "duct_section_convert_apply",
+      "from": "hesap",
+      "required": false,
+      "params": {
+        "skip_warnings": false
+      }
+    },
+    {
+      "id": "sonuc",
+      "op": "show_table",
+      "from": "uygula",
+      "required": false,
+      "params": {
+        "title": "Dönüşüm Sonuçları",
+        "max_rows": 300
+      }
+    }
+  ]
+}

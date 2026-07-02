@@ -1,0 +1,62 @@
+{
+  "title": "MEP-Mek: Hava Terminali Oda Eşleşmesi",
+  "category": "mekanik",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_DuctCurves",
+        "OST_MechanicalEquipment"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde mekanik eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "terminaller",
+      "op": "collect_air_terminals"
+    },
+    {
+      "id": "eslesme",
+      "op": "mep_air_terminal_space_map",
+      "from": "terminaller"
+    },
+    {
+      "id": "rapor",
+      "op": "export_xlsx",
+      "from": "eslesme",
+      "params": {
+        "output_path": "",
+        "sheet_name": "Terminal Haritası"
+      }
+    },
+    {
+      "id": "kat_bazli",
+      "op": "group_elements_by_type",
+      "from": "terminaller"
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "kat_bazli",
+      "params": {
+        "title": "MEP-Mek: Hava Terminali Oda Eşleşmesi"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "kat_bazli"
+    }
+  ],
+  "id": "me01_hava_terminal_map",
+  "description": "MEP-Mek: Hava Terminali Oda Eşleşmesi — 6 adımlı otomasyon iş akışı.",
+  "tags": [
+    "mekanik",
+    "hvac",
+    "mep"
+  ]
+}

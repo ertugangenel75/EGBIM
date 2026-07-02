@@ -1,0 +1,338 @@
+{
+  "title": "IFC Readiness QA — Tam Hazırlık Denetimi",
+  "description": "IFC ihracı öncesi kapsamlı hazırlık kontrolü: sınıf eşleme, tip ataması, GUID denetimi, Pset doluluk, export mapping boşlukları, ÇŞB 2026 sınıflandırma. Tüm disiplinler tek manifeste.",
+  "category": "ifc",
+  "version": "1.0",
+  "author": "EGBIM",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "category": "OST_Walls",
+      "message": "Modelde duvar yok"
+    },
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "map_to_ifc",
+      "message": "map_to_ifc kayıtlı değil"
+    },
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "validate_ids",
+      "message": "validate_ids kayıtlı değil"
+    },
+    {
+      "type": "FILE_EXISTS",
+      "path": "ids/ids_csb2026.ids",
+      "message": "IDS dosyası data/ids/ altında bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "s01_load_ifc_map",
+      "op": "load_ifc_mapping",
+      "description": "Export Mapping — Revit kategori → IFC sınıf tablosunu belleğe yükle (ifc_mapping.json)",
+      "required": true
+    },
+    {
+      "id": "s02_load_param_map",
+      "op": "load_shared_param_map",
+      "description": "Pset kontrolü — TR BIM paylaşımlı parametre → Revit param haritasını yükle",
+      "required": true
+    },
+    {
+      "id": "s03_walls",
+      "op": "collect_walls",
+      "description": "Duvarları topla",
+      "required": true
+    },
+    {
+      "id": "s04_columns",
+      "op": "collect_columns",
+      "description": "Kolonları topla",
+      "required": true
+    },
+    {
+      "id": "s05_floors",
+      "op": "collect_floors",
+      "description": "Döşemeleri topla",
+      "required": true
+    },
+    {
+      "id": "s06_doors",
+      "op": "collect_doors",
+      "description": "Kapıları topla",
+      "required": true
+    },
+    {
+      "id": "s07_windows",
+      "op": "collect_windows",
+      "description": "Pencereleri topla",
+      "required": true
+    },
+    {
+      "id": "s08_beams",
+      "op": "collect_beams",
+      "description": "Kirişleri topla",
+      "required": true
+    },
+    {
+      "id": "s09_all_elements",
+      "op": "merge_lists",
+      "from_many": [
+        "s03_walls",
+        "s04_columns",
+        "s05_floors",
+        "s06_doors",
+        "s07_windows",
+        "s08_beams"
+      ],
+      "description": "Tüm disiplin elemanlarını tek liste olarak birleştir",
+      "required": true
+    },
+    {
+      "id": "s10_ifc_class_map",
+      "op": "map_to_ifc",
+      "from": "s09_all_elements",
+      "description": "IFC Class — her elemanı IFC sınıfına eşle (ifc_sinifi). 'IfcBuildingElement' dönenler mapping boşluğunu gösterir.",
+      "required": true
+    },
+    {
+      "id": "s11_ifc_class_distribution",
+      "op": "group_by",
+      "from": "s10_ifc_class_map",
+      "description": "IFC Class dağılımı — hangi IFC sınıfından kaç eleman var. Unmapped = 'IfcBuildingElement' grubu.",
+      "params": {
+        "field": "ifc_sinifi"
+      },
+      "required": true
+    },
+    {
+      "id": "s12_ifc_type_check",
+      "op": "param_exists_check",
+      "from": "s09_all_elements",
+      "description": "IFC Type — 'IfcExportAs' parametresinin eleman tanımlarında mevcut olup olmadığını kontrol eder. Bu param IFC PredefinedType override'ını sağlar.",
+      "params": {
+        "param_name": "IfcExportAs",
+        "severity": "WARNING"
+      },
+      "required": true
+    },
+    {
+      "id": "s13_ifc_type_filled",
+      "op": "qa_find_empty_params",
+      "from": "s09_all_elements",
+      "description": "IFC Type doluluk — 'IfcExportAs' boş olan elemanlar listelenir. Boş = Revit otomatik tip ataması kullanılacak.",
+      "params": {
+        "param_names": [
+          "IfcExportAs",
+          "IfcExportType"
+        ]
+      },
+      "required": true
+    },
+    {
+      "id": "s14_guid_shared_params",
+      "op": "list_shared_params",
+      "description": "GUID denetimi — modeldeki tüm paylaşımlı parametrelerin GUID'lerini listele. Duplicate GUID IFC export hatasına yol açar.",
+      "required": true
+    },
+    {
+      "id": "s15_guid_distribution",
+      "op": "group_by",
+      "from": "s14_guid_shared_params",
+      "description": "GUID tekrar kontrolü — aynı GUID'e sahip birden fazla paylaşımlı parametre var mı? count > 1 = çakışma.",
+      "params": {
+        "field": "guid"
+      },
+      "required": true
+    },
+    {
+      "id": "s16_positional_duplicates",
+      "op": "qa_detect_duplicates",
+      "from": "s09_all_elements",
+      "description": "GUID çakışma riski — aynı konumdaki duplicate elemanlar IFC'de GUID çakışması oluşturabilir (10mm tolerans).",
+      "params": {
+        "tolerance_mm": 10
+      },
+      "required": true
+    },
+    {
+      "id": "s17_pset_ids",
+      "op": "validate_ids",
+      "from": "s09_all_elements",
+      "description": "Pset kontrolü (IDS) — ÇŞB 2026 IDS dosyasına göre Pset zorunlu özellik denetimleri. IDS property/attribute kurallarını uygular.",
+      "params": {
+        "ids_path": "ids/ids_csb2026.ids"
+      },
+      "required": true
+    },
+    {
+      "id": "s18_pset_walls",
+      "op": "validate_required_params",
+      "from": "s03_walls",
+      "description": "Pset_WallCommon doluluk — Revit'teki Pset karşılığı TR BIM parametreleri: FireRating, ThermalTransmittance, IsExternal, LoadBearing.",
+      "params": {
+        "required_params": "TR_DuvarREI,TR_DuvarUDegeri,TR_IsDisEleman,TR_IsTasiyici"
+      },
+      "required": true
+    },
+    {
+      "id": "s19_pset_doors",
+      "op": "validate_required_params",
+      "from": "s06_doors",
+      "description": "Pset_DoorCommon doluluk — FireRating, AcousticRating, ThermalTransmittance, HandicapAccessible TR BIM karşılıkları.",
+      "params": {
+        "required_params": "TR_KapiYangınSinifi,TR_KapiTipi,TR_KapiSesYalitim,TR_KapiEngelli"
+      },
+      "required": true
+    },
+    {
+      "id": "s20_pset_windows",
+      "op": "validate_required_params",
+      "from": "s07_windows",
+      "description": "Pset_WindowCommon doluluk — ThermalTransmittance, AcousticRating, Reference TR BIM karşılıkları.",
+      "params": {
+        "required_params": "TR_PencereUDegeri,TR_PencereSesYalitim,TR_PencereTipi"
+      },
+      "required": true
+    },
+    {
+      "id": "s21_pset_structural",
+      "op": "validate_required_params",
+      "from": "s04_columns",
+      "description": "Pset_ColumnCommon doluluk — LoadBearing ve FireRating TR BIM karşılıkları (kolon).",
+      "params": {
+        "required_params": "TR_IsTasiyici,TR_QA_FireRating"
+      },
+      "required": true
+    },
+    {
+      "id": "s22_export_mapping_check",
+      "op": "classify_elements",
+      "from": "s09_all_elements",
+      "description": "Export Mapping boşlukları — canonical_class ve disiplin çözümlemesi. canonical_class boş veya fallback olan elemanlar IFC mapping tablosunda karşılığı olmayan elemanları gösterir.",
+      "required": true
+    },
+    {
+      "id": "s23_mapping_distribution",
+      "op": "group_by",
+      "from": "s22_export_mapping_check",
+      "description": "Export Mapping dağılımı — disiplin bazında eleman dağılımı. Unmapped = boş canonical_class.",
+      "params": {
+        "field": "disiplin"
+      },
+      "required": true
+    },
+    {
+      "id": "s24_classification_check",
+      "op": "validate_required_params",
+      "from": "s09_all_elements",
+      "description": "Classification (ÇŞB 2026 BES) — TRBIM_Classification Pset karşılığı: BES Ana Kodu, Alt Kodu, Eleman Adı, Eleman Kodu.",
+      "params": {
+        "required_params": "TR_BES_AnaKod,TR_BES_AltKod,TR_BES_ElemanKodu,TR_BES_ElemanAdi"
+      },
+      "required": true
+    },
+    {
+      "id": "s25_classification_distribution",
+      "op": "group_by",
+      "from": "s22_export_mapping_check",
+      "description": "Classification dağılımı — canonical_class bazında kaç eleman var. Eksik sınıflandırma = boş grup.",
+      "params": {
+        "field": "canonical_class"
+      },
+      "required": true
+    },
+    {
+      "id": "s26_merge_all",
+      "op": "merge_validation_reports",
+      "from_many": [
+        "s12_ifc_type_check",
+        "s17_pset_ids",
+        "s18_pset_walls",
+        "s19_pset_doors",
+        "s20_pset_windows",
+        "s21_pset_structural",
+        "s24_classification_check"
+      ],
+      "description": "Tüm ValidationReport çıktılarını birleştir",
+      "params": {
+        "title": "IFC Readiness — Birleşik QA Raporu"
+      },
+      "required": true
+    },
+    {
+      "id": "s27_summary",
+      "op": "validation_summary",
+      "from": "s26_merge_all",
+      "description": "IFC Readiness özet: toplam kontrol / geçti / kaldı",
+      "required": true
+    },
+    {
+      "id": "s28_to_rows",
+      "op": "validation_to_rows",
+      "from": "s26_merge_all",
+      "description": "QA sonuçlarını satır listesine çevir — Excel ve HTML için",
+      "required": true
+    },
+    {
+      "id": "s29_generate_ids",
+      "op": "generate_ids",
+      "from": "s09_all_elements",
+      "description": "IDS üretimi — bu modelin parametre yapısından bir IDS taslağı oluştur. Gelecek kontroller için başlangıç noktası.",
+      "params": {
+        "title": "EGBIM IFC Readiness IDS — Otomatik Üretildi"
+      },
+      "required": false
+    },
+    {
+      "id": "s30_excel_qa",
+      "op": "export_xlsx",
+      "from": "s28_to_rows",
+      "description": "Excel — QA sonuç tablosu (hata/uyarı listesi)",
+      "params": {
+        "sheet_name": "IFC_Readiness_QA",
+        "title": "IFC Readiness QA Sonuçları"
+      },
+      "required": false
+    },
+    {
+      "id": "s31_excel_ifc_classes",
+      "op": "export_xlsx",
+      "from": "s11_ifc_class_distribution",
+      "description": "Excel — IFC sınıf dağılım tablosu. 'IfcBuildingElement' satırı mapping boşluklarını gösterir.",
+      "params": {
+        "sheet_name": "IFC_Sinif_Dagilim",
+        "title": "IFC Sınıf Dağılımı"
+      },
+      "required": false
+    },
+    {
+      "id": "s32_excel_classification",
+      "op": "export_xlsx",
+      "from": "s25_classification_distribution",
+      "description": "Excel — ÇŞB 2026 canonical class dağılımı. Boş grup = sınıflandırma eksik.",
+      "params": {
+        "sheet_name": "Siniflandirma_Dagilim",
+        "title": "Canonical Class Dağılımı"
+      },
+      "required": false
+    },
+    {
+      "id": "s33_html_report",
+      "op": "export_validation_report",
+      "from": "s26_merge_all",
+      "description": "HTML rapor — birleşik IFC Readiness QA raporu (tarayıcıda açılır)",
+      "params": {
+        "title": "IFC Readiness QA Raporu — EGBIM"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "ifc",
+    "openbim",
+    "export",
+    "tr_bim"
+  ]
+}

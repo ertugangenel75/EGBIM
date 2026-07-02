@@ -1,0 +1,59 @@
+{
+  "title": "QA'dan IDS Üret",
+  "description": "QA kural matrisinden IDS XML dosyası üretir.",
+  "version": "1.0.0",
+  "category": "IDS",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "qa_matris",
+      "op": "load_qa_matrix"
+    },
+    {
+      "id": "goster",
+      "op": "show_table",
+      "from": "qa_matris",
+      "params": {
+        "title": "QA Kural Matrisi",
+        "max_rows": 15
+      }
+    },
+    {
+      "id": "ids",
+      "op": "generate_ids",
+      "from": "qa_matris",
+      "params": {
+        "title": "EGBIMOTO IDS Kuralları"
+      }
+    },
+    {
+      "id": "sonuc",
+      "op": "show_result",
+      "from": "ids",
+      "params": {
+        "title": "IDS Dosyası Üretildi"
+      }
+    },
+    {
+      "id": "xlsx_rapor",
+      "op": "export_xlsx",
+      "from": "ids",
+      "params": {
+        "sheet_name": "QA'dan IDS Üret"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "ids",
+    "dogrulama",
+    "validation"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "MEP: Hat Boyunca Askı Yerleştirme",
+  "description": "Seçili veya toplanan boru/kanal hatları boyunca, kullanıcının belirttiği askı ailesini belirtilen aralıkla otomatik yerleştirir. Manuel family seçimi + manuel aralık girişi → tam kontrol. Aralık değerleri için data/validation/mep_aski_aralik.json ruleset tablosu (çap bantlı) referans alınabilir: örn. DN100 boru için 3.5m, büyük kanal için 2.4m. Bu manifest tek bir spacing değeriyle çalışır; farklı çaplar için ayrı çalıştırın veya borular çapa göre önce filtrelenir. Önizleme için önce kontrol amaçlı tabloyu inceleyin.",
+  "version": "1.0",
+  "category": "koordinasyon",
+  "id": "mep_aski_yerlestirme",
+  "_ruleset_ref": "data/validation/mep_aski_aralik.json",
+  "tags": ["mep", "aski", "hanger", "destek", "yerlestirme", "boru", "kanal"],
+  "transaction_policy": "atomic",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_PipeCurves",
+        "OST_DuctCurves"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde askı yerleştirilecek boru/kanal hattı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "aski_yerlestir",
+      "op": "place_family_along_mep",
+      "from": "borular",
+      "params": {
+        "family_name": "Boru Askısı",
+        "type_name": "Standart",
+        "spacing_mm": 3500,
+        "end_setback_mm": 300,
+        "vertical_offset_mm": 0
+      }
+    },
+    {
+      "id": "sonuc",
+      "op": "show_table",
+      "from": "aski_yerlestir",
+      "params": {
+        "title": "Askı Yerleştirme Sonuçları",
+        "max_rows": 300
+      }
+    }
+  ]
+}

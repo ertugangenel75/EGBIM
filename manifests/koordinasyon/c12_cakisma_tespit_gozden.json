@@ -1,0 +1,69 @@
+{
+  "title": "Çakışma: Tespit ve Gözden Geçirme",
+  "description": "LinkedIn'de görülen 'Clash Resolution' aracının TESPİT + GÖZDEN GEÇİRME kısmının EGBIMOTO karşılığı. Tüm çakışmaları bulur, kesişim hacmine göre önceliklendirir, ekranda tablo olarak gösterir ve isteğe bağlı HTML/Excel rapor üretir. Ek olarak çakışan elemanları (collect_by_ids köprüsüyle) ayrı bir Element listesine çıkarır — bu liste 3D izolasyon, filtreleme veya çözüm adımına beslenebilir. Çözüm uygulaması için 'cakisma_cozum_ofset' manifestine bakın.",
+  "version": "1.0",
+  "category": "koordinasyon",
+  "id": "cakisma_tespit_gozden",
+  "tags": ["clash", "cakisma", "tespit", "gozden-gecir", "koordinasyon", "izolasyon"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "cakismalar",
+      "op": "clash_detect_matrix",
+      "params": {
+        "group_a": "OST_DuctCurves,OST_PipeCurves,OST_CableTray",
+        "group_b": "OST_StructuralFraming,OST_StructuralColumns,OST_Walls",
+        "tolerance_mm": 10,
+        "max_results": 1000
+      }
+    },
+    {
+      "id": "oncelikli",
+      "op": "clash_severity_sort",
+      "from": "cakismalar"
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "oncelikli",
+      "params": {
+        "title": "Çakışmalar (Önceliğe Göre — En Büyük Kesişim Üstte)",
+        "max_rows": 200
+      }
+    },
+    {
+      "id": "cakisan_elemanlar_a",
+      "op": "collect_by_ids",
+      "from": "oncelikli",
+      "params": {
+        "id_fields": "a_id,b_id",
+        "distinct": "true"
+      }
+    },
+    {
+      "id": "izolasyon_raporu",
+      "op": "elements_to_rows",
+      "from": "cakisan_elemanlar_a",
+      "required": false
+    },
+    {
+      "id": "html_rapor",
+      "op": "export_html_report",
+      "from": "oncelikli",
+      "required": false,
+      "params": {
+        "title": "Çakışma Tespit Raporu"
+      }
+    },
+    {
+      "id": "excel",
+      "op": "export_xlsx",
+      "from": "oncelikli",
+      "required": false,
+      "params": {
+        "sheet_name": "Cakismalar",
+        "title": "Çakışma Tespit Listesi"
+      }
+    }
+  ]
+}

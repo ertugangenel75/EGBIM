@@ -1,0 +1,103 @@
+{
+  "title": "EG Maliyet BOQ Pipeline",
+  "description": "Tüm yapısal elemanların metraj + poz + maliyet hesabını yapar. Keynote öncelikli poz eşleme, semantic fallback.",
+  "category": "Maliyet",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "poz_data",
+      "on_fail": "WARN",
+      "message": "Poz verisi yüklü değil — load_poz_data adımı çalıştırılacak"
+    }
+  ],
+  "steps": [
+    {
+      "id": "s01_load_poz",
+      "op": "load_poz_data"
+    },
+    {
+      "id": "s02_load_canonical",
+      "op": "load_poz_canonical_map"
+    },
+    {
+      "id": "s03_load_rules",
+      "op": "load_poz_section_rules"
+    },
+    {
+      "id": "s04_topla_yapisal",
+      "op": "collect_multi",
+      "inputs": {
+        "categories": [
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Walls",
+          "OST_Floors",
+          "OST_StructuralFoundation"
+        ]
+      }
+    },
+    {
+      "id": "s05_kalip_hesapla",
+      "op": "kalip_all",
+      "from": "s04_topla_yapisal",
+      "inputs": {
+        "include_edges": "true"
+      }
+    },
+    {
+      "id": "s06_poz_esle",
+      "op": "poz_match_keynote_aware",
+      "from": "s05_kalip_hesapla"
+    },
+    {
+      "id": "s07_maliyet",
+      "op": "calc_cost",
+      "from": "s06_poz_esle",
+      "inputs": {
+        "quantity_field": "kalip_m2"
+      }
+    },
+    {
+      "id": "s08_poz_ozet",
+      "op": "cost_summary",
+      "from": "s07_maliyet",
+      "inputs": {
+        "group_by": "poz_no"
+      }
+    },
+    {
+      "id": "s09_kat_ozet",
+      "op": "cost_by_level",
+      "from": "s07_maliyet"
+    },
+    {
+      "id": "s10_excel_export",
+      "op": "export_xlsx",
+      "from": "s07_maliyet",
+      "inputs": {
+        "filename": "EG_BOQ_Maliyet",
+        "sheet_name": "BOQ"
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "s09_kat_ozet",
+      "params": {
+        "title": "EG Maliyet BOQ Pipeline"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s04_topla_yapisal"
+    }
+  ],
+  "tags": [
+    "maliyet",
+    "cost",
+    "poz",
+    "fiyat"
+  ]
+}

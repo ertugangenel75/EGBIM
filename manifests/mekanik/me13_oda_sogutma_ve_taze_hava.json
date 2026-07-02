@@ -1,0 +1,45 @@
+{
+  "id": "me13_oda_sogutma_ve_taze_hava",
+  "title": "Mekanik: Oda Soğutma Yükü ve Taze Hava Hesabı",
+  "description": "Oda bazlı soğutma yükü (güneş+iç yük) ve ASHRAE 62.1 taze hava oranı kontrolü pipeline'ı.",
+  "category": "MEKANIK",
+  "version": "1.0",
+  "tags": ["mekanik","sogutma","taze_hava","gunes","ashrae62","oda_yuku"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_sogutma",
+      "op": "mep_cooling_load_room",
+      "description": "Oda soğutma yükü (güneş + iç yük)",
+      "inputs": {
+        "alan_m2":         "$INPUT:alan_m2:50",
+        "cam_alani_m2":    "$INPUT:cam_alani_m2:10",
+        "yon":             "$INPUT:yon:guney",
+        "kisi_sayisi":     "$INPUT:kisi_sayisi:5",
+        "ekipman_w":       "$INPUT:ekipman_w:500",
+        "aydinlatma_w_m2": 12.0,
+        "dis_sicaklik_c":  36.0,
+        "ic_sicaklik_c":   24.0
+      }
+    },
+    {
+      "id": "s02_taze_hava",
+      "op": "mep_fresh_air_rate_check",
+      "description": "Taze hava oranı kontrolü (ASHRAE 62.1)",
+      "inputs": {
+        "alan_m2":     "$INPUT:alan_m2:50",
+        "kisi_sayisi": "$INPUT:kisi_sayisi:5",
+        "alan_tipi":   "$INPUT:alan_tipi:ofis",
+        "mevcut_m3h":  "$INPUT:mevcut_m3h:0"
+      }
+    },
+    {
+      "id": "s03_rapor",
+      "op": "export_html_report",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/oda_sogutma_taze_hava.html",
+        "title": "Oda Soğutma Yükü ve Taze Hava Raporu"
+      }
+    }
+  ]
+}

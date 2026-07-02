@@ -1,0 +1,96 @@
+{
+  "title": "EG Kalıp Parametreleri Kur",
+  "description": "TR_KalipAlani, TR_KalipPozNo, TR_KalipBirimFiyat, TR_KalipToplamTutar shared parametrelerini projeye bağlar.",
+  "category": "Kalıp",
+  "version": "1.0.0",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_StructuralColumns",
+        "OST_StructuralFraming",
+        "OST_Walls",
+        "OST_Floors"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde yapısal eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "s01_ensure_params",
+      "op": "add_shared_params",
+      "inputs": {
+        "param_group": "EGKalip",
+        "params": [
+          {
+            "name": "TR_KalipAlani",
+            "type": "TEXT",
+            "guid": "4fc39fce-6355-5557-9c88-3461503096a6"
+          },
+          {
+            "name": "TR_KalipPozNo",
+            "type": "TEXT",
+            "guid": "e2fbe95c-1deb-50bc-b2fd-ad4a1f3494ef"
+          },
+          {
+            "name": "TR_KalipPozAdi",
+            "type": "TEXT",
+            "guid": "fbcbece2-cdfe-5c34-af96-6a66bdcae94b"
+          },
+          {
+            "name": "TR_KalipBirimFiyat",
+            "type": "TEXT",
+            "guid": "5d908bbf-1b05-5b13-a0f4-f6f769050a7c"
+          },
+          {
+            "name": "TR_KalipToplamTutar",
+            "type": "TEXT",
+            "guid": "e224e020-d281-5239-8bfd-58f1d5ccf4a7"
+          },
+          {
+            "name": "Formwork_Area",
+            "type": "NUMBER",
+            "guid": "ee000001-aa00-4b00-bb00-000000000001"
+          }
+        ],
+        "categories": [
+          "OST_StructuralColumns",
+          "OST_StructuralFraming",
+          "OST_Walls",
+          "OST_Floors",
+          "OST_StructuralFoundation"
+        ]
+      }
+    },
+    {
+      "id": "tablo",
+      "op": "show_table",
+      "from": "s01_ensure_params",
+      "params": {
+        "title": "EG Kalıp Parametreleri Kur"
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "elements_to_rows_with_params",
+      "from": "s01_ensure_params"
+    },
+    {
+      "id": "xlsx_rapor",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "EG Kalıp Parametreleri Kur"
+      },
+      "required": false
+    }
+  ],
+  "transaction_policy": "atomic",
+  "tags": [
+    "kalip",
+    "formwork",
+    "metraj"
+  ]
+}

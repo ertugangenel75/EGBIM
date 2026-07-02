@@ -1,0 +1,96 @@
+{
+  "title": "IFC4 TR BIM Dışa Aktarma",
+  "description": "TR BIM ve ÇŞB 2026 uyumlu IFC4 dışa aktarma. IFC öncesi parametre kontrolü + ifc_mapping + export.",
+  "version": "1.0.0",
+  "category": "IFC",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_Walls",
+        "OST_StructuralColumns"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde eleman bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "kolonlar",
+      "op": "collect_columns"
+    },
+    {
+      "id": "birlesik",
+      "op": "merge_lists",
+      "from_many": [
+        "duvarlar",
+        "kolonlar"
+      ]
+    },
+    {
+      "id": "qa_par",
+      "op": "validate_required_params",
+      "from": "birlesik",
+      "params": {
+        "required_params": "Malzeme"
+      }
+    },
+    {
+      "id": "qa_ozet",
+      "op": "validation_summary",
+      "from": "qa_par"
+    },
+    {
+      "id": "ifc_map",
+      "op": "load_ifc_mapping"
+    },
+    {
+      "id": "sinifla",
+      "op": "map_to_ifc",
+      "from": "birlesik"
+    },
+    {
+      "id": "export",
+      "op": "ifc_export",
+      "params": {
+        "ifc_version": "IFC4",
+        "file_name": "EGBIM_Model_IFC4",
+        "export_linked_files": false
+      }
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "export"
+    },
+    {
+      "id": "html_rapor",
+      "op": "export_validation_report",
+      "from": "satirlar",
+      "params": {
+        "title": "IFC4 TR BIM Dışa Aktarma"
+      },
+      "required": false
+    },
+    {
+      "id": "xlsx_rapor",
+      "op": "export_xlsx",
+      "from": "satirlar",
+      "params": {
+        "sheet_name": "IFC4 TR BIM Dışa Aktarma"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "ifc",
+    "openbim",
+    "export",
+    "tr_bim"
+  ]
+}

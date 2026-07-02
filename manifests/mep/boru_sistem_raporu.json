@@ -1,0 +1,65 @@
+{
+  "title": "Boru Sistem Raporu",
+  "description": "Boruları toplar, tipe göre gruplar ve uzunluk raporlar.",
+  "version": "1.0.0",
+  "category": "MEP",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_DuctCurves",
+        "OST_PipeCurves",
+        "OST_CableTray"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde MEP elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "uzunluk",
+      "op": "curve_from_element",
+      "from": "borular"
+    },
+    {
+      "id": "gruplama",
+      "op": "group_by",
+      "from": "uzunluk",
+      "params": {
+        "field": "tip"
+      }
+    },
+    {
+      "id": "toplam",
+      "op": "mep_total_length",
+      "from": "uzunluk"
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "gruplama",
+      "params": {
+        "title": "Boru Tip Dağılımı"
+      }
+    },
+    {
+      "id": "html",
+      "op": "export_html_report",
+      "from": "uzunluk",
+      "params": {
+        "title": "Boru Raporu"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "mep",
+    "tesisat",
+    "mekanik"
+  ]
+}

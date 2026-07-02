@@ -1,0 +1,99 @@
+{
+  "title": "Boru Sistemi Tam Raporu",
+  "description": "Tüm boruları, bağlantı parçalarını ve aksesuarları sistem bazında toplar. Toplam uzunluk, çap dağılımı ve ÇŞB poz eşleme.",
+  "version": "1.0.0",
+  "category": "MEP",
+  "pre_checks": [
+    {
+      "type": "MODEL_HAS_ELEMENTS",
+      "categories": [
+        "OST_DuctCurves",
+        "OST_PipeCurves",
+        "OST_CableTray"
+      ],
+      "min_count": 1,
+      "on_fail": "ABORT",
+      "message": "Modelde MEP elemanı bulunamadı"
+    }
+  ],
+  "steps": [
+    {
+      "id": "poz_yukle",
+      "op": "load_poz_data",
+      "required": false
+    },
+    {
+      "id": "borular",
+      "op": "collect_pipes"
+    },
+    {
+      "id": "bfitler",
+      "op": "collect_pipe_fittings"
+    },
+    {
+      "id": "aksesuar",
+      "op": "collect_pipe_accessories"
+    },
+    {
+      "id": "sys_ozet",
+      "op": "mep_by_system",
+      "from": "borular"
+    },
+    {
+      "id": "b_toplam",
+      "op": "mep_total_length",
+      "from": "borular"
+    },
+    {
+      "id": "b_detay",
+      "op": "mep_summary",
+      "from": "borular"
+    },
+    {
+      "id": "fit_sayi",
+      "op": "element_count",
+      "from": "bfitler"
+    },
+    {
+      "id": "aks_sayi",
+      "op": "element_count",
+      "from": "aksesuar"
+    },
+    {
+      "id": "poz",
+      "op": "poz_match",
+      "from": "sys_ozet"
+    },
+    {
+      "id": "rapor",
+      "op": "show_table",
+      "from": "sys_ozet",
+      "params": {
+        "title": "Boru Sistem Özeti"
+      }
+    },
+    {
+      "id": "xlsx",
+      "op": "export_xlsx",
+      "from": "b_detay",
+      "params": {
+        "sheet_name": "Borular"
+      },
+      "required": false
+    },
+    {
+      "id": "html",
+      "op": "export_html_report",
+      "from": "b_detay",
+      "params": {
+        "title": "Boru Sistemi Raporu"
+      },
+      "required": false
+    }
+  ],
+  "tags": [
+    "mep",
+    "tesisat",
+    "mekanik"
+  ]
+}

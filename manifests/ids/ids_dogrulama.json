@@ -1,0 +1,65 @@
+{
+  "title": "IDS Model Doğrulama",
+  "description": "Modeli IDS XML kurallarına göre doğrular.",
+  "version": "1.0.0",
+  "category": "IDS",
+  "pre_checks": [
+    {
+      "type": "REGISTRY_KEY_EXISTS",
+      "key": "project_data",
+      "on_fail": "WARN",
+      "message": "Proje verisi yüklü değil"
+    }
+  ],
+  "steps": [
+    {
+      "id": "duvarlar",
+      "op": "collect_walls"
+    },
+    {
+      "id": "dogrula",
+      "op": "validate_ids",
+      "from": "duvarlar",
+      "params": {
+        "ids_path": "data/validation/ids_wall_minimal.ids"
+      }
+    },
+    {
+      "id": "ozet",
+      "op": "validation_summary",
+      "from": "dogrula"
+    },
+    {
+      "id": "rapor",
+      "op": "show_result",
+      "from": "ozet",
+      "params": {
+        "title": "IDS Doğrulama Özeti"
+      }
+    },
+    {
+      "id": "html",
+      "op": "export_validation_report",
+      "from": "dogrula",
+      "params": {
+        "title": "IDS Doğrulama Raporu"
+      },
+      "required": false
+    },
+    {
+      "id": "kat_ozet",
+      "op": "group_elements_by_level",
+      "from": "dogrula"
+    },
+    {
+      "id": "satirlar",
+      "op": "validation_to_rows",
+      "from": "kat_ozet"
+    }
+  ],
+  "tags": [
+    "ids",
+    "dogrulama",
+    "validation"
+  ]
+}

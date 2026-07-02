@@ -1,0 +1,41 @@
+{
+  "id": "me14_basinc_hepa_qa",
+  "title": "Mekanik: Basınçlandırma ve HEPA Filtre QA",
+  "description": "Oda basınçlandırma kontrolü (ameliyathane/temiz oda/mutfak) ve HEPA H14 filtre uygunluk QA pipeline'ı.",
+  "category": "MEKANIK",
+  "version": "1.0",
+  "tags": ["mekanik","basinclama","hepa","h14","ameliyathane","temiz_oda","ashrae170"],
+  "transaction_policy": "none",
+  "steps": [
+    {
+      "id": "s01_basinc",
+      "op": "mep_pressurization_check",
+      "description": "Oda basınçlandırma kontrolü",
+      "inputs": {
+        "oda_tipi":        "$INPUT:oda_tipi:ameliyathane",
+        "mevcut_basinc_pa":"$INPUT:mevcut_basinc_pa:15",
+        "tolerans_pa":     2.0
+      }
+    },
+    {
+      "id": "s02_hepa",
+      "op": "mep_hepa_filter_qa",
+      "description": "HEPA H14 filtre uygunluk kontrolü",
+      "inputs": {
+        "filtre_sinifi":   "$INPUT:filtre_sinifi:H14",
+        "alan_tipi":       "$INPUT:alan_tipi:ameliyathane",
+        "mevcut_dp_pa":    "$INPUT:mevcut_dp_pa:180",
+        "montaj_tipi":     "$INPUT:montaj_tipi:gel_seal",
+        "son_test_tarihi": "$INPUT:son_test_tarihi:"
+      }
+    },
+    {
+      "id": "s03_rapor",
+      "op": "export_html_report",
+      "inputs": {
+        "output_path": "$INPUT:output_path:C:/EGBIM_Output/basinc_hepa_qa.html",
+        "title": "Basınçlandırma ve HEPA Filtre QA Raporu"
+      }
+    }
+  ]
+}
